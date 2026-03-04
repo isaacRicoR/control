@@ -1,0 +1,485 @@
+:root {
+  /* Forward-map system variables to Semantic Layer */
+  --background: var(--semantic-background-default);
+  --foreground: var(--semantic-text-default);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Ensure Dark Mode follows Semantic layer */
+    --background: var(--semantic-background-default);
+    --foreground: var(--semantic-text-default);
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  /* Enforce Semantic Variables directly on Body */
+  color: var(--semantic-text-default);
+  background: var(--semantic-background-default);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+:root {
+  /* Default to Light Theme */
+
+  /* ========================================= */
+  /* UNIVERSAL LAYER: STATUS COLORS            */
+  /* ========================================= */
+
+  /* Success (Teal-Green) - Static/Universal */
+  --status-success-0: #001a10;
+  --status-success-50: #003322;
+  --status-success-100: #004a32;
+  --status-success-200: #006145;
+  --status-success-300: #007a58;
+  --status-success-400: #00a176;
+  --status-success-500: #00c98f;
+  --status-success-600: #00ff99;
+  --status-success-700: #3dffb0;
+  --status-success-800: #7cffc8;
+  --status-success-900: #b6ffe1;
+  --status-success-950: #ddfff1;
+  --status-success-1000: #f2fffb;
+
+  /* Warning (Amber) - Static/Universal */
+  --status-warning-0: #1a1200;
+  --status-warning-50: #2b1f00;
+  --status-warning-100: #3b2a00;
+  --status-warning-200: #523900;
+  --status-warning-300: #6a4900;
+  --status-warning-400: #8a6100;
+  --status-warning-500: #b07c00;
+  --status-warning-600: #ffb020;
+  --status-warning-700: #ffc35c;
+  --status-warning-800: #ffd79a;
+  --status-warning-900: #ffe9cf;
+  --status-warning-950: #fff2e6;
+  --status-warning-1000: #fffbf5;
+  --status-warning-emphasis: #ff8c00;
+  /* Naranja corporativo */
+
+  /* Danger (Red) - Static/Universal */
+  --status-danger-0: #1a0000;
+  --status-danger-50: #2b0000;
+  --status-danger-100: #3b0000;
+  --status-danger-200: #520000;
+  --status-danger-300: #6a0000;
+  --status-danger-400: #8a0000;
+  --status-danger-500: #b00000;
+  --status-danger-600: #ff3344;
+  --status-danger-700: #ff6a76;
+  --status-danger-800: #ff9aa2;
+  --status-danger-900: #ffd0d4;
+  --status-danger-950: #ffe7e9;
+  --status-danger-1000: #fff5f6;
+
+  /* Info (Sky Blue) - Static/Universal */
+  --status-info-0: #00111a;
+  --status-info-50: #001f2b;
+  --status-info-100: #002a3b;
+  --status-info-200: #003952;
+  --status-info-300: #00496a;
+  --status-info-400: #00618a;
+  --status-info-500: #007cb0;
+  --status-info-600: #29a3ff;
+  --status-info-700: #64beff;
+  --status-info-800: #9ad8ff;
+  --status-info-900: #cfeeff;
+  --status-info-950: #e6f6ff;
+  --status-info-1000: #f5fcff;
+
+  /* ========================================= */
+  /* THEME LAYER: SEMANTIC TOKENS              */
+  /* ========================================= */
+
+  /* Backgrounds & Surfaces (Mapped to Brand Neutral) */
+  --semantic-background-default: var(--brand-neutral-50);
+  --semantic-background-hover: var(--brand-neutral-100);
+  --semantic-background-active: var(--brand-neutral-200);
+  --semantic-background-disabled: var(--brand-neutral-100);
+  --semantic-background-focus: var(--brand-neutral-50);
+  --semantic-background-selected: var(--brand-neutral-100);
+
+  --semantic-surface-default: var(--brand-neutral-200);
+  --semantic-surface-hover: var(--brand-neutral-300);
+  --semantic-surface-active: var(--brand-neutral-300);
+  --semantic-surface-disabled: var(--brand-neutral-200);
+  --semantic-surface-focus: var(--brand-neutral-100);
+  /* Selected Surface often uses Primary Tint */
+  --semantic-surface-selected: var(--brand-primary-50);
+
+  /* Borders */
+  --semantic-border-default: var(--brand-neutral-300);
+  --semantic-border-hover: var(--brand-neutral-400);
+  --semantic-border-active: var(--brand-neutral-500);
+  --semantic-border-disabled: var(--brand-neutral-300);
+  --semantic-border-focus: var(--brand-neutral-600);
+  --semantic-border-selected: var(--brand-primary-600);
+
+  /* Typography */
+  --semantic-text-default: var(--brand-neutral-600);
+  --semantic-text-muted: var(--brand-neutral-500);
+  --semantic-text-hover: var(--brand-neutral-1000);
+  --semantic-text-active: var(--brand-neutral-1000);
+  --semantic-text-disabled: var(--brand-neutral-500);
+  --semantic-text-focus: var(--brand-neutral-1000);
+  --semantic-text-selected: var(--brand-neutral-1000);
+
+  /* Primary (Identity) - Mapped to Brand */
+  --semantic-primary-default: var(--brand-primary-600);
+  --semantic-primary-hover: var(--brand-primary-700);
+  --semantic-primary-active: var(--brand-primary-500);
+  --semantic-primary-disabled: var(--brand-neutral-400);
+  --semantic-primary-focus: var(--brand-primary-600);
+  --semantic-primary-selected: var(--brand-primary-700);
+
+  /* Status (Universal) - Mapped to Status */
+  --semantic-danger-default: var(--status-danger-600);
+  --semantic-danger-hover: var(--status-danger-700);
+  --semantic-danger-active: var(--status-danger-500);
+  --semantic-danger-disabled: var(--brand-neutral-400);
+  --semantic-danger-focus: var(--status-danger-600);
+  --semantic-danger-selected: var(--status-danger-700);
+
+  --semantic-success-default: var(--status-success-600);
+  --semantic-success-hover: var(--status-success-700);
+  --semantic-success-active: var(--status-success-500);
+  --semantic-success-disabled: var(--brand-neutral-400);
+  --semantic-success-focus: var(--status-success-600);
+  --semantic-success-selected: var(--status-success-700);
+
+  --semantic-warning-default: var(--status-warning-600);
+  --semantic-warning-hover: var(--status-warning-700);
+  --semantic-warning-active: var(--status-warning-500);
+  --semantic-warning-disabled: var(--brand-neutral-400);
+  --semantic-warning-focus: var(--status-warning-600);
+  --semantic-warning-selected: var(--status-warning-700);
+
+  --semantic-info-default: var(--status-info-600);
+  --semantic-info-hover: var(--status-info-700);
+  --semantic-info-active: var(--status-info-500);
+  --semantic-info-disabled: var(--brand-neutral-400);
+  --semantic-info-focus: var(--status-info-600);
+  --semantic-info-selected: var(--status-info-700);
+
+
+  /* Brand Layer (Defaults for Control) */
+  --brand-primary-0: #001a10;
+  --brand-primary-50: #00FFA91A;
+  --brand-primary-100: #004a32;
+  --brand-primary-200: #006145;
+  --brand-primary-300: #007a58;
+  --brand-primary-400: #00a176;
+  --brand-primary-500: #00c98f;
+  --brand-primary-600: #00FFA9;
+  --brand-primary-700: #3dffb0;
+  --brand-primary-800: #7cffc8;
+  --brand-primary-900: #b6ffe1;
+  --brand-primary-950: #ddfff1;
+  --brand-primary-1000: #f2fffb;
+
+  --brand-neutral-0: #000000;
+  --brand-neutral-50: #141A21;
+  --brand-neutral-100: #111114;
+  --brand-neutral-200: #1C252E;
+  --brand-neutral-300: #2A3744;
+  --brand-neutral-400: #2c2c36;
+  --brand-neutral-500: #5A6672;
+  --brand-neutral-600: #8B95A5;
+  --brand-neutral-700: #7a7a8a;
+  --brand-neutral-800: #a6a6b3;
+  --brand-neutral-900: #d6d6de;
+  --brand-neutral-950: #eeeeF2;
+  --brand-neutral-1000: #ffffff;
+}
+
+[data-brand="security"] {
+  /* OVERRIDE: Security Brand (Premium Blue) */
+  --brand-primary-0: #0b1221;
+  --brand-primary-50: #101828;
+  --brand-primary-100: #1d2939;
+  --brand-primary-200: #344054;
+  --brand-primary-300: #475467;
+  --brand-primary-400: #667085;
+  --brand-primary-500: #2970ff;
+  --brand-primary-600: #155eef;
+  /* Premium Blue */
+  --brand-primary-700: #004eeb;
+  --brand-primary-800: #0040c1;
+  --brand-primary-900: #00359e;
+  --brand-primary-950: #eif8ff;
+  --brand-primary-1000: #f5faFF;
+
+  --brand-neutral-0: #020617;
+  /* Slate 950 */
+  --brand-neutral-50: #0f172a;
+  /* Slate 900 */
+  --brand-neutral-100: #1e293b;
+  /* Slate 800 */
+  --brand-neutral-200: #334155;
+  /* Slate 700 */
+  --brand-neutral-300: #475569;
+  /* Slate 600 */
+  --brand-neutral-400: #64748b;
+  /* Slate 500 */
+  --brand-neutral-500: #94a3b8;
+  /* Slate 400 */
+  --brand-neutral-600: #cbd5e1;
+  /* Slate 300 */
+  --brand-neutral-700: #e2e8f0;
+  /* Slate 200 */
+  --brand-neutral-800: #f1f5f9;
+  /* Slate 100 */
+  --brand-neutral-900: #f8fafc;
+  /* Slate 50 */
+  --brand-neutral-950: #ffffff;
+  --brand-neutral-1000: #ffffff;
+
+}
+
+[data-theme="light"] {
+  /* SaaS moderno: fondo #F4F6F8, cards #FFFFFF, acento #00A76F */
+  --semantic-background-default: #F4F6F8;
+  --semantic-background-hover: #EEF2F7;
+  --semantic-background-active: #E4E4E7;
+  --semantic-background-disabled: #F4F4F5;
+  --semantic-background-focus: #F4F6F8;
+  --semantic-background-selected: #F4F4F5;
+
+  --semantic-surface-default: #FFFFFF;
+  --semantic-surface-hover: #F4F4F5;
+  --semantic-surface-active: #EEEEF0;
+  --semantic-surface-disabled: #FFFFFF;
+  --semantic-surface-focus: #FFFFFF;
+  --semantic-surface-selected: #E1F0EE;
+
+  --semantic-border-default: #E4E4E7;
+  --semantic-border-hover: #D4D4D8;
+  --semantic-border-active: #A1A1AA;
+  --semantic-border-disabled: #E4E4E7;
+  --semantic-border-focus: #52525B;
+  --semantic-border-selected: #00A76F;
+
+  --semantic-text-default: #18181B;
+  --semantic-text-muted: #71717A;
+  --semantic-text-hover: #000000;
+  --semantic-text-active: #18181B;
+  --semantic-text-disabled: #A1A1AA;
+  --semantic-text-focus: #18181B;
+  --semantic-text-selected: #18181B;
+  --semantic-text-onPrimary: #FFFFFF;
+  --semantic-text-on-solid: #FFFFFF;
+
+  --semantic-primary-default: #00A76F;
+  --semantic-primary-hover: #007a58;
+  --semantic-primary-active: #00c98f;
+  --semantic-primary-disabled: #94a3b8;
+  --semantic-primary-focus: #00A76F;
+  --semantic-primary-selected: #007a58;
+
+  --semantic-danger-default: #ff3344;
+  --semantic-danger-hover: #ff6a76;
+  --semantic-danger-active: #b00000;
+  --semantic-danger-disabled: #94a3b8;
+  --semantic-danger-focus: #ff3344;
+  --semantic-danger-selected: #ff6a76;
+
+  --semantic-success-default: #00A76F;
+  --semantic-success-hover: #007a58;
+  --semantic-success-active: #00c98f;
+  --semantic-success-disabled: #94a3b8;
+  --semantic-success-focus: #00A76F;
+  --semantic-success-selected: #007a58;
+
+  --semantic-warning-default: #ffb020;
+  --semantic-warning-hover: #ffc35c;
+  --semantic-warning-active: #b07c00;
+  --semantic-warning-disabled: #8a6100;
+  --semantic-warning-focus: #ffb020;
+  --semantic-warning-selected: #ffc35c;
+
+  --semantic-info-default: #29a3ff;
+  --semantic-info-hover: #64beff;
+  --semantic-info-active: #007cb0;
+  --semantic-info-disabled: #00618a;
+  --semantic-info-focus: #29a3ff;
+  --semantic-info-selected: #64beff;
+
+  /* Button White Variant */
+  --semantic-button-white-bg: #FFFFFF;
+  --semantic-button-white-text: #18181B;
+  --semantic-button-white-border: #E4E4E7;
+  --semantic-button-white-hoverBg: #F4F4F5;
+
+  /* Button Primary: texto negro-azulado sobre verde */
+  --semantic-button-primary-bg: var(--semantic-primary-default);
+  --semantic-button-primary-text: var(--semantic-text-default);
+  --semantic-button-primary-hover: var(--semantic-primary-hover);
+
+  /* Button Create: DARK visual (swap: light theme shows dark button) */
+  --semantic-button-create-bg: #0F172A;
+  --semantic-button-create-text: #FFFFFF;
+  --semantic-button-create-border: #0F172A;
+  --semantic-button-create-hover: #162233;
+
+  --semantic-sidebar-group-label: #71717A;
+  --semantic-sidebar-item-default: #71717A;
+  --semantic-sidebar-item-hover: #52525B;
+  --semantic-icon-muted: #71717A;
+  --semantic-icon-default: #71717A;
+  --semantic-icon-active: #00A76F;
+  --semantic-nav-active-bg: #E1F0EE;
+  --semantic-nav-active-fg: #00A76F;
+  --semantic-nav-sub-active-bg: #E1F0EE;
+  --semantic-nav-sub-active-fg: #00A76F;
+  --semantic-nav-hover-bg: #F1F5F9;
+
+  /* Dispositivos section: accent #118D57, surface tint #DBF6E5 */
+  --semantic-nav-devices-active-bg: #DBF6E5;
+  --semantic-nav-devices-active-fg: #118D57;
+
+  /* Devices chip (Users table): count > 0 */
+  --devices-chip-bg: #DBF6E5;
+  --devices-chip-fg: #118D57;
+  --devices-chip-border: #118D57;
+
+  /* Action icons (Users table - Acciones column) — icono secundario/inactivo (reposo), no texto */
+  --semantic-icon-muted: #637381;
+  --semantic-icon-active: #18181B;
+  --ui-action-icon-default: var(--semantic-icon-muted);
+  --ui-action-icon-hover: var(--semantic-icon-active);
+
+  /* Danger surface hover (menu items, etc.) */
+  --semantic-danger-surface-hover: #fff5f6;
+}
+
+[data-theme="dark"] {
+  --semantic-background-default: #141A21;
+  --semantic-background-hover: #111114;
+  --semantic-background-active: #1C252E;
+  --semantic-background-disabled: #111114;
+  --semantic-background-focus: #141A21;
+  --semantic-background-selected: #111114;
+
+  --semantic-surface-default: #1C252E;
+  --semantic-surface-hover: #2A3744;
+  --semantic-surface-active: #2A3744;
+  --semantic-surface-disabled: #1C252E;
+  --semantic-surface-focus: #111114;
+  --semantic-surface-selected: #00FFA91A;
+
+  --semantic-border-default: #2A3744;
+  --semantic-border-hover: #2c2c36;
+  --semantic-border-active: #5A6672;
+  --semantic-border-disabled: #2A3744;
+  --semantic-border-focus: #8B95A5;
+  --semantic-border-selected: #00FFA9;
+
+  --semantic-text-default: #8B95A5;
+  --semantic-text-muted: #5A6672;
+  --semantic-text-hover: #ffffff;
+  --semantic-text-active: #ffffff;
+  --semantic-text-disabled: #5A6672;
+  --semantic-text-focus: #ffffff;
+  --semantic-text-selected: #ffffff;
+
+  --semantic-primary-default: #00FFA9;
+  --semantic-primary-hover: #3dffb0;
+  --semantic-primary-active: #00c98f;
+  --semantic-primary-disabled: #2c2c36;
+  --semantic-primary-focus: #00FFA9;
+  --semantic-primary-selected: #3dffb0;
+
+  --semantic-danger-default: #ff3344;
+  --semantic-danger-hover: #ff6a76;
+  --semantic-danger-active: #b00000;
+  --semantic-danger-disabled: #2c2c36;
+  --semantic-danger-focus: #ff3344;
+  --semantic-danger-selected: #ff6a76;
+
+  --semantic-success-default: #00ff99;
+  --semantic-success-hover: #3dffb0;
+  --semantic-success-active: #00c98f;
+  --semantic-success-disabled: #00a176;
+  --semantic-success-focus: #00ff99;
+  --semantic-success-selected: #3dffb0;
+
+  --semantic-warning-default: #ffb020;
+  --semantic-warning-hover: #ffc35c;
+  --semantic-warning-active: #b07c00;
+  --semantic-warning-disabled: #8a6100;
+  --semantic-warning-focus: #ffb020;
+  --semantic-warning-selected: #ffc35c;
+
+  --semantic-info-default: #29a3ff;
+  --semantic-info-hover: #64beff;
+  --semantic-info-active: #007cb0;
+  --semantic-info-disabled: #00618a;
+  --semantic-info-focus: #29a3ff;
+  --semantic-info-selected: #64beff;
+
+  /* Button White Variant (Inverse in Dark) */
+  --semantic-button-white-bg: #FFFFFF;
+  --semantic-button-white-text: #000000;
+  --semantic-button-white-border: #FFFFFF;
+  --semantic-button-white-hoverBg: #eeeeF2;
+
+  /* Button Primary: texto blanco sobre verde */
+  --semantic-button-primary-bg: var(--semantic-primary-default);
+  --semantic-button-primary-text: #FFFFFF;
+  --semantic-button-primary-hover: var(--semantic-primary-hover);
+
+  /* Button Create: LIGHT visual (swap: dark theme shows light button) */
+  --semantic-button-create-bg: #FFFFFF;
+  --semantic-button-create-text: #0F172A;
+  --semantic-button-create-border: #FFFFFF;
+  --semantic-button-create-hover: #F4F6F8;
+
+  --semantic-sidebar-group-label: #5A6672;
+
+  /* Action icons (Users table - Acciones column) — icono secundario/inactivo (reposo), no texto */
+  --semantic-icon-muted: #637381;
+  --semantic-icon-active: #8B95A5;
+  --ui-action-icon-default: var(--semantic-icon-muted);
+  --ui-action-icon-hover: var(--semantic-icon-active);
+
+  /* Danger surface hover (menu items, etc.) */
+  --semantic-danger-surface-hover: #2a1518;
+
+  /* Devices chip (Users table): count > 0 — same as LIGHT for consistency */
+  --devices-chip-bg: #DBF6E5;
+  --devices-chip-fg: #118D57;
+  --devices-chip-border: #118D57;
+}

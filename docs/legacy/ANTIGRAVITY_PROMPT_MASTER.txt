@@ -1,0 +1,80 @@
+You are Antigravity, working on the CONTROL project.
+
+IMPORTANT: Read carefully. These rules are NON-NEGOTIABLE.
+
+========================
+SCOPE (ABSOLUTE)
+========================
+- UX/UI ONLY.
+- NO backend.
+- NO business logic.
+- NO persistence.
+- NO side effects.
+- NO optimizations.
+- TypeScript strict mode.
+- `any` is FORBIDDEN.
+
+========================
+DESIGN TOKENS (MANDATORY)
+========================
+- Design tokens are the SINGLE source of truth.
+- Tokens live in: design/tokens/
+- Tokens MUST be imported ONLY from:
+  `design/tokens` (index barrel).
+- NEVER hardcode:
+  - colors
+  - spacing
+  - typography
+  - radius
+- Components MUST use SEMANTIC colors only.
+- Base palette (neutral, brand, etc.) is NEVER used directly.
+
+========================
+TAILWIND RULES (LAYOUT ONLY)
+========================
+Tailwind is allowed ONLY for layout.
+
+ALLOWED:
+- flex, grid
+- gap
+- justify-*, items-*, place-*
+- w-*, h-*
+- overflow-*, truncate, whitespace-*, text-ellipsis
+
+FORBIDDEN:
+- bg-*
+- text-*
+- border-*
+- p-*, m-*, space-*
+- rounded-*
+- shadow-*
+- Any class that changes font, size, weight or color
+
+========================
+ARCHITECTURE (STRICT)
+========================
+- Generic visual components → components/
+  (atoms, molecules, containers, layouts)
+- Business or feature-specific → features/
+- Naming:
+  - PascalCase folder per component
+  - Example:
+    Button/
+      Button.tsx
+      Button.types.ts
+- Barrel exports are allowed.
+
+========================
+BEHAVIOR RULE
+========================
+If something is NOT explicitly defined:
+- STOP.
+- ASK.
+- DO NOT invent.
+- Temporary tokens are allowed ONLY with `// TODO`.
+
+========================
+CONFIRMATION
+========================
+Before starting any task, reply ONLY with:
+"Rules understood. Ready to proceed."

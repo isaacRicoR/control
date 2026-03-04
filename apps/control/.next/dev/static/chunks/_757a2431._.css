@@ -1,0 +1,292 @@
+/* [project]/apps/control/app/(shell)/users/components/UserForm.module.css [app-client] (css) */
+.UserForm-module__YobMcW__layoutGrid {
+  grid-template-columns: 250px 1fr;
+  width: 100%;
+  display: grid;
+}
+
+.UserForm-module__YobMcW__visualCol {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.UserForm-module__YobMcW__formCol {
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+}
+
+.UserForm-module__YobMcW__formColumnGrid {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+}
+
+.UserForm-module__YobMcW__formFieldColumn {
+  flex-direction: column;
+  display: flex;
+}
+
+.UserForm-module__YobMcW__avatarPlaceholder {
+  background-color: var(--avatar-bg);
+  color: var(--avatar-icon);
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: background-color .2s, color .2s;
+  display: flex;
+}
+
+.UserForm-module__YobMcW__avatarPlaceholder:hover {
+  background-color: var(--avatar-bg-hover);
+  color: var(--avatar-icon-hover);
+}
+
+@media (max-width: 768px) {
+  .UserForm-module__YobMcW__layoutGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .UserForm-module__YobMcW__visualCol {
+    order: -1;
+    width: 100%;
+  }
+
+  .UserForm-module__YobMcW__formColumnGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* [project]/packages/console/ui/atoms/Input/Input.css [app-client] (css) */
+.input-field {
+  width: 100%;
+  height: var(--input-height);
+  padding-top: calc(var(--input-padding-top)  - 8px);
+  padding-right: var(--input-padding-x);
+  padding-bottom: var(--input-padding-bottom);
+  padding-left: var(--input-padding-left, calc(var(--input-padding-x)  - 7px));
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius);
+  color: var(--input-text);
+  appearance: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: border-color .2s, box-shadow .2s;
+  display: block;
+}
+
+.input-field::placeholder {
+  color: var(--input-placeholder);
+  opacity: 1;
+}
+
+.input-field:hover:not(:disabled):not(.has-error):not(:focus) {
+  border-color: var(--input-border-hover);
+}
+
+.input-field:focus {
+  border-color: var(--input-border-focus);
+}
+
+.input-field.has-error {
+  border-color: var(--input-border-error);
+}
+
+.input-field:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  background-color: var(--input-bg);
+}
+
+.input-label {
+  left: calc(var(--input-padding-x)  - 12px);
+  top: calc(var(--input-height) / 2);
+  color: var(--input-label);
+  pointer-events: none;
+  transform-origin: 0 0;
+  font-size: .875rem;
+  line-height: 1;
+  transition: all .2s ease-out;
+  position: absolute;
+  transform: translateY(-50%);
+}
+
+.required-asterisk {
+  position: relative;
+  top: 4px;
+}
+
+.input-field:focus + .input-label, .input-field:not(:placeholder-shown) + .input-label {
+  top: 11px;
+  transform: translateY(-50%)scale(.75);
+}
+
+.input-field:focus + .input-label {
+  color: var(--input-label-focus);
+}
+
+.input-field.has-error:focus + .input-label, .input-field.has-error:not(:placeholder-shown) + .input-label {
+  color: var(--input-label-error);
+}
+
+/* [project]/packages/console/ui/patterns/form/FormLayout.module.css [app-client] (css) */
+.FormLayout-module__wYnP4W__layoutGrid {
+  grid-template-columns: 250px 1fr;
+  width: 100%;
+  display: grid;
+}
+
+.FormLayout-module__wYnP4W__visualCol {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.FormLayout-module__wYnP4W__formCol {
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+}
+
+.FormLayout-module__wYnP4W__formColumnGrid {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+}
+
+@media (max-width: 768px) {
+  .FormLayout-module__wYnP4W__layoutGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .FormLayout-module__wYnP4W__visualCol {
+    order: -1;
+    width: 100%;
+  }
+
+  .FormLayout-module__wYnP4W__formColumnGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* [project]/packages/console/ui/atoms/SelectField/SelectField.css [app-client] (css) */
+.select-field-box {
+  width: 100%;
+  height: var(--select-height);
+  padding: calc(var(--select-padding-top)  - 8px) var(--select-padding-x) var(--select-padding-bottom) calc(var(--select-padding-x)  - 7px);
+  background-color: var(--select-bg);
+  border: 1px solid var(--select-border);
+  border-radius: var(--select-radius);
+  color: var(--select-text);
+  cursor: pointer;
+  outline: none;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: border-color .2s, box-shadow .2s;
+  display: flex;
+  position: relative;
+}
+
+.select-field-box:hover:not(.has-error) {
+  border-color: var(--select-border-hover);
+}
+
+.select-field-box:focus, .select-field-box.is-open {
+  border-color: var(--select-border-focus);
+}
+
+.select-field-box.has-error {
+  border-color: var(--select-border-error);
+}
+
+.select-field-value {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: calc((var(--select-padding-x) * 2)  + 1.25em);
+  flex: 1;
+  overflow: hidden;
+}
+
+.select-field-box[data-filled="false"] .select-field-value {
+  color: #0000;
+}
+
+.select-field-box[data-filled="true"] .select-field-value {
+  color: var(--select-text);
+}
+
+.select-field-arrow {
+  right: var(--select-padding-x);
+  color: var(--select-arrow);
+  pointer-events: none;
+  flex-shrink: 0;
+  margin-left: 0;
+  display: block;
+  position: absolute;
+  top: 50%;
+}
+
+.select-field-label {
+  left: calc(var(--select-padding-x)  - 12px);
+  top: calc(var(--select-height) / 2);
+  color: var(--select-label);
+  pointer-events: none;
+  transform-origin: 0 0;
+  font-size: .875rem;
+  line-height: 1;
+  transition: all .2s ease-out;
+  position: absolute;
+  transform: translateY(-50%);
+}
+
+.required-asterisk {
+  position: relative;
+  top: 4px;
+}
+
+.select-field-box[data-filled="true"] + .select-field-label {
+  top: 11px;
+  transform: translateY(-50%)scale(.75);
+}
+
+.select-field-box:focus + .select-field-label, .select-field-box.is-open + .select-field-label {
+  color: var(--select-label-focus);
+}
+
+.select-field-box.has-error + .select-field-label {
+  color: var(--select-label-error);
+}
+
+/* [project]/packages/console/ui/molecules/SelectSingle/SelectSingle.css [app-client] (css) */
+.select-single-container {
+  width: 100%;
+  position: relative;
+}
+
+.select-option.is-selected {
+  font-weight: 500;
+}
+
+.select-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.select-dropdown::-webkit-scrollbar-track {
+  background: none;
+}
+
+.select-dropdown::-webkit-scrollbar-thumb {
+  background: #0003;
+  border-radius: 4px;
+}
+
+.select-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #0000004d;
+}
+
+/*# sourceMappingURL=_757a2431._.css.map*/

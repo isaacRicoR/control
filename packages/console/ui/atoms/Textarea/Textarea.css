@@ -1,0 +1,98 @@
+/* Textarea.css — mirrors Input.css for visual parity */
+
+.textarea-field {
+    display: block;
+    width: 100%;
+    height: var(--input-height, 48px);
+    padding: calc(var(--textarea-padding-top) - 8px) var(--textarea-padding-x) var(--textarea-padding-bottom) calc(var(--textarea-padding-x) - 7px);
+
+    background-color: var(--textarea-bg);
+    border: 1px solid var(--textarea-border);
+    border-radius: var(--textarea-radius);
+
+    color: var(--textarea-text);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+    appearance: none;
+    resize: vertical;
+    overflow-y: auto;
+
+    /* Scrollbar — same pattern as SelectSingle dropdown */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.textarea-field::-webkit-scrollbar {
+    width: 8px;
+}
+
+.textarea-field::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.textarea-field::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.textarea-field::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.textarea-field:hover:not(:disabled):not(.has-error) {
+    border-color: var(--textarea-border-hover);
+}
+
+.textarea-field:focus {
+    border-color: var(--textarea-border-focus);
+}
+
+.textarea-field.has-error {
+    border-color: var(--textarea-border-error);
+}
+
+.textarea-field:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--textarea-bg);
+}
+
+/* Floating Label Logic — same as Input */
+.textarea-label {
+    position: absolute;
+    left: calc(var(--textarea-padding-x) - 12px);
+    top: 24px;
+    transform: translateY(-50%);
+
+    color: var(--textarea-label);
+    font-size: 0.875rem;
+    line-height: 1;
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    transform-origin: left top;
+}
+
+.textarea-required-asterisk {
+    position: relative;
+    top: 4px;
+}
+
+/* Float when focused OR when not empty */
+.textarea-field:focus+.textarea-label,
+.textarea-field:not(:placeholder-shown)+.textarea-label {
+    top: 11px;
+    transform: translateY(-50%) scale(0.75);
+}
+
+.textarea-field:focus+.textarea-label {
+    color: var(--textarea-label-focus);
+}
+
+.textarea-field.has-error:focus+.textarea-label,
+.textarea-field.has-error:not(:placeholder-shown)+.textarea-label {
+    color: var(--textarea-label-error);
+}

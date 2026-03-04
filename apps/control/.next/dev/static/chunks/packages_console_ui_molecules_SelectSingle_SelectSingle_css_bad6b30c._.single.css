@@ -1,0 +1,28 @@
+/* [project]/packages/console/ui/molecules/SelectSingle/SelectSingle.css [app-client] (css) */
+.select-single-container {
+  width: 100%;
+  position: relative;
+}
+
+.select-option.is-selected {
+  font-weight: 500;
+}
+
+.select-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.select-dropdown::-webkit-scrollbar-track {
+  background: none;
+}
+
+.select-dropdown::-webkit-scrollbar-thumb {
+  background: #0003;
+  border-radius: 4px;
+}
+
+.select-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #0000004d;
+}
+
+/*# sourceMappingURL=packages_console_ui_molecules_SelectSingle_SelectSingle_css_bad6b30c._.single.css.map*/

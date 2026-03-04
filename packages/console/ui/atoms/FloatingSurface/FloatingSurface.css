@@ -1,0 +1,87 @@
+/* FloatingSurface.css */
+
+.floating-surface {
+    position: relative;
+    background-color: var(--floating-bg);
+    border: 1px solid var(--floating-border);
+    border-radius: var(--floating-radius);
+    box-shadow: var(--floating-shadow);
+
+    /* Reset margins and padding */
+    margin: 0;
+    padding: 0;
+
+    min-width: 0;
+    min-height: 0;
+
+    /* Ensure glows don't bleed out */
+    overflow: hidden;
+
+    will-change: transform, opacity;
+}
+
+/* Top Right Glow (Greenish) - Strictly Corner */
+.floating-surface::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    /* Balanced corner focus */
+    height: 120px;
+    background: radial-gradient(circle at top right, var(--floating-glow-top) 0%, transparent 60%);
+    opacity: var(--floating-glow-opacity-top, 0.15);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(var(--floating-glow-blur, 16px));
+}
+
+/* Bottom Left Glow (Reddish) - Strictly Corner */
+.floating-surface::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at bottom left, var(--floating-glow-bottom) 0%, transparent 60%);
+    opacity: var(--floating-glow-opacity-bottom, 0.12);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(var(--floating-glow-blur, 16px));
+}
+
+/* Ensure content stays on top if needed (children usually stack on top of base bg, but let's be safe) */
+.floating-surface>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Custom Scrollbar for inner content */
+.floating-scroll::-webkit-scrollbar {
+    width: 6px;
+    /* Thin */
+    height: 6px;
+}
+
+.floating-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.floating-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--floating-border);
+    /* Subtle semantic color */
+    border-radius: 4px;
+    /* Smooth rounded corners */
+}
+
+.floating-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: var(--floating-border-active, #555);
+    /* Fallback */
+}
+
+/* Firefox fallback */
+.floating-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--floating-border) transparent;
+}

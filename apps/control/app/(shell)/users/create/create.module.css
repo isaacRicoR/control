@@ -1,0 +1,65 @@
+/* Structural Layout Only - No Tokens */
+
+.layoutGrid {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    /* Fixed width for avatar column, rest for form */
+    width: 100%;
+}
+
+.visualCol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formCol {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.formColumnGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 2 equal columns */
+}
+
+.formFieldColumn {
+    display: flex;
+    flex-direction: column;
+    /* Stack fields vertically within column */
+}
+
+.avatarPlaceholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--avatar-bg);
+    color: var(--avatar-icon);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+.avatarPlaceholder:hover {
+    background-color: var(--avatar-bg-hover);
+    color: var(--avatar-icon-hover);
+}
+
+/* Mobile Responsive Overrides */
+@media (max-width: 768px) {
+    .layoutGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .visualCol {
+        order: -1;
+        /* Move visual to top */
+        width: 100%;
+    }
+
+    .formColumnGrid {
+        grid-template-columns: 1fr;
+        /* Single column on mobile */
+    }
+}

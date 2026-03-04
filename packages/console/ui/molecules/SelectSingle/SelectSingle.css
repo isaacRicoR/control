@@ -1,0 +1,31 @@
+/* SelectSingle.css */
+
+.select-single-container {
+    position: relative;
+    width: 100%;
+}
+
+
+
+.select-option.is-selected {
+    font-weight: 500;
+}
+
+
+/* Scrollbar styling for dropdown (optional, using defaults) */
+.select-dropdown::-webkit-scrollbar {
+    width: 8px;
+}
+
+.select-dropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.select-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.select-dropdown::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}

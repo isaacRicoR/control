@@ -1,0 +1,291 @@
+# UI SYSTEM MAP
+
+> Inventario oficial del sistema de interfaz — CONTROL Design System  
+> Última actualización: 2026-02-16
+
+---
+
+## 1. Propósito
+
+Este documento define todas las piezas oficiales del sistema UI para productos Admin / SaaS.
+
+- **Centraliza** el inventario de componentes disponibles y planificados.
+- **Evita improvisaciones**: si una pieza no está aquí, no se implementa ad-hoc dentro de un feature.
+- **Guía la creación de pantallas**: antes de diseñar cualquier vista nueva, se consulta este mapa.
+
+---
+
+## 2. Convenciones
+
+### Estados
+
+| Símbolo | Significado |
+|---------|-------------|
+| ✅ | **Implementado** — Existe en el proyecto, funcional y cerrado |
+| ⚠️ | **Parcial** — Existe pero incompleto o con limitaciones conocidas |
+| ❌ | **No existe aún** — Planificado, pendiente de implementación |
+
+### Ubicación obligatoria
+
+Toda pieza debe vivir en la carpeta correspondiente a su nivel de complejidad:
+
+```
+components/
+├── atoms/         → Piezas atómicas, sin dependencias internas
+├── molecules/     → Combinación de 2-3 atoms
+├── containers/    → Organismos complejos, con lógica de UI
+├── layouts/       → Estructura de página (shell, sidebar, topbar)
+├── patterns/      → Patrones reutilizables entre features
+```
+
+---
+
+## 3. ATOMS
+
+### Inputs
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| Input | ✅ | `atoms/Input/` | Campo de texto con floating label, estados focus/error/disabled |
+| Textarea | ✅ | `atoms/Textarea/` | Multiline con floating label, mismo aspecto que Input |
+| Select | ✅ | `atoms/Select/` | Select base nativo (ver también SelectSingle en molecules) |
+| SelectField | ✅ | `atoms/SelectField/` | Wrapper de Select con label y error integrados |
+| MultiSelect | ❌ | `atoms/MultiSelect/` | Selector múltiple con chips y dropdown |
+| Checkbox | ❌ | `atoms/Checkbox/` | Control de check individual con label |
+| Radio | ❌ | `atoms/Radio/` | Botón de radio individual con label |
+| Switch | ❌ | `atoms/Switch/` | Toggle on/off para settings |
+| DatePicker | ❌ | `atoms/DatePicker/` | Selector de fecha con calendario |
+| TimePicker | ❌ | `atoms/TimePicker/` | Selector de hora |
+| FileUpload | ❌ | `atoms/FileUpload/` | Zona de subida de archivos (drag & drop + botón) |
+| SearchInput | ❌ | `atoms/SearchInput/` | Input especializado con ícono de búsqueda y clear |
+
+### Display
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| Text | ✅ | `atoms/Text/` | Componente tipográfico base con tipos y estilos |
+| Badge | ✅ | `atoms/Badge/` | Etiqueta de estado (success, warning, error, neutral, info) |
+| Icon | ✅ | `atoms/Icon/` | Wrapper sobre Lucide icons, size y color por props |
+| FloatingSurface | ✅ | `atoms/FloatingSurface/` | Superficie flotante con borde, sombra y scrollbar |
+| Spacer | ✅ | `atoms/Spacer/` | Espaciador vertical/horizontal basado en tokens |
+| Avatar | ❌ | `atoms/Avatar/` | Círculo con iniciales o imagen de usuario |
+| Divider | ❌ | `atoms/Divider/` | Separador horizontal/vertical semántico |
+| Tooltip | ❌ | `atoms/Tooltip/` | Texto auxiliar emergente on hover |
+| Label | ❌ | `atoms/Label/` | Etiqueta de texto asociada a un form control |
+
+### Actions
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| Button | ✅ | `atoms/Button/` | Botón con variantes (primary, white, ghost, danger) |
+| ActionIcon | ✅ | `atoms/ActionIcon/` | Botón iconográfico con hover circle |
+| Link | ❌ | `atoms/Link/` | Enlace estilizado con variante inline/standalone |
+
+### Feedback
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| Spinner | ✅ | `atoms/Spinner/` | Indicador de carga circular animado (SVG + Tokens) |
+| ProgressBar | ❌ | `atoms/ProgressBar/` | Barra de progreso horizontal |
+| Skeleton | ⚠️ | *(inline en DataTable)* | Placeholder animado; existe como lógica interna, no como atom |
+
+---
+
+## 4. MOLECULES
+
+### Forms
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| FormField | ❌ | `molecules/FormField/` | Label + Input + error + helper text unificados |
+| FormGroup | ❌ | `molecules/FormGroup/` | Agrupación de campos con título de sección |
+| FormSection | ✅ | `containers/FormSection/` | Sección colapsable con título y contenido |
+| FormActions | ✅ | `patterns/form/FormActions.tsx` | Footer de formulario con Cancel/Submit + loading/error/success |
+
+### Navigation
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| TabsInline | ⚠️ | *(inline en toolbar)* | Tabs funcionales con underline animado; no es componente standalone |
+| Breadcrumb | ⚠️ | *(inline en PageShell)* | Breadcrumbs via JSX; no es componente standalone |
+| Pagination | ✅ | `containers/DataTable/TableFooter.tsx` | Paginación con "Filas por página" y navegación prev/next |
+
+### Data Display
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| InfoRow | ❌ | `molecules/InfoRow/` | Fila key-value para detalle de entidad |
+| KeyValueList | ❌ | `molecules/KeyValueList/` | Lista vertical de pares clave-valor |
+| StatCard | ❌ | `molecules/StatCard/` | Tarjeta con métrica, ícono y tendencia |
+| MetricBadge | ❌ | `molecules/MetricBadge/` | Badge numérico con variante de cambio (+/-) |
+
+### Interaction
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| TableDropdown | ✅ | `containers/DataTable/TableDropdown.tsx` | Dropdown selector reutilizable (filtro, rows-per-page) |
+| ActionMenu | ✅ | `molecules/ActionMenu/` | Menú contextual con secciones, íconos y variantes |
+| SelectSingle | ✅ | `molecules/SelectSingle/` | Select con dropdown flotante y scrollbar estilizado |
+| SelectMulti | ❌ | `molecules/SelectMulti/` | Select multi-valor con chips |
+| FilterChips | ❌ | `molecules/FilterChips/` | Chips activos de filtro con botón de eliminar |
+
+---
+
+## 5. ORGANISMS
+
+### Tabla
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| DataTable | ✅ | `containers/DataTable/` | Tabla genérica con sorting, filtrado, paginación, skeleton, empty state |
+| TableToolbar | ⚠️ | `containers/TableToolbar/` | Toolbar con tabs, filtro y search (hardcoded para Users; Devices usa inline) |
+| TableHeader | ✅ | `containers/DataTable/TableHeader.tsx` | Header con sorting icons |
+| TableFooter | ✅ | `containers/DataTable/TableFooter.tsx` | Footer con paginación funcional |
+
+### Containers
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| Card | ✅ | `molecules/Card/` | Contenedor con borde, radius y padding opcional |
+| Section | ✅ | `containers/Section/` | Sección con título y contenido |
+| PageShell | ✅ | `containers/PageShell/` | Shell de página con título, breadcrumbs, acciones y layout fluid/boxed |
+| ModalShell | ✅ | `containers/ModalShell/` | Modal con overlay, título, close y contenido |
+
+### Estados Globales (Containers)
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| EmptyState | ✅ | `containers/EmptyState/` | Icono, título, descripción y acción opcional (centrado) |
+| ErrorState | ✅ | `containers/ErrorState/` | Estado de error con ícono danger, título, mensaje y retry |
+| LoadingState | ❌ | `containers/LoadingState/` | Estado de carga a pantalla completa (wrapper de Spinner) |
+
+### Pendientes
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| Drawer | ❌ | `containers/Drawer/` | Panel lateral deslizable (alternativa a modal) |
+| FilterBar | ❌ | `containers/FilterBar/` | Barra horizontal de filtros activos |
+| SearchBar | ❌ | `containers/SearchBar/` | Barra de búsqueda global |
+| ConfirmationModal | ❌ | `containers/ConfirmationModal/` | Modal de confirmación "¿Estás seguro?" con acciones |
+
+### KanbanBoard
+
+| Componente | Estado | Ruta | Nota de uso |
+|-----------|--------|------|-------------|
+| KanbanBoard | ❌ | `containers/KanbanBoard/` | Tablero de columnas arrastrables para flujos de estado |
+| KanbanColumn | ❌ | `containers/KanbanBoard/KanbanColumn.tsx` | Columna individual con título, count y zona de drop |
+| KanbanCard | ❌ | `containers/KanbanBoard/KanbanCard.tsx` | Tarjeta arrastrable con datos de la entidad |
+
+---
+
+## 6. PATTERNS
+
+| Patrón | Estado | Descripción |
+|--------|--------|-------------|
+| **CRUD Pattern** | ✅ | Lista + Crear + Editar para una entidad (Users, Devices) |
+| **Detail View Pattern** | ❌ | Vista de detalle con header, secciones de info y acciones |
+| **Dashboard Grid Pattern** | ❌ | Grid de StatCards + gráficas + tablas resumidas |
+| **Form 2-Column Pattern** | ✅ | Layout de formulario con visual izquierdo + campos derecho (`FormLayout`) |
+| **Wizard / Stepper Pattern** | ❌ | Flujo multi-paso con progreso visible y validación por paso |
+| **Confirmation Pattern** | ❌ | Modal de confirmación antes de acciones destructivas |
+| **Bulk Actions Pattern** | ❌ | Selección múltiple + barra de acciones masivas en tabla |
+| **Status Tabs Pattern** | ✅ | Tabs que filtran datos por estado con counts dinámicos (Users, Devices) |
+| **Inline Expandable Row Pattern** | ❌ | Fila de tabla que se expande para mostrar detalle sin navegar |
+| **Workflow Board Pattern** | ❌ | Tablero Kanban para flujos de estado arrastrables |
+
+---
+
+## 7. Global UI States — ✅ Cerrado (v1)
+
+Estándar para los 8 estados fundamentales de interfaz.
+
+### 1. Loading
+- **Dónde aplica**: Carga inicial de página, tablas, tarjetas o envío de formularios.
+- **Componente**: `atoms/Spinner` (para bloques pequeños) o `Skeleton` (para estructuras conocidas).
+- **Checklist**:
+  - [ ] No bloquear toda la UI si es carga parcial.
+  - [ ] Usar `aria-busy="true"`.
+  - [ ] Mantener layout estable (evitar saltos al cargar).
+
+### 2. Empty
+- **Dónde aplica**: Listas sin resultados, tablas vacías, secciones sin contenido.
+- **Componente**: `containers/EmptyState`.
+- **Checklist**:
+  - [ ] Icono neutral (ej: search, inbox).
+  - [ ] Título claro ("No hay dispositivos").
+  - [ ] Descripción breve o instrucción.
+  - [ ] Acción primaria para resolver el estado ("Crear dispositivo").
+
+### 3. Error
+- **Dónde aplica**: Fallo de carga, error de servidor 500, error de validación global.
+- **Componente**: `containers/ErrorState`.
+- **Checklist**:
+  - [ ] Icono de error/danger.
+  - [ ] Título amigable ("Algo salió mal").
+  - [ ] Mensaje técnico opcional (si es admin).
+  - [ ] Botón "Reintentar" funcional.
+
+### 4. Success
+- **Dónde aplica**: Confirmación post-acción (crear, editar, borrar).
+- **Componente**: `FormActions` (estado success) o `Toast` (pendiente).
+- **Checklist**:
+  - [ ] Feedback inmediato (< 200ms).
+  - [ ] Color semántico `success`.
+  - [ ] Desaparece automáticamente o permite dismiss.
+
+### 5. Disabled
+- **Dónde aplica**: Botones, inputs, acciones no disponibles por lógica de negocio.
+- **Componente**: Propiedad nativa `disabled` + estilos CSS.
+- **Checklist**:
+  - [ ] Opacidad visual (0.5 o similar).
+  - [ ] Cursor `not-allowed`.
+  - [ ] No emite eventos click/hover.
+  - [ ] (Opcional) Tooltip explicando la razón.
+
+### 6. No Permission (403)
+- **Dónde aplica**: Usuario intenta acceder a ruta/acción restringida.
+- **Componente**: `containers/ErrorState` (variante).
+- **Checklist**:
+  - [ ] Icono de candado/lock.
+  - [ ] Título: "Acceso denegado".
+  - [ ] Acción: "Volver al dashboard" o "Iniciar sesión".
+
+### 7. Not Found (404)
+- **Dónde aplica**: Ruta inexistente o recurso eliminado.
+- **Componente**: `containers/ErrorState` (variante).
+- **Checklist**:
+  - [ ] Icono de búsqueda/fantasma.
+  - [ ] Título: "Página no encontrada".
+  - [ ] Acción: "Volver al inicio".
+
+### 8. Offline
+- **Dónde aplica**: Pérdida de conexión detectada.
+- **Componente**: `containers/ErrorState` (variante global).
+- **Checklist**:
+  - [ ] Icono de wifi-off.
+  - [ ] Título: "Sin conexión".
+  - [ ] Botón: "Reintentar conexión".
+
+---
+
+
+---
+
+## 8. Testing Surfaces
+
+Entornos internos para desarrollo y pruebas de componentes aislados.
+
+| Ruta | Estado | Propósito |
+|------|--------|-----------|
+| `/lab` | ✅ **Oficial** | Entorno de desarrollo aislado para probar átomos, moléculas y organismos fuera de la lógica de negocio. |
+
+---
+
+## 9. Cómo usar este mapa
+
+1. **Antes de crear una pantalla nueva** → revisar este inventario.
+2. **Si la pieza no existe** → crearla oficialmente (ej: `LoadingState` wrapper).
+3. **No crear piezas dentro de features** sin registrarlas aquí.
+4. **Mantener actualizado** al cerrar componentes pendientes (ej: Toast, Modal).
+
+> _Este documento es la fuente de verdad del sistema UI._

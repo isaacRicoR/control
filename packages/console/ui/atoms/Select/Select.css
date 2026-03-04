@@ -1,0 +1,112 @@
+/* Select.css */
+
+.select-field {
+    display: block;
+    width: 100%;
+    /* Use valid scoped variable */
+    height: var(--select-height);
+
+    /* Use valid scoped variables */
+    padding: calc(var(--select-padding-top) - 8px) var(--select-padding-x) var(--select-padding-bottom) calc(var(--select-padding-x) - 7px);
+
+    background-color: var(--select-bg);
+    border: 1px solid var(--select-border);
+    border-radius: var(--select-radius);
+
+    color: var(--select-text);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+    cursor: pointer;
+
+    /* Critical for pixel-perfect padding alignment (removes native browser styling) */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Fix overlap: Push text down when filled */
+.select-field[data-filled="true"] {
+    /* Push text down to make room for floating label */
+    padding-top: calc(var(--select-padding-top) - 8px);
+}
+
+/* Estado vacío y SIN foco: ocultar texto para que el label “viva” al centro */
+/* Estado vacío (con o sin foco): ocultar texto para que el label “viva” al centro sin choque */
+.select-field[data-filled="false"] {
+    color: transparent;
+}
+
+/* Solo mostrar texto con valor real */
+.select-field[data-filled="true"] {
+    color: var(--select-text);
+}
+
+.select-field:hover:not(:disabled):not(.has-error) {
+    border-color: var(--select-border-hover);
+}
+
+.select-field:focus {
+    border-color: var(--select-border-focus);
+}
+
+.select-field.has-error {
+    border-color: var(--select-border-error);
+}
+
+.select-field option {
+    color: var(--select-text);
+}
+
+.select-field:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Floating Label Logic — PARIDAD con Input */
+.select-label {
+    position: absolute;
+
+    /* Use valid scoped variable */
+    left: calc(var(--select-padding-x) - 12px);
+    top: 50%;
+    transform: translateY(-50%);
+
+    /* Use valid scoped variable (Note: Select.tsx maps this to semantic.text.default, same as Input) */
+    color: var(--select-label);
+
+    font-size: 0.875rem;
+    line-height: 1;
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    transform-origin: left top;
+}
+
+.required-asterisk {
+    position: relative;
+    top: 4px;
+    color: var(--select-label-error);
+}
+
+/* ✅ Flota SOLO cuando hay valor (NO por foco) */
+.select-field[data-filled="true"]+.select-label {
+    top: 11px;
+    transform: translateY(-50%) scale(0.75);
+}
+
+/* ✅ Azul SOLO con foco (y si está lleno, ya está flotando) */
+.select-field:focus+.select-label {
+    color: var(--select-label-focus);
+}
+
+/* Error State for Label and Asterisk */
+.select-field.has-error+.select-label {
+    color: var(--select-label-error);
+}
+
+.select-field.has-error+.select-label .required-asterisk {
+    color: var(--select-label-error);
+}

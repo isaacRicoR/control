@@ -1,0 +1,51 @@
+/* [project]/packages/console/ui/atoms/Button/Button.css [app-client] (css) */
+.button-variant-primary {
+  transition: background-color .2s, opacity .2s;
+}
+
+.button-variant-primary:hover {
+  background-color: var(--button-primary-hover) !important;
+}
+
+.button-variant-white {
+  transition: background-color .2s, opacity .2s;
+}
+
+.button-variant-white:hover {
+  background-color: var(--button-white-hover-bg) !important;
+}
+
+.button-variant-create {
+  transition: background-color .2s, opacity .2s;
+}
+
+.button-variant-create:hover {
+  background-color: var(--button-create-hover) !important;
+}
+
+.button-variant-action-primary {
+  transition: background-color .2s, opacity .2s;
+}
+
+.button-variant-action-primary:hover {
+  background-color: var(--button-action-primary-hover) !important;
+}
+
+.button-variant-secondary {
+  transition: background-color .15s, border-color .15s, opacity .2s, box-shadow .15s;
+}
+
+.button-variant-secondary:hover {
+  background-color: var(--button-secondary-hover-bg) !important;
+  border-color: var(--button-secondary-hover-border) !important;
+}
+
+.button-variant-secondary:active {
+  background-color: var(--button-secondary-active-bg) !important;
+}
+
+.button-variant-secondary:focus-visible {
+  box-shadow: 0 0 0 2px var(--button-secondary-focus-ring);
+}
+
+/*# sourceMappingURL=packages_console_ui_atoms_Button_Button_4bb4f703.css.map*/

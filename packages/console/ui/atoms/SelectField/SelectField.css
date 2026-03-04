@@ -1,0 +1,111 @@
+/* SelectField.css */
+
+.select-field-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: var(--select-height);
+
+    /* Match Input padding pattern */
+    padding: calc(var(--select-padding-top) - 8px) var(--select-padding-x) var(--select-padding-bottom) calc(var(--select-padding-x) - 7px);
+
+    background-color: var(--select-bg);
+    border: 1px solid var(--select-border);
+    border-radius: var(--select-radius);
+
+    color: var(--select-text);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+    cursor: pointer;
+
+    position: relative;
+}
+
+.select-field-box:hover:not(.has-error) {
+    border-color: var(--select-border-hover);
+}
+
+.select-field-box:focus,
+.select-field-box.is-open {
+    border-color: var(--select-border-focus);
+}
+
+.select-field-box.has-error {
+    border-color: var(--select-border-error);
+}
+
+/* Value text */
+.select-field-value {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    /* espacio para la flecha */
+    padding-right: calc((var(--select-padding-x) * 2) + 1.25em);
+}
+
+/* Placeholder state (no value) - hide placeholder to avoid overlap with label */
+.select-field-box[data-filled="false"] .select-field-value {
+    color: transparent;
+}
+
+.select-field-box[data-filled="true"] .select-field-value {
+    color: var(--select-text);
+}
+
+/* Arrow icon (centrado real). OJO: aquí ya NO ponemos transform */
+.select-field-arrow {
+    position: absolute;
+    right: var(--select-padding-x);
+    top: 50%;
+
+    margin-left: 0;
+    flex-shrink: 0;
+    color: var(--select-arrow);
+
+    pointer-events: none;
+    display: block;
+}
+
+/* Floating Label Logic - Match Input pattern */
+.select-field-label {
+    position: absolute;
+    left: calc(var(--select-padding-x) - 12px);
+    top: calc(var(--select-height) / 2);
+    transform: translateY(-50%);
+
+    color: var(--select-label);
+    font-size: 0.875rem;
+    line-height: 1;
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    transform-origin: left top;
+}
+
+.required-asterisk {
+    position: relative;
+    top: 4px;
+}
+
+/* Float when has value */
+.select-field-box[data-filled="true"]+.select-field-label {
+    top: 11px;
+    transform: translateY(-50%) scale(0.75);
+}
+
+/* Focus color */
+.select-field-box:focus+.select-field-label,
+.select-field-box.is-open+.select-field-label {
+    color: var(--select-label-focus);
+}
+
+/* Error state */
+.select-field-box.has-error+.select-field-label {
+    color: var(--select-label-error);
+}

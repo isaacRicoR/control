@@ -1,0 +1,47 @@
+/* Text.css */
+.text-component {
+    font-family: var(--font-primary, inherit);
+    color: var(--text-color, inherit);
+    margin: 0;
+    padding: 0;
+    /* Base defaults */
+}
+
+/* Variant: Label */
+.text-variant-label {
+    font-size: 1rem;
+    line-height: 1;
+    /* Uses context-aware variables (e.g. --input-label) or falls back to inherit */
+    color: var(--component-label, inherit);
+}
+
+/* Variant: Helper */
+.text-variant-helper {
+    font-size: 0.75rem;
+    /* XS */
+    margin-top: 4px;
+    display: block;
+    color: var(--text-disabled);
+}
+
+/* Variant: Asterisk */
+.text-variant-asterisk {
+    color: var(--semantic-danger);
+    margin-left: 0.25em;
+    display: inline-block;
+}
+
+/* Variant: Body (Default) */
+.text-variant-body {
+    font-size: 1rem;
+}
+
+/* Error State */
+.text-component[data-error="true"] {
+    color: var(--semantic-danger) !important;
+}
+
+/* Specific overrides if needed */
+.text-variant-label[data-error="true"] {
+    color: var(--semantic-danger);
+}

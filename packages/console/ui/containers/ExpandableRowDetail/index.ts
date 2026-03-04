@@ -1,0 +1,1 @@
+export { ExpandableRowDetail } from "./ExpandableRowDetail";

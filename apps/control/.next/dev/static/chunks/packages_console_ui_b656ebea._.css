@@ -1,0 +1,219 @@
+/* [project]/packages/console/ui/atoms/Text/Text.css [app-client] (css) */
+.text-component {
+  font-family: var(--font-primary, inherit);
+  color: var(--text-color, inherit);
+  margin: 0;
+  padding: 0;
+}
+
+.text-variant-label {
+  color: var(--component-label, inherit);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.text-variant-helper {
+  color: var(--text-disabled);
+  margin-top: 4px;
+  font-size: .75rem;
+  display: block;
+}
+
+.text-variant-asterisk {
+  color: var(--semantic-danger);
+  margin-left: .25em;
+  display: inline-block;
+}
+
+.text-variant-body {
+  font-size: 1rem;
+}
+
+.text-component[data-error="true"] {
+  color: var(--semantic-danger) !important;
+}
+
+.text-variant-label[data-error="true"] {
+  color: var(--semantic-danger);
+}
+
+/* [project]/packages/console/ui/atoms/Button/Button.css [app-client] (css) */
+.button-variant-primary {
+  transition: background-color .2s, opacity .2s;
+}
+
+.button-variant-primary:hover {
+  background-color: var(--button-primary-hover) !important;
+}
+
+.button-variant-white {
+  transition: background-color .2s, opacity .2s;
+}
+
+.button-variant-white:hover {
+  background-color: var(--button-white-hover-bg) !important;
+}
+
+.button-variant-create {
+  transition: background-color .2s, opacity .2s;
+}
+
+.button-variant-create:hover {
+  background-color: var(--button-create-hover) !important;
+}
+
+.button-variant-action-primary {
+  transition: background-color .2s, opacity .2s;
+}
+
+.button-variant-action-primary:hover {
+  background-color: var(--button-action-primary-hover) !important;
+}
+
+.button-variant-secondary {
+  transition: background-color .15s, border-color .15s, opacity .2s;
+}
+
+.button-variant-secondary:hover {
+  background-color: var(--button-secondary-hover-bg) !important;
+  border-color: var(--button-secondary-hover-border) !important;
+}
+
+.button-variant-secondary:active {
+  background-color: var(--button-secondary-active-bg) !important;
+}
+
+.button-variant-secondary:focus, .button-variant-secondary:focus-visible {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.button-variant-secondary:focus-visible {
+  border-color: var(--semantic-border-focus) !important;
+}
+
+/* [project]/packages/console/ui/atoms/FloatingSurface/FloatingSurface.css [app-client] (css) */
+.floating-surface {
+  background-color: var(--floating-bg);
+  border: 1px solid var(--floating-border);
+  border-radius: var(--floating-radius);
+  box-shadow: var(--floating-shadow);
+  will-change: transform, opacity;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-surface:before {
+  content: "";
+  background: radial-gradient(circle at top right, var(--floating-glow-top) 0%, transparent 60%);
+  width: 120px;
+  height: 120px;
+  opacity: var(--floating-glow-opacity-top, .15);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(var(--floating-glow-blur, 16px));
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.floating-surface:after {
+  content: "";
+  background: radial-gradient(circle at bottom left, var(--floating-glow-bottom) 0%, transparent 60%);
+  width: 120px;
+  height: 120px;
+  opacity: var(--floating-glow-opacity-bottom, .12);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(var(--floating-glow-blur, 16px));
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.floating-surface > * {
+  z-index: 1;
+  position: relative;
+}
+
+.floating-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.floating-scroll::-webkit-scrollbar-track {
+  background: none;
+}
+
+.floating-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--floating-border);
+  border-radius: 4px;
+}
+
+.floating-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--floating-border-active, #555);
+}
+
+.floating-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--floating-border) transparent;
+}
+
+/* [project]/packages/console/ui/containers/ToastStack/ToastStack.css [app-client] (css) */
+.toast-stack {
+  z-index: 10000;
+  pointer-events: none;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  position: fixed;
+  top: 24px;
+  right: 24px;
+}
+
+.toast-stack > * {
+  pointer-events: auto;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .toast-stack {
+    gap: 8px;
+    max-width: none;
+    padding: 16px;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/*# sourceMappingURL=packages_console_ui_b656ebea._.css.map*/
