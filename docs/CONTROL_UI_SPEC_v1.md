@@ -1,6 +1,6 @@
-# Especificación Técnica de UI - Proyecto CONTROL (v1)
+# Especificación Técnica de UI - Proyecto CONTROL (v1) [Source of Truth Final]
 
-Este documento es la **Fuente de Verdad (Source of Truth)** definitiva del sistema visual de CONTROL. Contiene las especificaciones técnicas extraídas directamente del código para garantizar la reconstrucción íntegra del sistema.
+Este documento es la **Fuente de Verdad (Source of Truth) final** del sistema visual de CONTROL, validada y congelada según los estándares del repositorio. Contiene las especificaciones técnicas extraídas directamente del código para garantizar la reconstrucción íntegra del sistema.
 
 ---
 
@@ -22,12 +22,11 @@ Los colores se rigen por variables CSS dinámicas. El objeto `colors.semantic` e
 
 ## 2. Jerarquía de Texto
 
-La consistencia visual depende del mapeo correcto de estos tres estados de texto:
+La consistencia visual depende del mapeo correcto de estos tres estados de texto (Source of Truth):
 
-*   **Labels de Formularios**: Siempre utilizan `semantic.text.muted`. (Configurado vía `--input-label` y `--select-label`).
-*   **Texto de Usuario (Values)**: Siempre utilizan `semantic.text.active` para máximo contraste.
-*   **Breadcrumbs y Metadata**: Utilizan `semantic.text.muted`.
-*   **Títulos de Página**: Utilizan `semantic.text.active` con peso `bold`.
+*   **`text.active`**: Títulos, valores ingresados por el usuario y máximo contraste.
+*   **`text.default`**: Cuerpo de texto, contenido de tablas y descripciones.
+*   **`text.muted`**: Labels de formularios (`Input`, `SelectField`), breadcrumbs y metadata.
 
 ---
 
@@ -68,7 +67,7 @@ Para lograr que los footers de acción toquen los bordes del `Card` sin romper e
 // Lógica interna en Card.tsx
 margin: `0 -${spacing[24]}px -${spacing[24]}px -${spacing[24]}px`
 ```
-Este patrón elimina el "aire" extra en la parte inferior de las vistas de configuración.
+Este patrón elimina el "aire" extra en la parte inferior de las vistas de configuración. El footer queda perfectamente alineado a los bordes de la Card.
 
 ---
 
@@ -81,8 +80,10 @@ Los botones tienen prohibido el uso de alturas manuales. Se rigen por el prop `s
 *   **`md`**: Altura real de **48px**. Estándar para formularios de creación.
 
 ### Variantes de Color:
-*   **`actionPrimary`**: Invierte colores según el tema. (LIGHT: Fondo oscuro/Texto blanco | DARK: Fondo blanco/Texto oscuro).
-*   **`secondary`**: Fondo neutro (`surface`), borde visible y texto de contraste.
+*   **`actionPrimary`**: Invierte colores según el tema (Invert).
+    *   **LIGHT**: Fondo oscuro (`#141A21`) / Texto blanco.
+    *   **DARK**: Fondo blanco / Texto oscuro (`#141A21`).
+*   **`secondary`**: Fondo neutro (`surface`), borde visible y texto de contraste (`text.active`).
 
 ---
 
@@ -90,13 +91,13 @@ Los botones tienen prohibido el uso de alturas manuales. Se rigen por el prop `s
 
 ### Especificaciones Técnicas:
 *   **Patrón**: Floating Labels obligatorio.
-*   **Color de Label**: `semantic.text.muted`.
+*   **Labels**: Usan estrictamente `semantic.text.muted` (configurado vía `--input-label` y `--select-label`).
 *   **Color de Texto ingresado**: `semantic.text.active`.
 *   **Borde y Fondo**: `border.default` y `surface.default`.
 
 ---
 
-## 8. Patrones de Pantalla y Uso
+## 8. Patrones de Pantalla y Uso (Mapa de Rutas)
 
 | Tipo de Pantalla | Card Pattern | Tamaño Botones | Rutas de Ejemplo |
 | :--- | :--- | :--- | :--- |
@@ -113,6 +114,7 @@ Los botones tienen prohibido el uso de alturas manuales. Se rigen por el prop `s
 2.  **No modificar tokens desde componentes**: Los cambios de color se centralizan en `globals.css`.
 3.  **Respetar variantes del sistema**: No usar paddings manuales en pantallas; elegir la variante de `Card` adecuada.
 4.  **Consistencia de Botones**: Usar `size="sm"` para toda acción que no sea el envío principal de un formulario de creación.
+5.  **Prohibido Hacks por Pantalla**: Cualquier ajuste visual debe ser sistémico y reflejado en este documento.
 
 ---
 
@@ -131,6 +133,6 @@ Para mantener la integridad de la Fuente de Verdad, cualquier cambio visual debe
 
 Si el UI se rompe o pierde coherencia:
 1.  **Check de Tokens**: Validar los HEX de la Sección 1 en `globals.css`.
-2.  **Check de Labels**: Asegurar que `Input.tsx` mapee `--input-label` a `text.muted`.
-3.  **Check de Card Variant**: Confirmar que `variant="panel"` en `Card.tsx` aplique los márgenes negativos de `-24px`.
+2.  **Check de Labels**: Asegurar que `Input.tsx` y `SelectField.tsx` mapeen `--input-label`/`--select-label` a `text.muted`.
+3.  **Check de Card Variant**: Confirmar que `variant="panel"` en `Card.tsx` aplique los márgenes negativos de `-24px` en el footer.
 4.  **Check de Button Sizes**: Validar que el tamaño `sm` calcule su altura a 36px.

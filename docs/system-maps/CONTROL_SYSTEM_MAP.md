@@ -273,7 +273,9 @@ Contenedor base para elementos que flotan sobre la UI principal.
 
 ## 5.2️⃣ DESIGN SYSTEM Y COMPORTAMIENTO UI OFICIAL
 
-Documentación de los ajustes visuales y de comportamiento implementados.
+Para una referencia detallada de tokens, componentes y patrones, consulte la **Fuente de Verdad (Source of Truth)** definitiva del sistema visual.
+
+- **Referencia**: [CONTROL_UI_SPEC_v1.md](/docs/CONTROL_UI_SPEC_v1.md)
 
 ### Design System — Estado Oficial
 

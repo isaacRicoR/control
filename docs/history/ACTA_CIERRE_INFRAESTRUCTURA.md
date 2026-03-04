@@ -49,3 +49,9 @@ Se declara oficialmente cerrada la etapa de Infraestructura. Se autoriza el inic
 
 **Fecha**: 27 de febrero de 2026
 **Estado**: Infraestructura congelada y validada.
+
+---
+
+## 7. Cierre de UI Spec v1
+
+Se ratifica que la **Especificación de UI v1** ha quedado formalmente congelada y respaldada en el repositorio de GitHub como la única Fuente de Verdad para el sistema visual de CONTROL. Cualquier evolución futura deberá partir de este estado base validado.

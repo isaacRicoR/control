@@ -268,10 +268,19 @@ Estándar para los 8 estados fundamentales de interfaz.
 
 ---
 
+## 8. Estándar Global de Componentes (Source of Truth)
+
+Para garantizar la consistencia, todos los componentes deben seguir estos estándares obligatorios:
+
+- **Card Variant "panel"**: Uso obligatorio para paneles de configuración, perfil y detalle. Fuerza elevación y aplica el patrón de **Footer Glued** (márgenes negativos de -24px).
+- **Footer Glued**: Las acciones de pie de página en Cards tipo panel deben tocar los bordes del contenedor sin "aire" inferior.
+- **Labels Muted**: Los labels de `Input` y `SelectField` deben usar estrictamente el token `semantic.text.muted`.
+- **Botones Panel**: En vistas de tipo panel o tablas, el tamaño de botón estándar es `size="sm"` (36px).
+- **Prohibición de Hacks**: Queda estrictamente prohibido el uso de paddings, márgenes o alturas manuales ("hacks") por pantalla. Todo ajuste debe ser a través de props de componentes o tokens globales.
 
 ---
 
-## 8. Testing Surfaces
+## 9. Testing Surfaces
 
 Entornos internos para desarrollo y pruebas de componentes aislados.
 
