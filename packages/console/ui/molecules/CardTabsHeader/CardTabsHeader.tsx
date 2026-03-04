@@ -18,6 +18,7 @@ export type CardTabsHeaderProps = {
     leftSlot?: React.ReactNode;
     rightSlot?: React.ReactNode;
     ariaLabel?: string;
+    tabsGap?: number;
 };
 
 export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
@@ -27,6 +28,7 @@ export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
     leftSlot,
     rightSlot,
     ariaLabel = "Tabs",
+    tabsGap,
 }) => {
     const { theme } = useTheme();
     const semantic = colors[theme].semantic;
@@ -114,6 +116,7 @@ export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
                         alignItems: "center",
                         flex: 1,
                         minWidth: 0,
+                        gap: tabsGap,
                     }}
                 >
                     {tabs.map((tab, index) => {

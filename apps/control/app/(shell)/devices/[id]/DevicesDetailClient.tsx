@@ -232,6 +232,7 @@ export function DevicesDetailClient({ deviceId }: DevicesDetailClientProps) {
                     tabs={TABS}
                     value={activeTab}
                     onChange={setActiveTab}
+                    tabsGap={spacing[16]}
                     leftSlot={
                         <div style={{ paddingLeft: spacing[12], paddingRight: spacing[8], paddingTop: spacing[12], paddingBottom: spacing[12], display: "flex", alignItems: "center" }}>
                             <ActionIcon
