@@ -138,8 +138,9 @@ const DataTableInternal = <T,>({
           position: "relative",
           display: "flex",
           flexDirection: "column",
-          height: "100%",
           flex: 1,
+          height: "100%",
+          minHeight: 0, // Crucial for nested flex
         }}
         aria-label={ariaLabel}
       >
@@ -162,12 +163,13 @@ const DataTableInternal = <T,>({
               overflow: "auto",
               width: "100%",
               flex: 1,
-              paddingTop: spacing[12],
+              paddingTop: 0,
               scrollbarWidth: "none",
               msOverflowStyle: "none",
               boxShadow: "none",
               filter: "none",
               borderTop: "none",
+              minHeight: 0,
             }}
           >
           {isLoading ? (

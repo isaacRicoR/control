@@ -29,25 +29,22 @@ export const TableFooter: React.FC<TableFooterProps> = ({
     const hasNext = page < totalPages - 1;
 
     return (
-        <div
-            style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: `${spacing[12]}px ${spacing[24]}px`,
-                borderTop: `1px solid ${semantic.border.default}`,
-                boxShadow: "none",
-                filter: "none",
-                color: semantic.text.default,
-                fontSize: typography.fontSize.sm,
-                position: "sticky",
-                bottom: 0,
-                zIndex: 5,
-                backgroundColor: semantic.surface.default,
-                width: "100%",
-                fontFamily: typography.fontFamily.primary,
-            }}
-        >
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: `${spacing[12]}px ${spacing[24]}px`,
+                    borderTop: `1px solid ${semantic.border.default}`,
+                    boxShadow: "none",
+                    filter: "none",
+                    color: semantic.text.default,
+                    fontSize: typography.fontSize.sm,
+                    backgroundColor: semantic.surface.default,
+                    width: "100%",
+                    fontFamily: typography.fontFamily.primary,
+                }}
+            >
             <div style={{ display: "flex", alignItems: "center", gap: spacing[8] }}>
                 <span style={{ color: semantic.text.disabled }}>Filas por página:</span>
 
