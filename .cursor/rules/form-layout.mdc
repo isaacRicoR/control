@@ -1,0 +1,73 @@
+---
+description: Estándar para el diseño de formularios (Form Layout) en pantallas de detalle y edición en apps/control.
+globs: apps/control/app/(shell)/**/*.tsx
+alwaysApply: false
+---
+
+# Form Layout Standard
+
+Este documento formaliza la estructura interna y el estilo de los formularios en pantallas de detalle, creación y edición.
+
+## 1. Estructura Jerárquica
+Todos los formularios deben implementarse dentro del patrón de Panel Layout:
+`PageShell` > `PagePanelTemplate` > `Body`.
+
+## 2. Organización del Body
+El contenido dentro del slot `body` del template debe seguir este orden:
+1. **SectionTitle**: Título descriptivo de la sección.
+2. **FormGrid**: Contenedor de rejilla para los campos.
+3. **Inputs/Selects**: Campos de entrada de datos.
+
+## 3. SectionTitle (Títulos de Sección)
+Cada bloque de campos debe estar encabezado por un título.
+- **Color**: `semantic.text.muted`
+- **Font Weight**: `600` o `typography.fontWeight.semibold`
+- **Margen**: Espaciado consistente con el grid (ej. `spacing[24]` de separación entre bloques).
+
+## 4. Campos de Entrada (Inputs y Selects)
+Todos los elementos de formulario (`Input`, `SelectSingle`, etc.) deben ser visualmente idénticos:
+- **Ancho**: Generalmente `100%` dentro de su celda del grid.
+- **Borde**: `semantic.border.default`
+- **Radio**: `radius.card` (18px)
+- **Prohibido**: No usar colores `hex`, `rgb` o `rgba` hardcodeados. Usar siempre `semantic.*`.
+
+## 5. Patrón de Avatar (Solo Usuarios)
+Para entidades de tipo Usuario/Perfil:
+- **Tamaño**: 120px.
+- **Posición**: Ubicado a la izquierda del bloque principal de formulario en pantallas grandes (layout de columnas).
+
+## 6. Acciones (FooterActions)
+El footer debe contener siempre el patrón de confirmación:
+- **Orden**: `[ Cancelar ] [ Guardar ]`
+- **Alineación**: Derecha (`justify-content: flex-end`).
+- **Primario**: "Guardar" (o acción principal) con `variant="actionPrimary"`.
+- **Secundario**: "Cancelar" con `variant="secondary"`.
+
+## Ejemplo de Referencia (Official)
+`apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx`
+
+```tsx
+<PagePanelTemplate
+  header={<CardTabsHeader ... />}
+  body={
+    <div style={{ display: "flex", gap: spacing[32] }}>
+      {/* Opcional: Avatar para usuarios */}
+      <Avatar size={120} ... />
+      
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: spacing[24] }}>
+        <Text style={{ color: semantic.text.muted, fontWeight: 600 }}>Información Personal</Text>
+        <div style={{ display: "grid", gap: spacing[16] }}>
+          <Input label="Nombre" ... />
+          <SelectSingle label="Estado" ... />
+        </div>
+      </div>
+    </div>
+  }
+  footer={
+    <>
+      <Button variant="secondary">Cancelar</Button>
+      <Button variant="actionPrimary">Guardar</Button>
+    </>
+  }
+/>
+```

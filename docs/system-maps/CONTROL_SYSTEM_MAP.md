@@ -18,11 +18,56 @@ Modelo de aislamiento total para escalabilidad y mantenimiento.
 |---|---|---|
 | **Core** | Design System, Connector (`src/core/connector/`), Auth Logic | CERRADO |
 | **Console** | Shell (`AppShell`, `Sidebar`, `TopBar`, layouts) | CERRADO |
-| **Features** | Cartuchos de negocio (`app/(shell)/users`, `devices`) | EN DESARROLLO (Users cerrado, Devices detallado) |
+| **Features** | Cartuchos de negocio (`app/(shell)/users`, `devices`) | ESTABLE (Patrones UI congelados) |
 | **Security** | Route Guards, Permisos RBAC, Middleware | IMPLEMENTADO |
 | **Tools** | Herramientas de desarrollo (`Permisos`, `Apariencia`, `Lint`) | IMPLEMENTADO |
 
 > **Regla de oro**: Las capas superiores dependen de las inferiores. Ningún Feature accede directamente a infraestructura sin pasar por la capa Core.
+
+---
+
+## 🎨 UI PATTERN RULES (Cursor Intelligence)
+
+El sistema utiliza reglas de IA para garantizar que los patrones visuales se mantengan estables y replicables sin intervención manual constante.
+
+| Regla | Propósito | Estado |
+|---|---|---|
+| `.cursor/rules/panel-layout.mdc` | Estándar de Paneles (Header/Body/Footer) | ❄️ FROZEN |
+| `.cursor/rules/listing-layout.mdc` | Estándar de Listados (Scroll interno, Toolbar) | ❄️ FROZEN |
+| `.cursor/rules/form-layout.mdc` | Estándar de Formularios (Grid, SectionTitles) | ❄️ FROZEN |
+| `.cursor/rules/ui-patterns.mdc` | Estándar de Botones, Avatars e Interacciones | ❄️ FROZEN |
+
+---
+
+## 📐 ESTRUCTURA UI CORE
+
+Jerarquía oficial para la construcción de pantallas dentro de `apps/control`.
+
+### Pantallas de Detalle / Edición / Panel
+1. **PageShell**: Contenedor semántico.
+2. **PagePanelTemplate**: Template reutilizable con 3 slots:
+   - **HeaderTools**: `Back` + `Tabs` (CardTabsHeader).
+   - **Body**: Contenido scrolleable (Grid + Inputs).
+   - **FooterActions**: Acciones `[ Cancelar ] [ Guardar ]`.
+
+### Pantallas de Listado
+1. **PageShell** (variant="fluid"): Altura fija al 100% visible.
+2. **Table Container** (data-table-card):
+   - **Status Tabs**: Filtros rápidos de estado.
+   - **TableToolbar**: Buscador y filtros dinámicos.
+   - **DataTable**: Cuerpo con scroll interno.
+   - **Footer**: Paginación.
+
+---
+
+## 💎 DESIGN SYSTEM & TOKENS
+
+El sistema ha eliminado completamente los valores hardcodeados en favor de una arquitectura 100% basada en tokens semánticos.
+
+- **Colores**: Uso exclusivo de `semantic.*` (ej: `semantic.border.subtle`). **0% hardcoded colors**.
+- **Espaciado**: Uso exclusivo de `spacing.*`. **0% hardcoded margins/paddings**.
+- **Radios**: Uso estandarizado de `radius.card` (18px) para todos los contenedores y botones de acción.
+- **Tipografía**: Uso de `typography.fontWeight.semibold` (600) para títulos de sección.
 
 ---
 
@@ -182,13 +227,9 @@ Acceso exclusivo para administradores y desarrolladores (Owner role).
 
 Piezas de arquitectura UI reutilizables.
 
+- **PagePanelTemplate**: ❄️ STABLE (Slot-based layout para Paneles).
 - **DataTable**: Tabla de datos con paginación y estados — **CERRADO** (100% genérico).
 - **TableToolbar**: Barra de herramientas estandarizada (Tabs, Search, Actions).
-- **Card Layout Architecture (Flat Style)**:
-  - Se eliminó el borde exterior tipo "card" y sombras para un estilo "flat" en contenedores de listas y formularios.
-  - **Jerarquía de Bordes**:
-    - `border.subtle`: Usado en líneas estructurales (tabs, footer, toolbars).
-    - `border.default`: Usado en separadores de filas y elementos de UI internos.
 - **CardTabsHeader**: Header reutilizable para tarjetas con tabs. Altura: **55px**.
 - **PageShell**: Contenedor semántico de páginas (Título, Breadcrumbs).
 - **ConfirmDialog**: Patrón oficial congelado (Layout compacto, premium status).
@@ -217,20 +258,43 @@ Piezas de arquitectura UI reutilizables.
 | Componente | Estado | Notas |
 |---|---|---|
 | **Arquitectura Base** | ✅ CERRADA | Consola + Cartucho, SSR Safe |
+| **UI Layouts (Panel/List/Form)** | ❄️ FROZEN | Formalizados mediante `.mdc` rules |
 | **Security Layer** | ✅ IMPLEMENTADO | Route Guards, Permisos RBAC |
 | **Contrato Universal** | ✅ CERRADO | v2.1 LTS |
 | **Connector Layer** | ✅ IMPLEMENTADO | 0 errors, 0 warnings |
 | **Preferences Layer** | ✅ ESTABLE | Persistencia por pantalla + fallback |
-| **Design System** | ✅ ESTABLE | Flat style, tokens semánticos refinados |
+| **Design System** | ❄️ FROZEN | 100% Token-based (0% hardcoded) |
 | **ESLint Rules** | ✅ IMPLEMENTADO | Regla custom "use client" obligatoria |
 | **Backend Real** | ⏳ NO IMPLEMENTADO | Mock Data (Dataset de usuarios ampliado) |
 
 ---
 
+## 🚀 ÁREA DE DESARROLLO ACTUAL
+
+El foco se encuentra en la infraestructura de personalización y estética avanzada.
+
+- **Appearance System**: Refinamiento de la herramienta de edición de tokens.
+- **Theme Registry**: Gestión dinámica de presets (Control vs Security).
+- **Theme Switching**: Transiciones suaves y persistencia de modo (Dark/Light).
+- **Ubicación**: `apps/control/app/(shell)/lab/apariencia`
+- **Estado**: 🚧 IN DEVELOPMENT
+
+---
+
+## 📅 PRÓXIMOS MÓDULOS DE PRODUCTO
+
+Módulos funcionales que heredarán los patrones UI congelados.
+
+1. **Departments**: Gestión de estructuras organizativas.
+2. **Devices**: Expansión de gestión de inventario.
+3. **Organization**: Configuración global de la cuenta.
+
+---
+
 ## 🕵️ ÚLTIMOS CAMBIOS (Fecha de corte: 2026-03-04)
 
-- **UI Flat Style**: Remoción de bordes exteriores y sombras en Cards de listas/formularios. Introducción de `border.subtle` para líneas estructurales.
-- **Persistencia Inteligente**: `pageSize` ahora persiste por ruta de navegación y tiene fallback al último valor global.
-- **Blindaje SSR**: Eliminación de Turbopack Runtime Errors mediante guards de `window` y uso de `Suspense` en rutas con `useSearchParams`.
-- **Quality Gates**: Migración a ESLint Flat Config (v9) e implementación de regla custom para validar `"use client"` ante presencia de hooks.
-- **Dataset de Usuarios**: Ampliación del store en memoria para pruebas de scroll y validación de componentes de Avatar.
+- **UI Patterns Frozen**: Formalización de `PanelLayout`, `ListingLayout`, `FormLayout` y `UI Patterns` mediante reglas de Cursor (.mdc).
+- **Standard Layout Template**: Creación de `PagePanelTemplate` para unificar comportamiento de Header/Footer fijos y Body scrolleable.
+- **Listing Alignment**: Sincronización visual de Users List y Devices List (Tabs, Toolbars, Interacciones).
+- **Design System Cleanup**: Eliminación total de colores y espaciados hardcodeados en las pantallas principales.
+- **UI Flat Style**: Remoción de bordes exteriores y sombras en Cards de listas/formularios.
