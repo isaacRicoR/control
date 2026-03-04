@@ -53,12 +53,12 @@ export const CompanySelector: React.FC<CompanySelectorProps> = ({
                         width: 24,
                         height: 24,
                         borderRadius: "50%",
-                        backgroundColor: activeCompany?.color || "#10B981",
+                        backgroundColor: activeCompany?.color || semantic.success.default,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                     }}>
-                        <span style={{ color: "#FFF", fontSize: typography.fontSize.xs, fontWeight: "bold" }}>{activeCompany?.label || "EM"}</span>
+                        <span style={{ color: semantic.text.onSolid, fontSize: typography.fontSize.xs, fontWeight: "bold" }}>{activeCompany?.label || "EM"}</span>
                     </div>
 
                     <Text style={{
@@ -142,7 +142,7 @@ export const CompanySelector: React.FC<CompanySelectorProps> = ({
                                             // Removed hardcoded shadow to comply with strict token rules
                                             border: `1px solid ${semantic.border.default}`
                                         }}>
-                                            <span style={{ color: "#FFF", fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.bold }}>
+                                            <span style={{ color: semantic.text.onSolid, fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.bold }}>
                                                 {company.label}
                                             </span>
                                         </div>
@@ -153,7 +153,7 @@ export const CompanySelector: React.FC<CompanySelectorProps> = ({
                                                 fontSize: typography.fontSize.sm, // Was 12, now sm (14) or should I use xs (10)? Sidebar often uses smaller text. Let's use 12px via calc or just sm if acceptable. User wanted 12. Token system has xs=10, sm=14. I will use xs (10) for count and sm (14) for name, or maybe 12 is needed. But user said "No hardcodear sizes". I'll use sm (14) for name and xs (10) for count.
                                                 fontWeight: typography.fontWeight.medium,
                                                 color: company.active ? semantic.primary.default : semantic.text.default,
-                                                // Note: Active text often white on dark active bg, but standard tokens might diff. 
+                                                // Note: Active text often contrast on dark active bg, but standard tokens might diff. 
                                                 // Logic: if company.active (selected), bg is surface.selected.
                                                 whiteSpace: "nowrap",
                                                 overflow: "hidden",

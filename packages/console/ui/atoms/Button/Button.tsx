@@ -51,14 +51,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     text = colors.semantic.text.disabled;
     border = colors.semantic.border.disabled;
   } else if (variant === 'primary') {
-    const pt = colors.semantic.button?.primary;
-    const packBg = themeTokens?.buttonPrimaryBg;
-    const packText = themeTokens?.buttonPrimaryText;
-    bg = packBg ?? pt?.bg ?? colors.semantic.primary.default;
-    text = packText ?? pt?.text ?? colors.semantic.text.active;
+    bg = themeTokens?.buttonPrimaryBg ?? colors.semantic.primary.default;
+    text = themeTokens?.buttonPrimaryText ?? colors.semantic.text.onSolid;
     border = bg;
     variantClass = "button-variant-primary";
-    const hoverVal = pt?.hover ?? pt?.bg ?? colors.semantic.primary.hover;
+    const hoverVal = colors.semantic.primary.hover;
     cssVariables = { "--button-primary-hover": hoverVal };
   } else if (variant === 'actionPrimary') {
     const ap = colors[theme].semantic.button?.actionPrimary;
@@ -93,13 +90,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     cssVariables = {
       "--button-white-hover-bg": colors.semantic.button?.white.hoverBg ?? "#F4F4F5"
     };
-  } else if (variant === 'create' && colors.semantic.button?.create) {
-    const ct = colors.semantic.button.create;
-    bg = ct.bg;
-    text = ct.text;
-    border = ct.border;
+  } else if (variant === 'create') {
+    bg = "var(--semantic-button-create-bg)";
+    text = "var(--semantic-button-create-text)";
+    border = "var(--semantic-button-create-border)";
     variantClass = "button-variant-create";
-    cssVariables = { "--button-create-hover": ct.hover };
+    cssVariables = { "--button-create-hover": "var(--semantic-button-create-hover)" };
   } else if (variant === 'error') {
     bg = colors.semantic.error.default;
     text = colors.semantic.text.active; // Using active text for better contrast on red

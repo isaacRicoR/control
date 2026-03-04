@@ -23,7 +23,7 @@
 
     /* Scrollbar — same pattern as SelectSingle dropdown */
     scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    scrollbar-color: var(--semantic-border-default) transparent;
 }
 
 .textarea-field::-webkit-scrollbar {
@@ -35,12 +35,12 @@
 }
 
 .textarea-field::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--semantic-border-default);
     border-radius: 4px;
 }
 
 .textarea-field::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--semantic-border-active);
 }
 
 .textarea-field:hover:not(:disabled):not(.has-error) {

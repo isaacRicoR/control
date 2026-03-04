@@ -1,10 +1,10 @@
 import { SidebarGroup, SystemCompany } from "@ui/layouts/Sidebar/Sidebar.types";
 
 export const mockCompanies: SystemCompany[] = [
-    { name: "Empresa ABC", label: "EM", count: "4 de 10", active: true, color: "#00C853" }, // Green
-    { name: "Corporación Tech", label: "CO", count: "2 de 5", active: false, color: "#00796B" }, // Teal
-    { name: "Startup Innovación", label: "ST", count: "9 de 15", active: false, color: "#2E7D32" }, // Dark Green
-    { name: "Corporación Int...", label: "CO", count: "5 de 10", active: false, color: "#00695C" } // Dark Teal
+    { name: "Empresa ABC", label: "EM", count: "4 de 10", active: true, color: "var(--semantic-success-default)" },
+    { name: "Corporación Tech", label: "CO", count: "2 de 5", active: false, color: "var(--semantic-primary-default)" },
+    { name: "Startup Innovación", label: "ST", count: "9 de 15", active: false, color: "var(--semantic-success-hover)" },
+    { name: "Corporación Int...", label: "CO", count: "5 de 10", active: false, color: "var(--semantic-primary-hover)" }
 ];
 
 export const appName = "Control";

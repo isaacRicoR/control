@@ -4,7 +4,7 @@ import { FC, useState, useRef, useEffect } from "react";
 import { DEV_UI_ENABLED } from "@core/flags/devFlags";
 import { mockSession } from "@core/auth/mockSession";
 import { useVisualPreset, VisualPreset } from "@core/visual/visualPresetStore";
-import { colors, spacing, radius, typography, zIndex } from "@tokens";
+import { colors, spacing, radius, typography, zIndex, shadows } from "@tokens";
 
 export const DevPanel: FC = () => {
     // 2. State for Dropdown
@@ -65,7 +65,7 @@ export const DevPanel: FC = () => {
         background: colors.semantic.surface.default,
         border: `1px solid ${colors.semantic.border.default}`,
         borderRadius: radius.md,
-        boxShadow: "0 4px 12px rgba(0,0,0,0.1)", // Shadow token pending, using conservative fallback or standard
+        boxShadow: shadows.dropdown, // Shadow token
         zIndex: zIndex.dropdown, // Assuming zIndex.dropdown exists in tokens
         overflow: "hidden",
         display: isOpen ? "block" : "none",

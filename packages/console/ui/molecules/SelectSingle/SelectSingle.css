@@ -22,10 +22,10 @@
 }
 
 .select-dropdown::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--semantic-border-default);
     border-radius: 4px;
 }
 
 .select-dropdown::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--semantic-border-active);
 }
