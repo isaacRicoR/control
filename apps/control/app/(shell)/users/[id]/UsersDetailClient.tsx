@@ -13,6 +13,7 @@ import { DetailSkeleton } from "@ui/patterns/skeletons/DetailSkeleton";
 import { PageShell } from "@ui/containers/PageShell/PageShell";
 import { CardTabsHeader } from "@ui/molecules/CardTabsHeader";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
+import { PagePanelTemplate } from "../../_components/PagePanelTemplate";
 import { Text } from "@ui/atoms/Text/Text";
 import { Avatar } from "@ui/atoms/Avatar";
 import { Button } from "@ui/atoms/Button/Button";
@@ -222,181 +223,161 @@ export const UsersDetailClient = ({ userId }: UsersDetailClientProps) => {
                 minHeight: 0,
             }}
         >
-            <div
-                style={{
-                    flex: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                    minHeight: 0,
-                    backgroundColor: semantic.surface.default,
-                    borderRadius: radius.card,
-                    border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
-                    overflow: "hidden",
-                    paddingTop: spacing[24],
-                }}
-            >
-                <CardTabsHeader
-                    tabs={TABS}
-                    value={activeTab}
-                    onChange={setActiveTab}
-                    tabsGap={spacing[16]}
-                    leftSlot={
-                        <div style={{ paddingLeft: spacing[12], paddingRight: spacing[8], paddingTop: spacing[12], paddingBottom: spacing[12], display: "flex", alignItems: "center" }}>
-                            <ActionIcon
-                                name="chevron-left"
-                                label="Volver"
-                                onClick={() => router.back()}
-                            />
-                        </div>
-                    }
-                    ariaLabel="Secciones del perfil"
-                />
-
-                <div style={{ flex: 1, overflowY: "auto", minHeight: 0, padding: spacing[24], paddingTop: 0 }}>
-                    {
-                        activeTab === "Perfil" ? (
-                            <>
-                                <div style={{
-                                    display: "flex",
-                                    gap: spacing[32],
-                                    flexWrap: "wrap",
-                                }}>
-
-                                    {/* Avatar Column */}
-                                    <div style={{ flex: "0 0 auto", display: "flex", justifyContent: "center" }}>
-                                        <Avatar
-                                            src={formData.avatar}
-                                            name={formData.name}
-                                            backgroundColor={formData.initialsColor}
-                                            size={120}
-                                        />
-                                    </div>
-
-                                    {/* Details Column */}
-                                    <div style={{ flex: "1 1 300px", display: "flex", flexDirection: "column", gap: spacing[24] }}>
-                                        {/* Header for Profile Content */}
-                                        <Text
-                                            variant="body"
-                                            style={{
-                                                fontSize: typography.fontSize.md,
-                                                fontWeight: typography.fontWeight.semibold,
-                                                color: semantic.text.default
-                                            }}
-                                        >
-                                            Información Personal
-                                        </Text>
-
-                                        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: spacing[16], maxWidth: "400px", width: "100%" }}>
-                                            <Input
-                                                label="Nombre Completo"
-                                                value={formData.name}
-                                                onChange={(e) => handleChange("name", e.target.value)}
-                                                readOnly={!isEditing}
-                                            />
-                                            <Input
-                                                label="Correo Electrónico"
-                                                value={formData.email}
-                                                onChange={(e) => handleChange("email", e.target.value)}
-                                                readOnly={!isEditing}
-                                            />
-                                            <Input
-                                                label="Teléfono"
-                                                value={formData.phone}
-                                                onChange={(e) => handleChange("phone", e.target.value)}
-                                                readOnly={!isEditing}
-                                            />
-
-                                            {isEditing ? (
-                                                <SelectSingle
-                                                    label="Rol"
-                                                    value={formData.role}
-                                                    onChange={(val) => handleChange("role", val)}
-                                                    options={ROLE_OPTIONS}
-                                                />
-                                            ) : (
-                                                <Input
-                                                    label="Rol"
-                                                    value={ROLE_OPTIONS.find(o => o.value === formData.role)?.label || formData.role}
-                                                    readOnly
-                                                />
-                                            )}
-
-                                            {isEditing ? (
-                                                <SelectSingle
-                                                    label="Departamento"
-                                                    value={formData.department}
-                                                    onChange={(val) => handleChange("department", val)}
-                                                    options={DEPT_OPTIONS}
-                                                />
-                                            ) : (
-                                                <Input
-                                                    label="Departamento"
-                                                    value={DEPT_OPTIONS.find(o => o.value === formData.department)?.label || formData.department}
-                                                    readOnly
-                                                />
-                                            )}
-
-                                            {isEditing ? (
-                                                <SelectSingle
-                                                    label="Estado"
-                                                    value={formData.status}
-                                                    onChange={(val) => handleChange("status", val)}
-                                                    options={STATUS_OPTIONS}
-                                                />
-                                            ) : (
-                                                <Input
-                                                    label="Estado"
-                                                    value={STATUS_OPTIONS.find(o => o.value === formData.status)?.label || formData.status}
-                                                    readOnly
-                                                />
-                                            )}
-
-                                            {/* Read-only field example */}
-                                            {!isEditing && (
-                                                <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-y-1 lg:gap-y-0 items-center" style={{ padding: `${spacing[12]}px 0`, borderBottom: `1px solid ${semantic.border.default}` }}>
-                                                    <Text variant="body" style={{ color: semantic.text.disabled }}>Miembro desde</Text>
-                                                    <Text variant="body" style={{ color: semantic.text.default, fontWeight: typography.fontWeight.medium }}>01 Ene 2024</Text>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        ) : (
-                            <div style={{
-                                minHeight: 300,
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                            }}>
-                                <EmptyState
-                                    title="Próximamente"
-                                    description={`El módulo de ${activeTab.toLowerCase()} está en construcción.`}
-                                    icon="info"
+            <PagePanelTemplate
+                header={
+                    <CardTabsHeader
+                        tabs={TABS}
+                        value={activeTab}
+                        onChange={setActiveTab}
+                        tabsGap={spacing[16]}
+                        leftSlot={
+                            <div style={{ paddingLeft: spacing[12], paddingRight: spacing[8], paddingTop: spacing[12], paddingBottom: spacing[12], display: "flex", alignItems: "center" }}>
+                                <ActionIcon
+                                    name="chevron-left"
+                                    label="Volver"
+                                    onClick={() => router.back()}
                                 />
                             </div>
-                        )
-                    }
-                </div>
+                        }
+                        ariaLabel="Secciones del perfil"
+                    />
+                }
+                body={
+                    <>
+                        {
+                            activeTab === "Perfil" ? (
+                                <>
+                                    <div style={{
+                                        display: "flex",
+                                        gap: spacing[32],
+                                        flexWrap: "wrap",
+                                    }}>
 
-                {showFooter && (
-                    <div
-                        style={{
-                            borderTop: `1px solid ${semantic.border.default}`,
-                            padding: spacing[16],
-                            display: "flex",
-                            gap: spacing[12],
-                            alignItems: "center",
-                            justifyContent: "flex-end",
-                            marginTop: "auto",
-                        }}
-                    >
+                                        {/* Avatar Column */}
+                                        <div style={{ flex: "0 0 auto", display: "flex", justifyContent: "center" }}>
+                                            <Avatar
+                                                src={formData.avatar}
+                                                name={formData.name}
+                                                backgroundColor={formData.initialsColor}
+                                                size={120}
+                                            />
+                                        </div>
+
+                                        {/* Details Column */}
+                                        <div style={{ flex: "1 1 300px", display: "flex", flexDirection: "column", gap: spacing[24] }}>
+                                            {/* Header for Profile Content */}
+                                            <Text
+                                                variant="body"
+                                                style={{
+                                                    fontSize: typography.fontSize.md,
+                                                    fontWeight: typography.fontWeight.semibold,
+                                                    color: semantic.text.default
+                                                }}
+                                            >
+                                                Información Personal
+                                            </Text>
+
+                                            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: spacing[16], maxWidth: "400px", width: "100%" }}>
+                                                <Input
+                                                    label="Nombre Completo"
+                                                    value={formData.name}
+                                                    onChange={(e) => handleChange("name", e.target.value)}
+                                                    readOnly={!isEditing}
+                                                />
+                                                <Input
+                                                    label="Correo Electrónico"
+                                                    value={formData.email}
+                                                    onChange={(e) => handleChange("email", e.target.value)}
+                                                    readOnly={!isEditing}
+                                                />
+                                                <Input
+                                                    label="Teléfono"
+                                                    value={formData.phone}
+                                                    onChange={(e) => handleChange("phone", e.target.value)}
+                                                    readOnly={!isEditing}
+                                                />
+
+                                                {isEditing ? (
+                                                    <SelectSingle
+                                                        label="Rol"
+                                                        value={formData.role}
+                                                        onChange={(val) => handleChange("role", val)}
+                                                        options={ROLE_OPTIONS}
+                                                    />
+                                                ) : (
+                                                    <Input
+                                                        label="Rol"
+                                                        value={ROLE_OPTIONS.find(o => o.value === formData.role)?.label || formData.role}
+                                                        readOnly
+                                                    />
+                                                )}
+
+                                                {isEditing ? (
+                                                    <SelectSingle
+                                                        label="Departamento"
+                                                        value={formData.department}
+                                                        onChange={(val) => handleChange("department", val)}
+                                                        options={DEPT_OPTIONS}
+                                                    />
+                                                ) : (
+                                                    <Input
+                                                        label="Departamento"
+                                                        value={DEPT_OPTIONS.find(o => o.value === formData.department)?.label || formData.department}
+                                                        readOnly
+                                                    />
+                                                )}
+
+                                                {isEditing ? (
+                                                    <SelectSingle
+                                                        label="Estado"
+                                                        value={formData.status}
+                                                        onChange={(val) => handleChange("status", val)}
+                                                        options={STATUS_OPTIONS}
+                                                    />
+                                                ) : (
+                                                    <Input
+                                                        label="Estado"
+                                                        value={STATUS_OPTIONS.find(o => o.value === formData.status)?.label || formData.status}
+                                                        readOnly
+                                                    />
+                                                )}
+
+                                                {/* Read-only field example */}
+                                                {!isEditing && (
+                                                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-y-1 lg:gap-y-0 items-center" style={{ padding: `${spacing[12]}px 0`, borderBottom: `1px solid ${semantic.border.default}` }}>
+                                                        <Text variant="body" style={{ color: semantic.text.disabled }}>Miembro desde</Text>
+                                                        <Text variant="body" style={{ color: semantic.text.default, fontWeight: typography.fontWeight.medium }}>01 Ene 2024</Text>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <div style={{
+                                    minHeight: 300,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                }}>
+                                    <EmptyState
+                                        title="Próximamente"
+                                        description={`El módulo de ${activeTab.toLowerCase()} está en construcción.`}
+                                        icon="info"
+                                    />
+                                </div>
+                            )
+                        }
+                    </>
+                }
+                footer={showFooter ? (
+                    <>
                         <Button
                             variant="secondary"
                             size="sm"
                             onClick={handleCancel}
                             style={{
-                                borderRadius: radius.xl,
+                                borderRadius: radius.card,
                             }}
                         >
                             Cancelar
@@ -406,14 +387,14 @@ export const UsersDetailClient = ({ userId }: UsersDetailClientProps) => {
                             size="sm"
                             onClick={handleSave}
                             style={{
-                                borderRadius: radius.xl,
+                                borderRadius: radius.card,
                             }}
                         >
                             Guardar
                         </Button>
-                    </div>
-                )}
-            </div>
+                    </>
+                ) : undefined}
+            />
         </PageShell>
     );
 };

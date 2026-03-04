@@ -10,7 +10,9 @@ import { PageShell } from "@ui/containers/PageShell/PageShell";
 import { FormActions } from "@ui/patterns/form/FormActions";
 import { CardTabsHeader } from "@ui/molecules/CardTabsHeader";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
+import { PagePanelTemplate } from "../../_components/PagePanelTemplate";
 import { Input } from "@ui/atoms/Input/Input";
+import { Button } from "@ui/atoms/Button/Button";
 import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
 import { Badge } from "@ui/atoms/Badge";
 import { Icon } from "@ui/atoms/Icon/Icon";
@@ -215,40 +217,29 @@ export function DevicesDetailClient({ deviceId }: DevicesDetailClientProps) {
                 minHeight: 0,
             }}
         >
-            <div
-                style={{
-                    flex: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                    minHeight: 0,
-                    backgroundColor: semantic.surface.default,
-                    borderRadius: radius.card,
-                    border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
-                    overflow: "hidden",
-                    paddingTop: spacing[24],
-                }}
-            >
-                <CardTabsHeader
-                    tabs={TABS}
-                    value={activeTab}
-                    onChange={setActiveTab}
-                    tabsGap={spacing[16]}
-                    leftSlot={
-                        <div style={{ paddingLeft: spacing[12], paddingRight: spacing[8], paddingTop: spacing[12], paddingBottom: spacing[12], display: "flex", alignItems: "center" }}>
-                            <ActionIcon
-                                name="chevron-left"
-                                label="Volver"
-                                onClick={() => router.back()}
-                            />
-                        </div>
-                    }
-                    ariaLabel="Secciones del dispositivo"
-                />
-
-                <div style={{ flex: 1, overflowY: "auto", minHeight: 0, padding: spacing[24] }}>
-                    {activeTab === "Info general" ? (
-                        <>
-                            <div style={{ display: "flex", gap: spacing[32], flexWrap: "wrap", marginBottom: isEditing ? spacing[24] : 0 }}>
+            <PagePanelTemplate
+                header={
+                    <CardTabsHeader
+                        tabs={TABS}
+                        value={activeTab}
+                        onChange={setActiveTab}
+                        tabsGap={spacing[16]}
+                        leftSlot={
+                            <div style={{ paddingLeft: spacing[12], paddingRight: spacing[8], paddingTop: spacing[12], paddingBottom: spacing[12], display: "flex", alignItems: "center" }}>
+                                <ActionIcon
+                                    name="chevron-left"
+                                    label="Volver"
+                                    onClick={() => router.back()}
+                                />
+                            </div>
+                        }
+                        ariaLabel="Secciones del dispositivo"
+                    />
+                }
+                body={
+                    <>
+                        {activeTab === "Info general" ? (
+                            <div style={{ display: "flex", gap: spacing[32], flexWrap: "wrap" }}>
                                 <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: spacing[12] }}>
                                     {formData.imageUrl ? (
                                         <div style={{ position: "relative", width: 120, height: 120, borderRadius: radius.lg, overflow: "hidden", border: `1px solid ${semantic.border.default}` }}>
@@ -336,44 +327,55 @@ export function DevicesDetailClient({ deviceId }: DevicesDetailClientProps) {
                                     />
                                 </div>
                             </div>
-
-                            {isEditing ? (
-                                <FormActions
-                                    mode="edit"
-                                    onCancel={handleCancel}
-                                    onSubmit={handleSave}
+                        ) : (
+                            <div style={{ minHeight: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                <EmptyState
+                                    title="Próximamente"
+                                    description={`El módulo de ${activeTab.toLowerCase()} está en construcción.`}
+                                    icon="info"
                                 />
-                            ) : (
-                                <div style={{ display: "flex", justifyContent: "flex-end", paddingTop: spacing[16] }}>
-                                    <button
-                                        onClick={() => setIsEditing(true)}
-                                        style={{
-                                            background: "none",
-                                            border: `1px solid ${semantic.border.default}`,
-                                            borderRadius: radius.md,
-                                            color: semantic.text.default,
-                                            fontFamily: typography.fontFamily.primary,
-                                            fontSize: typography.fontSize.sm,
-                                            padding: `${spacing[8]}px ${spacing[16]}px`,
-                                            cursor: "pointer",
-                                        }}
-                                    >
-                                        Editar
-                                    </button>
-                                </div>
-                            )}
+                            </div>
+                        )}
+                    </>
+                }
+                footer={
+                    isEditing ? (
+                        <>
+                            <Button
+                                variant="secondary"
+                                size="sm"
+                                onClick={handleCancel}
+                                style={{
+                                    borderRadius: radius.card,
+                                }}
+                            >
+                                Cancelar
+                            </Button>
+                            <Button
+                                variant="actionPrimary"
+                                size="sm"
+                                onClick={handleSave}
+                                style={{
+                                    borderRadius: radius.card,
+                                }}
+                            >
+                                Guardar Cambios
+                            </Button>
                         </>
                     ) : (
-                        <div style={{ minHeight: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <EmptyState
-                                title="Próximamente"
-                                description={`El módulo de ${activeTab.toLowerCase()} está en construcción.`}
-                                icon="info"
-                            />
-                        </div>
-                    )}
-                </div>
-            </div>
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={() => setIsEditing(true)}
+                            style={{
+                                borderRadius: radius.card,
+                            }}
+                        >
+                            Editar
+                        </Button>
+                    )
+                }
+            />
         </PageShell>
     );
 }
