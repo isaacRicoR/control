@@ -27,8 +27,8 @@ export const ActionIcon = ({
     const { theme } = useTheme();
     const semantic = colors[theme].semantic;
 
-    const effectiveColor = color || semantic.text.default;
-    const effectiveHoverColor = hoverColor ?? semantic.text.hover;
+    const effectiveColor = color || semantic.icon?.muted || semantic.text.muted || semantic.text.default;
+    const effectiveHoverColor = hoverColor ?? semantic.icon?.active ?? semantic.text.hover;
 
     return (
         <div

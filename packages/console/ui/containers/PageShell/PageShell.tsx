@@ -77,7 +77,7 @@ export const PageShell: FC<PageShellProps> = ({
             {breadcrumbs && (
               <div
                 style={{
-                  color: semantic.text.disabled,
+                  color: semantic.text.muted,
                   fontSize: typography.fontSize.sm,
                   fontFamily: typography.fontFamily.primary,
                   display: "flex",

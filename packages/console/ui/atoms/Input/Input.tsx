@@ -62,7 +62,7 @@ export const Input: FC<InputProps> = ({
                 "--input-label": semantic.text.default,
                 "--input-label-focus": semantic.primary.default,
                 "--input-label-error": semantic.danger.default,
-                "--input-placeholder": semantic.text.disabled,
+                "--input-placeholder": semantic.text.muted || semantic.text.disabled,
 
                 ...style,
             } as React.CSSProperties}

@@ -41,6 +41,7 @@ export type SemanticGroup =
   | "danger"
   | "info"
   | "error"
+  | "icon"
   | "sidebar"
   | "button";
 
@@ -49,13 +50,19 @@ export type SemanticTokenGroup = Record<SemanticState, string> & {
   200?: string;
   300?: string;
   400?: string;
+  muted?: string;
   emphasis?: string;
   onSolid?: string;
 };
 
-export type SemanticPalette = Record<Exclude<SemanticGroup, "sidebar" | "button">, SemanticTokenGroup> & {
+export type SemanticPalette = Record<Exclude<SemanticGroup, "sidebar" | "button" | "icon">, SemanticTokenGroup> & {
   sidebar?: {
     groupLabel: string;
+  };
+  icon?: {
+    default: string;
+    muted: string;
+    active: string;
   };
   button?: {
     white: {
@@ -151,6 +158,7 @@ const semanticActive: SemanticPalette = {
     disabled: "var(--semantic-text-disabled)",
     focus: "var(--semantic-text-focus)",
     selected: "var(--semantic-text-selected)",
+    muted: "var(--semantic-text-muted)",
     onSolid: "var(--semantic-text-on-solid)",
   },
   primary: {
@@ -244,6 +252,11 @@ const semanticActive: SemanticPalette = {
   },
   sidebar: {
     groupLabel: "var(--semantic-sidebar-group-label)",
+  },
+  icon: {
+    default: "var(--semantic-icon-default)",
+    muted: "var(--semantic-icon-muted)",
+    active: "var(--semantic-icon-active)",
   },
 };
 
