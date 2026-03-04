@@ -7,13 +7,12 @@ import { request } from "@core/connector/httpClient";
 import { useToast } from "@core/toast/useToast";
 import { normalizedErrorToToast } from "@core/toast/errorToastHelper";
 import { PageShell } from "@ui/containers/PageShell/PageShell";
-import { Card } from "@ui/molecules/Card/Card";
 import { FormActions } from "@ui/patterns/form/FormActions";
 import { Input } from "@ui/atoms/Input/Input";
 import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
 import { Badge } from "@ui/atoms/Badge";
 import { Icon } from "@ui/atoms/Icon/Icon";
-import { spacing, colors, typography, radius } from "@tokens";
+import { spacing, colors, typography, radius, layout } from "@tokens";
 import { ErrorState } from "@ui/containers/ErrorState/ErrorState";
 import { NotFoundState } from "@ui/containers/NotFoundState/NotFoundState";
 import { DetailSkeleton } from "@ui/patterns/skeletons/DetailSkeleton";
@@ -221,9 +220,27 @@ export function DevicesDetailClient({ deviceId }: DevicesDetailClientProps) {
                 </>
             }
             headerStyle={{ borderBottom: "none" }}
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                height: `calc(100vh - ${layout.appBarHeight}px - ${spacing[24] * 2}px)`,
+                overflow: "hidden",
+                minHeight: 0,
+            }}
         >
-            <Card variant="flat">
-                <div style={{ borderBottom: `1px solid ${semantic.border.default}`, marginBottom: spacing[24], position: "relative" }}>
+            <div
+                style={{
+                    flex: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    minHeight: 0,
+                    backgroundColor: semantic.surface.default,
+                    borderRadius: radius.card,
+                    border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                    overflow: "hidden",
+                }}
+            >
+                <div style={{ padding: spacing[24], borderBottom: `1px solid ${semantic.border.default}`, position: "relative" }}>
                     <div style={{ display: "flex", gap: spacing[8] }}>
                         {TABS.map((tab, index) => {
                             const isActive = activeTab === tab;
@@ -253,133 +270,135 @@ export function DevicesDetailClient({ deviceId }: DevicesDetailClientProps) {
                     />
                 </div>
 
-                {activeTab === "Info general" ? (
-                    <>
-                        <div style={{ display: "flex", gap: spacing[32], flexWrap: "wrap", marginBottom: isEditing ? spacing[24] : 0 }}>
-                            <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: spacing[12] }}>
-                                {formData.imageUrl ? (
-                                    <div style={{ position: "relative", width: 120, height: 120, borderRadius: radius.lg, overflow: "hidden", border: `1px solid ${semantic.border.default}` }}>
-                                        <Image
-                                            src={formData.imageUrl}
-                                            alt={formData.nombre}
-                                            fill
-                                            style={{ objectFit: "cover" }}
+                <div style={{ flex: 1, overflowY: "auto", minHeight: 0, padding: spacing[24] }}>
+                    {activeTab === "Info general" ? (
+                        <>
+                            <div style={{ display: "flex", gap: spacing[32], flexWrap: "wrap", marginBottom: isEditing ? spacing[24] : 0 }}>
+                                <div style={{ flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: spacing[12] }}>
+                                    {formData.imageUrl ? (
+                                        <div style={{ position: "relative", width: 120, height: 120, borderRadius: radius.lg, overflow: "hidden", border: `1px solid ${semantic.border.default}` }}>
+                                            <Image
+                                                src={formData.imageUrl}
+                                                alt={formData.nombre}
+                                                fill
+                                                style={{ objectFit: "cover" }}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div
+                                            style={{
+                                                width: 120,
+                                                height: 120,
+                                                borderRadius: radius.lg,
+                                                border: `1px dashed ${semantic.border.active}`,
+                                                backgroundColor: semantic.surface.hover,
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                color: semantic.text.disabled,
+                                                flexShrink: 0,
+                                            }}
+                                        >
+                                            <Icon name="monitor" size={48} />
+                                        </div>
+                                    )}
+
+                                    <span style={{ color: semantic.text.disabled, textAlign: "center", fontSize: typography.fontSize.sm, fontFamily: typography.fontFamily.primary }}>
+                                        {formData.tipo || "Dispositivo"}
+                                    </span>
+
+                                    {formData.status && (
+                                        <Badge
+                                            label={formData.status}
+                                            variant={STATUS_VARIANT[formData.status] ?? "neutral"}
+                                            appearance="ghost"
+                                            interactive={false}
+                                        />
+                                    )}
+                                </div>
+
+                                <div style={{ flex: 1, minWidth: 240, display: "flex", flexDirection: "column", gap: spacing[16] }}>
+                                    <Input
+                                        label="Nombre / Etiqueta"
+                                        value={formData.nombre}
+                                        disabled={!isEditing}
+                                        onChange={(e) => handleChange("nombre", e.target.value)}
+                                    />
+                                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing[16] }}>
+                                        <SelectSingle
+                                            label="Departamento"
+                                            value={formData.departamento}
+                                            disabled={!isEditing}
+                                            onChange={(v) => handleChange("departamento", v)}
+                                            options={DEPT_OPTIONS}
+                                        />
+                                        <SelectSingle
+                                            label="Estado"
+                                            value={formData.status}
+                                            disabled={!isEditing}
+                                            onChange={(v) => handleChange("status", v)}
+                                            options={ROLE_OPTIONS}
                                         />
                                     </div>
-                                ) : (
-                                    <div
-                                        style={{
-                                            width: 120,
-                                            height: 120,
-                                            borderRadius: radius.lg,
-                                            border: `1px dashed ${semantic.border.active}`,
-                                            backgroundColor: semantic.surface.hover,
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                            color: semantic.text.disabled,
-                                            flexShrink: 0,
-                                        }}
-                                    >
-                                        <Icon name="monitor" size={48} />
-                                    </div>
-                                )}
-
-                                <span style={{ color: semantic.text.disabled, textAlign: "center", fontSize: typography.fontSize.sm, fontFamily: typography.fontFamily.primary }}>
-                                    {formData.tipo || "Dispositivo"}
-                                </span>
-
-                                {formData.status && (
-                                    <Badge
-                                        label={formData.status}
-                                        variant={STATUS_VARIANT[formData.status] ?? "neutral"}
-                                        appearance="ghost"
-                                        interactive={false}
-                                    />
-                                )}
-                            </div>
-
-                            <div style={{ flex: 1, minWidth: 240, display: "flex", flexDirection: "column", gap: spacing[16] }}>
-                                <Input
-                                    label="Nombre / Etiqueta"
-                                    value={formData.nombre}
-                                    disabled={!isEditing}
-                                    onChange={(e) => handleChange("nombre", e.target.value)}
-                                />
-                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: spacing[16] }}>
-                                    <SelectSingle
-                                        label="Departamento"
-                                        value={formData.departamento}
+                                    <Input
+                                        label="Usuario asignado"
+                                        value={formData.usuario || "Sin asignar"}
                                         disabled={!isEditing}
-                                        onChange={(v) => handleChange("departamento", v)}
-                                        options={DEPT_OPTIONS}
+                                        onChange={(e) => handleChange("usuario", e.target.value)}
                                     />
                                     <SelectSingle
-                                        label="Estado"
-                                        value={formData.status}
+                                        label="Ubicación"
+                                        value={formData.ubicacion}
                                         disabled={!isEditing}
-                                        onChange={(v) => handleChange("status", v)}
-                                        options={ROLE_OPTIONS}
+                                        onChange={(v) => handleChange("ubicacion", v)}
+                                        options={UBICACION_OPTIONS}
+                                    />
+                                    <Input
+                                        label="Notas"
+                                        value={formData.notas}
+                                        disabled={!isEditing}
+                                        onChange={(e) => handleChange("notas", e.target.value)}
                                     />
                                 </div>
-                                <Input
-                                    label="Usuario asignado"
-                                    value={formData.usuario || "Sin asignar"}
-                                    disabled={!isEditing}
-                                    onChange={(e) => handleChange("usuario", e.target.value)}
-                                />
-                                <SelectSingle
-                                    label="Ubicación"
-                                    value={formData.ubicacion}
-                                    disabled={!isEditing}
-                                    onChange={(v) => handleChange("ubicacion", v)}
-                                    options={UBICACION_OPTIONS}
-                                />
-                                <Input
-                                    label="Notas"
-                                    value={formData.notas}
-                                    disabled={!isEditing}
-                                    onChange={(e) => handleChange("notas", e.target.value)}
-                                />
                             </div>
-                        </div>
 
-                        {isEditing ? (
-                            <FormActions
-                                mode="edit"
-                                onCancel={handleCancel}
-                                onSubmit={handleSave}
+                            {isEditing ? (
+                                <FormActions
+                                    mode="edit"
+                                    onCancel={handleCancel}
+                                    onSubmit={handleSave}
+                                />
+                            ) : (
+                                <div style={{ display: "flex", justifyContent: "flex-end", paddingTop: spacing[16] }}>
+                                    <button
+                                        onClick={() => setIsEditing(true)}
+                                        style={{
+                                            background: "none",
+                                            border: `1px solid ${semantic.border.default}`,
+                                            borderRadius: radius.md,
+                                            color: semantic.text.default,
+                                            fontFamily: typography.fontFamily.primary,
+                                            fontSize: typography.fontSize.sm,
+                                            padding: `${spacing[8]}px ${spacing[16]}px`,
+                                            cursor: "pointer",
+                                        }}
+                                    >
+                                        Editar
+                                    </button>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <div style={{ minHeight: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <EmptyState
+                                title="Próximamente"
+                                description={`El módulo de ${activeTab.toLowerCase()} está en construcción.`}
+                                icon="info"
                             />
-                        ) : (
-                            <div style={{ display: "flex", justifyContent: "flex-end", paddingTop: spacing[16] }}>
-                                <button
-                                    onClick={() => setIsEditing(true)}
-                                    style={{
-                                        background: "none",
-                                        border: `1px solid ${semantic.border.default}`,
-                                        borderRadius: radius.md,
-                                        color: semantic.text.default,
-                                        fontFamily: typography.fontFamily.primary,
-                                        fontSize: typography.fontSize.sm,
-                                        padding: `${spacing[8]}px ${spacing[16]}px`,
-                                        cursor: "pointer",
-                                    }}
-                                >
-                                    Editar
-                                </button>
-                            </div>
-                        )}
-                    </>
-                ) : (
-                    <div style={{ minHeight: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <EmptyState
-                            title="Próximamente"
-                            description={`El módulo de ${activeTab.toLowerCase()} está en construcción.`}
-                            icon="info"
-                        />
-                    </div>
-                )}
-            </Card>
+                        </div>
+                    )}
+                </div>
+            </div>
         </PageShell>
     );
 }

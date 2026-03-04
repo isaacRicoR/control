@@ -145,8 +145,9 @@ export function DevicesListClient() {
                 variant="fluid"
                 title="Dispositivos"
                 breadcrumbs={<><span>Panel</span><span>›</span><span>Dispositivos</span><span>›</span><span style={{ color: semantic.text.active }}>Lista</span></>}
-                headerStyle={{ borderBottom: "none" }}
-            >
+            headerStyle={{ borderBottom: "none" }}
+            style={{ display: "flex", flexDirection: "column", height: `calc(100vh - ${layout.appBarHeight}px - ${spacing[24] * 2}px)`, overflow: "hidden", minHeight: 0 }}
+        >
                 <ErrorState
                     title="Error al cargar dispositivos"
                     description={fetchError}

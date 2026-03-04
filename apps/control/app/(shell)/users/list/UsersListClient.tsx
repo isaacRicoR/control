@@ -388,6 +388,13 @@ export function UsersListClient() {
                     </>
                 }
                 headerStyle={{ borderBottom: "none" }}
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: `calc(100vh - ${layout.appBarHeight}px - ${spacing[24] * 2}px)`,
+                    overflow: "hidden",
+                    minHeight: 0,
+                }}
             >
                 <ErrorState
                     title="Error al cargar usuarios"

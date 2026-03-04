@@ -171,11 +171,14 @@ export const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = fa
                             )}
                         </div>
 
-                        <div style={{ textAlign: "center", color: semantic.text.disabled }}>
-                            <p style={{ margin: 0, fontSize: typography.fontSize.sm }}>
-                                Opcional • Formatos JPG, PNG •
+                        <div style={{ textAlign: "center", color: semantic.text.muted }}>
+                            <p style={{ margin: 0, fontSize: typography.fontSize.xs }}>
+                                Opcional • Formatos JPG, PNG
                             </p>
-                            <p style={{ margin: 0, fontSize: typography.fontSize.sm }}>
+                            <p style={{ margin: 0, fontSize: typography.fontSize.xs }}>
+                                •
+                            </p>
+                            <p style={{ margin: 0, fontSize: typography.fontSize.xs }}>
                                 Máx 5MB
                             </p>
                         </div>
