@@ -72,3 +72,31 @@
 [01:33:17.922] Server  LOG     ✓ Compiled in 143ms
 [01:36:26.293] Server  LOG     ✓ Compiled in 191ms
 [01:37:11.686] Server  LOG     ✓ Compiled in 152ms
+[01:49:25.518] Server  LOG     ✓ Compiled in 308ms
+[01:54:25.825] Server  LOG     [RouteGuard] Session validated for users:view
+[01:54:26.394] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:55:44.362] Server  LOG     ✓ Compiled in 190ms
+[01:55:56.322] Server  LOG     ✓ Compiled in 55ms
+[01:57:14.389] Server  LOG     ✓ Compiled in 89ms
+[01:58:57.851] Server  LOG     [RouteGuard] Session validated for users:view
+[01:59:05.738] Server  LOG     [RouteGuard] Session validated for users:view
+[02:00:29.855] Server  LOG     ✓ Compiled in 154ms
+[02:00:32.817] Server  LOG     ✓ Compiled in 29ms
+[02:00:36.774] Server  LOG     ✓ Compiled in 113ms
+[03:56:10.313] Server  LOG     [RouteGuard] Session validated for users:view
+[03:57:00.133] Browser LOG     EDIT CLICK {"avatar":"https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=128&h=128&q=60","department":"Marketing","devices":[],"email":"luis.torres@empresa.com","id":"u_003","initials":"LT","initialsColor":"#3b82f6","lastActivity":"Hace 2 días","name":"Luis Torres","phone":"+52 555 9876 543","role":"Usuario","status":"Inactivo"}
+[03:59:33.914] Server  LOG     ✓ Compiled in 107ms
+[04:03:20.421] Server  LOG     ✓ Compiled in 326ms
+[04:03:23.374] Server  LOG     ✓ Compiled in 109ms
+[04:03:26.297] Server  LOG     ✓ Compiled in 61ms
+[04:03:30.263] Server  LOG     ✓ Compiled in 377ms
+[04:03:35.385] Server  LOG     ✓ Compiled in 73ms
+[04:06:52.698] Server  LOG     ✓ Compiled in 145ms
+[04:07:02.015] Server  LOG     ✓ Compiled in 66ms
+[04:07:06.281] Server  LOG     ✓ Compiled in 53ms
+[04:07:13.355] Server  LOG     ✓ Compiled in 76ms
+[04:07:18.051] Server  LOG     ✓ Compiled in 90ms
+[04:07:22.375] Server  LOG     [RouteGuard] Session validated for users:view
+[04:07:24.695] Server  LOG     [RouteGuard] Session validated for devices:view
+[04:07:28.437] Server  LOG     [RouteGuard] Session validated for users:view
+[04:07:28.757] Server  LOG     ✓ Compiled in 76ms

@@ -642,7 +642,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f
 ;
 ;
 const ROW_HEIGHT = 55;
-const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel = "Tabs" })=>{
+const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel = "Tabs", tabsGap })=>{
     const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useTheme"])();
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"][theme].semantic;
     const tabsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])([]);
@@ -710,7 +710,7 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                             children: leftSlot
                         }, void 0, false, {
                             fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                            lineNumber: 87,
+                            lineNumber: 89,
                             columnNumber: 25
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -723,7 +723,7 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                             "aria-hidden": true
                         }, void 0, false, {
                             fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                            lineNumber: 98,
+                            lineNumber: 100,
                             columnNumber: 25
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
@@ -735,7 +735,8 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                         display: "flex",
                         alignItems: "center",
                         flex: 1,
-                        minWidth: 0
+                        minWidth: 0,
+                        gap: tabsGap
                     },
                     children: [
                         tabs.map((tab, index)=>{
@@ -754,7 +755,7 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                                 children: tab.label
                             }, tab.value, false, {
                                 fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                                lineNumber: 122,
+                                lineNumber: 125,
                                 columnNumber: 25
                             }, ("TURBOPACK compile-time value", void 0));
                         }),
@@ -773,13 +774,13 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                             "aria-hidden": true
                         }, void 0, false, {
                             fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                            lineNumber: 141,
+                            lineNumber: 144,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                    lineNumber: 109,
+                    lineNumber: 111,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0)),
                 hasRightSlot && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -793,18 +794,18 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                     children: rightSlot
                 }, void 0, false, {
                     fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                    lineNumber: 157,
+                    lineNumber: 160,
                     columnNumber: 21
                 }, ("TURBOPACK compile-time value", void 0))
             ]
         }, void 0, true, {
             fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-            lineNumber: 77,
+            lineNumber: 79,
             columnNumber: 13
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false, {
         fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-        lineNumber: 67,
+        lineNumber: 69,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -1809,13 +1810,28 @@ const UsersDetailClient = ({ userId })=>{
                     tabs: TABS,
                     value: activeTab,
                     onChange: setActiveTab,
-                    leftSlot: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$ActionIcon$2f$ActionIcon$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ActionIcon"], {
-                        name: "chevron-left",
-                        label: "Volver",
-                        onClick: ()=>router.back()
+                    tabsGap: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][16],
+                    leftSlot: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            paddingLeft: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][12],
+                            paddingRight: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][8],
+                            paddingTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][12],
+                            paddingBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][12],
+                            display: "flex",
+                            alignItems: "center"
+                        },
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$ActionIcon$2f$ActionIcon$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ActionIcon"], {
+                            name: "chevron-left",
+                            label: "Volver",
+                            onClick: ()=>router.back()
+                        }, void 0, false, {
+                            fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
+                            lineNumber: 245,
+                            columnNumber: 29
+                        }, void 0)
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                        lineNumber: 243,
+                        lineNumber: 244,
                         columnNumber: 25
                     }, void 0),
                     ariaLabel: "Secciones del perfil"
@@ -1853,12 +1869,12 @@ const UsersDetailClient = ({ userId })=>{
                                         size: 120
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                        lineNumber: 264,
+                                        lineNumber: 267,
                                         columnNumber: 41
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                    lineNumber: 263,
+                                    lineNumber: 266,
                                     columnNumber: 37
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1879,7 +1895,7 @@ const UsersDetailClient = ({ userId })=>{
                                             children: "Información Personal"
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                            lineNumber: 275,
+                                            lineNumber: 278,
                                             columnNumber: 41
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1898,7 +1914,7 @@ const UsersDetailClient = ({ userId })=>{
                                                     readOnly: !isEditing
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                                    lineNumber: 287,
+                                                    lineNumber: 290,
                                                     columnNumber: 45
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -1908,7 +1924,7 @@ const UsersDetailClient = ({ userId })=>{
                                                     readOnly: !isEditing
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                                    lineNumber: 293,
+                                                    lineNumber: 296,
                                                     columnNumber: 45
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -1918,7 +1934,7 @@ const UsersDetailClient = ({ userId })=>{
                                                     readOnly: !isEditing
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                                    lineNumber: 299,
+                                                    lineNumber: 302,
                                                     columnNumber: 45
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 ("TURBOPACK compile-time truthy", 1) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$SelectSingle$2f$SelectSingle$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectSingle"], {
@@ -1928,7 +1944,7 @@ const UsersDetailClient = ({ userId })=>{
                                                     options: ROLE_OPTIONS
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                                    lineNumber: 307,
+                                                    lineNumber: 310,
                                                     columnNumber: 49
                                                 }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ "TURBOPACK unreachable",
                                                 ("TURBOPACK compile-time truthy", 1) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$SelectSingle$2f$SelectSingle$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectSingle"], {
@@ -1938,7 +1954,7 @@ const UsersDetailClient = ({ userId })=>{
                                                     options: DEPT_OPTIONS
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                                    lineNumber: 322,
+                                                    lineNumber: 325,
                                                     columnNumber: 49
                                                 }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ "TURBOPACK unreachable",
                                                 ("TURBOPACK compile-time truthy", 1) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$SelectSingle$2f$SelectSingle$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectSingle"], {
@@ -1948,7 +1964,7 @@ const UsersDetailClient = ({ userId })=>{
                                                     options: STATUS_OPTIONS
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                                    lineNumber: 337,
+                                                    lineNumber: 340,
                                                     columnNumber: 49
                                                 }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ "TURBOPACK unreachable",
                                                 !isEditing && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1966,7 +1982,7 @@ const UsersDetailClient = ({ userId })=>{
                                                             children: "Miembro desde"
                                                         }, void 0, false, {
                                                             fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                                            lineNumber: 354,
+                                                            lineNumber: 357,
                                                             columnNumber: 53
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Text$2f$Text$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -1978,31 +1994,31 @@ const UsersDetailClient = ({ userId })=>{
                                                             children: "01 Ene 2024"
                                                         }, void 0, false, {
                                                             fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                                            lineNumber: 355,
+                                                            lineNumber: 358,
                                                             columnNumber: 53
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                                    lineNumber: 353,
+                                                    lineNumber: 356,
                                                     columnNumber: 49
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                            lineNumber: 286,
+                                            lineNumber: 289,
                                             columnNumber: 41
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                                    lineNumber: 273,
+                                    lineNumber: 276,
                                     columnNumber: 37
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                            lineNumber: 256,
+                            lineNumber: 259,
                             columnNumber: 33
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2018,17 +2034,17 @@ const UsersDetailClient = ({ userId })=>{
                             icon: "info"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                            lineNumber: 369,
+                            lineNumber: 372,
                             columnNumber: 33
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                        lineNumber: 363,
+                        lineNumber: 366,
                         columnNumber: 29
                     }, ("TURBOPACK compile-time value", void 0))
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                    lineNumber: 252,
+                    lineNumber: 255,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0)),
                 showFooter && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2052,7 +2068,7 @@ const UsersDetailClient = ({ userId })=>{
                             children: "Cancelar"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                            lineNumber: 391,
+                            lineNumber: 394,
                             columnNumber: 25
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -2065,13 +2081,13 @@ const UsersDetailClient = ({ userId })=>{
                             children: "Guardar"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                            lineNumber: 401,
+                            lineNumber: 404,
                             columnNumber: 25
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx",
-                    lineNumber: 380,
+                    lineNumber: 383,
                     columnNumber: 21
                 }, ("TURBOPACK compile-time value", void 0))
             ]

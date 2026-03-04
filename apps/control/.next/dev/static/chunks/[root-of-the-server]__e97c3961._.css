@@ -111,7 +111,14 @@ body {
   background: var(--semantic-background-default);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  user-select: none;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+input, textarea, [contenteditable="true"], .selectable {
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 * {

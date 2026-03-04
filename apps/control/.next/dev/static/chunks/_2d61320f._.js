@@ -3695,6 +3695,13 @@ function DevicesListClient() {
             headerStyle: {
                 borderBottom: "none"
             },
+            style: {
+                display: "flex",
+                flexDirection: "column",
+                height: `calc(100vh - ${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$layout$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["layout"].appBarHeight}px - ${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24] * 2}px)`,
+                overflow: "hidden",
+                minHeight: 0
+            },
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$ErrorState$2f$ErrorState$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ErrorState"], {
                 title: "Error al cargar dispositivos",
                 description: fetchError,
@@ -3706,7 +3713,7 @@ function DevicesListClient() {
                 retryLabel: "Reintentar"
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                lineNumber: 150,
+                lineNumber: 151,
                 columnNumber: 17
             }, this)
         }, void 0, false, {
@@ -3771,12 +3778,12 @@ function DevicesListClient() {
                                 size: 20
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                lineNumber: 224,
+                                lineNumber: 225,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                            lineNumber: 212,
+                            lineNumber: 213,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3790,7 +3797,7 @@ function DevicesListClient() {
                                     children: row.nombre
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                    lineNumber: 227,
+                                    lineNumber: 228,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3802,19 +3809,19 @@ function DevicesListClient() {
                                     children: row.tipo
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                    lineNumber: 228,
+                                    lineNumber: 229,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                            lineNumber: 226,
+                            lineNumber: 227,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 208,
+                    lineNumber: 209,
                     columnNumber: 17
                 }, this)
         },
@@ -3833,7 +3840,7 @@ function DevicesListClient() {
                     children: row.id
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 241,
+                    lineNumber: 242,
                     columnNumber: 17
                 }, this)
         },
@@ -3850,7 +3857,7 @@ function DevicesListClient() {
                     children: row.usuario || "Sin asignar"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 250,
+                    lineNumber: 251,
                     columnNumber: 17
                 }, this),
             hideBelow: "md"
@@ -3875,7 +3882,7 @@ function DevicesListClient() {
                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.sm
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 269,
+                    lineNumber: 270,
                     columnNumber: 21
                 }, this);
             }
@@ -3892,7 +3899,7 @@ function DevicesListClient() {
                     children: row.ultimaActividad
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 283,
+                    lineNumber: 284,
                     columnNumber: 17
                 }, this),
             hideBelow: "lg"
@@ -3917,7 +3924,7 @@ function DevicesListClient() {
                             onClick: ()=>router.push(`/devices/${row.id}`)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                            lineNumber: 293,
+                            lineNumber: 294,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$access$2f$PermissionGate$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PermissionGate"], {
@@ -3931,12 +3938,12 @@ function DevicesListClient() {
                                 onClick: ()=>console.log("Editar", row.id)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                lineNumber: 301,
+                                lineNumber: 302,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                            lineNumber: 300,
+                            lineNumber: 301,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$access$2f$PermissionGate$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PermissionGate"], {
@@ -3950,7 +3957,7 @@ function DevicesListClient() {
                                     hoverColor: actionIconHoverColor
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                    lineNumber: 311,
+                                    lineNumber: 312,
                                     columnNumber: 38
                                 }, void 0),
                                 title: "Acciones de dispositivo",
@@ -3989,18 +3996,18 @@ function DevicesListClient() {
                                 ]
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                lineNumber: 310,
+                                lineNumber: 311,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                            lineNumber: 309,
+                            lineNumber: 310,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 292,
+                    lineNumber: 293,
                     columnNumber: 17
                 }, this),
             hideBelow: "xl"
@@ -4016,28 +4023,28 @@ function DevicesListClient() {
                     children: "Panel"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 340,
-                    columnNumber: 21
-                }, void 0),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                    children: "›"
-                }, void 0, false, {
-                    fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
                     lineNumber: 341,
                     columnNumber: 21
                 }, void 0),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                    children: "Dispositivos"
+                    children: "›"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
                     lineNumber: 342,
                     columnNumber: 21
                 }, void 0),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                    children: "›"
+                    children: "Dispositivos"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
                     lineNumber: 343,
+                    columnNumber: 21
+                }, void 0),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                    children: "›"
+                }, void 0, false, {
+                    fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
+                    lineNumber: 344,
                     columnNumber: 21
                 }, void 0),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -4047,7 +4054,7 @@ function DevicesListClient() {
                     children: "Lista"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 344,
+                    lineNumber: 345,
                     columnNumber: 21
                 }, void 0)
             ]
@@ -4069,19 +4076,19 @@ function DevicesListClient() {
                         size: 16
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                        lineNumber: 355,
+                        lineNumber: 356,
                         columnNumber: 25
                     }, void 0),
                     "Agregar dispositivo"
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                lineNumber: 349,
+                lineNumber: 350,
                 columnNumber: 21
             }, void 0)
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-            lineNumber: 348,
+            lineNumber: 349,
             columnNumber: 17
         }, void 0),
         headerStyle: {
@@ -4127,7 +4134,7 @@ function DevicesListClient() {
                         align: "left"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                        lineNumber: 385,
+                        lineNumber: 386,
                         columnNumber: 25
                     }, void 0),
                     endContent: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -4140,7 +4147,7 @@ function DevicesListClient() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                lineNumber: 394,
+                                lineNumber: 395,
                                 columnNumber: 29
                             }, void 0),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4160,19 +4167,19 @@ function DevicesListClient() {
                                     color: semantic.text.default
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                    lineNumber: 400,
+                                    lineNumber: 401,
                                     columnNumber: 33
                                 }, void 0)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                lineNumber: 399,
+                                lineNumber: 400,
                                 columnNumber: 29
                             }, void 0)
                         ]
                     }, void 0, true)
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 376,
+                    lineNumber: 377,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$DataTable$2f$DataTable$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DataTable"], {
@@ -4183,18 +4190,18 @@ function DevicesListClient() {
                     emptyMessage: "No se encontraron dispositivos"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 406,
+                    lineNumber: 407,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-            lineNumber: 363,
+            lineNumber: 364,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-        lineNumber: 335,
+        lineNumber: 336,
         columnNumber: 9
     }, this);
 }

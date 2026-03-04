@@ -242,7 +242,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f
 ;
 ;
 const ROW_HEIGHT = 55;
-const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel = "Tabs" })=>{
+const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel = "Tabs", tabsGap })=>{
     const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useTheme"])();
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"][theme].semantic;
     const tabsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])([]);
@@ -310,7 +310,7 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                             children: leftSlot
                         }, void 0, false, {
                             fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                            lineNumber: 87,
+                            lineNumber: 89,
                             columnNumber: 25
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -323,7 +323,7 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                             "aria-hidden": true
                         }, void 0, false, {
                             fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                            lineNumber: 98,
+                            lineNumber: 100,
                             columnNumber: 25
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
@@ -335,7 +335,8 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                         display: "flex",
                         alignItems: "center",
                         flex: 1,
-                        minWidth: 0
+                        minWidth: 0,
+                        gap: tabsGap
                     },
                     children: [
                         tabs.map((tab, index)=>{
@@ -354,7 +355,7 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                                 children: tab.label
                             }, tab.value, false, {
                                 fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                                lineNumber: 122,
+                                lineNumber: 125,
                                 columnNumber: 25
                             }, ("TURBOPACK compile-time value", void 0));
                         }),
@@ -373,13 +374,13 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                             "aria-hidden": true
                         }, void 0, false, {
                             fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                            lineNumber: 141,
+                            lineNumber: 144,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                    lineNumber: 109,
+                    lineNumber: 111,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0)),
                 hasRightSlot && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -393,18 +394,18 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                     children: rightSlot
                 }, void 0, false, {
                     fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-                    lineNumber: 157,
+                    lineNumber: 160,
                     columnNumber: 21
                 }, ("TURBOPACK compile-time value", void 0))
             ]
         }, void 0, true, {
             fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-            lineNumber: 77,
+            lineNumber: 79,
             columnNumber: 13
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false, {
         fileName: "[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.tsx",
-        lineNumber: 67,
+        lineNumber: 69,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
