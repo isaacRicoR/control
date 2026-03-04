@@ -109,7 +109,7 @@ export default function AparienciaPage() {
             }
             showHeaderDivider={false}
         >
-            <Card>
+            <Card elevated>
                 <CardTabsHeader
                     tabs={TABS}
                     value={activeTab}

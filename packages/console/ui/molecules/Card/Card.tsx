@@ -14,7 +14,7 @@ import { colors, spacing, radius, typography, shadows } from "@tokens";
  * Tus colores semánticos viven en:
  * colors.semantic.<grupo>.<estado>
  */
-export const Card: FC<CardProps> = ({ title, subtitle, children, footer, noPadding }) => {
+export const Card: FC<CardProps> = ({ title, subtitle, children, footer, noPadding, elevated }) => {
   const semantic = colors.semantic;
 
   return (
@@ -25,6 +25,7 @@ export const Card: FC<CardProps> = ({ title, subtitle, children, footer, noPaddi
         borderRadius: radius.card,
         padding: noPadding ? 0 : spacing[24],
         fontFamily: typography.fontFamily.primary,
+        boxShadow: elevated ? shadows.card : "none",
       }}
       aria-label={title ?? "Card"}
     >

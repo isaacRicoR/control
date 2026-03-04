@@ -22,4 +22,7 @@ export type CardProps = {
 
   /** Enables full control of internal layout by removing default padding. Use for full-bleed content. */
   noPadding?: boolean;
+
+  /** Adds the standard system shadow (shadows.card) for better hierarchy on forms/detail views. */
+  elevated?: boolean;
 };

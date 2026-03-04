@@ -213,7 +213,7 @@ export const UsersDetailClient = ({ userId }: UsersDetailClientProps) => {
 
             headerStyle={{ borderBottom: "none" }}
         >
-            <Card>
+            <Card elevated>
                 <CardTabsHeader
                     tabs={TABS}
                     value={activeTab}
