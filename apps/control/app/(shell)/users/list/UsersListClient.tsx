@@ -140,15 +140,35 @@ export function UsersListClient() {
             filterable: true,
             filterValue: (row: UserRow) => `${String(row.name ?? "")} ${String(row.email ?? "")}`,
             cell: (row: UserRow) => (
-                <div style={{ display: "flex", alignItems: "center", gap: spacing[12] }}>
+                <div 
+                    onClick={() => router.push(`/users/${row.id}`)}
+                    style={{ 
+                        display: "flex", 
+                        alignItems: "center", 
+                        gap: spacing[12],
+                        cursor: "pointer"
+                    }}
+                >
                     <Avatar
                         src={row.avatar}
                         name={row.name}
                         backgroundColor={row.initialsColor}
                     />
                     <div>
-                        <div style={{ fontWeight: 600, color: semantic.text.active, fontFamily: typography.fontFamily.primary }}>{row.name}</div>
-                        <div style={{ fontSize: 12, color: semantic.text.muted, fontFamily: typography.fontFamily.primary }}>{row.email}</div>
+                        <div style={{ 
+                            fontWeight: 600, 
+                            color: semantic.text.active, 
+                            fontFamily: typography.fontFamily.primary
+                        }}>
+                            {row.name}
+                        </div>
+                        <div style={{ 
+                            fontSize: 12, 
+                            color: semantic.text.muted, 
+                            fontFamily: typography.fontFamily.primary 
+                        }}>
+                            {row.email}
+                        </div>
                     </div>
                 </div>
             ),
