@@ -303,8 +303,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/shadows.ts [app-client] (ecmascript)");
 ;
 ;
-const Card = ({ title, subtitle, children, footer, noPadding, elevated })=>{
+const Card = ({ title, subtitle, children, footer, noPadding, elevated, variant = "default" })=>{
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic;
+    const isPanel = variant === "panel";
+    const shouldElevate = elevated || isPanel;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         style: {
             background: semantic.surface.default,
@@ -312,7 +314,7 @@ const Card = ({ title, subtitle, children, footer, noPadding, elevated })=>{
             borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].card,
             padding: noPadding ? 0 : __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24],
             fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary,
-            boxShadow: elevated ? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["shadows"].card : "none"
+            boxShadow: shouldElevate ? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["shadows"].card : "none"
         },
         "aria-label": title ?? "Card",
         children: [
@@ -332,7 +334,7 @@ const Card = ({ title, subtitle, children, footer, noPadding, elevated })=>{
                         children: title
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                        lineNumber: 39,
+                        lineNumber: 41,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0)),
                     subtitle && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -345,13 +347,13 @@ const Card = ({ title, subtitle, children, footer, noPadding, elevated })=>{
                         children: subtitle
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                        lineNumber: 53,
+                        lineNumber: 55,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                lineNumber: 33,
+                lineNumber: 35,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -364,23 +366,26 @@ const Card = ({ title, subtitle, children, footer, noPadding, elevated })=>{
                 children: children
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                lineNumber: 67,
+                lineNumber: 69,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             footer && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
                 style: {
-                    marginTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24]
+                    marginTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24],
+                    ...isPanel ? {
+                        margin: `0 -${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24]}px -${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24]}px -${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24]}px`
+                    } : {}
                 },
                 children: footer
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                lineNumber: 79,
+                lineNumber: 81,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-        lineNumber: 21,
+        lineNumber: 23,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -455,12 +460,11 @@ const FormActions = ({ error, success, loading = false, disabled = false, mode, 
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                         variant: "secondary",
+                        size: "sm",
                         onClick: onCancel,
                         disabled: isDisabled,
                         style: {
                             borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].xl,
-                            paddingTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][8],
-                            paddingBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][8],
                             opacity: isDisabled ? LOADING_OPACITY : 1
                         },
                         children: cancelLabel
@@ -471,18 +475,17 @@ const FormActions = ({ error, success, loading = false, disabled = false, mode, 
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                         variant: "actionPrimary",
+                        size: "sm",
                         onClick: onSubmit,
                         disabled: isDisabled,
                         style: {
                             borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].xl,
-                            paddingTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][8],
-                            paddingBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][8],
                             opacity: isDisabled ? LOADING_OPACITY : 1
                         },
                         children: loading ? "Guardando..." : submitLabel ?? (mode === "create" ? "Guardar" : "Guardar Cambios")
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/patterns/form/FormActions.tsx",
-                        lineNumber: 84,
+                        lineNumber: 83,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
@@ -560,7 +563,7 @@ const Input = ({ label, error, errorMessage, helperText, id, className, required
             "--input-border-focus": semantic.border.focus,
             "--input-border-error": semantic.danger.default,
             "--input-text": semantic.text.active,
-            "--input-label": semantic.text.default,
+            "--input-label": semantic.text.muted || semantic.text.default,
             "--input-label-focus": semantic.primary.default,
             "--input-label-error": semantic.danger.default,
             "--input-placeholder": semantic.text.muted || semantic.text.disabled,
@@ -682,7 +685,7 @@ const SelectField = ({ label, value, placeholder = "Selecciona...", error, error
             "--select-border-focus": semantic.border.active,
             "--select-border-error": semantic.danger.default,
             "--select-text": semantic.text.active,
-            "--select-label": semantic.text.default,
+            "--select-label": semantic.text.muted || semantic.text.default,
             "--select-label-focus": semantic.primary.default,
             "--select-label-error": semantic.danger.default,
             "--select-arrow": semantic.icon?.muted || semantic.text.muted || semantic.text.default

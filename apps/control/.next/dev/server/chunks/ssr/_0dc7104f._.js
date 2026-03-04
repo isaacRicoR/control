@@ -58,29 +58,29 @@ const mockCompanies = [
         label: "EM",
         count: "4 de 10",
         active: true,
-        color: "#00C853"
+        color: "var(--semantic-success-default)"
     },
     {
         name: "Corporación Tech",
         label: "CO",
         count: "2 de 5",
         active: false,
-        color: "#00796B"
+        color: "var(--semantic-primary-default)"
     },
     {
         name: "Startup Innovación",
         label: "ST",
         count: "9 de 15",
         active: false,
-        color: "#2E7D32"
+        color: "var(--semantic-success-hover)"
     },
     {
         name: "Corporación Int...",
         label: "CO",
         count: "5 de 10",
         active: false,
-        color: "#00695C"
-    } // Dark Teal
+        color: "var(--semantic-primary-hover)"
+    }
 ];
 const appName = "Control";
 const createAccountLabel = "Crear cuenta";

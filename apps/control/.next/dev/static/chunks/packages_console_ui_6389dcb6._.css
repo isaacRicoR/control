@@ -183,12 +183,12 @@
 }
 
 .select-dropdown::-webkit-scrollbar-thumb {
-  background: #0003;
+  background: var(--semantic-border-default);
   border-radius: 4px;
 }
 
 .select-dropdown::-webkit-scrollbar-thumb:hover {
-  background: #0000004d;
+  background: var(--semantic-border-active);
 }
 
 /*# sourceMappingURL=packages_console_ui_6389dcb6._.css.map*/

@@ -91,18 +91,6 @@
 }
 
 /* [project]/apps/control/app/globals.css [app-client] (css) */
-:root {
-  --background: var(--semantic-background-default);
-  --foreground: var(--semantic-text-default);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--semantic-background-default);
-    --foreground: var(--semantic-text-default);
-  }
-}
-
 html, body {
   scrollbar-width: none;
   -ms-overflow-style: none;

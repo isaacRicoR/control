@@ -380,151 +380,19 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$
     info: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].info
 };
 /**
- * Semantic palette (paleta semántica) — Dark
- * Esto SÍ lo consumen los componentes.
- */ const semanticDark = {
-    background: {
-        default: baseDark.neutral[50],
-        hover: baseDark.neutral[100],
-        active: baseDark.neutral[200],
-        disabled: baseDark.neutral[100],
-        focus: baseDark.neutral[50],
-        selected: baseDark.neutral[100]
-    },
-    surface: {
-        default: baseDark.neutral[200],
-        hover: baseDark.neutral[300],
-        active: baseDark.neutral[300],
-        disabled: baseDark.neutral[200],
-        focus: baseDark.neutral[100],
-        selected: baseDark.brand[50]
-    },
-    elevated: {
-        default: baseDark.neutral[200],
-        hover: baseDark.neutral[300],
-        active: baseDark.neutral[400],
-        disabled: baseDark.neutral[300],
-        focus: baseDark.neutral[200],
-        selected: baseDark.neutral[300]
-    },
-    border: {
-        default: baseDark.neutral[300],
-        hover: baseDark.neutral[400],
-        active: baseDark.neutral[500],
-        disabled: baseDark.neutral[300],
-        focus: baseDark.brand[600],
-        selected: baseDark.brand[600]
-    },
-    text: {
-        default: baseDark.neutral[600],
-        hover: baseDark.neutral[1000],
-        active: baseDark.neutral[1000],
-        disabled: baseDark.neutral[500],
-        focus: baseDark.neutral[1000],
-        selected: baseDark.neutral[1000],
-        onSolid: baseDark.neutral[1000]
-    },
-    primary: {
-        default: baseDark.brand[600],
-        hover: baseDark.brand[700],
-        active: baseDark.brand[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.brand[600],
-        selected: baseDark.brand[700]
-    },
-    secondary: {
-        default: baseDark.neutral[300],
-        hover: baseDark.neutral[400],
-        active: baseDark.neutral[500],
-        disabled: baseDark.neutral[200],
-        focus: baseDark.neutral[300],
-        selected: baseDark.neutral[400]
-    },
-    success: {
-        default: baseDark.success[600],
-        hover: baseDark.success[700],
-        active: baseDark.success[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.success[600],
-        selected: baseDark.success[700],
-        100: baseDark.success[100],
-        200: baseDark.success[200],
-        300: baseDark.success[300]
-    },
-    warning: {
-        default: baseDark.warning[600],
-        hover: baseDark.warning[700],
-        active: baseDark.warning[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.warning[600],
-        selected: baseDark.warning[700],
-        100: baseDark.warning[100],
-        200: baseDark.warning[200],
-        300: baseDark.warning[300],
-        400: baseDark.warning[400],
-        emphasis: "#ff8c00"
-    },
-    danger: {
-        default: baseDark.danger[600],
-        hover: baseDark.danger[700],
-        active: baseDark.danger[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.danger[600],
-        selected: baseDark.danger[700],
-        100: baseDark.danger[100],
-        200: baseDark.danger[200],
-        300: baseDark.danger[300],
-        400: baseDark.danger[400]
-    },
-    info: {
-        default: baseDark.info[600],
-        hover: baseDark.info[700],
-        active: baseDark.info[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.info[600],
-        selected: baseDark.info[700]
-    },
-    error: {
-        default: baseDark.danger[600],
-        hover: baseDark.danger[700],
-        active: baseDark.danger[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.danger[600],
-        selected: baseDark.danger[700]
-    },
-    button: {
-        white: {
-            bg: baseDark.neutral[1000],
-            text: baseDark.neutral[0],
-            border: baseDark.neutral[1000],
-            hoverBg: baseDark.neutral[950]
-        },
-        actionPrimary: {
-            bg: baseDark.neutral[1000],
-            text: baseDark.neutral[0],
-            hoverBg: baseDark.neutral[950]
-        }
-    },
-    sidebar: {
-        groupLabel: baseDark.neutral[500]
-    }
+ * Base palette (paleta base) — Light placeholder
+ */ const baseLight = {
+    neutral: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].neutral,
+    brand: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].primary,
+    success: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].success,
+    warning: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].warning,
+    danger: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].danger,
+    info: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].info
 };
 /**
- * Light theme placeholder (estructura lista, no se usa todavía).
- */ const baseLight = {
-    // TODO: definir cuando se apruebe Light Mode
-    neutral: baseDark.neutral,
-    brand: baseDark.brand,
-    success: baseDark.success,
-    warning: baseDark.warning,
-    danger: baseDark.danger,
-    info: baseDark.info
-};
-const semanticLight = {
-    // TODO: definir cuando se apruebe Light Mode
-    ...semanticDark
-};
-const semanticActive = {
+ * Semantic Active — Uses CSS Variables for dynamic themes.
+ * This is the primary source for all semantic tokens.
+ */ const semanticActive = {
     background: {
         default: "var(--semantic-background-default)",
         hover: "var(--semantic-background-hover)",
@@ -556,6 +424,7 @@ const semanticActive = {
         disabled: "var(--semantic-text-disabled)",
         focus: "var(--semantic-text-focus)",
         selected: "var(--semantic-text-selected)",
+        muted: "var(--semantic-text-muted)",
         onSolid: "var(--semantic-text-on-solid)"
     },
     primary: {
@@ -618,19 +487,51 @@ const semanticActive = {
         focus: "var(--semantic-error-focus)",
         selected: "var(--semantic-error-selected)"
     },
-    secondary: semanticDark.secondary,
-    elevated: semanticDark.elevated,
+    secondary: {
+        default: "var(--semantic-secondary-default)",
+        hover: "var(--semantic-secondary-hover)",
+        active: "var(--semantic-secondary-active)",
+        disabled: "var(--semantic-secondary-active)",
+        focus: "var(--semantic-secondary-default)",
+        selected: "var(--semantic-secondary-hover)"
+    },
+    elevated: {
+        default: "var(--semantic-elevated-default)",
+        hover: "var(--semantic-elevated-hover)",
+        active: "var(--semantic-elevated-active)",
+        disabled: "var(--semantic-elevated-default)",
+        focus: "var(--semantic-elevated-hover)",
+        selected: "var(--semantic-elevated-active)"
+    },
     button: {
         white: {
             bg: "var(--semantic-button-white-bg)",
             text: "var(--semantic-button-white-text)",
             border: "var(--semantic-button-white-border)",
             hoverBg: "var(--semantic-button-white-hoverBg)"
+        },
+        actionPrimary: {
+            bg: "var(--semantic-button-action-primary-bg)",
+            text: "var(--semantic-button-action-primary-text)",
+            hoverBg: "var(--semantic-button-action-primary-hover)"
         }
     },
     sidebar: {
         groupLabel: "var(--semantic-sidebar-group-label)"
+    },
+    icon: {
+        default: "var(--semantic-icon-default)",
+        muted: "var(--semantic-icon-muted)",
+        active: "var(--semantic-icon-active)"
     }
+};
+/**
+ * Semantic palette — Dark/Light wrappers around semanticActive
+ */ const semanticDark = {
+    ...semanticActive
+};
+const semanticLight = {
+    ...semanticActive
 };
 const colors = {
     dark: {
@@ -1640,14 +1541,14 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                     width: 24,
                                     height: 24,
                                     borderRadius: "50%",
-                                    backgroundColor: activeCompany?.color || "#10B981",
+                                    backgroundColor: activeCompany?.color || semantic.success.default,
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center"
                                 },
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     style: {
-                                        color: "#FFF",
+                                        color: semantic.text.onSolid,
                                         fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.xs,
                                         fontWeight: "bold"
                                     },
@@ -1780,7 +1681,7 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                                         },
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             style: {
-                                                                color: "#FFF",
+                                                                color: semantic.text.onSolid,
                                                                 fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.xs,
                                                                 fontWeight: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontWeight.bold
                                                             },
@@ -1810,7 +1711,7 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                                                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.sm,
                                                                     fontWeight: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontWeight.medium,
                                                                     color: company.active ? semantic.primary.default : semantic.text.default,
-                                                                    // Note: Active text often white on dark active bg, but standard tokens might diff. 
+                                                                    // Note: Active text often contrast on dark active bg, but standard tokens might diff. 
                                                                     // Logic: if company.active (selected), bg is surface.selected.
                                                                     whiteSpace: "nowrap",
                                                                     overflow: "hidden",
@@ -2869,6 +2770,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$zIndex$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/zIndex.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/shadows.ts [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
@@ -2937,7 +2839,7 @@ const DevPanel = ()=>{
         background: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.surface.default,
         border: `1px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.border.default}`,
         borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].md,
-        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+        boxShadow: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["shadows"].dropdown,
         zIndex: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$zIndex$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["zIndex"].dropdown,
         overflow: "hidden",
         display: isOpen ? "block" : "none"
@@ -3327,7 +3229,9 @@ const themeRegistry = {
             info: "#29a3ff",
             pending: "#5A6672",
             buttonPrimaryBg: "#00FFA9",
-            buttonPrimaryText: "#FFFFFF"
+            buttonPrimaryText: "#FFFFFF",
+            buttonActionPrimaryBg: "#FFFFFF",
+            buttonActionPrimaryText: "#141A21"
         },
         light: {
             background: "#F4F6F8",
@@ -3341,7 +3245,9 @@ const themeRegistry = {
             info: "#29a3ff",
             pending: "#71717A",
             buttonPrimaryBg: "#00A76F",
-            buttonPrimaryText: "#18181B"
+            buttonPrimaryText: "#18181B",
+            buttonActionPrimaryBg: "#141A21",
+            buttonActionPrimaryText: "#FFFFFF"
         }
     },
     // TODO: customize security palette
@@ -3359,7 +3265,9 @@ const themeRegistry = {
             info: "#29a3ff",
             pending: "#94a3b8",
             buttonPrimaryBg: "#155eef",
-            buttonPrimaryText: "#FFFFFF"
+            buttonPrimaryText: "#FFFFFF",
+            buttonActionPrimaryBg: "#FFFFFF",
+            buttonActionPrimaryText: "#0f172a"
         },
         light: {
             background: "#F4F6F8",
@@ -3373,7 +3281,9 @@ const themeRegistry = {
             info: "#29a3ff",
             pending: "#71717A",
             buttonPrimaryBg: "#155eef",
-            buttonPrimaryText: "#FFFFFF"
+            buttonPrimaryText: "#FFFFFF",
+            buttonActionPrimaryBg: "#141A21",
+            buttonActionPrimaryText: "#FFFFFF"
         }
     }
 };
@@ -3425,33 +3335,25 @@ const Button = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
         text = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.text.disabled;
         border = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.border.disabled;
     } else if (variant === 'primary') {
-        const pt = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.button?.primary;
-        const packBg = themeTokens?.buttonPrimaryBg;
-        const packText = themeTokens?.buttonPrimaryText;
-        bg = packBg ?? pt?.bg ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.primary.default;
-        text = packText ?? pt?.text ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.text.active;
+        bg = themeTokens?.buttonPrimaryBg ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.primary.default;
+        text = themeTokens?.buttonPrimaryText ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.text.onSolid;
         border = bg;
         variantClass = "button-variant-primary";
-        const hoverVal = pt?.hover ?? pt?.bg ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.primary.hover;
+        const hoverVal = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.primary.hover;
         cssVariables = {
             "--button-primary-hover": hoverVal
         };
     } else if (variant === 'actionPrimary') {
-        const actionTheme = theme === 'light' ? 'dark' : 'light';
-        const ap = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"][actionTheme].semantic.button?.actionPrimary;
-        if (ap) {
-            bg = ap.bg;
-            text = ap.text;
-            border = ap.bg;
-            variantClass = "button-variant-action-primary";
-            cssVariables = {
-                "--button-action-primary-hover": ap.hoverBg
-            };
-        } else {
-            bg = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.surface.default;
-            text = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.text.active;
-            border = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.border.default;
-        }
+        const ap = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"][theme].semantic.button?.actionPrimary;
+        const packBg = themeTokens?.buttonActionPrimaryBg;
+        const packText = themeTokens?.buttonActionPrimaryText;
+        bg = packBg ?? ap?.bg ?? "var(--semantic-button-action-primary-bg)";
+        text = packText ?? ap?.text ?? "var(--semantic-button-action-primary-text)";
+        border = bg;
+        variantClass = "button-variant-action-primary";
+        cssVariables = {
+            "--button-action-primary-hover": ap?.hoverBg ?? "var(--semantic-button-action-primary-hover)"
+        };
     } else if (variant === 'secondary') {
         // Acción funcional no primaria: fondo neutro de superficie, texto de máximo contraste, borde visible.
         bg = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.surface.default;
@@ -3474,14 +3376,13 @@ const Button = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
         cssVariables = {
             "--button-white-hover-bg": __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.button?.white.hoverBg ?? "#F4F4F5"
         };
-    } else if (variant === 'create' && __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.button?.create) {
-        const ct = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.button.create;
-        bg = ct.bg;
-        text = ct.text;
-        border = ct.border;
+    } else if (variant === 'create') {
+        bg = "var(--semantic-button-create-bg)";
+        text = "var(--semantic-button-create-text)";
+        border = "var(--semantic-button-create-border)";
         variantClass = "button-variant-create";
         cssVariables = {
-            "--button-create-hover": ct.hover
+            "--button-create-hover": "var(--semantic-button-create-hover)"
         };
     } else if (variant === 'error') {
         bg = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.error.default;
@@ -3517,7 +3418,7 @@ const Button = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
         children: children
     }, void 0, false, {
         fileName: "[project]/packages/console/ui/atoms/Button/Button.tsx",
-        lineNumber: 114,
+        lineNumber: 106,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 }, "bv5hN2c/khsGf9i385besdPr9+g=", false, function() {
@@ -3949,7 +3850,7 @@ const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, 
                             }, ("TURBOPACK compile-time value", void 0)),
                             breadcrumbs && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
-                                    color: semantic.text.disabled,
+                                    color: semantic.text.muted,
                                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.sm,
                                     fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary,
                                     display: "flex",

@@ -461,151 +461,19 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$
     info: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].info
 };
 /**
- * Semantic palette (paleta semántica) — Dark
- * Esto SÍ lo consumen los componentes.
- */ const semanticDark = {
-    background: {
-        default: baseDark.neutral[50],
-        hover: baseDark.neutral[100],
-        active: baseDark.neutral[200],
-        disabled: baseDark.neutral[100],
-        focus: baseDark.neutral[50],
-        selected: baseDark.neutral[100]
-    },
-    surface: {
-        default: baseDark.neutral[200],
-        hover: baseDark.neutral[300],
-        active: baseDark.neutral[300],
-        disabled: baseDark.neutral[200],
-        focus: baseDark.neutral[100],
-        selected: baseDark.brand[50]
-    },
-    elevated: {
-        default: baseDark.neutral[200],
-        hover: baseDark.neutral[300],
-        active: baseDark.neutral[400],
-        disabled: baseDark.neutral[300],
-        focus: baseDark.neutral[200],
-        selected: baseDark.neutral[300]
-    },
-    border: {
-        default: baseDark.neutral[300],
-        hover: baseDark.neutral[400],
-        active: baseDark.neutral[500],
-        disabled: baseDark.neutral[300],
-        focus: baseDark.brand[600],
-        selected: baseDark.brand[600]
-    },
-    text: {
-        default: baseDark.neutral[600],
-        hover: baseDark.neutral[1000],
-        active: baseDark.neutral[1000],
-        disabled: baseDark.neutral[500],
-        focus: baseDark.neutral[1000],
-        selected: baseDark.neutral[1000],
-        onSolid: baseDark.neutral[1000]
-    },
-    primary: {
-        default: baseDark.brand[600],
-        hover: baseDark.brand[700],
-        active: baseDark.brand[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.brand[600],
-        selected: baseDark.brand[700]
-    },
-    secondary: {
-        default: baseDark.neutral[300],
-        hover: baseDark.neutral[400],
-        active: baseDark.neutral[500],
-        disabled: baseDark.neutral[200],
-        focus: baseDark.neutral[300],
-        selected: baseDark.neutral[400]
-    },
-    success: {
-        default: baseDark.success[600],
-        hover: baseDark.success[700],
-        active: baseDark.success[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.success[600],
-        selected: baseDark.success[700],
-        100: baseDark.success[100],
-        200: baseDark.success[200],
-        300: baseDark.success[300]
-    },
-    warning: {
-        default: baseDark.warning[600],
-        hover: baseDark.warning[700],
-        active: baseDark.warning[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.warning[600],
-        selected: baseDark.warning[700],
-        100: baseDark.warning[100],
-        200: baseDark.warning[200],
-        300: baseDark.warning[300],
-        400: baseDark.warning[400],
-        emphasis: "#ff8c00"
-    },
-    danger: {
-        default: baseDark.danger[600],
-        hover: baseDark.danger[700],
-        active: baseDark.danger[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.danger[600],
-        selected: baseDark.danger[700],
-        100: baseDark.danger[100],
-        200: baseDark.danger[200],
-        300: baseDark.danger[300],
-        400: baseDark.danger[400]
-    },
-    info: {
-        default: baseDark.info[600],
-        hover: baseDark.info[700],
-        active: baseDark.info[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.info[600],
-        selected: baseDark.info[700]
-    },
-    error: {
-        default: baseDark.danger[600],
-        hover: baseDark.danger[700],
-        active: baseDark.danger[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.danger[600],
-        selected: baseDark.danger[700]
-    },
-    button: {
-        white: {
-            bg: baseDark.neutral[1000],
-            text: baseDark.neutral[0],
-            border: baseDark.neutral[1000],
-            hoverBg: baseDark.neutral[950]
-        },
-        actionPrimary: {
-            bg: baseDark.neutral[1000],
-            text: baseDark.neutral[0],
-            hoverBg: baseDark.neutral[950]
-        }
-    },
-    sidebar: {
-        groupLabel: baseDark.neutral[500]
-    }
+ * Base palette (paleta base) — Light placeholder
+ */ const baseLight = {
+    neutral: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].neutral,
+    brand: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].primary,
+    success: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].success,
+    warning: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].warning,
+    danger: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].danger,
+    info: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].info
 };
 /**
- * Light theme placeholder (estructura lista, no se usa todavía).
- */ const baseLight = {
-    // TODO: definir cuando se apruebe Light Mode
-    neutral: baseDark.neutral,
-    brand: baseDark.brand,
-    success: baseDark.success,
-    warning: baseDark.warning,
-    danger: baseDark.danger,
-    info: baseDark.info
-};
-const semanticLight = {
-    // TODO: definir cuando se apruebe Light Mode
-    ...semanticDark
-};
-const semanticActive = {
+ * Semantic Active — Uses CSS Variables for dynamic themes.
+ * This is the primary source for all semantic tokens.
+ */ const semanticActive = {
     background: {
         default: "var(--semantic-background-default)",
         hover: "var(--semantic-background-hover)",
@@ -637,6 +505,7 @@ const semanticActive = {
         disabled: "var(--semantic-text-disabled)",
         focus: "var(--semantic-text-focus)",
         selected: "var(--semantic-text-selected)",
+        muted: "var(--semantic-text-muted)",
         onSolid: "var(--semantic-text-on-solid)"
     },
     primary: {
@@ -699,19 +568,51 @@ const semanticActive = {
         focus: "var(--semantic-error-focus)",
         selected: "var(--semantic-error-selected)"
     },
-    secondary: semanticDark.secondary,
-    elevated: semanticDark.elevated,
+    secondary: {
+        default: "var(--semantic-secondary-default)",
+        hover: "var(--semantic-secondary-hover)",
+        active: "var(--semantic-secondary-active)",
+        disabled: "var(--semantic-secondary-active)",
+        focus: "var(--semantic-secondary-default)",
+        selected: "var(--semantic-secondary-hover)"
+    },
+    elevated: {
+        default: "var(--semantic-elevated-default)",
+        hover: "var(--semantic-elevated-hover)",
+        active: "var(--semantic-elevated-active)",
+        disabled: "var(--semantic-elevated-default)",
+        focus: "var(--semantic-elevated-hover)",
+        selected: "var(--semantic-elevated-active)"
+    },
     button: {
         white: {
             bg: "var(--semantic-button-white-bg)",
             text: "var(--semantic-button-white-text)",
             border: "var(--semantic-button-white-border)",
             hoverBg: "var(--semantic-button-white-hoverBg)"
+        },
+        actionPrimary: {
+            bg: "var(--semantic-button-action-primary-bg)",
+            text: "var(--semantic-button-action-primary-text)",
+            hoverBg: "var(--semantic-button-action-primary-hover)"
         }
     },
     sidebar: {
         groupLabel: "var(--semantic-sidebar-group-label)"
+    },
+    icon: {
+        default: "var(--semantic-icon-default)",
+        muted: "var(--semantic-icon-muted)",
+        active: "var(--semantic-icon-active)"
     }
+};
+/**
+ * Semantic palette — Dark/Light wrappers around semanticActive
+ */ const semanticDark = {
+    ...semanticActive
+};
+const semanticLight = {
+    ...semanticActive
 };
 const colors = {
     dark: {
@@ -1020,17 +921,21 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/spacing.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/shadows.ts [app-rsc] (ecmascript)");
 ;
 ;
-const Card = ({ title, subtitle, children, footer, noPadding })=>{
+const Card = ({ title, subtitle, children, footer, noPadding, elevated, variant = "default" })=>{
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["colors"].semantic;
+    const isPanel = variant === "panel";
+    const shouldElevate = elevated || isPanel;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         style: {
             background: semantic.surface.default,
             border: `1px solid ${semantic.border.default}`,
             borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["radius"].card,
             padding: noPadding ? 0 : __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["spacing"][24],
-            fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary
+            fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary,
+            boxShadow: shouldElevate ? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["shadows"].card : "none"
         },
         "aria-label": title ?? "Card",
         children: [
@@ -1050,7 +955,7 @@ const Card = ({ title, subtitle, children, footer, noPadding })=>{
                         children: title
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                        lineNumber: 38,
+                        lineNumber: 41,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0)),
                     subtitle && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1063,13 +968,13 @@ const Card = ({ title, subtitle, children, footer, noPadding })=>{
                         children: subtitle
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                        lineNumber: 52,
+                        lineNumber: 55,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                lineNumber: 32,
+                lineNumber: 35,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1082,23 +987,26 @@ const Card = ({ title, subtitle, children, footer, noPadding })=>{
                 children: children
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                lineNumber: 66,
+                lineNumber: 69,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             footer && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
                 style: {
-                    marginTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["spacing"][24]
+                    marginTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["spacing"][24],
+                    ...isPanel ? {
+                        margin: `0 -${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["spacing"][24]}px -${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["spacing"][24]}px -${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["spacing"][24]}px`
+                    } : {}
                 },
                 children: footer
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                lineNumber: 78,
+                lineNumber: 81,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-        lineNumber: 21,
+        lineNumber: 23,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };

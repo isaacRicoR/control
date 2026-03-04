@@ -10,7 +10,7 @@
   appearance: none;
   resize: vertical;
   scrollbar-width: thin;
-  scrollbar-color: #0003 transparent;
+  scrollbar-color: var(--semantic-border-default) transparent;
   outline: none;
   font-family: inherit;
   font-size: 1rem;
@@ -29,12 +29,12 @@
 }
 
 .textarea-field::-webkit-scrollbar-thumb {
-  background: #0003;
+  background: var(--semantic-border-default);
   border-radius: 4px;
 }
 
 .textarea-field::-webkit-scrollbar-thumb:hover {
-  background: #0000004d;
+  background: var(--semantic-border-active);
 }
 
 .textarea-field:hover:not(:disabled):not(.has-error) {

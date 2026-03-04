@@ -1541,14 +1541,14 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                     width: 24,
                                     height: 24,
                                     borderRadius: "50%",
-                                    backgroundColor: activeCompany?.color || "#10B981",
+                                    backgroundColor: activeCompany?.color || semantic.success.default,
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center"
                                 },
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     style: {
-                                        color: "#FFF",
+                                        color: semantic.text.onSolid,
                                         fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.xs,
                                         fontWeight: "bold"
                                     },
@@ -1681,7 +1681,7 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                                         },
                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             style: {
-                                                                color: "#FFF",
+                                                                color: semantic.text.onSolid,
                                                                 fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.xs,
                                                                 fontWeight: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontWeight.bold
                                                             },
@@ -1711,7 +1711,7 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                                                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.sm,
                                                                     fontWeight: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontWeight.medium,
                                                                     color: company.active ? semantic.primary.default : semantic.text.default,
-                                                                    // Note: Active text often white on dark active bg, but standard tokens might diff. 
+                                                                    // Note: Active text often contrast on dark active bg, but standard tokens might diff. 
                                                                     // Logic: if company.active (selected), bg is surface.selected.
                                                                     whiteSpace: "nowrap",
                                                                     overflow: "hidden",
@@ -2770,6 +2770,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$zIndex$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/zIndex.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/shadows.ts [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
@@ -2838,7 +2839,7 @@ const DevPanel = ()=>{
         background: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.surface.default,
         border: `1px solid ${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.border.default}`,
         borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].md,
-        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+        boxShadow: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["shadows"].dropdown,
         zIndex: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$zIndex$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["zIndex"].dropdown,
         overflow: "hidden",
         display: isOpen ? "block" : "none"
@@ -3334,14 +3335,11 @@ const Button = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
         text = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.text.disabled;
         border = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.border.disabled;
     } else if (variant === 'primary') {
-        const pt = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.button?.primary;
-        const packBg = themeTokens?.buttonPrimaryBg;
-        const packText = themeTokens?.buttonPrimaryText;
-        bg = packBg ?? pt?.bg ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.primary.default;
-        text = packText ?? pt?.text ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.text.active;
+        bg = themeTokens?.buttonPrimaryBg ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.primary.default;
+        text = themeTokens?.buttonPrimaryText ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.text.onSolid;
         border = bg;
         variantClass = "button-variant-primary";
-        const hoverVal = pt?.hover ?? pt?.bg ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.primary.hover;
+        const hoverVal = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.primary.hover;
         cssVariables = {
             "--button-primary-hover": hoverVal
         };
@@ -3378,14 +3376,13 @@ const Button = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
         cssVariables = {
             "--button-white-hover-bg": __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.button?.white.hoverBg ?? "#F4F4F5"
         };
-    } else if (variant === 'create' && __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.button?.create) {
-        const ct = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.button.create;
-        bg = ct.bg;
-        text = ct.text;
-        border = ct.border;
+    } else if (variant === 'create') {
+        bg = "var(--semantic-button-create-bg)";
+        text = "var(--semantic-button-create-text)";
+        border = "var(--semantic-button-create-border)";
         variantClass = "button-variant-create";
         cssVariables = {
-            "--button-create-hover": ct.hover
+            "--button-create-hover": "var(--semantic-button-create-hover)"
         };
     } else if (variant === 'error') {
         bg = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic.error.default;
@@ -3421,7 +3418,7 @@ const Button = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
         children: children
     }, void 0, false, {
         fileName: "[project]/packages/console/ui/atoms/Button/Button.tsx",
-        lineNumber: 110,
+        lineNumber: 106,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 }, "bv5hN2c/khsGf9i385besdPr9+g=", false, function() {

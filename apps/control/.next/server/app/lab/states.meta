@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/lab/layout,_N_T_/lab/states/layout,_N_T_/lab/states/page,_N_T_/lab/states"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/lab/states/__PAGE__",
+    "/lab/states",
+    "/lab",
+    "/_index",
+    "/_head"
+  ]
+}

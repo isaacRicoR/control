@@ -1,206 +1,43 @@
-[00:00:02.530] Server  LOG     ✓ Ready in 1774ms
-[00:00:05.834] Server  LOG     [RouteGuard] Session validated for users:view
-[00:00:06.346] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:09:18.079] Server  LOG     [RouteGuard] Session validated for users:view
-[00:09:50.503] Server  LOG     [RouteGuard] Session validated for users:view
-[00:21:29.252] Server  LOG     ✓ Compiled in 72ms
-[00:21:29.787] Server  LOG     [RouteGuard] Session validated for users:view
-[00:21:30.304] Server  ERROR   ⨯ ReferenceError: Cannot access 'semanticActive' before initialization
-[00:21:30.794] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:30.982] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'semanticActive' before initialization
-[00:21:31.977] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:21:31.979] Server  WARN    ⚠ Fast Refresh had to perform a full reload when ./packages/console/tokens/colors.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:21:31.980] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:21:31.987] Server  LOG     ✓ Compiled in 19ms
-[00:21:32.480] Server  LOG     [RouteGuard] Session validated for users:view
-[00:21:32.860] Server  ERROR   ⨯ ReferenceError: Cannot access 'semanticActive' before initialization
-[00:21:33.212] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:33.403] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'semanticActive' before initialization
-[00:21:35.213] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:21:35.228] Server  LOG     ✓ Compiled in 44ms
-[00:21:35.377] Server  LOG     [RouteGuard] Session validated for users:view
-[00:21:35.379] Browser ERROR   unhandledRejection: Error: No link element found for chunk /_next/static/chunks/%5Broot-of-the-server%5D__e97c3961._.css
-[00:21:35.792] Server  ERROR   ⨯ ReferenceError: Cannot access 'semanticActive' before initialization
-[00:21:36.183] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:36.399] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'semanticActive' before initialization
-[00:21:38.203] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:21:38.403] Server  LOG     [RouteGuard] Session validated for users:view
-[00:21:38.411] Server  LOG     ✓ Compiled in 48ms
-[00:21:38.412] Browser ERROR   unhandledRejection: Error: No link element found for chunk /_next/static/chunks/%5Broot-of-the-server%5D__e97c3961._.css
-[00:21:38.782] Server  ERROR   ⨯ ReferenceError: Cannot access 'semanticActive' before initialization
-[00:21:39.149] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:39.366] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'semanticActive' before initialization
-[00:21:45.475] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:21:45.502] Server  LOG     ✓ Compiled in 38ms
-[00:21:45.970] Server  LOG     [RouteGuard] Session validated for users:view
-[00:21:46.401] Server  ERROR   ⨯ ReferenceError: Cannot access 'semanticActive' before initialization
-[00:21:46.758] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:46.960] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'semanticActive' before initialization
-[00:22:00.101] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:22:00.406] Server  LOG     [RouteGuard] Session validated for users:view
-[00:22:00.419] Server  LOG     ✓ Compiled in 52ms
-[00:22:00.420] Browser ERROR   unhandledRejection: Error: No link element found for chunk /_next/static/chunks/%5Broot-of-the-server%5D__e97c3961._.css
-[00:22:00.918] Server  ERROR   ⨯ ReferenceError: Cannot access 'semanticActive' before initialization
-[00:22:01.342] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:22:01.550] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'semanticActive' before initialization
-[00:22:02.870] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:22:03.036] Server  LOG     [RouteGuard] Session validated for users:view
-[00:22:03.055] Server  LOG     ✓ Compiled in 45ms
-[00:22:03.056] Browser ERROR   unhandledRejection: Error: No link element found for chunk /_next/static/chunks/%5Broot-of-the-server%5D__e97c3961._.css
-[00:22:03.443] Server  ERROR   ⨯ ReferenceError: Cannot access 'semanticActive' before initialization
-[00:22:03.786] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:22:03.990] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'semanticActive' before initialization
-[00:22:08.112] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:22:08.124] Server  WARN    ⚠ Fast Refresh had to perform a full reload when ./packages/console/tokens/colors.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:22:08.125] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:22:08.130] Server  LOG     ✓ Compiled in 35ms
-[00:22:08.817] Server  LOG     [RouteGuard] Session validated for users:view
-[00:22:09.323] Server  ERROR   ⨯ ReferenceError: Cannot access 'semanticActive' before initialization
-[00:22:09.659] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:22:09.889] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'semanticActive' before initialization
-[00:22:54.909] Server  LOG     ✓ Compiled in 288ms
-[00:22:55.040] Browser ERROR   ./packages/console/tokens/colors.ts:138:7
-Ecmascript file had an error
-  136 | };
-  137 |
-> 138 | const semanticLight: SemanticPalette = {
-      |       ^^^^^^^^^^^^^
-  139 |   ...semanticActive,
-  140 |   button: {
-  141 |     white: {
-
-the name `semanticLight` is defined multiple times
-
-Import traces:
-  #1 [Client Component Browser]:
-    ./packages/console/tokens/colors.ts [Client Component Browser]
-    ./apps/control/app/(shell)/users/list/UsersListClient.tsx [Client Component Browser]
-    ./apps/control/app/(shell)/users/list/UsersListClient.tsx [Server Component]
-    ./apps/control/app/(shell)/users/list/page.tsx [Server Component]
-
-  #2 [Client Component Browser]:
-    ./packages/console/tokens/colors.ts [Client Component Browser]
-    ./packages/console/ui/layouts/AppShell/AppShell.tsx [Client Component Browser]
-    ./packages/console/ui/layouts/AppShell/AppShell.tsx [Server Component]
-    ./apps/control/app/(shell)/layout.tsx [Server Component]
-
-  #3 [Client Component SSR]:
-    ./packages/console/tokens/colors.ts [Client Component SSR]
-    ./apps/control/app/(shell)/users/list/UsersListClient.tsx [Client Component SSR]
-    ./apps/control/app/(shell)/users/list/UsersListClient.tsx [Server Component]
-    ./apps/control/app/(shell)/users/list/page.tsx [Server Component]
-
-  #4 [Client Component SSR]:
-    ./packages/console/tokens/colors.ts [Client Component SSR]
-    ./packages/console/ui/layouts/AppShell/AppShell.tsx [Client Component SSR]
-    ./packages/console/ui/layouts/AppShell/AppShell.tsx [Server Component]
-    ./apps/control/app/(shell)/layout.tsx [Server Component]
-[00:22:57.324] Server  LOG     ✓ Compiled in 17ms
-[00:22:57.452] Browser ERROR   ./packages/console/tokens/colors.ts:138:7
-Ecmascript file had an error
-  136 | };
-  137 |
-> 138 | const semanticLight: SemanticPalette = {
-      |       ^^^^^^^^^^^^^
-  139 |   ...semanticActive,
-  140 | };
-  141 |
-
-the name `semanticLight` is defined multiple times
-
-Import traces:
-  #1 [Client Component Browser]:
-    ./packages/console/tokens/colors.ts [Client Component Browser]
-    ./apps/control/app/(shell)/users/list/UsersListClient.tsx [Client Component Browser]
-    ./apps/control/app/(shell)/users/list/UsersListClient.tsx [Server Component]
-    ./apps/control/app/(shell)/users/list/page.tsx [Server Component]
-
-  #2 [Client Component Browser]:
-    ./packages/console/tokens/colors.ts [Client Component Browser]
-    ./packages/console/ui/layouts/AppShell/AppShell.tsx [Client Component Browser]
-    ./packages/console/ui/layouts/AppShell/AppShell.tsx [Server Component]
-    ./apps/control/app/(shell)/layout.tsx [Server Component]
-
-  #3 [Client Component SSR]:
-    ./packages/console/tokens/colors.ts [Client Component SSR]
-    ./apps/control/app/(shell)/users/list/UsersListClient.tsx [Client Component SSR]
-    ./apps/control/app/(shell)/users/list/UsersListClient.tsx [Server Component]
-    ./apps/control/app/(shell)/users/list/page.tsx [Server Component]
-
-  #4 [Client Component SSR]:
-    ./packages/console/tokens/colors.ts [Client Component SSR]
-    ./packages/console/ui/layouts/AppShell/AppShell.tsx [Client Component SSR]
-    ./packages/console/ui/layouts/AppShell/AppShell.tsx [Server Component]
-    ./apps/control/app/(shell)/layout.tsx [Server Component]
-[00:23:19.318] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:23:19.328] Server  WARN    ⚠ Fast Refresh had to perform a full reload when ./packages/console/tokens/colors.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:23:19.329] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:23:19.336] Server  LOG     ✓ Compiled in 19ms
-[00:23:19.887] Server  LOG     [RouteGuard] Session validated for users:view
-[00:23:20.395] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:24:08.944] Server  LOG     [RouteGuard] Session validated for devices:view
-[00:24:13.906] Server  LOG     [RouteGuard] Session validated for users:view
-[00:30:51.854] Server  LOG     ✓ Compiled in 24ms
-[00:30:54.940] Server  LOG     ✓ Compiled in 22ms
-[00:31:07.418] Server  LOG     ✓ Compiled in 93ms
-[00:31:10.330] Server  LOG     ✓ Compiled in 59ms
-[00:31:21.285] Server  LOG     ✓ Compiled in 52ms
-[00:36:58.606] Server  LOG     [RouteGuard] Session validated for devices:view
-[00:37:00.728] Server  LOG     [RouteGuard] Session validated for users:view
-[00:37:14.794] Server  LOG     [RouteGuard] Session validated for users:view
-[00:37:15.241] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:38:08.421] Server  LOG     ✓ Compiled in 19ms
-[00:38:12.193] Server  LOG     ✓ Compiled in 42ms
-[00:38:15.212] Server  LOG     ✓ Compiled in 26ms
-[00:38:20.810] Server  LOG     ✓ Compiled in 43ms
-[00:41:01.482] Server  LOG     [RouteGuard] Session validated for devices:view
-[00:41:12.998] Server  LOG     ✓ Compiled in 26ms
-[00:41:19.932] Server  LOG     [RouteGuard] Session validated for users:view
-[00:41:30.257] Server  LOG     [RouteGuard] Session validated for devices:view
-[00:41:32.642] Server  LOG     [RouteGuard] Session validated for users:view
-[00:42:08.810] Server  LOG     [RouteGuard] Session validated for devices:view
-[00:42:12.706] Server  LOG     [RouteGuard] Session validated for users:view
-[00:42:24.494] Server  LOG     [RouteGuard] Session validated for devices:view
-[00:42:32.121] Server  LOG     [RouteGuard] Session validated for devices:view
-[00:44:50.213] Server  LOG     [RouteGuard] Session validated for users:view
-[00:45:44.527] Server  LOG     [RouteGuard] Session validated for devices:view
-[00:47:13.705] Server  LOG     [RouteGuard] Session validated for users:view
-[00:49:32.937] Server  LOG     [RouteGuard] Session validated for users:view
-[00:49:33.501] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:55:11.543] Server  LOG     ✓ Compiled in 507ms
-[00:55:12.212] Server  LOG     ✓ Compiled in 72ms
-[00:55:12.389] Server  LOG     ✓ Compiled in 201ms
-[00:55:43.637] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:55:56.485] Server  LOG     [RouteGuard] Session validated for users:view
-[01:00:26.934] Server  LOG     [RouteGuard] Session validated for users:view
-[01:02:09.644] Server  LOG     ✓ Compiled in 56ms
-[01:02:28.789] Server  LOG     [RouteGuard] Session validated for users:view
-[01:04:42.817] Server  LOG     [RouteGuard] Session validated for devices:view
-[01:04:45.212] Server  LOG     [RouteGuard] Session validated for users:view
-[01:04:48.841] Server  LOG     [RouteGuard] Session validated for devices:view
-[01:05:02.375] Server  LOG     [RouteGuard] Session validated for devices:view
-[01:05:02.823] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:05:58.633] Server  LOG     [RouteGuard] Session validated for users:view
-[01:07:35.648] Server  LOG     ✓ Compiled in 500ms
-[01:07:49.503] Server  LOG     [RouteGuard] Session validated for devices:view
-[01:10:10.845] Server  LOG     [RouteGuard] Session validated for devices:view
-[01:10:14.848] Server  LOG     [RouteGuard] Session validated for users:view
-[01:11:07.702] Server  LOG     [RouteGuard] Session validated for users:view
-[01:11:56.638] Server  LOG     ✓ Compiled in 33ms
-[01:12:01.295] Server  LOG     ✓ Compiled in 32ms
-[01:12:33.690] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:13:29.128] Server  LOG     [RouteGuard] Session validated for users:view
-[01:15:09.230] Server  LOG     ✓ Compiled in 44ms
-[01:15:13.032] Server  LOG     ✓ Compiled in 38ms
-[01:15:36.963] Server  LOG     [RouteGuard] Session validated for users:view
-[01:20:45.768] Server  LOG     [RouteGuard] Session validated for devices:view
-[01:20:51.501] Server  LOG     [RouteGuard] Session validated for users:view
-[01:20:53.383] Server  LOG     [RouteGuard] Session validated for devices:view
-[01:23:07.920] Server  LOG     ✓ Compiled in 84ms
-[01:23:08.320] Server  LOG     ✓ Compiled in 73ms
-[01:23:27.035] Server  LOG     ✓ Compiled in 49ms
-[01:23:46.852] Server  LOG     ✓ Compiled in 38ms
-[01:24:55.869] Server  LOG     [RouteGuard] Session validated for users:view
-[01:25:03.715] Server  LOG     [RouteGuard] Session validated for devices:view
-[01:26:12.752] Browser LOG     [DevPanel] Switched to preset: security
-[01:26:20.109] Browser LOG     [DevPanel] Switched to preset: control
+[00:00:02.496] Server  LOG     ✓ Ready in 2s
+[00:00:03.738] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:09.461] Server  LOG     [RouteGuard] Session validated for users:view
+[00:00:09.852] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:10.913] Server  LOG     ✓ Compiled in 112ms
+[00:09:25.838] Server  LOG     ✓ Compiled in 233ms
+[00:09:38.437] Server  LOG     [RouteGuard] Session validated for users:view
+[00:10:26.813] Server  LOG     ✓ Compiled in 65ms
+[00:17:05.063] Server  LOG     ✓ Compiled in 349ms
+[00:17:11.463] Server  LOG     ✓ Compiled in 56ms
+[00:17:19.242] Server  LOG     [RouteGuard] Session validated for users:view
+[00:17:19.387] Server  LOG     [RouteGuard] Session validated for users:view
+[00:17:19.475] Server  LOG     [RouteGuard] Session validated for users:view
+[00:17:19.540] Server  LOG     [RouteGuard] Session validated for users:view
+[00:17:19.609] Server  LOG     [RouteGuard] Session validated for users:view
+[00:17:24.857] Server  LOG     ✓ Compiled in 64ms
+[00:17:41.757] Server  LOG     ✓ Compiled in 43ms
+[00:17:56.355] Server  LOG     ✓ Compiled in 474ms
+[00:20:28.297] Server  LOG     ✓ Compiled in 62ms
+[00:25:29.931] Server  LOG     [RouteGuard] Session validated for users:view
+[00:28:40.553] Server  LOG     ✓ Compiled in 201ms
+[00:29:05.129] Server  LOG     [RouteGuard] Session validated for users:view
+[00:29:53.441] Server  LOG     ✓ Compiled in 88ms
+[00:29:53.442] Browser ERROR   %s a style property during rerender (%s) when a conflicting property is set (%s) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values. Removing paddingTop padding
+[00:29:53.442] Browser ERROR   %s a style property during rerender (%s) when a conflicting property is set (%s) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values. Removing paddingBottom padding
+[00:29:53.442] Browser ERROR   %s a style property during rerender (%s) when a conflicting property is set (%s) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values. Removing paddingTop padding
+[00:29:53.442] Browser ERROR   %s a style property during rerender (%s) when a conflicting property is set (%s) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values. Removing paddingBottom padding
+[00:30:58.195] Server  LOG     ✓ Compiled in 48ms
+[00:31:05.275] Server  LOG     ✓ Compiled in 103ms
+[00:31:16.747] Server  LOG     ✓ Compiled in 77ms
+[00:31:20.040] Server  LOG     ✓ Compiled in 50ms
+[00:31:27.659] Server  LOG     [RouteGuard] Session validated for users:view
+[00:32:17.518] Server  LOG     [RouteGuard] Session validated for devices:view
+[00:34:19.643] Server  LOG     [RouteGuard] Session validated for devices:view
+[00:34:24.509] Server  LOG     [RouteGuard] Session validated for users:view
+[00:35:40.268] Server  LOG     [RouteGuard] Session validated for devices:view
+[00:35:42.935] Server  LOG     [RouteGuard] Session validated for users:view
+[00:40:14.959] Server  LOG     ✓ Compiled in 729ms
+[00:42:33.606] Server  LOG     [RouteGuard] Session validated for devices:view
+[00:43:21.538] Server  LOG     ✓ Compiled in 59ms
+[00:45:27.838] Server  LOG     [RouteGuard] Session validated for users:view
+[00:45:37.598] Server  LOG     [RouteGuard] Session validated for devices:view
+[00:45:56.241] Server  LOG     [RouteGuard] Session validated for users:view
