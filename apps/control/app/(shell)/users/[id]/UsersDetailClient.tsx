@@ -213,7 +213,42 @@ export const UsersDetailClient = ({ userId }: UsersDetailClientProps) => {
 
             headerStyle={{ borderBottom: "none" }}
         >
-            <Card elevated>
+            <Card
+                variant="panel"
+                footer={showFooter && (
+                    <div
+                        style={{
+                            borderTop: `1px solid ${semantic.border.default}`,
+                            padding: spacing[16],
+                            display: "flex",
+                            gap: spacing[12],
+                            alignItems: "center",
+                            justifyContent: "flex-end",
+                        }}
+                    >
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={handleCancel}
+                            style={{
+                                borderRadius: radius.xl,
+                            }}
+                        >
+                            Cancelar
+                        </Button>
+                        <Button
+                            variant="actionPrimary"
+                            size="sm"
+                            onClick={handleSave}
+                            style={{
+                                borderRadius: radius.xl,
+                            }}
+                        >
+                            Guardar
+                        </Button>
+                    </div>
+                )}
+            >
                 <CardTabsHeader
                     tabs={TABS}
                     value={activeTab}
@@ -382,42 +417,6 @@ export const UsersDetailClient = ({ userId }: UsersDetailClientProps) => {
                         </div>
                     )
                 }
-
-                {showFooter && (
-                    <div
-                        style={{
-                            borderTop: `1px solid ${semantic.border.default}`,
-                            padding: spacing[16],
-                            display: "flex",
-                            gap: spacing[12],
-                            alignItems: "center",
-                            justifyContent: "flex-end",
-                        }}
-                    >
-                        <Button
-                            variant="secondary"
-                            onClick={handleCancel}
-                            style={{
-                                borderRadius: radius.xl,
-                                paddingTop: spacing[8],
-                                paddingBottom: spacing[8],
-                            }}
-                        >
-                            Cancelar
-                        </Button>
-                        <Button
-                            variant="actionPrimary"
-                            onClick={handleSave}
-                            style={{
-                                borderRadius: radius.xl,
-                                paddingTop: spacing[8],
-                                paddingBottom: spacing[8],
-                            }}
-                        >
-                            Guardar
-                        </Button>
-                    </div>
-                )}
             </Card>
         </PageShell>
     );

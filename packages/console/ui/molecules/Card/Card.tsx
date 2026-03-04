@@ -14,8 +14,10 @@ import { colors, spacing, radius, typography, shadows } from "@tokens";
  * Tus colores semánticos viven en:
  * colors.semantic.<grupo>.<estado>
  */
-export const Card: FC<CardProps> = ({ title, subtitle, children, footer, noPadding, elevated }) => {
+export const Card: FC<CardProps> = ({ title, subtitle, children, footer, noPadding, elevated, variant = "default" }) => {
   const semantic = colors.semantic;
+  const isPanel = variant === "panel";
+  const shouldElevate = elevated || isPanel;
 
   return (
     <section
@@ -25,7 +27,7 @@ export const Card: FC<CardProps> = ({ title, subtitle, children, footer, noPaddi
         borderRadius: radius.card,
         padding: noPadding ? 0 : spacing[24],
         fontFamily: typography.fontFamily.primary,
-        boxShadow: elevated ? shadows.card : "none",
+        boxShadow: shouldElevate ? shadows.card : "none",
       }}
       aria-label={title ?? "Card"}
     >
@@ -79,6 +81,9 @@ export const Card: FC<CardProps> = ({ title, subtitle, children, footer, noPaddi
         <footer
           style={{
             marginTop: spacing[24],
+            ...(isPanel ? {
+              margin: `0 -${spacing[24]}px -${spacing[24]}px -${spacing[24]}px`
+            } : {})
           }}
         >
           {footer}

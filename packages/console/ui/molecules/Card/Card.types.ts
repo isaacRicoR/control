@@ -25,4 +25,7 @@ export type CardProps = {
 
   /** Adds the standard system shadow (shadows.card) for better hierarchy on forms/detail views. */
   elevated?: boolean;
+
+  /** Standard layout variants. 'panel' automatically elevates and glues the footer. */
+  variant?: "default" | "panel";
 };
