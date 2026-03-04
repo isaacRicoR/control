@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { spacing, typography, colors, radius } from "@tokens";
+import { useDeepLinkedList } from "@core/hooks/useDeepLinkedList";
 
 import type { DataTableProps } from "./DataTable.types";
 import { EmptyState } from "../../containers/EmptyState";
@@ -14,14 +15,11 @@ import {
 
 
 /**
- * DataTable
+ * DataTableInternal
  * Contenedor base para mostrar datos en formato tabla.
- * - UX/UI only
- * - Sin lógica
- * - Sin ordenamiento
- * - Sin paginación
+ * Implementa la lógica de paginación sincronizada con la URL.
  */
-export const DataTable = <T,>({
+const DataTableInternal = <T,>({
   columns,
   rows,
   ariaLabel,
@@ -32,13 +30,27 @@ export const DataTable = <T,>({
   filterQuery,
 }: DataTableProps<T>) => {
   const semantic = colors.semantic;
-  const [rowsPerPage, setRowsPerPage] = useState("5");
-  const [page, setPage] = useState(0);
+  
+  const {
+    page: urlPage,
+    pageSize: urlPageSize,
+    setPage: setUrlPage,
+    setPageSize: setUrlPageSize
+  } = useDeepLinkedList({
+    defaultPageSize: 5,
+    defaultPage: 1
+  });
 
-  // Reset page when pageSize or filter changes
+  // Adapt 1-based to 0-based for internal slicing logic
+  const page = urlPage - 1;
+  const rowsPerPage = String(urlPageSize);
+
   const handleRowsPerPageChange = (value: string) => {
-    setRowsPerPage(value);
-    setPage(0);
+    setUrlPageSize(parseInt(value, 10));
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setUrlPage(newPage + 1);
   };
 
   // Sorting State
@@ -228,9 +240,25 @@ export const DataTable = <T,>({
           onRowsPerPageChange={handleRowsPerPageChange}
           totalRows={sortedRows.length}
           page={page}
-          onPageChange={setPage}
+          onPageChange={handlePageChange}
         />
       </div >
     </>
+  );
+};
+
+/**
+ * DataTable
+ * Wrapper de DataTableInternal que provee un Suspense boundary para el uso de useSearchParams.
+ */
+export const DataTable = <T,>(props: DataTableProps<T>) => {
+  return (
+    <Suspense fallback={
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", minHeight: 300 }}>
+        <Spinner size={32} />
+      </div>
+    }>
+      <DataTableInternal {...props} />
+    </Suspense>
   );
 };
