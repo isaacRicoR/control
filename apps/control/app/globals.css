@@ -18,6 +18,15 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+/* Allow text selection in inputs and explicit selectable elements */
+input, 
+textarea, 
+[contenteditable="true"],
+.selectable {
+  user-select: text;
 }
 
 * {
