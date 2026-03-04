@@ -13,7 +13,9 @@
     "lint": "eslint",
     "dev:control": "npm run dev --workspace=apps/control",
     "build:control": "npm run build --workspace=apps/control",
-    "verify:structure": "node scripts/verify-structure.js && npm run lint"
+    "verify:structure": "node scripts/verify-structure.js && npm run lint",
+    "scan:hardcodes": "node scripts/scan-hardcoded-colors.mjs",
+    "scan:hardcodes:strict": "node scripts/scan-hardcoded-colors.mjs --strict"
   },
   "dependencies": {
     "next": "16.1.6",
