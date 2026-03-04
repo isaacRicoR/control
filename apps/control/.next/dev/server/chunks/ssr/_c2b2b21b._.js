@@ -1159,7 +1159,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/colors.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/spacing.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Avatar$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/Avatar/index.ts [app-ssr] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Avatar$2f$Avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/Avatar/Avatar.tsx [app-ssr] (ecmascript)");
 "use client";
+;
 ;
 ;
 ;
@@ -1186,6 +1189,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
     const [departamento, setDepartamento] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(initialValues?.departamento || "");
     const [rolPlataforma, setRolPlataforma] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(initialValues?.rolPlataforma || "");
     const [estadoInicial, setEstadoInicial] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(initialValues?.estadoInicial || "");
+    const [avatarUrl, setAvatarUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(initialValues?.avatarUrl || null);
     const [errors, setErrors] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({});
     // Update state when initialValues change (crucial for loading data in edit mode)
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
@@ -1200,6 +1204,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                 setDepartamento(initialValues.departamento || "");
                 setRolPlataforma(initialValues.rolPlataforma || "");
                 setEstadoInicial(initialValues.estadoInicial || "");
+                setAvatarUrl(initialValues.avatarUrl || null);
             }, 0);
             return ()=>clearTimeout(timer);
         }
@@ -1247,7 +1252,8 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
             rol,
             departamento,
             rolPlataforma,
-            estadoInicial
+            estadoInicial,
+            avatarUrl
         });
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1261,16 +1267,25 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 width: 120,
                                 height: 120,
                                 borderRadius: "50%",
-                                border: `1px dashed ${semantic.border.active}`,
+                                border: avatarUrl ? "none" : `1px dashed ${semantic.border.active}`,
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 "--avatar-bg": "transparent",
                                 "--avatar-bg-hover": semantic.surface.hover,
                                 "--avatar-icon": semantic.text.disabled,
-                                "--avatar-icon-hover": semantic.text.hover
+                                "--avatar-icon-hover": semantic.text.hover,
+                                overflow: "hidden"
                             },
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                            children: avatarUrl ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Avatar$2f$Avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Avatar"], {
+                                src: avatarUrl,
+                                name: `${nombre} ${apellido}`,
+                                size: 120
+                            }, void 0, false, {
+                                fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
+                                lineNumber: 152,
+                                columnNumber: 33
+                            }, void 0) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                 width: 56,
                                 height: 56,
                                 viewBox: "0 0 24 24",
@@ -1284,8 +1299,8 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                         d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                        lineNumber: 155,
-                                        columnNumber: 33
+                                        lineNumber: 168,
+                                        columnNumber: 37
                                     }, void 0),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
                                         cx: "12",
@@ -1293,18 +1308,18 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                         r: "4"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                        lineNumber: 156,
-                                        columnNumber: 33
+                                        lineNumber: 169,
+                                        columnNumber: 37
                                     }, void 0)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 145,
-                                columnNumber: 29
+                                lineNumber: 158,
+                                columnNumber: 33
                             }, void 0)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                            lineNumber: 129,
+                            lineNumber: 134,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1321,7 +1336,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                     children: "Opcional • Formatos JPG, PNG •"
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                    lineNumber: 161,
+                                    lineNumber: 175,
                                     columnNumber: 29
                                 }, void 0),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1332,13 +1347,13 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                     children: "Máx 5MB"
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                    lineNumber: 164,
+                                    lineNumber: 178,
                                     columnNumber: 29
                                 }, void 0)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                            lineNumber: 160,
+                            lineNumber: 174,
                             columnNumber: 25
                         }, void 0)
                     ]
@@ -1365,7 +1380,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 errorMessage: errors.nombre
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 180,
+                                lineNumber: 194,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -1381,7 +1396,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 errorMessage: errors.apellido
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 192,
+                                lineNumber: 206,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -1391,7 +1406,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 onChange: (e)=>setSegundoApellido(e.target.value)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 204,
+                                lineNumber: 218,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -1408,7 +1423,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 errorMessage: errors.email
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 205,
+                                lineNumber: 219,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -1419,13 +1434,13 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 onChange: (e)=>setTelefono(e.target.value)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 218,
+                                lineNumber: 232,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                        lineNumber: 172,
+                        lineNumber: 186,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1449,7 +1464,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 errorMessage: errors.rol
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 230,
+                                lineNumber: 244,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$SelectSingle$2f$SelectSingle$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectSingle"], {
@@ -1487,7 +1502,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 ]
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 243,
+                                lineNumber: 257,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$SelectSingle$2f$SelectSingle$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectSingle"], {
@@ -1513,7 +1528,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 ]
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 263,
+                                lineNumber: 277,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$SelectSingle$2f$SelectSingle$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectSingle"], {
@@ -1537,19 +1552,19 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 ]
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 280,
+                                lineNumber: 294,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                        lineNumber: 222,
+                        lineNumber: 236,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                lineNumber: 126,
+                lineNumber: 131,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$patterns$2f$form$2f$FormActions$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FormActions"], {
@@ -1561,7 +1576,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                 disabled: isReadOnly
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                lineNumber: 295,
+                lineNumber: 309,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
