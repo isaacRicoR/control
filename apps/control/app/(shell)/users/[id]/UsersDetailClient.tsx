@@ -240,11 +240,13 @@ export const UsersDetailClient = ({ userId }: UsersDetailClientProps) => {
                     value={activeTab}
                     onChange={setActiveTab}
                     leftSlot={
-                        <ActionIcon
-                            name="chevron-left"
-                            label="Volver"
-                            onClick={() => router.back()}
-                        />
+                        <div style={{ paddingLeft: spacing[12], paddingRight: spacing[8], paddingTop: spacing[12], paddingBottom: spacing[12], display: "flex", alignItems: "center" }}>
+                            <ActionIcon
+                                name="chevron-left"
+                                label="Volver"
+                                onClick={() => router.back()}
+                            />
+                        </div>
                     }
                     ariaLabel="Secciones del perfil"
                 />

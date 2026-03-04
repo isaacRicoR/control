@@ -2,12 +2,14 @@
 
 import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { request } from "@core/connector/httpClient";
 import { useToast } from "@core/toast/useToast";
 import { normalizedErrorToToast } from "@core/toast/errorToastHelper";
 import { PageShell } from "@ui/containers/PageShell/PageShell";
 import { FormActions } from "@ui/patterns/form/FormActions";
+import { CardTabsHeader } from "@ui/molecules/CardTabsHeader";
+import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
 import { Input } from "@ui/atoms/Input/Input";
 import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
 import { Badge } from "@ui/atoms/Badge";
@@ -42,7 +44,11 @@ const UBICACION_OPTIONS = [
     { value: "Almacén", label: "Almacén" },
 ];
 
-const TABS = ["Info general", "Historial", "Configuración"];
+const TABS = [
+    { label: "Info general", value: "Info general" },
+    { label: "Historial", value: "Historial" },
+    { label: "Configuración", value: "Configuración" },
+];
 
 const STATUS_VARIANT: Record<string, "success" | "warning" | "error" | "neutral"> = {
     Activo: "success",
@@ -54,21 +60,12 @@ const STATUS_VARIANT: Record<string, "success" | "warning" | "error" | "neutral"
 export function DevicesDetailClient({ deviceId }: DevicesDetailClientProps) {
     const { showToast } = useToast();
     const searchParams = useSearchParams();
+    const router = useRouter();
     const debugState = searchParams.get("debugState");
     const semantic = colors.semantic;
 
     // ─── Tabs state ──────────────────────────────────────────────────────────
-    const [activeTab, setActiveTab] = useState(TABS[0]);
-    const tabsRef = useRef<(HTMLDivElement | null)[]>([]);
-    const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
-
-    useEffect(() => {
-        const index = TABS.indexOf(activeTab);
-        const el = tabsRef.current[index];
-        if (el) {
-            setUnderlineStyle({ left: el.offsetLeft, width: el.offsetWidth });
-        }
-    }, [activeTab]);
+    const [activeTab, setActiveTab] = useState(TABS[0].value);
 
     // ─── Data state ──────────────────────────────────────────────────────────
     const [loading, setLoading] = useState(true);
@@ -162,16 +159,6 @@ export function DevicesDetailClient({ deviceId }: DevicesDetailClientProps) {
     };
 
     // ─── Styles ───────────────────────────────────────────────────────────────
-    const tabBaseStyle: React.CSSProperties = {
-        cursor: "pointer",
-        padding: `${spacing[8]}px ${spacing[12]}px`,
-        fontFamily: typography.fontFamily.primary,
-        fontSize: typography.fontSize.sm,
-        fontWeight: typography.fontWeight.medium,
-        position: "relative",
-        transition: "color 0.2s ease",
-    };
-
     // ── Debug overrides (?debugState=loading|error|notfound) — dev only ──────
     if (process.env.NODE_ENV !== 'production' && debugState) {
         if (debugState === "loading") return <DetailSkeleton />;
@@ -238,37 +225,24 @@ export function DevicesDetailClient({ deviceId }: DevicesDetailClientProps) {
                     borderRadius: radius.card,
                     border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
                     overflow: "hidden",
+                    paddingTop: spacing[24],
                 }}
             >
-                <div style={{ padding: spacing[24], borderBottom: `1px solid ${semantic.border.default}`, position: "relative" }}>
-                    <div style={{ display: "flex", gap: spacing[8] }}>
-                        {TABS.map((tab, index) => {
-                            const isActive = activeTab === tab;
-                            return (
-                                <div
-                                    key={tab}
-                                    ref={(el) => { tabsRef.current[index] = el; }}
-                                    onClick={() => setActiveTab(tab)}
-                                    style={{ ...tabBaseStyle, color: isActive ? semantic.text.active : semantic.text.disabled }}
-                                >
-                                    {tab}
-                                </div>
-                            );
-                        })}
-                    </div>
-                    <div
-                        style={{
-                            position: "absolute",
-                            bottom: -1,
-                            left: underlineStyle.left,
-                            width: underlineStyle.width,
-                            height: 2,
-                            borderRadius: 2,
-                            backgroundColor: semantic.text.active,
-                            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                        }}
-                    />
-                </div>
+                <CardTabsHeader
+                    tabs={TABS}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                    leftSlot={
+                        <div style={{ paddingLeft: spacing[12], paddingRight: spacing[8], paddingTop: spacing[12], paddingBottom: spacing[12], display: "flex", alignItems: "center" }}>
+                            <ActionIcon
+                                name="chevron-left"
+                                label="Volver"
+                                onClick={() => router.back()}
+                            />
+                        </div>
+                    }
+                    ariaLabel="Secciones del dispositivo"
+                />
 
                 <div style={{ flex: 1, overflowY: "auto", minHeight: 0, padding: spacing[24] }}>
                     {activeTab === "Info general" ? (
