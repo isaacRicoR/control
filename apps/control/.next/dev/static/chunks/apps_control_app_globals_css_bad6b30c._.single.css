@@ -277,6 +277,12 @@ a {
   --semantic-info-disabled: #00618a;
   --semantic-info-focus: #29a3ff;
   --semantic-info-selected: #64beff;
+  --semantic-secondary-default: #e4e4e7;
+  --semantic-secondary-hover: #d4d4d8;
+  --semantic-secondary-active: #a1a1aa;
+  --semantic-elevated-default: #fff;
+  --semantic-elevated-hover: #f4f4f5;
+  --semantic-elevated-active: #eeeef0;
   --semantic-button-white-bg: #fff;
   --semantic-button-white-text: #18181b;
   --semantic-button-white-border: #e4e4e7;
@@ -288,6 +294,9 @@ a {
   --semantic-button-create-text: #fff;
   --semantic-button-create-border: #0f172a;
   --semantic-button-create-hover: #162233;
+  --semantic-button-action-primary-bg: #141a21;
+  --semantic-button-action-primary-text: #fff;
+  --semantic-button-action-primary-hover: #2a3744;
   --semantic-sidebar-group-label: #71717a;
   --semantic-sidebar-item-default: #71717a;
   --semantic-sidebar-item-hover: #52525b;
@@ -365,6 +374,12 @@ a {
   --semantic-info-disabled: #00618a;
   --semantic-info-focus: #29a3ff;
   --semantic-info-selected: #64beff;
+  --semantic-secondary-default: #2a3744;
+  --semantic-secondary-hover: #2c2c36;
+  --semantic-secondary-active: #5a6672;
+  --semantic-elevated-default: #1c252e;
+  --semantic-elevated-hover: #2a3744;
+  --semantic-elevated-active: #2a3744;
   --semantic-button-white-bg: #fff;
   --semantic-button-white-text: #000;
   --semantic-button-white-border: #fff;
@@ -376,6 +391,9 @@ a {
   --semantic-button-create-text: #0f172a;
   --semantic-button-create-border: #fff;
   --semantic-button-create-hover: #f4f6f8;
+  --semantic-button-action-primary-bg: #fff;
+  --semantic-button-action-primary-text: #141a21;
+  --semantic-button-action-primary-hover: #f4f6f8;
   --semantic-sidebar-group-label: #5a6672;
   --semantic-icon-muted: #637381;
   --semantic-icon-active: #8b95a5;

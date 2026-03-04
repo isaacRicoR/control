@@ -1861,7 +1861,7 @@ const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, 
                             }, ("TURBOPACK compile-time value", void 0)),
                             breadcrumbs && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
-                                    color: semantic.text.disabled,
+                                    color: semantic.text.muted,
                                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.sm,
                                     fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary,
                                     display: "flex",
@@ -1945,8 +1945,8 @@ const ActionIcon = ({ name, onClick, label, size = 16, color, hoverColor })=>{
     const [isHovered, setIsHovered] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"])();
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"][theme].semantic;
-    const effectiveColor = color || semantic.text.default;
-    const effectiveHoverColor = hoverColor ?? semantic.text.hover;
+    const effectiveColor = color || semantic.icon?.muted || semantic.text.muted || semantic.text.default;
+    const effectiveHoverColor = hoverColor ?? semantic.icon?.active ?? semantic.text.hover;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         onClick: onClick,
         role: "button",
@@ -2482,10 +2482,10 @@ const Input = ({ label, error, errorMessage, helperText, id, className, required
             "--input-border-focus": semantic.border.focus,
             "--input-border-error": semantic.danger.default,
             "--input-text": semantic.text.active,
-            "--input-label": semantic.text.default,
+            "--input-label": semantic.text.muted || semantic.text.default,
             "--input-label-focus": semantic.primary.default,
             "--input-label-error": semantic.danger.default,
-            "--input-placeholder": semantic.text.disabled,
+            "--input-placeholder": semantic.text.muted || semantic.text.disabled,
             ...style
         },
         children: [
@@ -2536,7 +2536,7 @@ const Input = ({ label, error, errorMessage, helperText, id, className, required
                     display: "block",
                     marginTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][4],
                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.xs,
-                    color: error ? semantic.danger.default : semantic.text.disabled
+                    color: error ? semantic.danger.default : semantic.text.muted || semantic.text.disabled
                 },
                 children: error ? errorMessage : helperText
             }, void 0, false, {
@@ -3974,7 +3974,7 @@ function DevicesListClient() {
             action: "create",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                 size: "sm",
-                variant: "create",
+                variant: "actionPrimary",
                 onClick: ()=>router.push("/devices/create"),
                 style: {
                     gap: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][8],

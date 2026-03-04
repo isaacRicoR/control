@@ -73,7 +73,7 @@ const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, 
                             }, ("TURBOPACK compile-time value", void 0)),
                             breadcrumbs && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
-                                    color: semantic.text.disabled,
+                                    color: semantic.text.muted,
                                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.sm,
                                     fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary,
                                     display: "flex",
@@ -143,17 +143,21 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/spacing.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/shadows.ts [app-client] (ecmascript)");
 ;
 ;
-const Card = ({ title, subtitle, children, footer, noPadding })=>{
+const Card = ({ title, subtitle, children, footer, noPadding, elevated, variant = "default" })=>{
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic;
+    const isPanel = variant === "panel";
+    const shouldElevate = elevated || isPanel;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         style: {
             background: semantic.surface.default,
             border: `1px solid ${semantic.border.default}`,
             borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].card,
             padding: noPadding ? 0 : __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24],
-            fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary
+            fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary,
+            boxShadow: shouldElevate ? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["shadows"].card : "none"
         },
         "aria-label": title ?? "Card",
         children: [
@@ -173,7 +177,7 @@ const Card = ({ title, subtitle, children, footer, noPadding })=>{
                         children: title
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                        lineNumber: 38,
+                        lineNumber: 41,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0)),
                     subtitle && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -186,13 +190,13 @@ const Card = ({ title, subtitle, children, footer, noPadding })=>{
                         children: subtitle
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                        lineNumber: 52,
+                        lineNumber: 55,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                lineNumber: 32,
+                lineNumber: 35,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -205,23 +209,26 @@ const Card = ({ title, subtitle, children, footer, noPadding })=>{
                 children: children
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                lineNumber: 66,
+                lineNumber: 69,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             footer && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
                 style: {
-                    marginTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24]
+                    marginTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24],
+                    ...isPanel ? {
+                        margin: `0 -${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24]}px -${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24]}px -${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24]}px`
+                    } : {}
                 },
                 children: footer
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-                lineNumber: 78,
+                lineNumber: 81,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/packages/console/ui/molecules/Card/Card.tsx",
-        lineNumber: 21,
+        lineNumber: 23,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -473,8 +480,8 @@ const ActionIcon = ({ name, onClick, label, size = 16, color, hoverColor })=>{
     const [isHovered, setIsHovered] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"])();
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"][theme].semantic;
-    const effectiveColor = color || semantic.text.default;
-    const effectiveHoverColor = hoverColor ?? semantic.text.hover;
+    const effectiveColor = color || semantic.icon?.muted || semantic.text.muted || semantic.text.default;
+    const effectiveHoverColor = hoverColor ?? semantic.icon?.active ?? semantic.text.hover;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         onClick: onClick,
         role: "button",
@@ -574,10 +581,10 @@ const Input = ({ label, error, errorMessage, helperText, id, className, required
             "--input-border-focus": semantic.border.focus,
             "--input-border-error": semantic.danger.default,
             "--input-text": semantic.text.active,
-            "--input-label": semantic.text.default,
+            "--input-label": semantic.text.muted || semantic.text.default,
             "--input-label-focus": semantic.primary.default,
             "--input-label-error": semantic.danger.default,
-            "--input-placeholder": semantic.text.disabled,
+            "--input-placeholder": semantic.text.muted || semantic.text.disabled,
             ...style
         },
         children: [
@@ -628,7 +635,7 @@ const Input = ({ label, error, errorMessage, helperText, id, className, required
                     display: "block",
                     marginTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][4],
                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.xs,
-                    color: error ? semantic.danger.default : semantic.text.disabled
+                    color: error ? semantic.danger.default : semantic.text.muted || semantic.text.disabled
                 },
                 children: error ? errorMessage : helperText
             }, void 0, false, {
@@ -963,6 +970,49 @@ function AparienciaPage() {
         }, void 0, true),
         showHeaderDivider: false,
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$Card$2f$Card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
+            variant: "panel",
+            footer: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    borderTop: `1px solid ${semantic.border.default}`,
+                    padding: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][16],
+                    display: "flex",
+                    gap: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][12],
+                    alignItems: "center",
+                    justifyContent: "flex-end"
+                },
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                        variant: "secondary",
+                        size: "sm",
+                        onClick: handleCancel,
+                        style: {
+                            borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].xl
+                        },
+                        children: "Cancelar"
+                    }, void 0, false, {
+                        fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
+                        lineNumber: 125,
+                        columnNumber: 25
+                    }, void 0),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                        variant: "actionPrimary",
+                        size: "sm",
+                        onClick: handleSave,
+                        style: {
+                            borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].xl
+                        },
+                        children: "Guardar"
+                    }, void 0, false, {
+                        fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
+                        lineNumber: 135,
+                        columnNumber: 25
+                    }, void 0)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
+                lineNumber: 115,
+                columnNumber: 21
+            }, void 0),
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$CardTabsHeader$2f$CardTabsHeader$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardTabsHeader"], {
                     tabs: TABS,
@@ -974,13 +1024,13 @@ function AparienciaPage() {
                         onClick: ()=>router.back()
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 118,
+                        lineNumber: 153,
                         columnNumber: 25
                     }, void 0),
                     ariaLabel: "Secciones de apariencia"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 113,
+                    lineNumber: 148,
                     columnNumber: 17
                 }, this),
                 activeTab === "Base" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1011,7 +1061,7 @@ function AparienciaPage() {
                                     children: "Preset activo"
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 142,
+                                    lineNumber: 177,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Text$2f$Text$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -1023,7 +1073,7 @@ function AparienciaPage() {
                                     children: currentPreset === "control" ? "Control" : "Security"
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 145,
+                                    lineNumber: 180,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Text$2f$Text$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -1034,7 +1084,7 @@ function AparienciaPage() {
                                     children: "Modo"
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 148,
+                                    lineNumber: 183,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Text$2f$Text$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -1046,13 +1096,13 @@ function AparienciaPage() {
                                     children: theme === "dark" ? "Oscuro" : "Claro"
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 151,
+                                    lineNumber: 186,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                            lineNumber: 130,
+                            lineNumber: 165,
                             columnNumber: 25
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1069,7 +1119,7 @@ function AparienciaPage() {
                                     onChange: (e)=>handleChange("background", e.target.value)
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 158,
+                                    lineNumber: 193,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -1078,7 +1128,7 @@ function AparienciaPage() {
                                     onChange: (e)=>handleChange("surface", e.target.value)
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 163,
+                                    lineNumber: 198,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -1087,7 +1137,7 @@ function AparienciaPage() {
                                     onChange: (e)=>handleChange("border", e.target.value)
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 168,
+                                    lineNumber: 203,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -1096,7 +1146,7 @@ function AparienciaPage() {
                                     onChange: (e)=>handleChange("text", e.target.value)
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 173,
+                                    lineNumber: 208,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -1105,19 +1155,19 @@ function AparienciaPage() {
                                     onChange: (e)=>handleChange("accent", e.target.value)
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 178,
+                                    lineNumber: 213,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                            lineNumber: 157,
+                            lineNumber: 192,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 128,
+                    lineNumber: 163,
                     columnNumber: 21
                 }, this),
                 activeTab === "Estados" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1136,12 +1186,12 @@ function AparienciaPage() {
                         children: "Próximamente: Estados"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 189,
+                        lineNumber: 224,
                         columnNumber: 25
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 188,
+                    lineNumber: 223,
                     columnNumber: 21
                 }, this),
                 activeTab === "Componentes" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1160,12 +1210,12 @@ function AparienciaPage() {
                         children: "Próximamente: Componentes"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 197,
+                        lineNumber: 232,
                         columnNumber: 25
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 196,
+                    lineNumber: 231,
                     columnNumber: 21
                 }, this),
                 activeTab === "Avanzado" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1184,57 +1234,13 @@ function AparienciaPage() {
                         children: "Próximamente: Avanzado"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 205,
+                        lineNumber: 240,
                         columnNumber: 25
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 204,
+                    lineNumber: 239,
                     columnNumber: 21
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    style: {
-                        borderTop: `1px solid ${semantic.border.default}`,
-                        padding: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][16],
-                        display: "flex",
-                        gap: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][12],
-                        alignItems: "center",
-                        justifyContent: "flex-end"
-                    },
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                            variant: "secondary",
-                            onClick: handleCancel,
-                            style: {
-                                borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].xl,
-                                paddingTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][8],
-                                paddingBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][8]
-                            },
-                            children: "Cancelar"
-                        }, void 0, false, {
-                            fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                            lineNumber: 222,
-                            columnNumber: 21
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                            variant: "actionPrimary",
-                            onClick: handleSave,
-                            style: {
-                                borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].xl,
-                                paddingTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][8],
-                                paddingBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][8]
-                            },
-                            children: "Guardar"
-                        }, void 0, false, {
-                            fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                            lineNumber: 233,
-                            columnNumber: 21
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 212,
-                    columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
