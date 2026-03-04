@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC, useState } from "react";
 import { colors, spacing } from "@tokens";
 import { SidebarItem } from "./SidebarItem";

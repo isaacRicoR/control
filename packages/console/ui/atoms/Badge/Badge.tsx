@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC } from "react";
 import { colors, radius, spacing, typography } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";

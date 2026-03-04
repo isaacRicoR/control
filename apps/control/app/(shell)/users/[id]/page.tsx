@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { UsersDetailClient } from "./UsersDetailClient";
+import { DetailSkeleton } from "@ui/patterns/skeletons/DetailSkeleton";
 
 export default async function UserProfilePage({
     params,
@@ -6,5 +8,9 @@ export default async function UserProfilePage({
     params: Promise<{ id: string }>;
 }) {
     const { id } = await params;
-    return <UsersDetailClient userId={id} />;
+    return (
+        <Suspense fallback={<DetailSkeleton />}>
+            <UsersDetailClient userId={id} />
+        </Suspense>
+    );
 }

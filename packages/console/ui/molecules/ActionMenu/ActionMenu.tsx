@@ -66,7 +66,7 @@ export default function ActionMenu({
     }, [isOpen]);
 
     // Positioning Logic
-    React.useLayoutEffect(() => {
+    useEffect(() => {
         if (isOpen && containerRef.current && menuRef.current) {
             const triggerRect = containerRef.current.getBoundingClientRect();
             const menuRect = menuRef.current.getBoundingClientRect();

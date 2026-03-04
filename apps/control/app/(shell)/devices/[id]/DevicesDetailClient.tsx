@@ -63,7 +63,7 @@ export function DevicesDetailClient({ deviceId }: DevicesDetailClientProps) {
     const tabsRef = useRef<(HTMLDivElement | null)[]>([]);
     const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const index = TABS.indexOf(activeTab);
         const el = tabsRef.current[index];
         if (el) {

@@ -1,6 +1,8 @@
 "use client";
 
-import React, { createContext, useContext, useLayoutEffect, useState, ReactNode, useCallback } from "react";
+import React, { createContext, useContext, useEffect, useState, ReactNode, useCallback, useMemo } from "react";
+import { UserPreferences, UserPreferencesRepository } from "./preferences.types";
+import { LocalPreferencesRepository } from "./LocalPreferencesRepository";
 
 interface GlobalPreferencesContextType {
     lastPageSize: number;
@@ -10,52 +12,70 @@ interface GlobalPreferencesContextType {
 
 const GlobalPreferencesContext = createContext<GlobalPreferencesContextType | undefined>(undefined);
 
-const STORAGE_PREFIX = "control.preferences.pageSize:";
-const LAST_PAGE_SIZE_KEY = "control.preferences.lastPageSize";
-
 export const GlobalPreferencesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [lastPageSize, setLastPageSize] = useState<number>(5);
+    const [preferences, setPreferences] = useState<UserPreferences>({
+        tables: {},
+        lastPageSize: 5
+    });
 
-    useLayoutEffect(() => {
-        // Init lastPageSize from localStorage on mount
-        try {
-            const stored = window.localStorage.getItem(LAST_PAGE_SIZE_KEY);
-            if (stored) {
-                const parsed = parseInt(stored, 10);
-                if (!isNaN(parsed)) {
-                    setLastPageSize(parsed);
-                }
-            }
-        } catch {
-            // no-op
-        }
+    // Repository state to ensure it only exists on client
+    const [repository, setRepository] = useState<UserPreferencesRepository | null>(null);
+
+    useEffect(() => {
+        setRepository(new LocalPreferencesRepository());
     }, []);
+
+    useEffect(() => {
+        if (!repository) return;
+
+        const load = async () => {
+            try {
+                const stored = await repository.getPreferences();
+                if (stored) {
+                    setPreferences(stored);
+                }
+            } catch (error) {
+                console.error("[GlobalPreferencesProvider] Failed to load preferences:", error);
+            }
+        };
+        load();
+    }, [repository]);
 
     const getPathPageSize = useCallback((path: string): number | null => {
-        try {
-            const stored = window.localStorage.getItem(`${STORAGE_PREFIX}${path}`);
-            if (stored) {
-                const parsed = parseInt(stored, 10);
-                return isNaN(parsed) ? null : parsed;
-            }
-        } catch {
-            // no-op
-        }
-        return null;
-    }, []);
+        return preferences.tables[path]?.pageSize ?? null;
+    }, [preferences.tables]);
 
-    const setPageSize = useCallback((path: string, size: number) => {
-        setLastPageSize(size);
-        try {
-            window.localStorage.setItem(LAST_PAGE_SIZE_KEY, String(size));
-            window.localStorage.setItem(`${STORAGE_PREFIX}${path}`, String(size));
-        } catch {
-            // no-op
+    const setPageSize = useCallback(async (path: string, size: number) => {
+        const nextPreferences: UserPreferences = {
+            ...preferences,
+            lastPageSize: size,
+            tables: {
+                ...preferences.tables,
+                [path]: { pageSize: size }
+            }
+        };
+
+        // UI optimistic update
+        setPreferences(nextPreferences);
+
+        // Persistence
+        if (repository) {
+            try {
+                await repository.savePreferences(nextPreferences);
+            } catch (error) {
+                console.error("[GlobalPreferencesProvider] Failed to save preferences:", error);
+            }
         }
-    }, []);
+    }, [preferences, repository]);
+
+    const value = useMemo(() => ({
+        lastPageSize: preferences.lastPageSize || 5,
+        getPathPageSize,
+        setPageSize
+    }), [preferences.lastPageSize, getPathPageSize, setPageSize]);
 
     return (
-        <GlobalPreferencesContext.Provider value={{ lastPageSize, getPathPageSize, setPageSize }}>
+        <GlobalPreferencesContext.Provider value={value}>
             {children}
         </GlobalPreferencesContext.Provider>
     );

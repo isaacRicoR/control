@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { colors, typography } from "@tokens"; // Adjust import path if needed
 import type { TextProps } from "./Text.types";

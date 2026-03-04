@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useLayoutEffect, useState, ReactNode } from "react";
+import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
 export type VisualPreset = "control" | "security";
 
@@ -16,18 +16,18 @@ const STORAGE_KEY = "control.visual.preset";
 export const VisualPresetProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [currentPreset, setCurrentPreset] = useState<VisualPreset>("control");
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         // Client-side visual preset init
         try {
-            const stored = window.localStorage.getItem(STORAGE_KEY);
-            if (stored && ["control", "security"].includes(stored)) {
-                setTimeout(() => {
+            if (typeof window !== "undefined" && window.localStorage) {
+                const stored = window.localStorage.getItem(STORAGE_KEY);
+                if (stored && ["control", "security"].includes(stored)) {
                     setCurrentPreset(stored as VisualPreset);
                     document.documentElement.setAttribute("data-brand", stored);
-                }, 0);
-            } else {
-                // Default to control if nothing stored
-                document.documentElement.setAttribute("data-brand", "control");
+                } else {
+                    // Default to control if nothing stored
+                    document.documentElement.setAttribute("data-brand", "control");
+                }
             }
         } catch {
             // no-op

@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, ReactNode, CSSProperties } from "react";
 import { spacing, typography, colors } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";

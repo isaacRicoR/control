@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { colors, radius as radiusTokens } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";

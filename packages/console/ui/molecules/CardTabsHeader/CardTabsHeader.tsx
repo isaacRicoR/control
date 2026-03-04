@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useLayoutEffect, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { colors, spacing, typography } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";
 
@@ -33,7 +33,7 @@ export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
     const tabsRef = useRef<(HTMLDivElement | null)[]>([]);
     const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const activeIndex = tabs.findIndex((t) => t.value === value);
         const currentTab = tabsRef.current[activeIndex];
         if (currentTab) {

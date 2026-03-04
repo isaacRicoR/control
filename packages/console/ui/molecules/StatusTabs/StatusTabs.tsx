@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useLayoutEffect, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { colors, spacing, typography, radius } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";
 import type { StatusTabsProps } from "./StatusTabs.types";
@@ -31,7 +31,7 @@ export const StatusTabs: React.FC<StatusTabsProps> = ({
     }, []);
 
     // Calculate active tab position
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (!items.length || !activeValue) return;
 
         const activeIndex = items.findIndex(item => item.value === activeValue);

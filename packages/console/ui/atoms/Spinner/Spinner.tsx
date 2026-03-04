@@ -1,19 +1,24 @@
-import React from "react";
+"use client";
+
+import React, { useContext } from "react";
 import { colors } from "@tokens";
+import { ThemeContext } from "@ui/context/ThemeProvider";
 
 type SpinnerProps = {
     size?: number;
     color?: string;
 };
 
-import { useTheme } from "@ui/context/ThemeProvider";
-
 export const Spinner: React.FC<SpinnerProps> = ({
     size = 24,
     color,
 }) => {
-    const { theme } = useTheme();
-    const semantic = colors[theme].semantic;
+    // We use useContext directly to avoid useTheme() throwing if Provider is missing
+    const themeContext = useContext(ThemeContext);
+    const theme = themeContext?.theme || "light";
+    
+    // Fallback to global semantic tokens if theme is not found in tokens
+    const semantic = (colors as any)[theme]?.semantic || colors.semantic;
     const effectiveColor = color || semantic.primary.default;
 
     return (

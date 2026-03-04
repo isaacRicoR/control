@@ -1,3 +1,5 @@
+"use client";
+
 import type { FC, CSSProperties } from "react";
 import { colors, spacing, radius, typography } from "@tokens";
 import "./SelectField.css";
