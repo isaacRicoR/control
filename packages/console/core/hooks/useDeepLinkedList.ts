@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useGlobalPreferences } from "@core/preferences/globalPreferencesStore";
 
 /**
  * Hook universal de Consola para gestión de Deep Linking en listas.
@@ -25,12 +26,21 @@ export function useDeepLinkedList<TFilters extends Record<string, string>>({
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    const { lastPageSize, getPathPageSize, setPageSize: setGlobalPageSize } = useGlobalPreferences();
 
     // ─── Estado Interno Inicializado desde URL ───────────────────────────────
     const [activeTab, setActiveTab] = useState(() => searchParams.get("tab") ?? defaultTab);
     const [searchQuery, setSearchQuery] = useState(() => searchParams.get("q") ?? defaultSearch);
     const [page, setPage] = useState(() => Number(searchParams.get("page")) || defaultPage);
-    const [pageSize, setPageSize] = useState(() => Number(searchParams.get("pageSize")) || defaultPageSize);
+    const [pageSize, setPageSize] = useState(() => {
+        const urlValue = searchParams.get("pageSize");
+        if (urlValue) return Number(urlValue);
+        
+        const pathValue = getPathPageSize(pathname);
+        if (pathValue) return pathValue;
+
+        return lastPageSize || defaultPageSize;
+    });
 
     // Filtros dinámicos basados en la configuración
     const [filters, setFilters] = useState<TFilters>(() => {
@@ -103,7 +113,16 @@ export function useDeepLinkedList<TFilters extends Record<string, string>>({
         const urlTab = searchParams.get("tab") ?? defaultTab;
         const urlQ = searchParams.get("q") ?? defaultSearch;
         const urlPage = Number(searchParams.get("page")) || defaultPage;
-        const urlPageSize = Number(searchParams.get("pageSize")) || defaultPageSize;
+        
+        const hasUrlPageSize = searchParams.has("pageSize");
+        let urlPageSize: number;
+
+        if (hasUrlPageSize) {
+            urlPageSize = Number(searchParams.get("pageSize"));
+        } else {
+            const pathValue = getPathPageSize(pathname);
+            urlPageSize = pathValue || lastPageSize || defaultPageSize;
+        }
 
         const timer = setTimeout(() => {
             if (urlTab !== activeTab) setActiveTab(urlTab);
@@ -126,7 +145,7 @@ export function useDeepLinkedList<TFilters extends Record<string, string>>({
 
         return () => clearTimeout(timer);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchParams]);
+    }, [searchParams, lastPageSize, getPathPageSize, pathname, defaultPageSize, defaultTab, defaultSearch, defaultPage]);
 
     // ─── Public Setters ──────────────────────────────────────────────────────
     const handleSetTab = useCallback(
@@ -160,10 +179,11 @@ export function useDeepLinkedList<TFilters extends Record<string, string>>({
     const handleSetPageSize = useCallback(
         (ps: number) => {
             setPageSize(ps);
+            setGlobalPageSize(pathname, ps); // Update path-specific and last used preference
             setPage(1);
             updateUrl({ pageSize: ps, page: 1 }, "replace");
         },
-        [updateUrl]
+        [updateUrl, setGlobalPageSize, pathname]
     );
 
     const handleSetFilter = useCallback(

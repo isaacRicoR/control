@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@ui/context/ThemeProvider";
 import { VisualPresetProvider } from "@core/visual/visualPresetStore";
+import { GlobalPreferencesProvider } from "@core/preferences/globalPreferencesStore";
 import { SessionProvider } from "@core/auth/SessionProvider";
 
 const geistSans = Geist({
@@ -29,14 +30,16 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <VisualPresetProvider>
-          <ThemeProvider>
-            {/* SessionProvider: expone sesión activa a todo el árbol de la app.
-                Para cambiar la fuente de sesión (mock → real auth), modificar
-                únicamente src/core/auth/SessionProvider.tsx */}
-            <SessionProvider>
-              {children}
-            </SessionProvider>
-          </ThemeProvider>
+          <GlobalPreferencesProvider>
+            <ThemeProvider>
+              {/* SessionProvider: expone sesión activa a todo el árbol de la app.
+                  Para cambiar la fuente de sesión (mock → real auth), modificar
+                  únicamente src/core/auth/SessionProvider.tsx */}
+              <SessionProvider>
+                {children}
+              </SessionProvider>
+            </ThemeProvider>
+          </GlobalPreferencesProvider>
         </VisualPresetProvider>
       </body>
     </html>
