@@ -108,6 +108,7 @@ a {
   --semantic-surface-focus: var(--brand-neutral-100);
   --semantic-surface-selected: var(--brand-primary-50);
   --semantic-border-default: var(--brand-neutral-300);
+  --semantic-border-subtle: #e4e4e780;
   --semantic-border-hover: var(--brand-neutral-400);
   --semantic-border-active: var(--brand-neutral-500);
   --semantic-border-disabled: var(--brand-neutral-300);
@@ -221,6 +222,7 @@ a {
   --semantic-surface-focus: #fff;
   --semantic-surface-selected: #e1f0ee;
   --semantic-border-default: #e4e4e7;
+  --semantic-border-subtle: #e4e4e780;
   --semantic-border-hover: #d4d4d8;
   --semantic-border-active: #a1a1aa;
   --semantic-border-disabled: #e4e4e7;
@@ -320,6 +322,7 @@ a {
   --semantic-surface-focus: #111114;
   --semantic-surface-selected: #00ffa91a;
   --semantic-border-default: #2a3744;
+  --semantic-border-subtle: #2a374480;
   --semantic-border-hover: #2c2c36;
   --semantic-border-active: #5a6672;
   --semantic-border-disabled: #2a3744;
@@ -332,6 +335,7 @@ a {
   --semantic-text-disabled: #5a6672;
   --semantic-text-focus: #fff;
   --semantic-text-selected: #fff;
+  --semantic-text-on-solid: #fff;
   --semantic-primary-default: #00ffa9;
   --semantic-primary-hover: #3dffb0;
   --semantic-primary-active: #00c98f;

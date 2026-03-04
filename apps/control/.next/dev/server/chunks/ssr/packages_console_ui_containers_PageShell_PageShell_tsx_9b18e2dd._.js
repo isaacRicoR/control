@@ -18,7 +18,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f
 ;
 ;
 ;
-const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, variant = "contained" })=>{
+const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, variant = "contained", showHeaderDivider = true })=>{
     const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useTheme"])();
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"][theme].semantic;
     const hasHeader = title || breadcrumbs || actions;
@@ -37,7 +37,9 @@ const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, 
                     top: 0,
                     zIndex: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$zIndex$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["zIndex"].sidebar,
                     backgroundColor: semantic.background.default,
-                    borderBottom: `1px solid ${semantic.border.default}`,
+                    ...showHeaderDivider ? {
+                        borderBottom: `1px solid ${semantic.border.default}`
+                    } : {},
                     marginBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][24],
                     paddingBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][16],
                     display: "grid",
@@ -64,12 +66,12 @@ const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, 
                                 children: title
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/PageShell/PageShell.tsx",
-                                lineNumber: 64,
+                                lineNumber: 65,
                                 columnNumber: 15
                             }, ("TURBOPACK compile-time value", void 0)),
                             breadcrumbs && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
-                                    color: semantic.text.disabled,
+                                    color: semantic.text.muted,
                                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["typography"].fontSize.sm,
                                     fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary,
                                     display: "flex",
@@ -79,13 +81,13 @@ const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, 
                                 children: breadcrumbs
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/PageShell/PageShell.tsx",
-                                lineNumber: 77,
+                                lineNumber: 78,
                                 columnNumber: 15
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/packages/console/ui/containers/PageShell/PageShell.tsx",
-                        lineNumber: 56,
+                        lineNumber: 57,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     actions && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -97,20 +99,20 @@ const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, 
                         children: actions
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/PageShell/PageShell.tsx",
-                        lineNumber: 94,
+                        lineNumber: 95,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/containers/PageShell/PageShell.tsx",
-                lineNumber: 40,
+                lineNumber: 41,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)),
             children
         ]
     }, void 0, true, {
         fileName: "[project]/packages/console/ui/containers/PageShell/PageShell.tsx",
-        lineNumber: 30,
+        lineNumber: 31,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };

@@ -165,8 +165,10 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$preferences$2f$globalPreferencesStore$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/core/preferences/globalPreferencesStore.tsx [app-client] (ecmascript)");
 var _s = __turbopack_context__.k.signature();
 "use client";
+;
 ;
 ;
 function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPage = 1, defaultPageSize = 20, filtersConfig = {} } = {}) {
@@ -174,6 +176,7 @@ function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPa
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"])();
     const searchParams = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSearchParams"])();
+    const { lastPageSize, getPathPageSize, setPageSize: setGlobalPageSize } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$preferences$2f$globalPreferencesStore$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGlobalPreferences"])();
     // ─── Estado Interno Inicializado desde URL ───────────────────────────────
     const [activeTab, setActiveTab] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         "useDeepLinkedList.useState": ()=>searchParams.get("tab") ?? defaultTab
@@ -185,7 +188,13 @@ function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPa
         "useDeepLinkedList.useState": ()=>Number(searchParams.get("page")) || defaultPage
     }["useDeepLinkedList.useState"]);
     const [pageSize, setPageSize] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
-        "useDeepLinkedList.useState": ()=>Number(searchParams.get("pageSize")) || defaultPageSize
+        "useDeepLinkedList.useState": ()=>{
+            const urlValue = searchParams.get("pageSize");
+            if (urlValue) return Number(urlValue);
+            const pathValue = getPathPageSize(pathname);
+            if (pathValue) return pathValue;
+            return lastPageSize || defaultPageSize;
+        }
     }["useDeepLinkedList.useState"]);
     // Filtros dinámicos basados en la configuración
     const [filters, setFilters] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
@@ -264,7 +273,14 @@ function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPa
             const urlTab = searchParams.get("tab") ?? defaultTab;
             const urlQ = searchParams.get("q") ?? defaultSearch;
             const urlPage = Number(searchParams.get("page")) || defaultPage;
-            const urlPageSize = Number(searchParams.get("pageSize")) || defaultPageSize;
+            const hasUrlPageSize = searchParams.has("pageSize");
+            let urlPageSize;
+            if (hasUrlPageSize) {
+                urlPageSize = Number(searchParams.get("pageSize"));
+            } else {
+                const pathValue = getPathPageSize(pathname);
+                urlPageSize = pathValue || lastPageSize || defaultPageSize;
+            }
             const timer = setTimeout({
                 "useDeepLinkedList.useEffect.timer": ()=>{
                     if (urlTab !== activeTab) setActiveTab(urlTab);
@@ -294,7 +310,14 @@ function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPa
         // eslint-disable-next-line react-hooks/exhaustive-deps
         }
     }["useDeepLinkedList.useEffect"], [
-        searchParams
+        searchParams,
+        lastPageSize,
+        getPathPageSize,
+        pathname,
+        defaultPageSize,
+        defaultTab,
+        defaultSearch,
+        defaultPage
     ]);
     // ─── Public Setters ──────────────────────────────────────────────────────
     const handleSetTab = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
@@ -336,6 +359,7 @@ function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPa
     const handleSetPageSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "useDeepLinkedList.useCallback[handleSetPageSize]": (ps)=>{
             setPageSize(ps);
+            setGlobalPageSize(pathname, ps); // Update path-specific and last used preference
             setPage(1);
             updateUrl({
                 pageSize: ps,
@@ -343,7 +367,9 @@ function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPa
             }, "replace");
         }
     }["useDeepLinkedList.useCallback[handleSetPageSize]"], [
-        updateUrl
+        updateUrl,
+        setGlobalPageSize,
+        pathname
     ]);
     const handleSetFilter = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "useDeepLinkedList.useCallback[handleSetFilter]": (key, value)=>{
@@ -381,11 +407,12 @@ function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPa
         updateUrl
     };
 }
-_s(useDeepLinkedList, "wDbdhw6TSNkUZyT8zz13izIUjJ8=", false, function() {
+_s(useDeepLinkedList, "PLHtxvd6HA4QhvM4YpiesZ/dkfU=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePathname"],
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSearchParams"]
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSearchParams"],
+        __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$preferences$2f$globalPreferencesStore$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGlobalPreferences"]
     ];
 });
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
@@ -532,17 +559,23 @@ __turbopack_context__.s([
     ()=>Spinner
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/packages/console/tokens/index.ts [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/colors.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/context/ThemeProvider.tsx [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
+"use client";
+;
 ;
 ;
 const Spinner = ({ size = 24, color })=>{
     _s();
-    const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"])();
-    const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"][theme].semantic;
+    // We use useContext directly to avoid useTheme() throwing if Provider is missing
+    const themeContext = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ThemeContext"]);
+    const theme = themeContext?.theme || "light";
+    // Fallback to global semantic tokens if theme is not found in tokens
+    const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"][theme]?.semantic || __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic;
     const effectiveColor = color || semantic.primary.default;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         style: {
@@ -560,7 +593,7 @@ const Spinner = ({ size = 24, color })=>{
             `
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/atoms/Spinner/Spinner.tsx",
-                lineNumber: 21,
+                lineNumber: 26,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -582,7 +615,7 @@ const Spinner = ({ size = 24, color })=>{
                         strokeOpacity: "0.25"
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/atoms/Spinner/Spinner.tsx",
-                        lineNumber: 35,
+                        lineNumber: 40,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
@@ -592,27 +625,23 @@ const Spinner = ({ size = 24, color })=>{
                         strokeLinecap: "round"
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/atoms/Spinner/Spinner.tsx",
-                        lineNumber: 43,
+                        lineNumber: 48,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/atoms/Spinner/Spinner.tsx",
-                lineNumber: 27,
+                lineNumber: 32,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/packages/console/ui/atoms/Spinner/Spinner.tsx",
-        lineNumber: 20,
+        lineNumber: 25,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
-_s(Spinner, "JkSxfi8+JQlqgIgDOc3wQN+nVIw=", false, function() {
-    return [
-        __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"]
-    ];
-});
+_s(Spinner, "Y26/CnccTa0PRifJ8EfxHm0U6Rk=");
 _c = Spinner;
 var _c;
 __turbopack_context__.k.register(_c, "Spinner");
@@ -890,14 +919,11 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
             justifyContent: "space-between",
             alignItems: "center",
             padding: `${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][12]}px ${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24]}px`,
-            borderTop: `1px solid ${semantic.border.default}`,
+            borderTop: `1px solid ${semantic.border.subtle || semantic.border.default}`,
             boxShadow: "none",
             filter: "none",
             color: semantic.text.default,
             fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.sm,
-            position: "sticky",
-            bottom: 0,
-            zIndex: 5,
             backgroundColor: semantic.surface.default,
             width: "100%",
             fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary
@@ -917,7 +943,7 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
                         children: "Filas por página:"
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                        lineNumber: 52,
+                        lineNumber: 49,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$DataTable$2f$TableDropdown$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableDropdown"], {
@@ -933,13 +959,13 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
                         align: "center"
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                        lineNumber: 54,
+                        lineNumber: 51,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                lineNumber: 51,
+                lineNumber: 48,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -962,7 +988,7 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
                         ]
                     }, void 0, true, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                        lineNumber: 64,
+                        lineNumber: 61,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -986,12 +1012,12 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
                                     size: 16
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                                    lineNumber: 67,
+                                    lineNumber: 64,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                                lineNumber: 66,
+                                lineNumber: 63,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1008,31 +1034,31 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
                                     size: 16
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                                    lineNumber: 70,
+                                    lineNumber: 67,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                                lineNumber: 69,
+                                lineNumber: 66,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                        lineNumber: 65,
+                        lineNumber: 62,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                lineNumber: 63,
+                lineNumber: 60,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
         lineNumber: 32,
-        columnNumber: 9
+        columnNumber: 13
     }, ("TURBOPACK compile-time value", void 0));
 };
 _s(TableFooter, "JkSxfi8+JQlqgIgDOc3wQN+nVIw=", false, function() {
@@ -1165,6 +1191,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/colors.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$hooks$2f$useDeepLinkedList$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/core/hooks/useDeepLinkedList.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$EmptyState$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/packages/console/ui/containers/EmptyState/index.ts [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$EmptyState$2f$EmptyState$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/containers/EmptyState/EmptyState.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$ErrorState$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/packages/console/ui/containers/ErrorState/index.ts [app-client] (ecmascript) <locals>");
@@ -1182,15 +1209,26 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, getRowKey, filterQuery })=>{
+;
+/**
+ * DataTableInternal
+ * Contenedor base para mostrar datos en formato tabla.
+ * Implementa la lógica de paginación sincronizada con la URL.
+ */ const DataTableInternal = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, getRowKey, filterQuery })=>{
     _s();
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic;
-    const [rowsPerPage, setRowsPerPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("5");
-    const [page, setPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
-    // Reset page when pageSize or filter changes
+    const { page: urlPage, pageSize: urlPageSize, setPage: setUrlPage, setPageSize: setUrlPageSize } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$hooks$2f$useDeepLinkedList$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useDeepLinkedList"])({
+        defaultPageSize: 5,
+        defaultPage: 1
+    });
+    // Adapt 1-based to 0-based for internal slicing logic
+    const page = urlPage - 1;
+    const rowsPerPage = String(urlPageSize);
     const handleRowsPerPageChange = (value)=>{
-        setRowsPerPage(value);
-        setPage(0);
+        setUrlPageSize(parseInt(value, 10));
+    };
+    const handlePageChange = (newPage)=>{
+        setUrlPage(newPage + 1);
     };
     // Sorting State
     const [sort, setSort] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
@@ -1264,7 +1302,7 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
       `
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                lineNumber: 101,
+                lineNumber: 113,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1276,8 +1314,9 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                     position: "relative",
                     display: "flex",
                     flexDirection: "column",
+                    flex: 1,
                     height: "100%",
-                    flex: 1
+                    minHeight: 0
                 },
                 "aria-label": ariaLabel,
                 children: [
@@ -1299,12 +1338,13 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                 overflow: "auto",
                                 width: "100%",
                                 flex: 1,
-                                paddingTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][12],
+                                paddingTop: 0,
                                 scrollbarWidth: "none",
                                 msOverflowStyle: "none",
                                 boxShadow: "none",
                                 filter: "none",
-                                borderTop: "none"
+                                borderTop: "none",
+                                minHeight: 0
                             },
                             children: isLoading ? // Loading State (Spinner)
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1320,12 +1360,12 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                     size: 32
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                    lineNumber: 164,
+                                    lineNumber: 178,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                lineNumber: 163,
+                                lineNumber: 177,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)) : error ? // Error State
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1340,12 +1380,12 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                     description: error
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                    lineNumber: 169,
+                                    lineNumber: 183,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                lineNumber: 168,
+                                lineNumber: 182,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)) : sortedRows.length === 0 ? // Empty State
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1367,17 +1407,17 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                         title: emptyMessage || "No hay datos para mostrar"
                                     }, void 0, false, {
                                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                        lineNumber: 175,
+                                        lineNumber: 189,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                    lineNumber: 174,
+                                    lineNumber: 188,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                lineNumber: 173,
+                                lineNumber: 187,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
                                 style: {
@@ -1394,7 +1434,7 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                         onSort: handleSort
                                     }, void 0, false, {
                                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                        lineNumber: 188,
+                                        lineNumber: 202,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1417,35 +1457,35 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                                         children: column.cell(row)
                                                     }, column.key, false, {
                                                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                                        lineNumber: 198,
+                                                        lineNumber: 212,
                                                         columnNumber: 27
                                                     }, ("TURBOPACK compile-time value", void 0));
                                                 })
                                             }, key, false, {
                                                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                                lineNumber: 195,
+                                                lineNumber: 209,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0));
                                         })
                                     }, void 0, false, {
                                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                        lineNumber: 190,
+                                        lineNumber: 204,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                lineNumber: 179,
+                                lineNumber: 193,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                            lineNumber: 147,
+                            lineNumber: 160,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                        lineNumber: 134,
+                        lineNumber: 147,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$DataTable$2f$TableFooter$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TableFooter"], {
@@ -1453,25 +1493,67 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                         onRowsPerPageChange: handleRowsPerPageChange,
                         totalRows: sortedRows.length,
                         page: page,
-                        onPageChange: setPage
+                        onPageChange: handlePageChange
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                        lineNumber: 226,
+                        lineNumber: 240,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                lineNumber: 120,
+                lineNumber: 132,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true);
 };
-_s(DataTable, "87nf8ogYLT4YJhtdSYCrJIICBkY=");
-_c = DataTable;
-var _c;
-__turbopack_context__.k.register(_c, "DataTable");
+_s(DataTableInternal, "/efLOfT1hw0ceRLhNrwgEPJdNJI=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$hooks$2f$useDeepLinkedList$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useDeepLinkedList"]
+    ];
+});
+_c = DataTableInternal;
+const DataTable = (props)=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Suspense"], {
+        fallback: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            style: {
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+                minHeight: 300
+            },
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Spinner$2f$Spinner$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Spinner"], {
+                size: 32
+            }, void 0, false, {
+                fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
+                lineNumber: 260,
+                columnNumber: 9
+            }, void 0)
+        }, void 0, false, {
+            fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
+            lineNumber: 259,
+            columnNumber: 7
+        }, void 0),
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(DataTableInternal, {
+            ...props
+        }, void 0, false, {
+            fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
+            lineNumber: 263,
+            columnNumber: 7
+        }, ("TURBOPACK compile-time value", void 0))
+    }, void 0, false, {
+        fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
+        lineNumber: 258,
+        columnNumber: 5
+    }, ("TURBOPACK compile-time value", void 0));
+};
+_c1 = DataTable;
+var _c, _c1;
+__turbopack_context__.k.register(_c, "DataTableInternal");
+__turbopack_context__.k.register(_c1, "DataTable");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
@@ -1673,6 +1755,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/context/ThemeProvider.tsx [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
+"use client";
 ;
 ;
 const getBadgeStyles = (variant = "neutral", appearance = "filled", interactive = false, fontSize, theme = "light")=>{
@@ -1750,7 +1833,7 @@ const Badge = ({ label, variant = "neutral", appearance = "filled", interactive 
             `
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/atoms/Badge/Badge.tsx",
-                lineNumber: 101,
+                lineNumber: 103,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1759,7 +1842,7 @@ const Badge = ({ label, variant = "neutral", appearance = "filled", interactive 
                 children: label
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/atoms/Badge/Badge.tsx",
-                lineNumber: 106,
+                lineNumber: 108,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
@@ -2079,8 +2162,8 @@ function ActionMenu({ trigger, title, items, sections, align = "right", onOpenCh
         isOpen
     ]);
     // Positioning Logic
-    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useLayoutEffect({
-        "ActionMenu.useLayoutEffect": ()=>{
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "ActionMenu.useEffect": ()=>{
             if (isOpen && containerRef.current && menuRef.current) {
                 const triggerRect = containerRef.current.getBoundingClientRect();
                 const menuRect = menuRef.current.getBoundingClientRect();
@@ -2119,7 +2202,7 @@ function ActionMenu({ trigger, title, items, sections, align = "right", onOpenCh
                 setPosition(null);
             }
         }
-    }["ActionMenu.useLayoutEffect"], [
+    }["ActionMenu.useEffect"], [
         isOpen,
         align
     ]);
@@ -2415,7 +2498,7 @@ function ActionMenu({ trigger, title, items, sections, align = "right", onOpenCh
         columnNumber: 9
     }, this);
 }
-_s(ActionMenu, "bp/TCuQ4++sMX7T9uBch5SdgV8Y=", false, function() {
+_s(ActionMenu, "zoQwbPGyafZweYLp5HvS9sPcU2M=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"]
     ];
@@ -2636,12 +2719,12 @@ const StatusTabs = ({ items, activeValue, onChange, className, style })=>{
         }
     }["StatusTabs.useEffect"], []);
     // Calculate active tab position
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "StatusTabs.useLayoutEffect": ()=>{
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "StatusTabs.useEffect": ()=>{
             if (!items.length || !activeValue) return;
             const activeIndex = items.findIndex({
-                "StatusTabs.useLayoutEffect.activeIndex": (item)=>item.value === activeValue
-            }["StatusTabs.useLayoutEffect.activeIndex"]);
+                "StatusTabs.useEffect.activeIndex": (item)=>item.value === activeValue
+            }["StatusTabs.useEffect.activeIndex"]);
             const currentTab = tabsRef.current[activeIndex];
             if (currentTab) {
                 setUnderlineStyle({
@@ -2650,7 +2733,7 @@ const StatusTabs = ({ items, activeValue, onChange, className, style })=>{
                 });
             }
         }
-    }["StatusTabs.useLayoutEffect"], [
+    }["StatusTabs.useEffect"], [
         activeValue,
         items
     ]);
@@ -2710,7 +2793,7 @@ const StatusTabs = ({ items, activeValue, onChange, className, style })=>{
             width: "100%",
             boxShadow: "none",
             filter: "none",
-            borderBottom: `1px solid ${semantic.border.default}`,
+            borderBottom: `1px solid ${semantic.border.subtle || semantic.border.default}`,
             ...style
         },
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2857,7 +2940,7 @@ const StatusTabs = ({ items, activeValue, onChange, className, style })=>{
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
-_s(StatusTabs, "H6jN0TkuQHPCXFTIo7KVSXkmkkg=", false, function() {
+_s(StatusTabs, "CvLvdK5SgqvMD+/+DnUdaBhaGkI=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"]
     ];
@@ -2928,7 +3011,7 @@ const TableToolbar = ({ className, style, tabs = [], statusTabs, activeTab, onTa
             gap: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][12],
             paddingBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][12],
             backgroundColor: "transparent",
-            borderBottom: `1px solid ${semantic.border.default}`,
+            borderBottom: `1px solid ${semantic.border.subtle || semantic.border.default}`,
             boxShadow: "none",
             filter: "none",
             ...style
@@ -3186,6 +3269,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/context/ThemeProvider.tsx [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
+"use client";
 ;
 ;
 const SkeletonBlock = ({ width = "100%", height = 16, borderRadius = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].sm })=>{
@@ -3202,7 +3286,7 @@ const SkeletonBlock = ({ width = "100%", height = 16, borderRadius = __TURBOPACK
         }
     }, void 0, false, {
         fileName: "[project]/packages/console/ui/atoms/SkeletonBlock/SkeletonBlock.tsx",
-        lineNumber: 27,
+        lineNumber: 29,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -3337,7 +3421,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/colors.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/shadows.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$PageShell$2f$PageShell$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/containers/PageShell/PageShell.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/Button/Button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$ActionIcon$2f$ActionIcon$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/ActionIcon/ActionIcon.tsx [app-client] (ecmascript)");
@@ -4017,9 +4100,8 @@ function DevicesListClient() {
                 display: "flex",
                 flexDirection: "column",
                 backgroundColor: semantic.surface.default,
-                border: `1px solid ${semantic.border.default}`,
                 borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].card,
-                boxShadow: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["shadows"].card,
+                boxShadow: "none",
                 overflow: "hidden",
                 flex: 1,
                 minHeight: 0
@@ -4045,7 +4127,7 @@ function DevicesListClient() {
                         align: "left"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                        lineNumber: 386,
+                        lineNumber: 385,
                         columnNumber: 25
                     }, void 0),
                     endContent: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -4058,7 +4140,7 @@ function DevicesListClient() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                lineNumber: 395,
+                                lineNumber: 394,
                                 columnNumber: 29
                             }, void 0),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4078,19 +4160,19 @@ function DevicesListClient() {
                                     color: semantic.text.default
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                    lineNumber: 401,
+                                    lineNumber: 400,
                                     columnNumber: 33
                                 }, void 0)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                                lineNumber: 400,
+                                lineNumber: 399,
                                 columnNumber: 29
                             }, void 0)
                         ]
                     }, void 0, true)
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 377,
+                    lineNumber: 376,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$DataTable$2f$DataTable$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DataTable"], {
@@ -4101,7 +4183,7 @@ function DevicesListClient() {
                     emptyMessage: "No se encontraron dispositivos"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/devices/list/DevicesListClient.tsx",
-                    lineNumber: 407,
+                    lineNumber: 406,
                     columnNumber: 17
                 }, this)
             ]

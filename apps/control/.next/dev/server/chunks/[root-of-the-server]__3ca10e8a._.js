@@ -141,6 +141,225 @@ const DEV_SEED = [
         devices: [],
         lastActivity: 'Hace 1 semana',
         createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_006',
+        name: 'Elena Moreno',
+        email: 'elena.moreno@empresa.com',
+        initials: 'EM',
+        initialsColor: '#10b981',
+        avatarUrl: null,
+        phone: '+52 555 2223 334',
+        role: 'Usuario',
+        department: 'Finanzas',
+        status: 'Activo',
+        devices: [
+            'Desktop'
+        ],
+        lastActivity: 'Hace 15 min',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_007',
+        name: 'David Silva',
+        email: 'david.silva@empresa.com',
+        initials: 'DS',
+        initialsColor: '#f43f5e',
+        avatarUrl: null,
+        phone: '+52 555 3334 445',
+        role: 'Administrador',
+        department: 'TI',
+        status: 'Activo',
+        devices: [
+            'Desktop',
+            'Mobile'
+        ],
+        lastActivity: 'Online',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_008',
+        name: 'Beatriz Lira',
+        email: 'beatriz.lira@empresa.com',
+        initials: 'BL',
+        initialsColor: '#0ea5e9',
+        avatarUrl: null,
+        phone: '+52 555 4445 556',
+        role: 'Usuario',
+        department: 'Soporte',
+        status: 'Activo',
+        devices: [
+            'Mobile'
+        ],
+        lastActivity: 'Hace 3 horas',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_009',
+        name: 'Jorge Ramos',
+        email: 'jorge.ramos@empresa.com',
+        initials: 'JR',
+        initialsColor: '#84cc16',
+        avatarUrl: null,
+        phone: '+52 555 5556 667',
+        role: 'Supervisor',
+        department: 'Operaciones',
+        status: 'Inactivo',
+        devices: [
+            'Desktop'
+        ],
+        lastActivity: 'Hace 3 días',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_010',
+        name: 'Patricia Vega',
+        email: 'patricia.vega@empresa.com',
+        initials: 'PV',
+        initialsColor: '#d946ef',
+        avatarUrl: null,
+        phone: '+52 555 6667 778',
+        role: 'Usuario',
+        department: 'Ventas',
+        status: 'Pendiente',
+        devices: [],
+        lastActivity: 'Pendiente de aprobación',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_011',
+        name: 'Ricardo Luna',
+        email: 'ricardo.luna@empresa.com',
+        initials: 'RL',
+        initialsColor: '#f97316',
+        avatarUrl: null,
+        phone: '+52 555 7778 889',
+        role: 'Usuario',
+        department: 'Logística',
+        status: 'Activo',
+        devices: [
+            'Desktop',
+            'Mobile'
+        ],
+        lastActivity: 'Hace 5 min',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_012',
+        name: 'Gabriela Solis',
+        email: 'gabriela.solis@empresa.com',
+        initials: 'GS',
+        initialsColor: '#64748b',
+        avatarUrl: null,
+        phone: '+52 555 8889 990',
+        role: 'Administrador',
+        department: 'Dirección',
+        status: 'Activo',
+        devices: [
+            'Desktop',
+            'Mobile',
+            'Tablet'
+        ],
+        lastActivity: 'Online',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_013',
+        name: 'Fernando Díaz',
+        email: 'fernando.diaz@empresa.com',
+        initials: 'FD',
+        initialsColor: '#ec4899',
+        avatarUrl: null,
+        phone: '+52 555 9990 001',
+        role: 'Usuario',
+        department: 'Legal',
+        status: 'Inactivo',
+        devices: [],
+        lastActivity: 'Hace 1 mes',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_014',
+        name: 'Silvia Cruz',
+        email: 'silvia.cruz@empresa.com',
+        initials: 'SC',
+        initialsColor: '#06b6d4',
+        avatarUrl: null,
+        phone: '+52 555 0001 112',
+        role: 'Supervisor',
+        department: 'Marketing',
+        status: 'Activo',
+        devices: [
+            'Laptop'
+        ],
+        lastActivity: 'Hace 45 min',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_015',
+        name: 'Hugo Montes',
+        email: 'hugo.montes@empresa.com',
+        initials: 'HM',
+        initialsColor: '#a855f7',
+        avatarUrl: null,
+        phone: '+52 555 1112 333',
+        role: 'Usuario',
+        department: 'TI',
+        status: 'Bloqueado',
+        devices: [
+            'Desktop'
+        ],
+        lastActivity: 'Acceso denegado ayer',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_016',
+        name: 'Mónica Soto',
+        email: 'monica.soto@empresa.com',
+        initials: 'MS',
+        initialsColor: '#fbbf24',
+        avatarUrl: null,
+        phone: '+52 555 2223 444',
+        role: 'Usuario',
+        department: 'Recursos Humanos',
+        status: 'Activo',
+        devices: [
+            'Laptop'
+        ],
+        lastActivity: 'Hace 10 min',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_017',
+        name: 'Raúl Parra',
+        email: 'raul.parra@empresa.com',
+        initials: 'RP',
+        initialsColor: '#2dd4bf',
+        avatarUrl: null,
+        phone: '+52 555 3334 555',
+        role: 'Administrador',
+        department: 'Operaciones',
+        status: 'Activo',
+        devices: [
+            'Mobile'
+        ],
+        lastActivity: 'Online',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 'u_018',
+        name: 'Laura Bernal',
+        email: 'laura.bernal@empresa.com',
+        initials: 'LB',
+        initialsColor: '#94a3b8',
+        avatarUrl: null,
+        phone: '+52 555 4445 666',
+        role: 'Usuario',
+        department: 'Ventas',
+        status: 'Pendiente',
+        devices: [],
+        lastActivity: 'Invitación enviada hoy',
+        createdAt: new Date().toISOString()
     }
 ];
 /**

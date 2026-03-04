@@ -8,18 +8,27 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$preferences$2f$globalPreferencesStore$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/core/preferences/globalPreferencesStore.tsx [app-ssr] (ecmascript)");
 "use client";
+;
 ;
 ;
 function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPage = 1, defaultPageSize = 20, filtersConfig = {} } = {}) {
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["usePathname"])();
     const searchParams = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSearchParams"])();
+    const { lastPageSize, getPathPageSize, setPageSize: setGlobalPageSize } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$preferences$2f$globalPreferencesStore$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGlobalPreferences"])();
     // ─── Estado Interno Inicializado desde URL ───────────────────────────────
     const [activeTab, setActiveTab] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(()=>searchParams.get("tab") ?? defaultTab);
     const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(()=>searchParams.get("q") ?? defaultSearch);
     const [page, setPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(()=>Number(searchParams.get("page")) || defaultPage);
-    const [pageSize, setPageSize] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(()=>Number(searchParams.get("pageSize")) || defaultPageSize);
+    const [pageSize, setPageSize] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(()=>{
+        const urlValue = searchParams.get("pageSize");
+        if (urlValue) return Number(urlValue);
+        const pathValue = getPathPageSize(pathname);
+        if (pathValue) return pathValue;
+        return lastPageSize || defaultPageSize;
+    });
     // Filtros dinámicos basados en la configuración
     const [filters, setFilters] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(()=>{
         const initialFilters = {
@@ -88,7 +97,14 @@ function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPa
         const urlTab = searchParams.get("tab") ?? defaultTab;
         const urlQ = searchParams.get("q") ?? defaultSearch;
         const urlPage = Number(searchParams.get("page")) || defaultPage;
-        const urlPageSize = Number(searchParams.get("pageSize")) || defaultPageSize;
+        const hasUrlPageSize = searchParams.has("pageSize");
+        let urlPageSize;
+        if (hasUrlPageSize) {
+            urlPageSize = Number(searchParams.get("pageSize"));
+        } else {
+            const pathValue = getPathPageSize(pathname);
+            urlPageSize = pathValue || lastPageSize || defaultPageSize;
+        }
         const timer = setTimeout(()=>{
             if (urlTab !== activeTab) setActiveTab(urlTab);
             if (urlQ !== searchQuery) setSearchQuery(urlQ);
@@ -111,7 +127,14 @@ function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPa
         return ()=>clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
-        searchParams
+        searchParams,
+        lastPageSize,
+        getPathPageSize,
+        pathname,
+        defaultPageSize,
+        defaultTab,
+        defaultSearch,
+        defaultPage
     ]);
     // ─── Public Setters ──────────────────────────────────────────────────────
     const handleSetTab = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((tab)=>{
@@ -146,13 +169,16 @@ function useDeepLinkedList({ defaultTab = "Todos", defaultSearch = "", defaultPa
     ]);
     const handleSetPageSize = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((ps)=>{
         setPageSize(ps);
+        setGlobalPageSize(pathname, ps); // Update path-specific and last used preference
         setPage(1);
         updateUrl({
             pageSize: ps,
             page: 1
         }, "replace");
     }, [
-        updateUrl
+        updateUrl,
+        setGlobalPageSize,
+        pathname
     ]);
     const handleSetFilter = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((key, value)=>{
         const nextFilters = {
@@ -310,15 +336,21 @@ __turbopack_context__.s([
     ()=>Spinner
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/packages/console/tokens/index.ts [app-ssr] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/colors.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/context/ThemeProvider.tsx [app-ssr] (ecmascript)");
+"use client";
+;
 ;
 ;
 ;
 const Spinner = ({ size = 24, color })=>{
-    const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useTheme"])();
-    const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"][theme].semantic;
+    // We use useContext directly to avoid useTheme() throwing if Provider is missing
+    const themeContext = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ThemeContext"]);
+    const theme = themeContext?.theme || "light";
+    // Fallback to global semantic tokens if theme is not found in tokens
+    const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"][theme]?.semantic || __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic;
     const effectiveColor = color || semantic.primary.default;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         style: {
@@ -336,7 +368,7 @@ const Spinner = ({ size = 24, color })=>{
             `
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/atoms/Spinner/Spinner.tsx",
-                lineNumber: 21,
+                lineNumber: 26,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -358,7 +390,7 @@ const Spinner = ({ size = 24, color })=>{
                         strokeOpacity: "0.25"
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/atoms/Spinner/Spinner.tsx",
-                        lineNumber: 35,
+                        lineNumber: 40,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
@@ -368,19 +400,19 @@ const Spinner = ({ size = 24, color })=>{
                         strokeLinecap: "round"
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/atoms/Spinner/Spinner.tsx",
-                        lineNumber: 43,
+                        lineNumber: 48,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/atoms/Spinner/Spinner.tsx",
-                lineNumber: 27,
+                lineNumber: 32,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/packages/console/ui/atoms/Spinner/Spinner.tsx",
-        lineNumber: 20,
+        lineNumber: 25,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -634,14 +666,11 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
             justifyContent: "space-between",
             alignItems: "center",
             padding: `${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][12]}px ${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][24]}px`,
-            borderTop: `1px solid ${semantic.border.default}`,
+            borderTop: `1px solid ${semantic.border.subtle || semantic.border.default}`,
             boxShadow: "none",
             filter: "none",
             color: semantic.text.default,
             fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["typography"].fontSize.sm,
-            position: "sticky",
-            bottom: 0,
-            zIndex: 5,
             backgroundColor: semantic.surface.default,
             width: "100%",
             fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary
@@ -661,7 +690,7 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
                         children: "Filas por página:"
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                        lineNumber: 52,
+                        lineNumber: 49,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$DataTable$2f$TableDropdown$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableDropdown"], {
@@ -677,13 +706,13 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
                         align: "center"
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                        lineNumber: 54,
+                        lineNumber: 51,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                lineNumber: 51,
+                lineNumber: 48,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -706,7 +735,7 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
                         ]
                     }, void 0, true, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                        lineNumber: 64,
+                        lineNumber: 61,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -730,12 +759,12 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
                                     size: 16
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                                    lineNumber: 67,
+                                    lineNumber: 64,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                                lineNumber: 66,
+                                lineNumber: 63,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -752,31 +781,31 @@ const TableFooter = ({ rowsPerPage, onRowsPerPageChange, totalRows, page, onPage
                                     size: 16
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                                    lineNumber: 70,
+                                    lineNumber: 67,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                                lineNumber: 69,
+                                lineNumber: 66,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                        lineNumber: 65,
+                        lineNumber: 62,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
-                lineNumber: 63,
+                lineNumber: 60,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/packages/console/ui/containers/DataTable/TableFooter.tsx",
         lineNumber: 32,
-        columnNumber: 9
+        columnNumber: 13
     }, ("TURBOPACK compile-time value", void 0));
 };
 }),
@@ -885,6 +914,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/colors.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$hooks$2f$useDeepLinkedList$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/core/hooks/useDeepLinkedList.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$EmptyState$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/packages/console/ui/containers/EmptyState/index.ts [app-ssr] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$EmptyState$2f$EmptyState$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/containers/EmptyState/EmptyState.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$ErrorState$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/packages/console/ui/containers/ErrorState/index.ts [app-ssr] (ecmascript) <locals>");
@@ -901,14 +931,25 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f
 ;
 ;
 ;
-const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, getRowKey, filterQuery })=>{
+;
+/**
+ * DataTableInternal
+ * Contenedor base para mostrar datos en formato tabla.
+ * Implementa la lógica de paginación sincronizada con la URL.
+ */ const DataTableInternal = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, getRowKey, filterQuery })=>{
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic;
-    const [rowsPerPage, setRowsPerPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("5");
-    const [page, setPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
-    // Reset page when pageSize or filter changes
+    const { page: urlPage, pageSize: urlPageSize, setPage: setUrlPage, setPageSize: setUrlPageSize } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$hooks$2f$useDeepLinkedList$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useDeepLinkedList"])({
+        defaultPageSize: 5,
+        defaultPage: 1
+    });
+    // Adapt 1-based to 0-based for internal slicing logic
+    const page = urlPage - 1;
+    const rowsPerPage = String(urlPageSize);
     const handleRowsPerPageChange = (value)=>{
-        setRowsPerPage(value);
-        setPage(0);
+        setUrlPageSize(parseInt(value, 10));
+    };
+    const handlePageChange = (newPage)=>{
+        setUrlPage(newPage + 1);
     };
     // Sorting State
     const [sort, setSort] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
@@ -982,7 +1023,7 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
       `
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                lineNumber: 101,
+                lineNumber: 113,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -994,8 +1035,9 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                     position: "relative",
                     display: "flex",
                     flexDirection: "column",
+                    flex: 1,
                     height: "100%",
-                    flex: 1
+                    minHeight: 0
                 },
                 "aria-label": ariaLabel,
                 children: [
@@ -1017,12 +1059,13 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                 overflow: "auto",
                                 width: "100%",
                                 flex: 1,
-                                paddingTop: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][12],
+                                paddingTop: 0,
                                 scrollbarWidth: "none",
                                 msOverflowStyle: "none",
                                 boxShadow: "none",
                                 filter: "none",
-                                borderTop: "none"
+                                borderTop: "none",
+                                minHeight: 0
                             },
                             children: isLoading ? // Loading State (Spinner)
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1038,12 +1081,12 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                     size: 32
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                    lineNumber: 164,
+                                    lineNumber: 178,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                lineNumber: 163,
+                                lineNumber: 177,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)) : error ? // Error State
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1058,12 +1101,12 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                     description: error
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                    lineNumber: 169,
+                                    lineNumber: 183,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                lineNumber: 168,
+                                lineNumber: 182,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)) : sortedRows.length === 0 ? // Empty State
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1085,17 +1128,17 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                         title: emptyMessage || "No hay datos para mostrar"
                                     }, void 0, false, {
                                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                        lineNumber: 175,
+                                        lineNumber: 189,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                    lineNumber: 174,
+                                    lineNumber: 188,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                lineNumber: 173,
+                                lineNumber: 187,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
                                 style: {
@@ -1112,7 +1155,7 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                         onSort: handleSort
                                     }, void 0, false, {
                                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                        lineNumber: 188,
+                                        lineNumber: 202,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1135,35 +1178,35 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                                                         children: column.cell(row)
                                                     }, column.key, false, {
                                                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                                        lineNumber: 198,
+                                                        lineNumber: 212,
                                                         columnNumber: 27
                                                     }, ("TURBOPACK compile-time value", void 0));
                                                 })
                                             }, key, false, {
                                                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                                lineNumber: 195,
+                                                lineNumber: 209,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0));
                                         })
                                     }, void 0, false, {
                                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                        lineNumber: 190,
+                                        lineNumber: 204,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                                lineNumber: 179,
+                                lineNumber: 193,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                            lineNumber: 147,
+                            lineNumber: 160,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                        lineNumber: 134,
+                        lineNumber: 147,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$DataTable$2f$TableFooter$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TableFooter"], {
@@ -1171,20 +1214,56 @@ const DataTable = ({ columns, rows, ariaLabel, isLoading, error, emptyMessage, g
                         onRowsPerPageChange: handleRowsPerPageChange,
                         totalRows: sortedRows.length,
                         page: page,
-                        onPageChange: setPage
+                        onPageChange: handlePageChange
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                        lineNumber: 226,
+                        lineNumber: 240,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
-                lineNumber: 120,
+                lineNumber: 132,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true);
+};
+const DataTable = (props)=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Suspense"], {
+        fallback: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            style: {
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+                minHeight: 300
+            },
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Spinner$2f$Spinner$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Spinner"], {
+                size: 32
+            }, void 0, false, {
+                fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
+                lineNumber: 260,
+                columnNumber: 9
+            }, void 0)
+        }, void 0, false, {
+            fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
+            lineNumber: 259,
+            columnNumber: 7
+        }, void 0),
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(DataTableInternal, {
+            ...props
+        }, void 0, false, {
+            fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
+            lineNumber: 263,
+            columnNumber: 7
+        }, ("TURBOPACK compile-time value", void 0))
+    }, void 0, false, {
+        fileName: "[project]/packages/console/ui/containers/DataTable/DataTable.tsx",
+        lineNumber: 258,
+        columnNumber: 5
+    }, ("TURBOPACK compile-time value", void 0));
 };
 }),
 "[project]/packages/console/ui/containers/DataTable/TableActionsCell.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
@@ -1353,6 +1432,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/spacing.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/context/ThemeProvider.tsx [app-ssr] (ecmascript)");
+"use client";
 ;
 ;
 ;
@@ -1430,7 +1510,7 @@ const Badge = ({ label, variant = "neutral", appearance = "filled", interactive 
             `
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/atoms/Badge/Badge.tsx",
-                lineNumber: 101,
+                lineNumber: 103,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1439,7 +1519,7 @@ const Badge = ({ label, variant = "neutral", appearance = "filled", interactive 
                 children: label
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/atoms/Badge/Badge.tsx",
-                lineNumber: 106,
+                lineNumber: 108,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
@@ -1635,7 +1715,7 @@ const StatusTabs = ({ items, activeValue, onChange, className, style })=>{
         return ()=>clearTimeout(timer);
     }, []);
     // Calculate active tab position
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useLayoutEffect"])(()=>{
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if (!items.length || !activeValue) return;
         const activeIndex = items.findIndex((item)=>item.value === activeValue);
         const currentTab = tabsRef.current[activeIndex];
@@ -1705,7 +1785,7 @@ const StatusTabs = ({ items, activeValue, onChange, className, style })=>{
             width: "100%",
             boxShadow: "none",
             filter: "none",
-            borderBottom: `1px solid ${semantic.border.default}`,
+            borderBottom: `1px solid ${semantic.border.subtle || semantic.border.default}`,
             ...style
         },
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1904,7 +1984,7 @@ const TableToolbar = ({ className, style, tabs = [], statusTabs, activeTab, onTa
             gap: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][12],
             paddingBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][12],
             backgroundColor: "transparent",
-            borderBottom: `1px solid ${semantic.border.default}`,
+            borderBottom: `1px solid ${semantic.border.subtle || semantic.border.default}`,
             boxShadow: "none",
             filter: "none",
             ...style
@@ -2626,7 +2706,7 @@ function ActionMenu({ trigger, title, items, sections, align = "right", onOpenCh
         isOpen
     ]);
     // Positioning Logic
-    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].useLayoutEffect(()=>{
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if (isOpen && containerRef.current && menuRef.current) {
             const triggerRect = containerRef.current.getBoundingClientRect();
             const menuRect = menuRef.current.getBoundingClientRect();
@@ -3161,6 +3241,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/context/ThemeProvider.tsx [app-ssr] (ecmascript)");
+"use client";
 ;
 ;
 ;
@@ -3213,7 +3294,7 @@ const SelectField = ({ label, value, placeholder = "Selecciona...", error, error
                         children: value || placeholder
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/atoms/SelectField/SelectField.tsx",
-                        lineNumber: 90,
+                        lineNumber: 92,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -3234,18 +3315,18 @@ const SelectField = ({ label, value, placeholder = "Selecciona...", error, error
                             points: "6 9 12 15 18 9"
                         }, void 0, false, {
                             fileName: "[project]/packages/console/ui/atoms/SelectField/SelectField.tsx",
-                            lineNumber: 110,
+                            lineNumber: 112,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/atoms/SelectField/SelectField.tsx",
-                        lineNumber: 93,
+                        lineNumber: 95,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/atoms/SelectField/SelectField.tsx",
-                lineNumber: 73,
+                lineNumber: 75,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             label && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -3264,13 +3345,13 @@ const SelectField = ({ label, value, placeholder = "Selecciona...", error, error
                         children: "*"
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/atoms/SelectField/SelectField.tsx",
-                        lineNumber: 124,
+                        lineNumber: 126,
                         columnNumber: 25
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/atoms/SelectField/SelectField.tsx",
-                lineNumber: 116,
+                lineNumber: 118,
                 columnNumber: 17
             }, ("TURBOPACK compile-time value", void 0)),
             (error || helperText) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3285,13 +3366,13 @@ const SelectField = ({ label, value, placeholder = "Selecciona...", error, error
                 children: error ? errorMessage : helperText
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/atoms/SelectField/SelectField.tsx",
-                lineNumber: 133,
+                lineNumber: 135,
                 columnNumber: 17
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/packages/console/ui/atoms/SelectField/SelectField.tsx",
-        lineNumber: 43,
+        lineNumber: 45,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -4080,6 +4161,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/colors.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/context/ThemeProvider.tsx [app-ssr] (ecmascript)");
+"use client";
 ;
 ;
 ;
@@ -4096,7 +4178,7 @@ const SkeletonBlock = ({ width = "100%", height = 16, borderRadius = __TURBOPACK
         }
     }, void 0, false, {
         fileName: "[project]/packages/console/ui/atoms/SkeletonBlock/SkeletonBlock.tsx",
-        lineNumber: 27,
+        lineNumber: 29,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -4358,7 +4440,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/colors.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/shadows.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$DataTable$2f$TableDropdown$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/containers/DataTable/TableDropdown.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$TableToolbar$2f$TableToolbar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/containers/TableToolbar/TableToolbar.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$PageShell$2f$PageShell$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/containers/PageShell/PageShell.tsx [app-ssr] (ecmascript)");
@@ -4368,6 +4449,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$ActionIcon$2f$ActionIcon$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/ActionIcon/ActionIcon.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$ActionMenu$2f$ActionMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/molecules/ActionMenu/ActionMenu.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$control$2f$app$2f28$shell$292f$users$2f$components$2f$UserForm$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/apps/control/app/(shell)/users/components/UserForm.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Avatar$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/Avatar/index.ts [app-ssr] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Avatar$2f$Avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/Avatar/Avatar.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$SearchInput$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/SearchInput/index.ts [app-ssr] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$SearchInput$2f$SearchInput$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/SearchInput/SearchInput.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$access$2f$PermissionGate$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/core/access/PermissionGate.tsx [app-ssr] (ecmascript)");
@@ -4378,6 +4461,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$toast$2f$useToast$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/core/toast/useToast.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$toast$2f$errorToastHelper$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/core/toast/errorToastHelper.ts [app-ssr] (ecmascript)");
 "use client";
+;
 ;
 ;
 ;
@@ -4499,24 +4583,13 @@ function UsersListClient() {
                         gap: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][12]
                     },
                     children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            style: {
-                                width: 40,
-                                height: 40,
-                                borderRadius: "50%",
-                                backgroundColor: row.initialsColor,
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                color: semantic.text.onSolid,
-                                fontSize: 14,
-                                fontWeight: 600,
-                                fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary
-                            },
-                            children: row.initials
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Avatar$2f$Avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Avatar"], {
+                            src: row.avatar,
+                            name: row.name,
+                            backgroundColor: row.initialsColor
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 142,
+                            lineNumber: 144,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4530,7 +4603,7 @@ function UsersListClient() {
                                     children: row.name
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                    lineNumber: 160,
+                                    lineNumber: 150,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4542,19 +4615,19 @@ function UsersListClient() {
                                     children: row.email
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                    lineNumber: 161,
+                                    lineNumber: 151,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 159,
+                            lineNumber: 149,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 141,
+                    lineNumber: 143,
                     columnNumber: 17
                 }, this)
         },
@@ -4569,7 +4642,7 @@ function UsersListClient() {
                     children: row.phone
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 170,
+                    lineNumber: 160,
                     columnNumber: 17
                 }, this)
         },
@@ -4586,7 +4659,7 @@ function UsersListClient() {
                     children: row.role
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 180,
+                    lineNumber: 170,
                     columnNumber: 37
                 }, this)
         },
@@ -4603,7 +4676,7 @@ function UsersListClient() {
                     children: row.department
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 188,
+                    lineNumber: 178,
                     columnNumber: 17
                 }, this),
             hideBelow: "md"
@@ -4628,7 +4701,7 @@ function UsersListClient() {
                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["typography"].fontSize.sm
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 205,
+                    lineNumber: 195,
                     columnNumber: 21
                 }, this);
             }
@@ -4641,7 +4714,7 @@ function UsersListClient() {
                     status: row.status
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 219,
+                    lineNumber: 209,
                     columnNumber: 17
                 }, this),
             hideBelow: "lg"
@@ -4658,7 +4731,7 @@ function UsersListClient() {
                     children: row.lastActivity
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 227,
+                    lineNumber: 217,
                     columnNumber: 17
                 }, this),
             hideBelow: "xl"
@@ -4683,7 +4756,7 @@ function UsersListClient() {
                             onClick: ()=>router.push(`/users/${row.id}`)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 237,
+                            lineNumber: 227,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$access$2f$PermissionGate$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PermissionGate"], {
@@ -4700,12 +4773,12 @@ function UsersListClient() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                lineNumber: 246,
+                                lineNumber: 236,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 245,
+                            lineNumber: 235,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$access$2f$PermissionGate$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PermissionGate"], {
@@ -4719,7 +4792,7 @@ function UsersListClient() {
                                     hoverColor: actionIconHoverColor
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                    lineNumber: 261,
+                                    lineNumber: 251,
                                     columnNumber: 38
                                 }, void 0),
                                 title: "Acciones de usuario",
@@ -4758,18 +4831,18 @@ function UsersListClient() {
                                 ]
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                lineNumber: 260,
+                                lineNumber: 250,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 259,
+                            lineNumber: 249,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 236,
+                    lineNumber: 226,
                     columnNumber: 17
                 }, this),
             hideBelow: "xl"
@@ -4799,6 +4872,7 @@ function UsersListClient() {
                         role: item.role,
                         department: item.department,
                         status: item.status,
+                        avatar: item.avatarUrl,
                         devices: item.devices,
                         lastActivity: item.lastActivity
                     }));
@@ -4820,7 +4894,7 @@ function UsersListClient() {
             columns: 5
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-            lineNumber: 352,
+            lineNumber: 343,
             columnNumber: 46
         }, this);
         if (debugState === "error") return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$ErrorState$2f$ErrorState$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ErrorState"], {
@@ -4828,7 +4902,7 @@ function UsersListClient() {
             description: "Simulated fetch error (debug)."
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-            lineNumber: 353,
+            lineNumber: 344,
             columnNumber: 44
         }, this);
         if (debugState === "empty") return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$EmptyState$2f$EmptyState$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["EmptyState"], {
@@ -4837,7 +4911,7 @@ function UsersListClient() {
             icon: "users"
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-            lineNumber: 354,
+            lineNumber: 345,
             columnNumber: 44
         }, this);
     }
@@ -4851,28 +4925,28 @@ function UsersListClient() {
                         children: "Panel"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 364,
+                        lineNumber: 355,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: "›"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 365,
+                        lineNumber: 356,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: "Usuarios"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 366,
+                        lineNumber: 357,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: "›"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 367,
+                        lineNumber: 358,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -4882,7 +4956,7 @@ function UsersListClient() {
                         children: "Lista"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 368,
+                        lineNumber: 359,
                         columnNumber: 25
                     }, void 0)
                 ]
@@ -4902,12 +4976,12 @@ function UsersListClient() {
                 columns: 5
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                lineNumber: 380,
+                lineNumber: 371,
                 columnNumber: 17
             }, this)
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-            lineNumber: 359,
+            lineNumber: 350,
             columnNumber: 13
         }, this);
     }
@@ -4921,28 +4995,28 @@ function UsersListClient() {
                         children: "Panel"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 392,
+                        lineNumber: 383,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: "›"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 393,
+                        lineNumber: 384,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: "Usuarios"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 394,
+                        lineNumber: 385,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: "›"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 395,
+                        lineNumber: 386,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -4952,7 +5026,7 @@ function UsersListClient() {
                         children: "Lista"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 396,
+                        lineNumber: 387,
                         columnNumber: 25
                     }, void 0)
                 ]
@@ -4969,12 +5043,12 @@ function UsersListClient() {
                 }
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                lineNumber: 401,
+                lineNumber: 392,
                 columnNumber: 17
             }, this)
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-            lineNumber: 387,
+            lineNumber: 378,
             columnNumber: 13
         }, this);
     }
@@ -4997,28 +5071,28 @@ function UsersListClient() {
                             children: "Panel"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 426,
+                            lineNumber: 417,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             children: "›"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 427,
+                            lineNumber: 418,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             children: "Usuarios"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 428,
+                            lineNumber: 419,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             children: "›"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 429,
+                            lineNumber: 420,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5028,7 +5102,7 @@ function UsersListClient() {
                             children: "Lista"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 430,
+                            lineNumber: 421,
                             columnNumber: 25
                         }, void 0)
                     ]
@@ -5050,19 +5124,19 @@ function UsersListClient() {
                                 size: 16
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                lineNumber: 441,
+                                lineNumber: 432,
                                 columnNumber: 29
                             }, void 0),
                             "Crear usuario"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 435,
+                        lineNumber: 426,
                         columnNumber: 25
                     }, void 0)
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 434,
+                    lineNumber: 425,
                     columnNumber: 21
                 }, void 0),
                 headerStyle: {
@@ -5081,9 +5155,8 @@ function UsersListClient() {
                         display: "flex",
                         flexDirection: "column",
                         backgroundColor: semantic.surface.default,
-                        border: `1px solid ${semantic.border.default}`,
                         borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["radius"].card,
-                        boxShadow: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$shadows$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["shadows"].card,
+                        boxShadow: "none",
                         overflow: "hidden",
                         flex: 1,
                         minHeight: 0
@@ -5109,7 +5182,7 @@ function UsersListClient() {
                                 align: "left"
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                lineNumber: 483,
+                                lineNumber: 473,
                                 columnNumber: 29
                             }, void 0),
                             endContent: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -5122,7 +5195,7 @@ function UsersListClient() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                        lineNumber: 492,
+                                        lineNumber: 482,
                                         columnNumber: 33
                                     }, void 0),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5142,19 +5215,19 @@ function UsersListClient() {
                                             color: semantic.text.default
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                            lineNumber: 498,
+                                            lineNumber: 488,
                                             columnNumber: 37
                                         }, void 0)
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                        lineNumber: 497,
+                                        lineNumber: 487,
                                         columnNumber: 33
                                     }, void 0)
                                 ]
                             }, void 0, true)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 474,
+                            lineNumber: 464,
                             columnNumber: 21
                         }, this),
                         filteredRows.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$EmptyState$2f$EmptyState$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["EmptyState"], {
@@ -5163,7 +5236,7 @@ function UsersListClient() {
                             icon: "users"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 506,
+                            lineNumber: 496,
                             columnNumber: 25
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$DataTable$2f$DataTable$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DataTable"], {
                             ariaLabel: "Tabla de usuarios",
@@ -5172,18 +5245,18 @@ function UsersListClient() {
                             filterQuery: searchQuery
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 512,
+                            lineNumber: 502,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 459,
+                    lineNumber: 450,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                lineNumber: 421,
+                lineNumber: 412,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$ModalShell$2f$ModalShell$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ModalShell"], {
@@ -5206,12 +5279,12 @@ function UsersListClient() {
                     onSubmit: handleSaveUser
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 528,
+                    lineNumber: 518,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                lineNumber: 522,
+                lineNumber: 512,
                 columnNumber: 13
             }, this)
         ]

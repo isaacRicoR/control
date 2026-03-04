@@ -1555,12 +1555,12 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                     children: activeCompany?.label || "EM"
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                    lineNumber: 61,
+                                    lineNumber: 62,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                lineNumber: 52,
+                                lineNumber: 53,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Text$2f$Text$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -1576,13 +1576,13 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                 children: activeCompany?.name || "Empresa"
                             }, void 0, false, {
                                 fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                lineNumber: 64,
+                                lineNumber: 65,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                        lineNumber: 50,
+                        lineNumber: 51,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1597,18 +1597,18 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                             name: "chevron-down"
                         }, void 0, false, {
                             fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                            lineNumber: 83,
+                            lineNumber: 84,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                        lineNumber: 78,
+                        lineNumber: 79,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                lineNumber: 30,
+                lineNumber: 31,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1688,12 +1688,12 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                                             children: company.label
                                                         }, void 0, false, {
                                                             fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                                            lineNumber: 145,
+                                                            lineNumber: 146,
                                                             columnNumber: 45
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     }, void 0, false, {
                                                         fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                                        lineNumber: 132,
+                                                        lineNumber: 133,
                                                         columnNumber: 41
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1721,7 +1721,7 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                                                 children: company.name
                                                             }, void 0, false, {
                                                                 fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                                                lineNumber: 152,
+                                                                lineNumber: 153,
                                                                 columnNumber: 45
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Text$2f$Text$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -1735,13 +1735,13 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                                                 children: company.count
                                                             }, void 0, false, {
                                                                 fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                                                lineNumber: 165,
+                                                                lineNumber: 166,
                                                                 columnNumber: 45
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                                        lineNumber: 151,
+                                                        lineNumber: 152,
                                                         columnNumber: 41
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1757,13 +1757,13 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                                         children: "Pro"
                                                     }, void 0, false, {
                                                         fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                                        lineNumber: 177,
+                                                        lineNumber: 178,
                                                         columnNumber: 41
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                                lineNumber: 112,
+                                                lineNumber: 113,
                                                 columnNumber: 37
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1785,18 +1785,18 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                                     name: "chevron-right"
                                                 }, void 0, false, {
                                                     fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                                    lineNumber: 205,
+                                                    lineNumber: 206,
                                                     columnNumber: 41
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             }, void 0, false, {
                                                 fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                                lineNumber: 191,
+                                                lineNumber: 192,
                                                 columnNumber: 37
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, index, true, {
                                         fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                        lineNumber: 110,
+                                        lineNumber: 111,
                                         columnNumber: 33
                                     }, ("TURBOPACK compile-time value", void 0))),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1829,12 +1829,12 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                                 name: "plus"
                                             }, void 0, false, {
                                                 fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                                lineNumber: 234,
+                                                lineNumber: 235,
                                                 columnNumber: 37
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                            lineNumber: 223,
+                                            lineNumber: 224,
                                             columnNumber: 33
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Text$2f$Text$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -1845,34 +1845,34 @@ const CompanySelector = ({ companies, createLabel = "Crear cuenta" })=>{
                                             children: createLabel
                                         }, void 0, false, {
                                             fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                            lineNumber: 236,
+                                            lineNumber: 237,
                                             columnNumber: 33
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                                    lineNumber: 211,
+                                    lineNumber: 212,
                                     columnNumber: 29
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                            lineNumber: 98,
+                            lineNumber: 99,
                             columnNumber: 25
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                        lineNumber: 97,
+                        lineNumber: 98,
                         columnNumber: 21
                     }, ("TURBOPACK compile-time value", void 0))
                 }, void 0, false, {
                     fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                    lineNumber: 96,
+                    lineNumber: 97,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/layouts/Sidebar/CompanySelector.tsx",
-                lineNumber: 88,
+                lineNumber: 89,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
