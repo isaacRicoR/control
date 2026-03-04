@@ -1,0 +1,52 @@
+---
+description: Patrones de UI oficiales y congelados para el proyecto apps/control.
+globs: apps/control/app/(shell)/**/*.tsx
+alwaysApply: false
+---
+
+# UI Patterns Standard (Frozen)
+
+Este documento formaliza los patrones de interfaz de usuario validados. Todas las nuevas pantallas deben seguir estos estándares para garantizar la consistencia visual y de comportamiento.
+
+## 1. Patrón de Botones de Acción
+
+### Primary Action Button
+- **Regla**: Solo una acción primaria por pantalla.
+- **Variante**: `variant="actionPrimary"` (Solid).
+- **Alineación**: Siempre alineado a la derecha en footers o zona de acciones del header.
+- **Ejemplos**: "Guardar", "Crear usuario", "Agregar dispositivo".
+
+### Secondary Action Button
+- **Regla**: Variante `variant="secondary"` (Outline/Ghost).
+- **Posición**: Siempre a la izquierda del botón primario.
+- **Orden**: `[ Cancelar ] [ Guardar ]`.
+
+## 2. Avatar Pattern (Usuarios)
+- **Forma**: Circular (usar componente `Avatar`).
+- **Comportamiento**: Mostrar iniciales con color de fondo si no hay imagen disponible.
+- **Consistencia**: El estilo debe ser idéntico en listas y detalles (aunque el tamaño varíe según el contexto).
+
+## 3. Navegación en Listas (Clickable Rows)
+- **Celda Principal**: La columna que contiene `Avatar + Nombre + Email`.
+- **Interacción**:
+    - `cursor: pointer` para indicar que es clickeable.
+    - `user-select: none` para evitar selección accidental.
+    - Navegación directa al detalle de la entidad al hacer clic.
+
+## 4. Status Tabs (List Views)
+- **Posición**: Ubicados siempre arriba de la tabla, dentro de la card principal.
+- **Configuración**:
+    - Usar `tabsGap={spacing[16]}`.
+    - Estilo uniforme (Todos, Activos, Pendientes, etc.).
+
+## 5. Estructura de Listado (List Toolbar)
+La barra de herramientas (`TableToolbar`) debe seguir este orden de arriba hacia abajo:
+1. **Pestañas de Estado** (Tabs).
+2. **Toolbar de Acciones**: Filtros (izquierda), Búsqueda y Opciones extras (derecha).
+3. **Tabla de Datos** (`DataTable`).
+4. **Footer / Paginación**.
+
+## Restricciones
+- **NO modificar componentes base** en `packages/console`.
+- **NO crear variaciones** de estos patrones sin validación previa.
+- Usar siempre tokens de `@tokens` para spacing y radios.

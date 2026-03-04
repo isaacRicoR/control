@@ -1,0 +1,54 @@
+---
+description: Estándar para pantallas tipo LISTADO (List Views) en apps/control.
+globs: apps/control/app/(shell)/**/list/*.tsx
+alwaysApply: false
+---
+
+# Listing Layout Pattern
+
+Todas las pantallas que listan colecciones de datos (Usuarios, Dispositivos, Departamentos, etc.) deben seguir este patrón estructural y visual para garantizar consistencia y una correcta gestión del scroll.
+
+## Estructura Estándar
+
+1. **PageShell (Wrapper)**:
+   - `variant="fluid"`
+   - `headerStyle={{ borderBottom: "none" }}`
+   - Altura fija: `height: calc(100vh - ${layout.appBarHeight}px - ${spacing[24] * 2}px)`
+   - `overflow: "hidden"`, `display: "flex"`, `flexDirection: "column"`
+
+2. **Card Contenedora (data-table-card)**:
+   - Debe llenar el espacio disponible: `flex: 1`, `minHeight: 0`.
+   - Estilo: `backgroundColor: semantic.surface.default`, `borderRadius: radius.card`, `overflow: "hidden"`.
+   - Dirección: `flexDirection: "column"`.
+
+3. **Toolbar (TableToolbar)**:
+   - Contiene pestañas de estado (Tabs), filtros (Dropdowns) y búsqueda (SearchInput).
+   - Siempre visible en la parte superior de la card.
+
+4. **Cuerpo (DataTable)**:
+   - Debe manejar el scroll interno de los datos.
+   - Debe recibir el `filterQuery` para la búsqueda local si aplica.
+
+## Reglas de Interacción
+
+- **Filas Clickeables**: Celdas con navegación deben usar `cursor: pointer`.
+- **Selección de Texto**: Usar `user-select: none` en áreas de navegación/clic para evitar selecciones accidentales al hacer doble clic, excepto en campos de entrada (inputs) o datos que el usuario necesite copiar (IDs, Emails).
+
+## Estados de Carga y Error
+
+Los estados de `loading`, `error` y `empty` deben renderizarse **dentro** del mismo layout de `PageShell` para evitar "brincos" visuales o cambios en la altura del header.
+
+```tsx
+// Ejemplo de estructura correcta
+<PageShell ... style={{ height: `calc(100vh - ...)`, overflow: "hidden" }}>
+    <div data-table-card style={{ flex: 1, minHeight: 0, overflow: "hidden" }}>
+        <TableToolbar ... />
+        <DataTable ... />
+    </div>
+</PageShell>
+```
+
+## Tokens Obligatorios
+- **Border**: `semantic.border.subtle || semantic.border.default` (si aplica borde externo).
+- **Radius**: `radius.card` (18px) para la card principal.
+- **Spacing**: `spacing[24]` para márgenes externos del shell.

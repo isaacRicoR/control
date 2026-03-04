@@ -268,11 +268,11 @@ export const UsersDetailClient = ({ userId }: UsersDetailClientProps) => {
                                             {/* Header for Profile Content */}
                                             <Text
                                                 variant="body"
-                                                style={{
-                                                    fontSize: typography.fontSize.md,
-                                                    fontWeight: typography.fontWeight.semibold,
-                                                    color: semantic.text.default
-                                                }}
+                                            style={{
+                                                fontSize: typography.fontSize.md,
+                                                fontWeight: typography.fontWeight.semibold,
+                                                color: semantic.text.muted
+                                            }}
                                             >
                                                 Información Personal
                                             </Text>
