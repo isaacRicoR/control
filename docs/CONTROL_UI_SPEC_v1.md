@@ -1,137 +1,136 @@
 # Especificación Técnica de UI - Proyecto CONTROL (v1)
 
-Este documento es la **Fuente de Verdad (Source of Truth)** del sistema visual de CONTROL. Contiene las especificaciones técnicas necesarias para reconstruir o mantener la interfaz de forma idéntica a su estado actual.
+Este documento es la **Fuente de Verdad (Source of Truth)** definitiva del sistema visual de CONTROL. Contiene las especificaciones técnicas extraídas directamente del código para garantizar la reconstrucción íntegra del sistema.
 
 ---
 
 ## 1. Tokens Reales del Sistema (Colores)
 
-El sistema de colores es dinámico y se basa en variables CSS definidas en `apps/control/app/globals.css`, consumidas a través del objeto `colors.semantic` en `packages/console/tokens/colors.ts`.
+Los colores se rigen por variables CSS dinámicas. El objeto `colors.semantic` en `packages/console/tokens/colors.ts` actúa como el puente hacia `apps/control/app/globals.css`.
 
-| Token | LIGHT (Hex) | DARK (Hex) | Uso Exacto |
-| :--- | :--- | :--- | :--- |
-| `background.default` | `#F4F6F8` | `#141A21` | Fondo general de la aplicación. |
-| `surface.default` | `#FFFFFF` | `#1C252E` | Fondo de Cards, Modales y contenedores de contenido. |
-| `border.default` | `#E4E4E7` | `#2A3744` | Bordes de inputs, divisores y contornos de Card. |
-| `text.default` | `#18181B` | `#8B95A5` | Texto de cuerpo, contenido de tablas y valores de inputs. |
-| `text.active` | `#18181B` | `#FFFFFF` | Títulos, texto resaltado y estados activos. |
-| `text.muted` | `#71717A` | `#5A6672` | Labels de formularios, breadcrumbs y metadata secundaria. |
-| `primary.default` | `#00A76F` | `#00FFA9` | Color de marca (Acento), usado en estados de éxito y botones primarios. |
+| Token | Variable CSS | LIGHT (Hex) | DARK (Hex) | Uso Exacto |
+| :--- | :--- | :--- | :--- | :--- |
+| `background.default` | `--semantic-background-default` | `#F4F6F8` | `#141A21` | Fondo general de la aplicación. |
+| `surface.default` | `--semantic-surface-default` | `#FFFFFF` | `#1C252E` | Fondo de Cards y Modales. |
+| `border.default` | `--semantic-border-default` | `#E4E4E7` | `#2A3744` | Bordes de inputs, divisores y Cards. |
+| `text.default` | `--semantic-text-default` | `#18181B` | `#8B95A5` | Texto de cuerpo y contenido de tablas. |
+| `text.active` | `--semantic-text-active` | `#18181B` | `#FFFFFF` | Títulos y valores ingresados en inputs. |
+| `text.muted` | `--semantic-text-muted` | `#71717A` | `#5A6672` | Labels de formularios y breadcrumbs. |
+| `primary.default` | `--semantic-primary-default` | `#00A76F` | `#00FFA9` | Color de acento / éxito. |
 
 ---
 
 ## 2. Jerarquía de Texto
 
-La jerarquía visual se mantiene mediante el uso estricto de tokens semánticos:
+La consistencia visual depende del mapeo correcto de estos tres estados de texto:
 
-*   **`semantic.text.active`**: Títulos de página, nombres en tablas, y texto ingresado por el usuario en inputs. Máximo contraste.
-*   **`semantic.text.default`**: Párrafos, descripciones y contenido general.
-*   **`semantic.text.muted`**: 
-    *   **Labels de Formularios**: Configurado en `Input.tsx` y `SelectField.tsx` vía `--input-label`.
-    *   **Breadcrumbs**: Definido en `PageShell.tsx`.
-    *   **Placeholders**: Texto de sugerencia dentro de campos vacíos.
+*   **Labels de Formularios**: Siempre utilizan `semantic.text.muted`. (Configurado vía `--input-label` y `--select-label`).
+*   **Texto de Usuario (Values)**: Siempre utilizan `semantic.text.active` para máximo contraste.
+*   **Breadcrumbs y Metadata**: Utilizan `semantic.text.muted`.
+*   **Títulos de Página**: Utilizan `semantic.text.active` con peso `bold`.
 
 ---
 
 ## 3. Arquitectura de Componentes UI
 
-El proyecto sigue una estructura jerárquica de componentes:
+El sistema se organiza en tres capas de abstracción:
 
-*   **`packages/console/ui/atoms`**: Componentes base indivisibles (`Button`, `Input`, `SelectField`, `Icon`). Manejan sus propios estados internos (hover, focus, floating labels).
-*   **`packages/console/ui/molecules`**: Composiciones simples (`Card`, `CardTabsHeader`, `SelectSingle`). Definen la estructura de los contenedores.
-*   **`packages/console/ui/patterns`**: Layouts complejos y bloques reutilizables (`FormLayout`, `FormActions`, `TableToolbar`). Orquestan múltiples átomos y moléculas.
+*   **Atoms (`ui/atoms`)**: `Button`, `Input`, `SelectField`, `Icon`, `Text`. Manejan su propia lógica de estados (hover, focus).
+*   **Molecules (`ui/molecules`)**: `Card`, `CardTabsHeader`, `SelectSingle`. Definen la estructura de los contenedores.
+*   **Patterns (`ui/patterns`)**: `FormLayout`, `FormActions`, `TableToolbar`. Bloques de construcción de alto nivel para pantallas.
 
 ---
 
 ## 4. Sistema de Card (`Card.tsx`)
 
-El componente `Card` es el contenedor modular de la aplicación.
+El `Card` es el contenedor maestro. Sus propiedades definen la jerarquía de la pantalla.
 
-### Props Disponibles:
-*   **`variant`**: `"default" | "panel"` (Controla elevación y footer).
+### Props Reales:
+*   **`variant`**: `"default" | "panel"`.
 *   **`elevated`**: `boolean` (Aplica sombra `shadows.card`).
-*   **`noPadding`**: `boolean` (Quita el padding de 24px).
+*   **`noPadding`**: `boolean` (Elimina los 24px de padding interno).
 
-### Definición de Variantes:
-| Variante | Elevación | Footer Behavior | Caso de Uso |
+### Variantes y Comportamiento:
+| Variante | Elevación (Sombra) | Footer Behavior | Caso de Uso |
 | :--- | :--- | :--- | :--- |
-| `default` | Opcional | Con padding interno | Tablas, Listados, Dashboards. |
-| **`panel`** | **Automática** | **Pegado (Margen Negativo)** | Pantallas de Perfil y Configuración. |
+| `default` | Opcional | Normal (con aire) | Tablas y Dashboards. |
+| **`panel`** | **Automática** | **Glued (Pegado)** | Perfil, Configuración y Detalle. |
+
+> **Regla de Prioridad**: `variant="panel"` tiene prioridad sobre el prop `elevated` y fuerza la sombra automáticamente.
 
 ---
 
 ## 5. Footer de Panel (Efecto "Glued")
 
-En la variante `panel`, el footer se extiende hasta los bordes del Card compensando el padding del contenedor.
-**Lógica real en `Card.tsx`:**
+Para lograr que los footers de acción toquen los bordes del `Card` sin romper el padding del contenido, la variante `panel` aplica márgenes negativos exactos:
+
 ```typescript
-...(variant === "panel" ? {
-  margin: `0 -${spacing[24]}px -${spacing[24]}px -${spacing[24]}px`
-} : {})
+// Lógica interna en Card.tsx
+margin: `0 -${spacing[24]}px -${spacing[24]}px -${spacing[24]}px`
 ```
-Esto asegura que el divisor superior del footer toque los bordes laterales y el fondo del footer toque el borde inferior del Card.
+Este patrón elimina el "aire" extra en la parte inferior de las vistas de configuración.
 
 ---
 
 ## 6. Sistema de Botones (`Button.tsx`)
 
-### Tamaños (Sizes):
-*   **`sm`**: Altura fija de **36px** (`spacing[32] + spacing[4]`). Usado en cabeceras y footers de panel.
-*   **`md`**: Altura fija de **48px**. Estándar para formularios de creación.
+Los botones tienen prohibido el uso de alturas manuales. Se rigen por el prop `size`.
 
-### Variantes y Temas:
-*   **`actionPrimary`**:
-    *   En **LIGHT**: Fondo Negro Azulado (`#141A21`), Texto Blanco.
-    *   En **DARK**: Fondo Blanco, Texto Negro Azulado.
-*   **`secondary`**: Fondo superficie, texto activo y borde visible.
+### Tamaños (Sizes):
+*   **`sm`**: Altura real de **36px** (`spacing[32] + spacing[4]`). Estándar para acciones de tabla y paneles.
+*   **`md`**: Altura real de **48px**. Estándar para formularios de creación.
+
+### Variantes de Color:
+*   **`actionPrimary`**: Invierte colores según el tema. (LIGHT: Fondo oscuro/Texto blanco | DARK: Fondo blanco/Texto oscuro).
+*   **`secondary`**: Fondo neutro (`surface`), borde visible y texto de contraste.
 
 ---
 
 ## 7. Inputs y Formularios
 
-### Especificaciones de `Input` y `SelectField`:
-*   **Patrón**: Floating Labels (la etiqueta se mueve al borde superior al escribir).
-*   **Color de Label**: `semantic.text.muted` (Gris tenue).
-*   **Color de Valor**: `semantic.text.active` (Máximo contraste).
-*   **Borde**: `semantic.border.default` (cambia a `active/focus` según interacción).
-*   **Fondo**: `semantic.surface.default`.
+### Especificaciones Técnicas:
+*   **Patrón**: Floating Labels obligatorio.
+*   **Color de Label**: `semantic.text.muted`.
+*   **Color de Texto ingresado**: `semantic.text.active`.
+*   **Borde y Fondo**: `border.default` y `surface.default`.
 
 ---
 
-## 8. Patrones de Pantalla y Consistencia de Layout
+## 8. Patrones de Pantalla y Uso
 
-| Tipo de Pantalla | Card Variant | Componentes de Apoyo |
-| :--- | :--- | :--- |
-| **Listados** | `default` | `Table`, `TableToolbar`, `Pagination` |
-| **Formularios** | `elevated` | `FormLayout`, `FormActions` |
-| **Configuración** | `panel` | `CardTabsHeader`, `Footer Actions` |
-| **Vistas de Detalle** | `panel` | `CardTabsHeader`, `Avatar / DataGrid` |
-
----
-
-## 9. Mapa de Uso en el Proyecto
-
-*   **/users/list**: `Card default` + `Button sm`.
-*   **/users/create**: `Card elevated` + `Button md`.
-*   **/users/[id] (Perfil)**: `Card variant="panel"` + `Button sm`.
-*   **/lab/apariencia**: `Card variant="panel"` + `Button sm`.
+| Tipo de Pantalla | Card Pattern | Tamaño Botones | Rutas de Ejemplo |
+| :--- | :--- | :--- | :--- |
+| **Listados** | `default` (elevated) | `sm` | `/users/list`, `/devices/list` |
+| **Formularios** | `elevated` | `md` | `/users/create`, `/devices/create` |
+| **Configuración** | `variant="panel"` | `sm` | `/lab/apariencia` |
+| **Vistas de Detalle** | `variant="panel"` | `sm` | `/users/[id]` |
 
 ---
 
-## 10. Reglas de Oro (Constraints)
+## 9. Reglas de Oro
 
-1.  **Prohibido el Hardcode**: No usar valores HEX directamente en componentes.
-2.  **Consumo de Tokens**: Usar siempre `colors.semantic.*`.
-3.  **Source of Truth**: Los colores base nacen en `globals.css` y se mapean en `colors.ts`.
-4.  **Consistencia de Layout**: No aplicar paddings manuales para "pegar" footers; usar `variant="panel"`.
+1.  **Nunca hardcodear colores HEX**: Usar siempre `colors.semantic.*`.
+2.  **No modificar tokens desde componentes**: Los cambios de color se centralizan en `globals.css`.
+3.  **Respetar variantes del sistema**: No usar paddings manuales en pantallas; elegir la variante de `Card` adecuada.
+4.  **Consistencia de Botones**: Usar `size="sm"` para toda acción que no sea el envío principal de un formulario de creación.
 
 ---
 
-## 11. Instrucciones de Restauración (Checklist)
+## 10. Regla de Cambios al Sistema
 
-Si el UI pierde su apariencia o jerarquía visual, seguir estos pasos:
+Para mantener la integridad de la Fuente de Verdad, cualquier cambio visual debe seguir este orden estrictamente:
+1.  **Modificar Tokens**: Actualizar `globals.css` si es un cambio de color.
+2.  **Modificar Componente Base**: Si es un cambio de layout (ej. altura de botones o márgenes de Card).
+3.  **Actualizar Documentación**: Reflejar el cambio en este archivo (`CONTROL_UI_SPEC_v1.md`).
 
-1.  **Validar Tokens**: Asegurar que `globals.css` tenga los valores HEX definidos en la Sección 1 de este documento.
-2.  **Validar Labels**: Confirmar que `Input.tsx` y `SelectField.tsx` usen `text.muted` para la variable `--input-label`.
-3.  **Validar Card Panel**: Verificar que `Card.tsx` aplique márgenes negativos de `-24px` (`spacing[24]`) en la variante `panel`.
-4.  **Validar Botones**: Asegurar que la altura del tamaño `sm` sea exactamente **36px**.
+**Nunca modificar directamente una pantalla para alterar el comportamiento global del sistema.**
+
+---
+
+## 11. Instrucciones de Restauración
+
+Si el UI se rompe o pierde coherencia:
+1.  **Check de Tokens**: Validar los HEX de la Sección 1 en `globals.css`.
+2.  **Check de Labels**: Asegurar que `Input.tsx` mapee `--input-label` a `text.muted`.
+3.  **Check de Card Variant**: Confirmar que `variant="panel"` en `Card.tsx` aplique los márgenes negativos de `-24px`.
+4.  **Check de Button Sizes**: Validar que el tamaño `sm` calcule su altura a 36px.
