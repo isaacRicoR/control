@@ -1,17 +1,3 @@
-:root {
-  /* Forward-map system variables to Semantic Layer */
-  --background: var(--semantic-background-default);
-  --foreground: var(--semantic-text-default);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Ensure Dark Mode follows Semantic layer */
-    --background: var(--semantic-background-default);
-    --foreground: var(--semantic-text-default);
-  }
-}
-
 html,
 body {
   max-width: 100vw;
