@@ -65,11 +65,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     const packBg = themeTokens?.buttonActionPrimaryBg;
     const packText = themeTokens?.buttonActionPrimaryText;
 
-    bg = packBg ?? ap?.bg ?? colors.semantic.surface.default;
-    text = packText ?? ap?.text ?? colors.semantic.text.active;
+    bg = packBg ?? ap?.bg ?? "var(--semantic-button-action-primary-bg)";
+    text = packText ?? ap?.text ?? "var(--semantic-button-action-primary-text)";
     border = bg;
     variantClass = "button-variant-action-primary";
-    cssVariables = { "--button-action-primary-hover": ap?.hoverBg ?? colors.semantic.surface.hover };
+    cssVariables = { "--button-action-primary-hover": ap?.hoverBg ?? "var(--semantic-button-action-primary-hover)" };
   } else if (variant === 'secondary') {
     // Acción funcional no primaria: fondo neutro de superficie, texto de máximo contraste, borde visible.
     bg = colors.semantic.surface.default;

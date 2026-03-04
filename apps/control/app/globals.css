@@ -337,6 +337,14 @@ a {
   --semantic-info-focus: #29a3ff;
   --semantic-info-selected: #64beff;
 
+  --semantic-secondary-default: #E4E4E7;
+  --semantic-secondary-hover: #D4D4D8;
+  --semantic-secondary-active: #A1A1AA;
+
+  --semantic-elevated-default: #FFFFFF;
+  --semantic-elevated-hover: #F4F4F5;
+  --semantic-elevated-active: #EEEEF0;
+
   /* Button White Variant */
   --semantic-button-white-bg: #FFFFFF;
   --semantic-button-white-text: #18181B;
@@ -348,11 +356,16 @@ a {
   --semantic-button-primary-text: var(--semantic-text-default);
   --semantic-button-primary-hover: var(--semantic-primary-hover);
 
-  /* Button Create: DARK visual (swap: light theme shows dark button) */
+  /* Button Create: LIGHT visual (swap: dark theme shows dark button) */
   --semantic-button-create-bg: #0F172A;
   --semantic-button-create-text: #FFFFFF;
   --semantic-button-create-border: #0F172A;
   --semantic-button-create-hover: #162233;
+
+  /* Button Action Primary: LIGHT rule (Negro azulado + Blanco) */
+  --semantic-button-action-primary-bg: #141A21;
+  --semantic-button-action-primary-text: #FFFFFF;
+  --semantic-button-action-primary-hover: #2A3744;
 
   --semantic-sidebar-group-label: #71717A;
   --semantic-sidebar-item-default: #71717A;
@@ -450,6 +463,14 @@ a {
   --semantic-info-focus: #29a3ff;
   --semantic-info-selected: #64beff;
 
+  --semantic-secondary-default: #2A3744;
+  --semantic-secondary-hover: #2c2c36;
+  --semantic-secondary-active: #5A6672;
+
+  --semantic-elevated-default: #1C252E;
+  --semantic-elevated-hover: #2A3744;
+  --semantic-elevated-active: #2A3744;
+
   /* Button White Variant (Inverse in Dark) */
   --semantic-button-white-bg: #FFFFFF;
   --semantic-button-white-text: #000000;
@@ -466,6 +487,11 @@ a {
   --semantic-button-create-text: #0F172A;
   --semantic-button-create-border: #FFFFFF;
   --semantic-button-create-hover: #F4F6F8;
+
+  /* Button Action Primary: DARK rule (Blanco + Negro azulado) */
+  --semantic-button-action-primary-bg: #FFFFFF;
+  --semantic-button-action-primary-text: #141A21;
+  --semantic-button-action-primary-hover: #F4F6F8;
 
   --semantic-sidebar-group-label: #5A6672;
 

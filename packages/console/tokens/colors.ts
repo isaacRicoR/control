@@ -2,7 +2,6 @@ import { activeBrand } from "@core/brands";
 
 // design/tokens/colors.ts
 // Single source of truth for color tokens.
-// Dark-first, structure ready for light later.
 
 export type ColorScaleKey =
   | 0
@@ -40,25 +39,10 @@ export type SemanticGroup =
   | "success"
   | "warning"
   | "danger"
-  | "warning"
-  | "danger"
   | "info"
   | "error"
   | "sidebar"
   | "button";
-
-/**
- * Base palette (paleta base) — nunca se usa directo en componentes.
- * Solo sirve para mapear a los semánticos.
- */
-export type BasePalette = {
-  neutral: ColorScale;
-  brand: ColorScale;
-  success: ColorScale;
-  warning: ColorScale;
-  danger: ColorScale;
-  info: ColorScale;
-};
 
 export type SemanticTokenGroup = Record<SemanticState, string> & {
   100?: string;
@@ -97,6 +81,15 @@ export type ThemeColors = {
 
 export type TokensColors = Record<ThemeName, ThemeColors>;
 
+export type BasePalette = {
+  neutral: ColorScale;
+  brand: ColorScale;
+  success: ColorScale;
+  warning: ColorScale;
+  danger: ColorScale;
+  info: ColorScale;
+};
+
 /**
  * Base palette (paleta base) — Dark
  * Conectado al Brand Layer (src/core/brands)
@@ -111,175 +104,21 @@ const baseDark: BasePalette = {
 };
 
 /**
- * Semantic palette (paleta semántica) — Dark
- * Esto SÍ lo consumen los componentes.
+ * Base palette (paleta base) — Light placeholder
  */
-const semanticDark: SemanticPalette = {
-  background: {
-    default: baseDark.neutral[50],
-    hover: baseDark.neutral[100],
-    active: baseDark.neutral[200],
-    disabled: baseDark.neutral[100],
-    focus: baseDark.neutral[50],
-    selected: baseDark.neutral[100],
-  },
-
-  surface: {
-    default: baseDark.neutral[200],
-    hover: baseDark.neutral[300],
-    active: baseDark.neutral[300],
-    disabled: baseDark.neutral[200],
-    focus: baseDark.neutral[100],
-    selected: baseDark.brand[50],
-  },
-
-  elevated: {
-    default: baseDark.neutral[200],
-    hover: baseDark.neutral[300],
-    active: baseDark.neutral[400],
-    disabled: baseDark.neutral[300],
-    focus: baseDark.neutral[200],
-    selected: baseDark.neutral[300],
-  },
-
-  border: {
-    default: baseDark.neutral[300],
-    hover: baseDark.neutral[400],
-    active: baseDark.neutral[500],
-    disabled: baseDark.neutral[300],
-    focus: baseDark.brand[600],
-    selected: baseDark.brand[600],
-  },
-
-  text: {
-    default: baseDark.neutral[600],
-    hover: baseDark.neutral[1000],
-    active: baseDark.neutral[1000],
-    disabled: baseDark.neutral[500],
-    focus: baseDark.neutral[1000],
-    selected: baseDark.neutral[1000],
-    onSolid: baseDark.neutral[1000],
-  },
-
-  primary: {
-    default: baseDark.brand[600],
-    hover: baseDark.brand[700],
-    active: baseDark.brand[500],
-    disabled: baseDark.neutral[400],
-    focus: baseDark.brand[600],
-    selected: baseDark.brand[700],
-  },
-
-  secondary: {
-    default: baseDark.neutral[300],
-    hover: baseDark.neutral[400],
-    active: baseDark.neutral[500],
-    disabled: baseDark.neutral[200],
-    focus: baseDark.neutral[300],
-    selected: baseDark.neutral[400],
-  },
-
-  success: {
-    default: baseDark.success[600],
-    hover: baseDark.success[700],
-    active: baseDark.success[500],
-    disabled: baseDark.neutral[400],
-    focus: baseDark.success[600],
-    selected: baseDark.success[700],
-    100: baseDark.success[100],
-    200: baseDark.success[200],
-    300: baseDark.success[300],
-  },
-
-  warning: {
-    default: baseDark.warning[600],
-    hover: baseDark.warning[700],
-    active: baseDark.warning[500],
-    disabled: baseDark.neutral[400],
-    focus: baseDark.warning[600],
-    selected: baseDark.warning[700],
-    100: baseDark.warning[100],
-    200: baseDark.warning[200],
-    300: baseDark.warning[300],
-    400: baseDark.warning[400],
-    emphasis: "#ff8c00", // Corporate Orange (Dark Orange)
-  },
-
-  danger: {
-    default: baseDark.danger[600],
-    hover: baseDark.danger[700],
-    active: baseDark.danger[500],
-    disabled: baseDark.neutral[400],
-    focus: baseDark.danger[600],
-    selected: baseDark.danger[700],
-    100: baseDark.danger[100],
-    200: baseDark.danger[200],
-    300: baseDark.danger[300],
-    400: baseDark.danger[400],
-  },
-
-  info: {
-    default: baseDark.info[600],
-    hover: baseDark.info[700],
-    active: baseDark.info[500],
-    disabled: baseDark.neutral[400],
-    focus: baseDark.info[600],
-    selected: baseDark.info[700],
-  },
-  error: {
-    default: baseDark.danger[600],
-    hover: baseDark.danger[700],
-    active: baseDark.danger[500],
-    disabled: baseDark.neutral[400],
-    focus: baseDark.danger[600],
-    selected: baseDark.danger[700],
-  },
-
-  button: {
-    white: {
-      bg: baseDark.neutral[1000],
-      text: baseDark.neutral[0],
-      border: baseDark.neutral[1000],
-      hoverBg: baseDark.neutral[950],
-    },
-    actionPrimary: {
-      bg: baseDark.neutral[1000],
-      text: baseDark.neutral[0],
-      hoverBg: baseDark.neutral[950],
-    },
-  },
-
-  sidebar: {
-    groupLabel: baseDark.neutral[500], // #5A6672
-  },
+const baseLight: BasePalette = {
+  neutral: activeBrand.neutral,
+  brand: activeBrand.primary,
+  success: activeBrand.success,
+  warning: activeBrand.warning,
+  danger: activeBrand.danger,
+  info: activeBrand.info,
 };
 
 /**
- * Light theme placeholder (estructura lista, no se usa todavía).
+ * Semantic Active — Uses CSS Variables for dynamic themes.
+ * This is the primary source for all semantic tokens.
  */
-const baseLight: BasePalette = {
-  // TODO: definir cuando se apruebe Light Mode
-  neutral: baseDark.neutral,
-  brand: baseDark.brand,
-  success: baseDark.success,
-  warning: baseDark.warning,
-  danger: baseDark.danger,
-  info: baseDark.info,
-};
-
-const semanticLight: SemanticPalette = {
-  // TODO: definir cuando se apruebe Light Mode
-  ...semanticDark,
-  button: {
-    ...semanticDark.button,
-    actionPrimary: {
-      bg: baseDark.neutral[0],
-      text: baseDark.neutral[1000],
-      hoverBg: baseDark.neutral[100],
-    },
-  },
-};
-
 const semanticActive: SemanticPalette = {
   background: {
     default: "var(--semantic-background-default)",
@@ -374,21 +213,49 @@ const semanticActive: SemanticPalette = {
     focus: "var(--semantic-error-focus)",
     selected: "var(--semantic-error-selected)",
   },
-  secondary: semanticDark.secondary, // Still using fallback (neutral)
-  elevated: semanticDark.elevated,   // Still using fallback (neutral)
-
+  secondary: {
+    default: "var(--semantic-secondary-default)",
+    hover: "var(--semantic-secondary-hover)",
+    active: "var(--semantic-secondary-active)",
+    disabled: "var(--semantic-secondary-active)",
+    focus: "var(--semantic-secondary-default)",
+    selected: "var(--semantic-secondary-hover)",
+  },
+  elevated: {
+    default: "var(--semantic-elevated-default)",
+    hover: "var(--semantic-elevated-hover)",
+    active: "var(--semantic-elevated-active)",
+    disabled: "var(--semantic-elevated-default)",
+    focus: "var(--semantic-elevated-hover)",
+    selected: "var(--semantic-elevated-active)",
+  },
   button: {
     white: {
       bg: "var(--semantic-button-white-bg)",
       text: "var(--semantic-button-white-text)",
       border: "var(--semantic-button-white-border)",
       hoverBg: "var(--semantic-button-white-hoverBg)",
+    },
+    actionPrimary: {
+      bg: "var(--semantic-button-action-primary-bg)",
+      text: "var(--semantic-button-action-primary-text)",
+      hoverBg: "var(--semantic-button-action-primary-hover)",
     }
   },
-
   sidebar: {
     groupLabel: "var(--semantic-sidebar-group-label)",
   },
+};
+
+/**
+ * Semantic palette — Dark/Light wrappers around semanticActive
+ */
+const semanticDark: SemanticPalette = {
+  ...semanticActive,
+};
+
+const semanticLight: SemanticPalette = {
+  ...semanticActive,
 };
 
 export const colors: TokensColors & { semantic: SemanticPalette } = {
