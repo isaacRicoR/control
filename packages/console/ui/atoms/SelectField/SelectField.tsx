@@ -65,7 +65,7 @@ export const SelectField: FC<SelectFieldProps> = ({
                     "--select-label-focus": semantic.primary.default,
                     "--select-label-error": semantic.danger.default,
 
-                    "--select-arrow": semantic.text.default,
+                    "--select-arrow": semantic.icon?.muted || semantic.text.muted || semantic.text.default,
                 } as CSSProperties
             }
         >
@@ -137,7 +137,7 @@ export const SelectField: FC<SelectFieldProps> = ({
                         display: "block",
                         marginTop: spacing[4],
                         fontSize: typography.fontSize.xs,
-                        color: error ? semantic.danger.default : semantic.text.disabled,
+                        color: error ? semantic.danger.default : semantic.text.muted || semantic.text.disabled,
                     }}
                 >
                     {error ? errorMessage : helperText}

@@ -106,7 +106,7 @@ export const Input: FC<InputProps> = ({
                         display: "block",
                         marginTop: spacing[4],
                         fontSize: typography.fontSize.xs,
-                        color: error ? semantic.danger.default : semantic.text.disabled,
+                        color: error ? semantic.danger.default : semantic.text.muted || semantic.text.disabled,
                     }}
                 >
                     {error ? errorMessage : helperText}
