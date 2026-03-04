@@ -59,7 +59,7 @@ export const Input: FC<InputProps> = ({
                 "--input-border-focus": semantic.border.focus,
                 "--input-border-error": semantic.danger.default,
                 "--input-text": semantic.text.active,
-                "--input-label": semantic.text.default,
+                "--input-label": semantic.text.muted || semantic.text.default,
                 "--input-label-focus": semantic.primary.default,
                 "--input-label-error": semantic.danger.default,
                 "--input-placeholder": semantic.text.muted || semantic.text.disabled,

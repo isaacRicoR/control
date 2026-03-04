@@ -61,7 +61,7 @@ export const SelectField: FC<SelectFieldProps> = ({
                     "--select-border-error": semantic.danger.default,
 
                     "--select-text": semantic.text.active,
-                    "--select-label": semantic.text.default,
+                    "--select-label": semantic.text.muted || semantic.text.default,
                     "--select-label-focus": semantic.primary.default,
                     "--select-label-error": semantic.danger.default,
 
