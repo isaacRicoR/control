@@ -271,11 +271,11 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
         left: 0,
         width: 0
     });
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useLayoutEffect"])({
-        "CardTabsHeader.useLayoutEffect": ()=>{
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "CardTabsHeader.useEffect": ()=>{
             const activeIndex = tabs.findIndex({
-                "CardTabsHeader.useLayoutEffect.activeIndex": (t)=>t.value === value
-            }["CardTabsHeader.useLayoutEffect.activeIndex"]);
+                "CardTabsHeader.useEffect.activeIndex": (t)=>t.value === value
+            }["CardTabsHeader.useEffect.activeIndex"]);
             const currentTab = tabsRef.current[activeIndex];
             if (currentTab) {
                 setUnderlineStyle({
@@ -284,7 +284,7 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
                 });
             }
         }
-    }["CardTabsHeader.useLayoutEffect"], [
+    }["CardTabsHeader.useEffect"], [
         value,
         tabs
     ]);
@@ -433,7 +433,7 @@ const CardTabsHeader = ({ tabs, value, onChange, leftSlot, rightSlot, ariaLabel 
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
-_s(CardTabsHeader, "LRURJPY2ozAd6MPEIgDzlUwt3yc=", false, function() {
+_s(CardTabsHeader, "d0ALtQyiLG9M2i/DfeQtfMM2TR4=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"]
     ];

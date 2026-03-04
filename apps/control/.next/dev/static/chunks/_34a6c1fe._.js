@@ -4268,15 +4268,15 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             style: {
                                 textAlign: "center",
-                                color: semantic.text.disabled
+                                color: semantic.text.muted
                             },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     style: {
                                         margin: 0,
-                                        fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.sm
+                                        fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.xs
                                     },
-                                    children: "Opcional • Formatos JPG, PNG •"
+                                    children: "Opcional • Formatos JPG, PNG"
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
                                     lineNumber: 175,
@@ -4285,12 +4285,23 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     style: {
                                         margin: 0,
-                                        fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.sm
+                                        fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.xs
+                                    },
+                                    children: "•"
+                                }, void 0, false, {
+                                    fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
+                                    lineNumber: 178,
+                                    columnNumber: 29
+                                }, void 0),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    style: {
+                                        margin: 0,
+                                        fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.xs
                                     },
                                     children: "Máx 5MB"
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                    lineNumber: 178,
+                                    lineNumber: 181,
                                     columnNumber: 29
                                 }, void 0)
                             ]
@@ -4323,7 +4334,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 errorMessage: errors.nombre
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 194,
+                                lineNumber: 197,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4339,7 +4350,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 errorMessage: errors.apellido
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 206,
+                                lineNumber: 209,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4349,7 +4360,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 onChange: (e)=>setSegundoApellido(e.target.value)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 218,
+                                lineNumber: 221,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4366,7 +4377,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 errorMessage: errors.email
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 219,
+                                lineNumber: 222,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -4377,13 +4388,13 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 onChange: (e)=>setTelefono(e.target.value)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 232,
+                                lineNumber: 235,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                        lineNumber: 186,
+                        lineNumber: 189,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4407,7 +4418,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 errorMessage: errors.rol
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 244,
+                                lineNumber: 247,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$SelectSingle$2f$SelectSingle$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectSingle"], {
@@ -4445,7 +4456,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 ]
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 257,
+                                lineNumber: 260,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$SelectSingle$2f$SelectSingle$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectSingle"], {
@@ -4471,7 +4482,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 ]
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 277,
+                                lineNumber: 280,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$SelectSingle$2f$SelectSingle$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectSingle"], {
@@ -4495,13 +4506,13 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                                 ]
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                                lineNumber: 294,
+                                lineNumber: 297,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                        lineNumber: 236,
+                        lineNumber: 239,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
@@ -4519,7 +4530,7 @@ const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = false, er
                 disabled: isReadOnly
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/components/UserForm.tsx",
-                lineNumber: 309,
+                lineNumber: 312,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
@@ -5508,6 +5519,13 @@ function UsersListClient() {
             headerStyle: {
                 borderBottom: "none"
             },
+            style: {
+                display: "flex",
+                flexDirection: "column",
+                height: `calc(100vh - ${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$layout$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["layout"].appBarHeight}px - ${__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24] * 2}px)`,
+                overflow: "hidden",
+                minHeight: 0
+            },
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$ErrorState$2f$ErrorState$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ErrorState"], {
                 title: "Error al cargar usuarios",
                 description: fetchError,
@@ -5517,7 +5535,7 @@ function UsersListClient() {
                 }
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                lineNumber: 392,
+                lineNumber: 399,
                 columnNumber: 17
             }, this)
         }, void 0, false, {
@@ -5545,28 +5563,28 @@ function UsersListClient() {
                             children: "Panel"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 417,
+                            lineNumber: 424,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             children: "›"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 418,
+                            lineNumber: 425,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             children: "Usuarios"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 419,
+                            lineNumber: 426,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             children: "›"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 420,
+                            lineNumber: 427,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5576,7 +5594,7 @@ function UsersListClient() {
                             children: "Lista"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 421,
+                            lineNumber: 428,
                             columnNumber: 25
                         }, void 0)
                     ]
@@ -5598,19 +5616,19 @@ function UsersListClient() {
                                 size: 16
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                lineNumber: 432,
+                                lineNumber: 439,
                                 columnNumber: 29
                             }, void 0),
                             "Crear usuario"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 426,
+                        lineNumber: 433,
                         columnNumber: 25
                     }, void 0)
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 425,
+                    lineNumber: 432,
                     columnNumber: 21
                 }, void 0),
                 headerStyle: {
@@ -5656,7 +5674,7 @@ function UsersListClient() {
                                 align: "left"
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                lineNumber: 473,
+                                lineNumber: 480,
                                 columnNumber: 29
                             }, void 0),
                             endContent: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -5669,7 +5687,7 @@ function UsersListClient() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                        lineNumber: 482,
+                                        lineNumber: 489,
                                         columnNumber: 33
                                     }, void 0),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5689,19 +5707,19 @@ function UsersListClient() {
                                             color: semantic.text.default
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                            lineNumber: 488,
+                                            lineNumber: 495,
                                             columnNumber: 37
                                         }, void 0)
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                        lineNumber: 487,
+                                        lineNumber: 494,
                                         columnNumber: 33
                                     }, void 0)
                                 ]
                             }, void 0, true)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 464,
+                            lineNumber: 471,
                             columnNumber: 21
                         }, this),
                         filteredRows.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$EmptyState$2f$EmptyState$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["EmptyState"], {
@@ -5710,7 +5728,7 @@ function UsersListClient() {
                             icon: "users"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 496,
+                            lineNumber: 503,
                             columnNumber: 25
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$DataTable$2f$DataTable$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DataTable"], {
                             ariaLabel: "Tabla de usuarios",
@@ -5719,18 +5737,18 @@ function UsersListClient() {
                             filterQuery: searchQuery
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 502,
+                            lineNumber: 509,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 450,
+                    lineNumber: 457,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                lineNumber: 412,
+                lineNumber: 419,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$ModalShell$2f$ModalShell$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ModalShell"], {
@@ -5754,12 +5772,12 @@ function UsersListClient() {
                     onSubmit: handleSaveUser
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 518,
+                    lineNumber: 525,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                lineNumber: 512,
+                lineNumber: 519,
                 columnNumber: 13
             }, this)
         ]

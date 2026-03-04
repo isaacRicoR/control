@@ -1,6 +1,7 @@
 {
   "/(shell)/devices/create/page": "app/(shell)/devices/create/page.js",
   "/(shell)/devices/list/page": "app/(shell)/devices/list/page.js",
+  "/(shell)/lab/apariencia/page": "app/(shell)/lab/apariencia/page.js",
   "/(shell)/panel/page": "app/(shell)/panel/page.js",
   "/(shell)/users/[id]/page": "app/(shell)/users/[id]/page.js",
   "/(shell)/users/create/page": "app/(shell)/users/create/page.js",
