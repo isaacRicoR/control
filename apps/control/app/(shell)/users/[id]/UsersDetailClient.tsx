@@ -217,7 +217,7 @@ export const UsersDetailClient = ({ userId }: UsersDetailClientProps) => {
             headerStyle={{ borderBottom: "none" }}
         >
             <Card
-                variant="panel"
+                variant="flat"
                 footer={showFooter && (
                     <div
                         style={{

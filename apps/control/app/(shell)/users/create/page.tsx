@@ -71,7 +71,7 @@ export default function CreateUserPage() {
             }
             headerStyle={{ borderBottom: "none" }}
         >
-            <Card noPadding elevated>
+            <Card noPadding variant="flat">
                 <UserForm
                     mode="create"
                     onSubmit={handleSubmit}

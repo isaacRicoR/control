@@ -17,17 +17,20 @@ import { colors, spacing, radius, typography, shadows } from "@tokens";
 export const Card: FC<CardProps> = ({ title, subtitle, children, footer, noPadding, elevated, variant = "default" }) => {
   const semantic = colors.semantic;
   const isPanel = variant === "panel";
-  const shouldElevate = elevated || isPanel;
+  const isFlat = variant === "flat";
+  // Los paneles y los elevados para formularios ahora son "flat" (sin borde ni sombra)
+  // para integrarse al fondo del layout.
+  const shouldBeFlat = isFlat || isPanel || elevated;
 
   return (
     <section
       style={{
         background: semantic.surface.default,
-        border: `1px solid ${semantic.border.default}`,
+        border: shouldBeFlat ? "none" : `1px solid ${semantic.border.default}`,
         borderRadius: radius.card,
         padding: noPadding ? 0 : spacing[24],
         fontFamily: typography.fontFamily.primary,
-        boxShadow: shouldElevate ? shadows.card : "none",
+        boxShadow: "none", // Se elimina la sombra para cumplir con la integración flat
       }}
       aria-label={title ?? "Card"}
     >
@@ -81,7 +84,7 @@ export const Card: FC<CardProps> = ({ title, subtitle, children, footer, noPaddi
         <footer
           style={{
             marginTop: spacing[24],
-            ...(isPanel ? {
+            ...(shouldBeFlat || isPanel ? {
               margin: `0 -${spacing[24]}px -${spacing[24]}px -${spacing[24]}px`
             } : {})
           }}

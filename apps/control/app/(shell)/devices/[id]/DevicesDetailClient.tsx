@@ -222,7 +222,7 @@ export function DevicesDetailClient({ deviceId }: DevicesDetailClientProps) {
             }
             headerStyle={{ borderBottom: "none" }}
         >
-            <Card>
+            <Card variant="flat">
                 <div style={{ borderBottom: `1px solid ${semantic.border.default}`, marginBottom: spacing[24], position: "relative" }}>
                     <div style={{ display: "flex", gap: spacing[8] }}>
                         {TABS.map((tab, index) => {

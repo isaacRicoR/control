@@ -55,7 +55,7 @@ export default function CreateDevicePage() {
             }
             headerStyle={{ borderBottom: "none" }}
         >
-            <Card noPadding elevated>
+            <Card noPadding variant="flat">
                 <DeviceForm
                     mode="create"
                     onSubmit={handleSubmit}
