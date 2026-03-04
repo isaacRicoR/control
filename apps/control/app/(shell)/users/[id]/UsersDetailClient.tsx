@@ -15,6 +15,7 @@ import { Card } from "@ui/molecules/Card/Card";
 import { CardTabsHeader } from "@ui/molecules/CardTabsHeader";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
 import { Text } from "@ui/atoms/Text/Text";
+import { Avatar } from "@ui/atoms/Avatar";
 import { Button } from "@ui/atoms/Button/Button";
 import { Input } from "@ui/atoms/Input/Input";
 import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
@@ -95,6 +96,7 @@ export const UsersDetailClient = ({ userId }: UsersDetailClientProps) => {
                         department: u.department ?? '',
                         status: u.status ?? 'Activo',
                         avatar: u.avatarUrl ?? null,
+                        initialsColor: u.initialsColor,
                     };
                     setFormData(loaded);
                     setOriginalData(loaded); // snapshot for cancel
@@ -125,6 +127,7 @@ export const UsersDetailClient = ({ userId }: UsersDetailClientProps) => {
         department: "",
         status: "Activo",
         avatar: null as string | null,
+        initialsColor: "",
     };
 
     const [formData, setFormData] = useState(emptyForm);
@@ -276,39 +279,12 @@ export const UsersDetailClient = ({ userId }: UsersDetailClientProps) => {
 
                                 {/* Avatar Column */}
                                 <div style={{ flex: "0 0 auto", display: "flex", justifyContent: "center" }}>
-                                    <div style={{
-                                        width: 120,
-                                        height: 120,
-                                        borderRadius: 60,
-                                        overflow: "hidden",
-                                        backgroundColor: semantic.surface.default,
-                                        border: `1px solid ${semantic.border.default}`,
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                    }}>
-                                        {formData.avatar ? (
-                                            <div style={{ position: "relative", width: "100%", height: "100%" }}>
-                                                <Image
-                                                    src={formData.avatar}
-                                                    alt={formData.name}
-                                                    fill
-                                                    style={{ objectFit: "cover" }}
-                                                />
-                                            </div>
-                                        ) : (
-                                            <Text
-                                                variant="body"
-                                                style={{
-                                                    fontSize: "2.5rem",
-                                                    color: semantic.text.disabled,
-                                                    fontWeight: typography.fontWeight.medium
-                                                }}
-                                            >
-                                                {getInitials(formData.name)}
-                                            </Text>
-                                        )}
-                                    </div>
+                                    <Avatar
+                                        src={formData.avatar}
+                                        name={formData.name}
+                                        backgroundColor={formData.initialsColor}
+                                        size={120}
+                                    />
                                 </div>
 
                                 {/* Details Column */}

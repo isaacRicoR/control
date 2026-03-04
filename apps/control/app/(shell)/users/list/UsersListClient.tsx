@@ -18,6 +18,7 @@ import { ModalShell } from "@ui/containers/ModalShell/ModalShell";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
 import ActionMenu from "@ui/molecules/ActionMenu/ActionMenu";
 import { UserForm, UserFormData } from "../components/UserForm";
+import { Avatar } from "@ui/atoms/Avatar";
 import { SearchInput } from "@ui/atoms/SearchInput";
 import { PermissionGate } from "@core/access/PermissionGate";
 import type { UserDTO } from "@server/db/memory/users.store";
@@ -39,6 +40,7 @@ type UserRow = {
     role: string;
     department: string;
     status: "Activo" | "Inactivo" | "Pendiente" | "Bloqueado";
+    avatar: string | null;
     devices: string[];
     lastActivity: string;
 };
@@ -139,23 +141,11 @@ export function UsersListClient() {
             filterValue: (row: UserRow) => `${String(row.name ?? "")} ${String(row.email ?? "")}`,
             cell: (row: UserRow) => (
                 <div style={{ display: "flex", alignItems: "center", gap: spacing[12] }}>
-                    <div
-                        style={{
-                            width: 40,
-                            height: 40,
-                            borderRadius: "50%",
-                            backgroundColor: row.initialsColor,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            color: semantic.text.onSolid,
-                            fontSize: 14,
-                            fontWeight: 600,
-                            fontFamily: typography.fontFamily.primary,
-                        }}
-                    >
-                        {row.initials}
-                    </div>
+                    <Avatar
+                        src={row.avatar}
+                        name={row.name}
+                        backgroundColor={row.initialsColor}
+                    />
                     <div>
                         <div style={{ fontWeight: 600, color: semantic.text.active, fontFamily: typography.fontFamily.primary }}>{row.name}</div>
                         <div style={{ fontSize: 12, color: semantic.text.muted, fontFamily: typography.fontFamily.primary }}>{row.email}</div>
@@ -330,6 +320,7 @@ export function UsersListClient() {
                     role: item.role,
                     department: item.department,
                     status: item.status,
+                    avatar: item.avatarUrl,
                     devices: item.devices,
                     lastActivity: item.lastActivity,
                 }));

@@ -413,6 +413,7 @@ a {
   --semantic-text-disabled: #5A6672;
   --semantic-text-focus: #ffffff;
   --semantic-text-selected: #ffffff;
+  --semantic-text-on-solid: #ffffff;
 
   --semantic-primary-default: #00FFA9;
   --semantic-primary-hover: #3dffb0;

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { colors, spacing, typography, radius } from "@tokens";
+import { Avatar } from "../../atoms/Avatar";
 import { Icon } from "../../atoms/Icon/Icon";
 import { Text } from "../../atoms/Text/Text";
 // Removed import: mockCompanies
@@ -48,18 +49,11 @@ export const CompanySelector: React.FC<CompanySelectorProps> = ({
             >
                 {/* Left: Avatar + Text */}
                 <div style={{ display: "flex", alignItems: "center", gap: spacing[12] }}>
-                    {/* Avatar Circle */}
-                    <div style={{
-                        width: 24,
-                        height: 24,
-                        borderRadius: "50%",
-                        backgroundColor: activeCompany?.color || semantic.success.default,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}>
-                        <span style={{ color: semantic.text.onSolid, fontSize: typography.fontSize.xs, fontWeight: "bold" }}>{activeCompany?.label || "EM"}</span>
-                    </div>
+                    <Avatar
+                        initials={activeCompany?.label || "EM"}
+                        backgroundColor={activeCompany?.color || semantic.success.default}
+                        size={24}
+                    />
 
                     <Text style={{
                         fontSize: typography.fontSize.sm,
@@ -128,24 +122,12 @@ export const CompanySelector: React.FC<CompanySelectorProps> = ({
                                             if (!company.active) e.currentTarget.style.backgroundColor = "transparent";
                                         }}
                                     >
-                                        {/* Avatar */}
-                                        <div style={{
-                                            width: 24,
-                                            height: 24,
-                                            minWidth: 24,
-                                            borderRadius: "50%",
-                                            backgroundColor: company.color,
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                            marginRight: spacing[12],
-                                            // Removed hardcoded shadow to comply with strict token rules
-                                            border: `1px solid ${semantic.border.default}`
-                                        }}>
-                                            <span style={{ color: semantic.text.onSolid, fontSize: typography.fontSize.xs, fontWeight: typography.fontWeight.bold }}>
-                                                {company.label}
-                                            </span>
-                                        </div>
+                                        <Avatar
+                                            initials={company.label}
+                                            backgroundColor={company.color}
+                                            size={24}
+                                            style={{ marginRight: spacing[12] }}
+                                        />
 
                                         {/* Info Column */}
                                         <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", marginRight: spacing[8], minWidth: 0 }}>

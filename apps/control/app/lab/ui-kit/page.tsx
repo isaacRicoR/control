@@ -9,6 +9,7 @@ import { Textarea } from "@ui/atoms/Textarea/Textarea";
 import { Text } from "@ui/atoms/Text/Text";
 import { Icon } from "@ui/atoms/Icon/Icon";
 import { Badge } from "@ui/atoms/Badge/Badge";
+import { Avatar } from "@ui/atoms/Avatar";
 import { Spinner } from "@ui/atoms/Spinner/Spinner";
 
 import { Card } from "@ui/molecules/Card/Card";
@@ -270,6 +271,30 @@ export default function UIKitShowroom() {
                 <Section title="Inventario de Átomos (Real usage)">
                     <div style={{ display: "flex", flexDirection: "column", gap: spacing[48], padding: `${spacing[24]}px 0` }}>
                         
+                        {/* Buttons Block */}
+                        <div>
+                            <Text variant="label" style={{ color: semantic.text.disabled, textTransform: "uppercase", fontSize: 11, letterSpacing: 1, display: "block" }}>
+                                Avatar
+                            </Text>
+                            <div style={{ height: "1px", backgroundColor: semantic.border.default, margin: `${spacing[12]}px 0 ${spacing[24]}px 0` }} />
+                            
+                            <div style={{ display: "flex", flexWrap: "wrap", gap: spacing[32], alignItems: "center" }}>
+                                <div style={{ display: "flex", flexDirection: "column", gap: spacing[8], alignItems: "center" }}>
+                                    <Text style={metadataLabelStyle}>Con Iniciales</Text>
+                                    <Avatar name="Juan Pérez" backgroundColor="#6366f1" />
+                                    <Text style={{ fontSize: 9, fontFamily: "monospace", color: semantic.text.disabled, opacity: 0.7 }}>onSolid text</Text>
+                                </div>
+                                <div style={{ display: "flex", flexDirection: "column", gap: spacing[8], alignItems: "center" }}>
+                                    <Text style={metadataLabelStyle}>Grande (Perfil)</Text>
+                                    <Avatar name="Juan Pérez" backgroundColor="#8b5cf6" size={80} fontSize="2rem" />
+                                </div>
+                                <div style={{ display: "flex", flexDirection: "column", gap: spacing[8], alignItems: "center" }}>
+                                    <Text style={metadataLabelStyle}>Sin Color</Text>
+                                    <Avatar name="User" />
+                                </div>
+                            </div>
+                        </div>
+
                         {/* Buttons Block */}
                         <div>
                             <Text variant="label" style={{ color: semantic.text.disabled, textTransform: "uppercase", fontSize: 11, letterSpacing: 1, display: "block" }}>
