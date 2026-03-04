@@ -434,7 +434,7 @@ export function UsersListClient() {
                     <PermissionGate entity="users" action="create">
                         <Button
                             size="sm"
-                            variant="create"
+                            variant="actionPrimary"
                             onClick={() => router.push("/users/create")}
                             style={{ gap: spacing[8], borderRadius: radius.xl }}
                         >

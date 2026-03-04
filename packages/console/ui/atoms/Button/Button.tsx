@@ -61,19 +61,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     const hoverVal = pt?.hover ?? pt?.bg ?? colors.semantic.primary.hover;
     cssVariables = { "--button-primary-hover": hoverVal };
   } else if (variant === 'actionPrimary') {
-    const actionTheme: 'dark' | 'light' = theme === 'light' ? 'dark' : 'light';
-    const ap = colors[actionTheme].semantic.button?.actionPrimary;
-    if (ap) {
-      bg = ap.bg;
-      text = ap.text;
-      border = ap.bg;
-      variantClass = "button-variant-action-primary";
-      cssVariables = { "--button-action-primary-hover": ap.hoverBg };
-    } else {
-      bg = colors.semantic.surface.default;
-      text = colors.semantic.text.active;
-      border = colors.semantic.border.default;
-    }
+    const ap = colors[theme].semantic.button?.actionPrimary;
+    const packBg = themeTokens?.buttonActionPrimaryBg;
+    const packText = themeTokens?.buttonActionPrimaryText;
+
+    bg = packBg ?? ap?.bg ?? colors.semantic.surface.default;
+    text = packText ?? ap?.text ?? colors.semantic.text.active;
+    border = bg;
+    variantClass = "button-variant-action-primary";
+    cssVariables = { "--button-action-primary-hover": ap?.hoverBg ?? colors.semantic.surface.hover };
   } else if (variant === 'secondary') {
     // Acción funcional no primaria: fondo neutro de superficie, texto de máximo contraste, borde visible.
     bg = colors.semantic.surface.default;

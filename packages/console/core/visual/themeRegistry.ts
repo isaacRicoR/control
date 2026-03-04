@@ -26,6 +26,8 @@ export interface ThemeTokens {
     // components
     buttonPrimaryBg: string;
     buttonPrimaryText: string;
+    buttonActionPrimaryBg: string;
+    buttonActionPrimaryText: string;
 }
 
 export interface ThemePack {
@@ -65,6 +67,8 @@ export const themeRegistry: Record<string, ThemePack> = {
             pending: "#5A6672",   // NOTE: --semantic-text-muted; no explicit pending in CSS
             buttonPrimaryBg: "#00FFA9",   // --semantic-button-primary-bg (= primary)
             buttonPrimaryText: "#FFFFFF", // --semantic-button-primary-text
+            buttonActionPrimaryBg: "#FFFFFF",
+            buttonActionPrimaryText: "#141A21",
         },
         light: {
             background: "#F4F6F8", // --semantic-background-default
@@ -79,6 +83,8 @@ export const themeRegistry: Record<string, ThemePack> = {
             pending: "#71717A",   // NOTE: --semantic-text-muted; no explicit pending in CSS
             buttonPrimaryBg: "#00A76F",   // --semantic-button-primary-bg (= primary)
             buttonPrimaryText: "#18181B",  // --semantic-button-primary-text (= text.default)
+            buttonActionPrimaryBg: "#141A21",
+            buttonActionPrimaryText: "#FFFFFF",
         },
     },
 
@@ -98,6 +104,8 @@ export const themeRegistry: Record<string, ThemePack> = {
             pending: "#94a3b8",       // security neutral-500
             buttonPrimaryBg: "#155eef",   // accent
             buttonPrimaryText: "#FFFFFF", // contrast on blue
+            buttonActionPrimaryBg: "#FFFFFF",
+            buttonActionPrimaryText: "#0f172a",
         },
         light: {
             background: "#F4F6F8",    // clone control (no security-specific light in CSS)
@@ -112,6 +120,8 @@ export const themeRegistry: Record<string, ThemePack> = {
             pending: "#71717A",      // global
             buttonPrimaryBg: "#155eef",   // accent
             buttonPrimaryText: "#FFFFFF",  // contrast on blue
+            buttonActionPrimaryBg: "#141A21",
+            buttonActionPrimaryText: "#FFFFFF",
         },
     },
 };

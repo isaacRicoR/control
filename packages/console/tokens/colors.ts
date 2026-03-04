@@ -270,6 +270,14 @@ const baseLight: BasePalette = {
 const semanticLight: SemanticPalette = {
   // TODO: definir cuando se apruebe Light Mode
   ...semanticDark,
+  button: {
+    ...semanticDark.button,
+    actionPrimary: {
+      bg: baseDark.neutral[0],
+      text: baseDark.neutral[1000],
+      hoverBg: baseDark.neutral[100],
+    },
+  },
 };
 
 const semanticActive: SemanticPalette = {

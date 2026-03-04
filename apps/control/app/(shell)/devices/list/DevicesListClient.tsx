@@ -348,7 +348,7 @@ export function DevicesListClient() {
                 <PermissionGate entity="devices" action="create">
                     <Button
                         size="sm"
-                        variant="create"
+                        variant="actionPrimary"
                         onClick={() => router.push("/devices/create")}
                         style={{ gap: spacing[8], borderRadius: radius.xl }}
                     >
