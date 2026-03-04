@@ -165,7 +165,7 @@ export default function UIKitShowroom() {
                             searchPlaceholder="Buscar dispositivo..."
                             actionsSlot={
                                 <div style={{ display: "flex", gap: spacing[12], alignItems: "center" }}>
-                                    <Button variant="white" size="sm" style={{ borderRadius: radius.xl, gap: spacing[8] }}>
+                                    <Button variant="actionPrimary" size="sm" style={{ borderRadius: radius.xl, gap: spacing[8] }}>
                                         <Icon name="plus" size={14} />
                                         Agregar dispositivo
                                     </Button>
@@ -226,7 +226,7 @@ export default function UIKitShowroom() {
                             <div style={{ padding: spacing[4] }}>
                                 <StatusBadge status="APPROVED" />
                                 <div style={{ display: "flex", flexWrap: "wrap", gap: spacing[8], marginBottom: spacing[16] }}>
-                                    <Button variant="primary" size="sm" onClick={() => showToast({ title: "Operación exitosa", type: "success" })}>Success</Button>
+                                    <Button variant="actionPrimary" size="sm" onClick={() => showToast({ title: "Operación exitosa", type: "success" })}>Success</Button>
                                     <Button variant="secondary" size="sm" onClick={() => showToast({ title: "Información importante", type: "info" })}>Info</Button>
                                     <Button variant="white" size="sm" onClick={() => showToast({ title: "Advertencia", type: "warning" })}>Warning</Button>
                                     <Button variant="error" size="sm" onClick={() => showToast({ title: "Error inesperado", type: "error" })}>Error</Button>
@@ -280,8 +280,8 @@ export default function UIKitShowroom() {
                             <div style={{ display: "flex", flexWrap: "wrap", gap: spacing[32], alignItems: "flex-start" }}>
                                 <div style={{ display: "flex", flexDirection: "column", gap: spacing[8], minWidth: 200 }}>
                                     <Text style={metadataLabelStyle}>Caso: Acción Principal</Text>
-                                    <Button variant="primary">Crear nuevo</Button>
-                                    <Text style={{ fontSize: 9, fontFamily: "monospace", color: semantic.text.disabled, opacity: 0.7 }}>props: variant=&quot;primary&quot;</Text>
+                                    <Button variant="actionPrimary" size="sm">Crear nuevo</Button>
+                                    <Text style={{ fontSize: 9, fontFamily: "monospace", color: semantic.text.disabled, opacity: 0.7 }}>props: variant=&quot;actionPrimary&quot; size=&quot;sm&quot;</Text>
                                     <UsageCollapsible paths={["app/(shell)/users/list/UsersListClient.tsx"]} />
                                 </div>
                                 <div style={{ display: "flex", flexDirection: "column", gap: spacing[8], minWidth: 200 }}>

@@ -77,7 +77,7 @@ export default function StatesLab() {
                     title="Sin resultados"
                     description="No hay datos que coincidan con tu búsqueda."
                     icon="search"
-                    action={<Button variant="primary">Limpiar filtros</Button>}
+                    action={<Button variant="actionPrimary" size="sm">Limpiar filtros</Button>}
                 />
             </LabSection>
 

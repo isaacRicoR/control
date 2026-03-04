@@ -69,12 +69,11 @@ export const FormActions = ({
             <div style={{ display: "flex", gap: spacing[12], alignItems: "center" }}>
                 <Button
                     variant="secondary"
+                    size="sm"
                     onClick={onCancel}
                     disabled={isDisabled}
                     style={{
                         borderRadius: radius.xl,
-                        paddingTop: spacing[8],
-                        paddingBottom: spacing[8],
                         opacity: isDisabled ? LOADING_OPACITY : 1,
                     }}
                 >
@@ -83,12 +82,11 @@ export const FormActions = ({
 
                 <Button
                     variant="actionPrimary"
+                    size="sm"
                     onClick={onSubmit}
                     disabled={isDisabled}
                     style={{
                         borderRadius: radius.xl,
-                        paddingTop: spacing[8],
-                        paddingBottom: spacing[8],
                         opacity: isDisabled ? LOADING_OPACITY : 1,
                     }}
                 >

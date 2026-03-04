@@ -16,7 +16,8 @@ const ToastsLabContent = () => {
             <Section title="Validation Controls">
                 <div style={{ display: "flex", gap: spacing[12], flexWrap: "wrap", paddingBottom: spacing[24] }}>
                     <Button
-                        variant="primary"
+                        variant="actionPrimary"
+                        size="sm"
                         onClick={() => showToast({
                             type: "success",
                             title: "Éxito",

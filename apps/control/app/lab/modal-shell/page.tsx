@@ -18,7 +18,7 @@ export default function ModalShellLabPage() {
                         Esta página valida la implementación aislada del componente <code>ModalShell</code>.
                     </p>
 
-                    <Button variant="primary" onClick={() => setIsModalOpen(true)}>
+                    <Button variant="actionPrimary" size="sm" onClick={() => setIsModalOpen(true)}>
                         Abrir Modal
                     </Button>
 
@@ -48,7 +48,7 @@ export default function ModalShellLabPage() {
                                 <Button variant="white" onClick={() => setIsModalOpen(false)}>
                                     Cancelar
                                 </Button>
-                                <Button variant="primary" onClick={() => setIsModalOpen(false)}>
+                                <Button variant="actionPrimary" size="sm" onClick={() => setIsModalOpen(false)}>
                                     Confirmar Acción
                                 </Button>
                             </div>

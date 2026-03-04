@@ -203,7 +203,8 @@ function CriticalTestUI({ session, semantic }: { session: Session, semantic: Sem
 
                     <div style={{ marginTop: spacing[12] }}>
                         <Button 
-                            variant="primary" 
+                            variant="actionPrimary" 
+                            size="sm"
                             onClick={runConnectorTest} 
                             disabled={connectorStatus === "testing"}
                         >

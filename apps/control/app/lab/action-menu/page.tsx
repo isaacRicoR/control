@@ -57,7 +57,7 @@ export default function ActionMenuLab() {
                     <div style={{ padding: spacing[24], border: `1px solid ${colors.dark.semantic.border.default}`, borderRadius: 8 }}>
                         <ActionMenu
                             align="left"
-                            trigger={<Button variant="primary">Open Menu</Button>}
+                            trigger={<Button variant="actionPrimary" size="sm">Open Menu</Button>}
                             title="Opciones"
                             items={[
                                 { type: "item", label: "Descargar", icon: "file-text" },

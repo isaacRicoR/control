@@ -209,7 +209,7 @@ export const UserForm = ({ initialValues, onCancel, onSubmit }: UserFormProps) =
                 <Button variant="white" onClick={onCancel} style={{ borderRadius: radius.xl }}>
                     Cancelar
                 </Button>
-                <Button variant="primary" onClick={handleSubmit} style={{ borderRadius: radius.xl }}>
+                <Button variant="actionPrimary" size="sm" onClick={handleSubmit} style={{ borderRadius: radius.xl }}>
                     Guardar Cambios
                 </Button>
             </div>

@@ -154,10 +154,10 @@ function PermissionsCheckUI({ session, semantic }: { session: Session | null, se
                         <h2 style={sectionTitleStyle}>Users UI</h2>
                         <div style={{ display: "flex", flexWrap: "wrap", gap: spacing[12] }}>
                             <PermissionGate entity="users" action="create">
-                                <Button size="sm" variant="white">Create User</Button>
+                                <Button size="sm" variant="actionPrimary">Create User</Button>
                             </PermissionGate>
                             <PermissionGate entity="users" action="edit">
-                                <Button size="sm" variant="primary">Edit User</Button>
+                                <Button size="sm" variant="actionPrimary">Edit User</Button>
                             </PermissionGate>
                             <PermissionGate entity="users" action="delete">
                                 <Button size="sm" variant="error">Delete User</Button>
@@ -173,10 +173,10 @@ function PermissionsCheckUI({ session, semantic }: { session: Session | null, se
                         <h2 style={sectionTitleStyle}>Devices UI</h2>
                         <div style={{ display: "flex", flexWrap: "wrap", gap: spacing[12] }}>
                             <PermissionGate entity="devices" action="create">
-                                <Button size="sm" variant="white">Create Device</Button>
+                                <Button size="sm" variant="actionPrimary">Create Device</Button>
                             </PermissionGate>
                             <PermissionGate entity="devices" action="edit">
-                                <Button size="sm" variant="primary">Edit Device</Button>
+                                <Button size="sm" variant="actionPrimary">Edit Device</Button>
                             </PermissionGate>
                             <PermissionGate entity="devices" action="delete">
                                 <Button size="sm" variant="error">Delete Device</Button>
