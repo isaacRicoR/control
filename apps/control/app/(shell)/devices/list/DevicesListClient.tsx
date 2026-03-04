@@ -41,12 +41,12 @@ type DeviceRow = {
 
 // ─── Tabs Config ─────────────────────────────────────────────────────────────
 
-const STATUS_TABS: { label: string; filterValue: DeviceStatus | null; variant?: "success" | "warning" | "error" | "neutral" }[] = [
+const STATUS_TABS: { label: string; filterValue: DeviceStatus | null; variant?: "success" | "warning" | "danger" | "neutral" }[] = [
     { label: "Todos", filterValue: null },
     { label: "Activos", filterValue: "Activo", variant: "success" },
     { label: "Mantenimiento", filterValue: "Mantenimiento", variant: "warning" },
     { label: "Inactivos", filterValue: "Inactivo", variant: "neutral" },
-    { label: "Bloqueados", filterValue: "Bloqueado", variant: "error" },
+    { label: "Bloqueados", filterValue: "Bloqueado", variant: "danger" },
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -207,7 +207,7 @@ export function DevicesListClient() {
             filterValue: (row: DeviceRow) => `${row.nombre} ${row.tipo}`,
             cell: (row: DeviceRow) => (
                 <div
-                    style={{ display: "flex", alignItems: "center", gap: spacing[12], cursor: "pointer" }}
+                    style={{ display: "flex", alignItems: "center", gap: spacing[12], cursor: "pointer", userSelect: "none" }}
                     onClick={() => router.push(`/devices/${row.id}`)}
                 >
                     <div
@@ -378,7 +378,7 @@ export function DevicesListClient() {
                     tabs={STATUS_TABS.map(tab => ({
                         label: tab.label,
                         count: getTabCount(tab.filterValue),
-                        variant: tab.variant === 'error' ? 'danger' : tab.variant,
+                        variant: tab.variant,
                     }))}
                     activeTab={activeTab}
                     onTabChange={handleTabChange}

@@ -1,0 +1,44 @@
+---
+description: Estándar para pantallas tipo Panel (Detalle, Editar, Crear, Configuración) en apps/control.
+globs: apps/control/app/(shell)/**/*.tsx
+alwaysApply: false
+---
+
+# Panel Layout Standard
+
+Todas las pantallas de tipo Detalle, Edición, Creación o Configuración deben seguir el patrón visual formalizado en `UsersDetailClient.tsx`.
+
+## Estructura Oficial (Panel Layout)
+
+El panel debe estar compuesto por tres secciones claramente definidas:
+
+1. **HeaderTools**: Contiene la navegación superior (`Back`), pestañas (`Tabs`) y un separador inferior. Implementado preferentemente con `CardTabsHeader`.
+2. **Body**: Zona de contenido variable (formularios, grids, etc.). Es la única zona con scroll interno permitido.
+3. **FooterActions**: Zona fija en la base con borde superior, conteniendo acciones principales (Cancelar, Guardar) alineadas a la derecha.
+
+## Implementación de Referencia
+
+La pantalla oficial de referencia es:
+`apps/control/app/(shell)/users/[id]/UsersDetailClient.tsx`
+
+## Componente de Implementación
+
+Para asegurar la consistencia, se debe utilizar el template:
+`apps/control/app/(shell)/_components/PagePanelTemplate.tsx`
+
+### Ejemplo de Uso:
+
+```tsx
+import { PagePanelTemplate } from "../../_components/PagePanelTemplate";
+
+<PagePanelTemplate
+    header={<CardTabsHeader ... />}
+    body={<FormContent ... />}
+    footer={<ButtonActions ... />}
+/>
+```
+
+## Reglas de Estilo
+- **Bordes**: Usar `semantic.border.subtle || semantic.border.default` para el contenedor principal.
+- **Radios**: Usar `radius.card` (18px) para todos los paneles y botones de acción.
+- **Layout**: Altura calculada con `height: calc(100vh - ${layout.appBarHeight}px - ${spacing[24] * 2}px)` para asegurar que el panel ocupe el espacio disponible sin scroll global.

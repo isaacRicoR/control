@@ -122,6 +122,7 @@ export default function AparienciaPage() {
                         tabs={TABS}
                         value={activeTab}
                         onChange={setActiveTab}
+                        tabsGap={spacing[16]}
                         leftSlot={
                             <div style={{ paddingLeft: spacing[12], paddingRight: spacing[8], paddingTop: spacing[12], paddingBottom: spacing[12], display: "flex", alignItems: "center" }}>
                                 <ActionIcon
@@ -137,7 +138,7 @@ export default function AparienciaPage() {
                 body={
                     <>
                         {activeTab === "Base" && (
-                            <div style={{ display: "flex", flexDirection: "column", gap: spacing[24], padding: `${spacing[24]}px 0` }}>
+                            <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
                                 {/* Lectura: preset y mode */}
                                 <div
                                     style={{

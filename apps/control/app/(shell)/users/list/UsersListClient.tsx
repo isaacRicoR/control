@@ -146,7 +146,8 @@ export function UsersListClient() {
                         display: "flex", 
                         alignItems: "center", 
                         gap: spacing[12],
-                        cursor: "pointer"
+                        cursor: "pointer",
+                        userSelect: "none"
                     }}
                 >
                     <Avatar
