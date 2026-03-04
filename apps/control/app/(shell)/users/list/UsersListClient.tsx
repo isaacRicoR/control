@@ -453,9 +453,8 @@ export function UsersListClient() {
                         display: "flex",
                         flexDirection: "column",
                         backgroundColor: semantic.surface.default,
-                        border: `1px solid ${semantic.border.default}`,
                         borderRadius: radius.card,
-                        boxShadow: shadows.card,
+                        boxShadow: "none",
                         overflow: "hidden",
                         flex: 1,
                         minHeight: 0, // Crucial for nested flex scroll

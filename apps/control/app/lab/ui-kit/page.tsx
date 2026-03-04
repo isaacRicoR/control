@@ -150,10 +150,10 @@ export default function UIKitShowroom() {
                         display: "flex", 
                         flexDirection: "column", 
                         backgroundColor: semantic.surface.default, 
-                        border: `1px solid ${semantic.border.default}`, 
                         borderRadius: radius.card, 
                         overflow: "hidden",
-                        width: "100%"
+                        width: "100%",
+                        boxShadow: "none"
                     }}>
                         <TableToolbar 
                             tabs={[
