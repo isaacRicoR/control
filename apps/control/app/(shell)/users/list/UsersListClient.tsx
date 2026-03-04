@@ -526,6 +526,7 @@ export function UsersListClient() {
                             departamento: selectedUser.department,
                             rolPlataforma: "Usuario", // Default, not available in list data
                             estadoInicial: selectedUser.status,
+                            avatarUrl: selectedUser.avatar, // Pass the avatar URL from list data
                         }}
                         onCancel={handleCloseModal}
                         onSubmit={handleSaveUser}

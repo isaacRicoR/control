@@ -9,6 +9,7 @@ import { FormLayout } from "@ui/patterns/form/FormLayout";
 import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
 import { FormActions } from "@ui/patterns/form/FormActions";
 import { colors, spacing, typography } from "@tokens";
+import { Avatar } from "@ui/atoms/Avatar";
 
 // Extracted from app/users/create/page.tsx to be the canonical UserForm
 // Supports both 'create' and 'edit' modes
@@ -23,6 +24,7 @@ export interface UserFormData {
     departamento: string;
     rolPlataforma: string;
     estadoInicial: string;
+    avatarUrl?: string | null;
 }
 
 interface UserFormProps {
@@ -52,6 +54,7 @@ export const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = fa
     const [departamento, setDepartamento] = useState(initialValues?.departamento || "");
     const [rolPlataforma, setRolPlataforma] = useState(initialValues?.rolPlataforma || "");
     const [estadoInicial, setEstadoInicial] = useState(initialValues?.estadoInicial || "");
+    const [avatarUrl, setAvatarUrl] = useState(initialValues?.avatarUrl || null);
 
     const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -68,6 +71,7 @@ export const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = fa
                 setDepartamento(initialValues.departamento || "");
                 setRolPlataforma(initialValues.rolPlataforma || "");
                 setEstadoInicial(initialValues.estadoInicial || "");
+                setAvatarUrl(initialValues.avatarUrl || null);
             }, 0);
             return () => clearTimeout(timer);
         }
@@ -117,7 +121,8 @@ export const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = fa
             rol,
             departamento,
             rolPlataforma,
-            estadoInicial
+            estadoInicial,
+            avatarUrl
         });
     };
 
@@ -132,7 +137,7 @@ export const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = fa
                                 width: 120,
                                 height: 120,
                                 borderRadius: "50%",
-                                border: `1px dashed ${semantic.border.active}`,
+                                border: avatarUrl ? "none" : `1px dashed ${semantic.border.active}`,
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
@@ -140,21 +145,30 @@ export const UserForm = ({ mode, initialValues, onCancel, onSubmit, loading = fa
                                 "--avatar-bg-hover": semantic.surface.hover,
                                 "--avatar-icon": semantic.text.disabled,
                                 "--avatar-icon-hover": semantic.text.hover,
+                                overflow: "hidden", // Important for Avatar
                             } as unknown as React.CSSProperties}
                         >
-                            <svg
-                                width={56}
-                                height={56}
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth={1.5}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                                <circle cx="12" cy="7" r="4" />
-                            </svg>
+                            {avatarUrl ? (
+                                <Avatar
+                                    src={avatarUrl}
+                                    name={`${nombre} ${apellido}`}
+                                    size={120}
+                                />
+                            ) : (
+                                <svg
+                                    width={56}
+                                    height={56}
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg>
+                            )}
                         </div>
 
                         <div style={{ textAlign: "center", color: semantic.text.disabled }}>
