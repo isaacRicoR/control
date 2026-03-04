@@ -105,7 +105,7 @@ export const StatusTabs: React.FC<StatusTabsProps> = ({
                 width: "100%",
                 boxShadow: "none",
                 filter: "none",
-                borderBottom: `1px solid ${semantic.border.default}`,
+                borderBottom: `1px solid ${semantic.border.subtle || semantic.border.default}`,
                 ...style,
             }}
         >

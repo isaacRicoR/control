@@ -128,6 +128,7 @@ a {
 
   /* Borders */
   --semantic-border-default: var(--brand-neutral-300);
+  --semantic-border-subtle: rgba(228, 228, 231, 0.5);
   --semantic-border-hover: var(--brand-neutral-400);
   --semantic-border-active: var(--brand-neutral-500);
   --semantic-border-disabled: var(--brand-neutral-300);
@@ -272,6 +273,7 @@ a {
   --semantic-surface-selected: #E1F0EE;
 
   --semantic-border-default: #E4E4E7;
+  --semantic-border-subtle: rgba(228, 228, 231, 0.5);
   --semantic-border-hover: #D4D4D8;
   --semantic-border-active: #A1A1AA;
   --semantic-border-disabled: #E4E4E7;
@@ -400,6 +402,7 @@ a {
   --semantic-surface-selected: #00FFA91A;
 
   --semantic-border-default: #2A3744;
+  --semantic-border-subtle: rgba(42, 55, 68, 0.5);
   --semantic-border-hover: #2c2c36;
   --semantic-border-active: #5A6672;
   --semantic-border-disabled: #2A3744;

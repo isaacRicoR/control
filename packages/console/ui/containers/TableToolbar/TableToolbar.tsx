@@ -44,7 +44,7 @@ export const TableToolbar: React.FC<TableToolbarProps> = ({
                 gap: spacing[12],
                 paddingBottom: spacing[12],
                 backgroundColor: "transparent",
-                borderBottom: `1px solid ${semantic.border.default}`,
+                borderBottom: `1px solid ${semantic.border.subtle || semantic.border.default}`,
                 boxShadow: "none",
                 filter: "none",
                 ...style,

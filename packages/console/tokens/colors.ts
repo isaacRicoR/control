@@ -50,6 +50,7 @@ export type SemanticTokenGroup = Record<SemanticState, string> & {
   200?: string;
   300?: string;
   400?: string;
+  subtle?: string;
   muted?: string;
   emphasis?: string;
   onSolid?: string;
@@ -145,6 +146,7 @@ const semanticActive: SemanticPalette = {
   },
   border: {
     default: "var(--semantic-border-default)",
+    subtle: "var(--semantic-border-subtle)",
     hover: "var(--semantic-border-hover)",
     active: "var(--semantic-border-active)",
     disabled: "var(--semantic-border-disabled)",

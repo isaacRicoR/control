@@ -32,11 +32,11 @@ export const TableFooter: React.FC<TableFooterProps> = ({
             <div
                 style={{
                     display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: `${spacing[12]}px ${spacing[24]}px`,
-                    borderTop: `1px solid ${semantic.border.default}`,
-                    boxShadow: "none",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: `${spacing[12]}px ${spacing[24]}px`,
+                borderTop: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                boxShadow: "none",
                     filter: "none",
                     color: semantic.text.default,
                     fontSize: typography.fontSize.sm,

@@ -68,7 +68,7 @@ export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
             role="tablist"
             aria-label={ariaLabel}
             style={{
-                borderBottom: `1px solid ${semantic.border.default}`,
+                borderBottom: `1px solid ${semantic.border.subtle || semantic.border.default}`,
                 marginTop: -spacing[24],
                 marginBottom: spacing[24],
                 position: "relative",
@@ -99,7 +99,7 @@ export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
                             style={{
                                 width: 1,
                                 height: dividerHeight,
-                                backgroundColor: semantic.border.default,
+                                backgroundColor: semantic.border.subtle || semantic.border.default,
                                 flexShrink: 0,
                             }}
                             aria-hidden
