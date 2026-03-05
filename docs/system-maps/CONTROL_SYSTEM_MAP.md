@@ -139,6 +139,28 @@ Este documento (CONTROL SYSTEM MAP) describe únicamente:
 
 ---
 
+## UI GOVERNANCE (Component Ownership)
+
+Regla:
+Los cartuchos (Features) **no deben** crear componentes UI reutilizables dentro de sus carpetas.
+
+- Los cartuchos solo **usan** el Design System (UI System).
+- Todo componente UI reutilizable vive en `packages/console/ui/*` (Atoms/Molecules/Containers/Patterns).
+- Providers/Hooks compartidos viven en `packages/console/core/*` (ej: Toast).
+
+Si un cartucho necesita un componente UI que no existe:
+
+1. Verificar en **UI SYSTEM MAP**
+2. Proponer/registrar el componente en **UI SYSTEM MAP** (estado ❌ / planificado)
+3. Implementarlo oficialmente en `packages/console/ui/*`
+4. Marcarlo como ✅ en **UI SYSTEM MAP**
+5. Solo entonces usarlo en el cartucho
+
+Objetivo:
+Evitar duplicación de UI y mantener consistencia entre módulos.
+
+---
+
 ## 📡 BACKEND COMMUNICATION LAYER
 
 **Contrato**: `UNIVERSAL_CONNECTOR_CONTRACT_v2.1` — **CERRADO (LTS)**

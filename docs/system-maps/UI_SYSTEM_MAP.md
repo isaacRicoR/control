@@ -60,6 +60,23 @@ Si se requiere uno:
 
 ---
 
+## UI Governance (Regla de creación de componentes)
+
+Regla:
+Está prohibido crear componentes UI reutilizables dentro de features/cartuchos.
+
+- Los cartuchos solo consumen componentes existentes del Design System.
+- Si un componente falta, se crea oficialmente dentro del Design System y se registra aquí.
+
+Proceso obligatorio para nuevas piezas:
+
+1. Registrar el componente en este documento (❌ Planificado)
+2. Implementar en `packages/console/ui/*` o `packages/console/core/*` según corresponda
+3. Actualizar estado a ✅ Implementado
+4. Recién entonces usarlo en cualquier cartucho
+
+---
+
 ## 3. ATOMS
 
 ### Inputs
