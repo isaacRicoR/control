@@ -106,6 +106,39 @@ Infraestructura relacionada:
 
 ---
 
+## DESIGN SYSTEM SOURCE OF TRUTH
+
+El inventario completo de componentes del sistema visual **no se documenta en este archivo**.
+
+Para consultar qué componentes UI existen realmente en el proyecto, ver:
+
+**UI SYSTEM MAP — CONTROL Design System**
+
+Ese documento contiene:
+
+- Inventario oficial de Atoms, Molecules, Containers y Patterns
+- Estado de cada componente (Implementado / Parcial / No existe)
+- Ruta exacta en el codebase
+- Reglas de uso del Design System
+
+Regla de arquitectura:
+
+Antes de crear o usar cualquier componente UI:
+
+1. Consultar UI SYSTEM MAP
+2. Si el componente existe → reutilizar
+3. Si no existe → registrarlo primero en UI SYSTEM MAP antes de implementarlo
+
+Este documento (CONTROL SYSTEM MAP) describe únicamente:
+
+- Arquitectura del sistema
+- Capas (Console, Core, Features)
+- Conectores y contratos
+- Seguridad y RBAC
+- Patrones UI congelados
+
+---
+
 ## 📡 BACKEND COMMUNICATION LAYER
 
 **Contrato**: `UNIVERSAL_CONNECTOR_CONTRACT_v2.1` — **CERRADO (LTS)**
