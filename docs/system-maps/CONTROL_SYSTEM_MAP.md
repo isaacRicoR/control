@@ -44,11 +44,20 @@ El sistema utiliza reglas de IA para garantizar que los patrones visuales se man
 Jerarquía oficial para la construcción de pantallas dentro de `apps/control`.
 
 ### Pantallas de Detalle / Edición / Panel
-1. **PageShell**: Contenedor semántico.
-2. **PagePanelTemplate**: Template reutilizable con 3 slots:
-   - **HeaderTools**: `Back` + `Tabs` (CardTabsHeader).
-   - **Body**: Contenido scrolleable (Grid + Inputs).
-   - **FooterActions**: Acciones `[ Cancelar ] [ Guardar ]`.
+
+1. **PageShell**  
+   Contenedor semántico de página.
+
+2. **PagePanelTemplate**  
+   Template reutilizable para vistas tipo panel que implementa el **Panel Card Pattern** definido en el **UI SYSTEM MAP**.
+
+   Este template organiza la interfaz en tres zonas estructurales:
+
+   - **HeaderTools**: Back navigation + Tabs cuando aplica.
+   - **Body**: Contenido scrolleable que puede incluir: formularios, configuraciones, dependencias de campos, listas o mini tablas.
+   - **FooterActions**: Acciones del panel como Cancelar / Guardar o acciones críticas.
+
+**Nota de arquitectura**: La estructura completa del **Panel Card Pattern** se documenta en **UI SYSTEM MAP → PATTERNS → Panel Card Pattern**. Este documento (CONTROL SYSTEM MAP) describe la arquitectura general del sistema, mientras que el **UI SYSTEM MAP** es la fuente de verdad para los componentes y patrones de interfaz.
 
 ### Pantallas de Listado
 1. **PageShell** (variant="fluid"): Altura fija al 100% visible.

@@ -255,6 +255,56 @@ Sistema global de notificaciones breves para feedback de acciones del usuario.
 | **Inline Expandable Row Pattern** | ❌ | Fila de tabla que se expande para mostrar detalle sin navegar |
 | **Workflow Board Pattern** | ❌ | Tablero Kanban para flujos de estado arrastrables |
 
+### Panel Card Pattern
+
+El **Panel Card Pattern** define la estructura estándar utilizada para pantallas de configuración, perfil, formularios y paneles administrativos dentro del sistema.
+
+Este patrón garantiza consistencia visual y estructural en todos los módulos del sistema.
+
+**Estructura**:
+
+```
+PanelCard
+├ Header
+│   ├ Title
+│   ├ Description (opcional)
+│   ├ Tabs / navegación interna (opcional)
+│   └ HeaderActions (opcional)
+│
+├ Body
+│   ├ Formularios
+│   ├ Configuración de campos
+│   ├ Dependencias de campos (conditional fields)
+│   ├ Secciones estructuradas
+│   ├ Listas o mini tablas
+│   └ Estados de carga (Skeleton / Spinner)
+│
+└ Footer
+    ├ DangerAction (opcional)
+    ├ SecondaryAction (Cancelar)
+    ├ PrimaryAction (Guardar / Aplicar)
+    └ Status feedback (Guardado / Error)
+```
+
+**Reglas de uso**:
+
+- El **Header** define el contexto del panel.
+- El **Body** es completamente flexible y puede contener cualquier estructura necesaria.
+- El **Footer** contiene las acciones principales del panel.
+- Las acciones destructivas deben aparecer separadas del PrimaryAction.
+
+**Casos de uso**:
+
+- Configuración de cuenta
+- Perfil de usuario
+- Seguridad
+- Apariencia
+- Integraciones
+- Permisos
+- Formularios administrativos
+
+Este patrón debe ser utilizado por cualquier módulo que implemente vistas tipo panel dentro del sistema.
+
 ---
 
 ## 7. Global UI States — ✅ Cerrado (v1)
