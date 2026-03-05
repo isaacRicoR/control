@@ -186,6 +186,7 @@ Proceso obligatorio para nuevas piezas:
 | Componente | Estado | Ruta | Nota de uso |
 |-----------|--------|------|-------------|
 | Card | ✅ | `molecules/Card/` | Contenedor con borde, radius y padding opcional |
+| PanelCard | ✅ | `containers/PanelCard/` | Contenedor estándar para paneles (configuración, perfil, formularios). Implementa Panel Card Pattern |
 | Section | ✅ | `containers/Section/` | Sección con título y contenido |
 | PageShell | ✅ | `containers/PageShell/` | Shell de página con título, breadcrumbs, acciones y layout fluid/boxed |
 | ModalShell | ✅ | `containers/ModalShell/` | Modal con overlay, título, close y contenido |
