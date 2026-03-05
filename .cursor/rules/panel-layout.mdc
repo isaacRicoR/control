@@ -1,0 +1,83 @@
+---
+description: Estándar para pantallas tipo PANEL (configuración, perfil, formularios de sistema) en apps/control.
+globs: apps/control/app/(shell)/**/*.tsx
+alwaysApply: false
+---
+
+# Panel Layout Standard
+
+Todas las pantallas de configuración, perfil o formularios de sistema deben usar **PanelCard**.
+
+No crear layouts manuales para pantallas tipo panel.
+
+## 1. Estructura Obligatoria
+
+```
+PageShell
+└ PanelCard
+   ├ PanelCardHeader
+   ├ Tabs (opcional)
+   ├ PanelCardBody (scrollable)
+   └ PanelCardFooter (sticky)
+```
+
+## 2. Reglas Obligatorias
+
+- **No crear layouts manuales** para pantallas tipo panel.
+- **No crear footers personalizados**. El footer debe usar `PanelCardFooter`.
+- **Scroll**: Solo puede existir dentro de `PanelCardBody`.
+- **Acciones del footer**: Deben usar exclusivamente botones del Design System.
+
+### Botones permitidos en el footer
+
+```tsx
+<Button variant="secondary">Cancelar</Button>
+<Button variant="actionPrimary">Guardar</Button>
+```
+
+No aplicar estilos manuales a los botones.
+
+## 3. Reglas de Layout
+
+- El **footer** debe permanecer **sticky** (flexShrink: 0).
+- El **body** debe manejar el scroll (overflow-y: auto).
+- **No agregar padding manual** en pantallas.
+- **No modificar** el spacing del footer.
+
+## 4. Ejemplo de Estructura Correcta
+
+```tsx
+<PageShell
+  title="Configuración"
+  breadcrumbs={...}
+  style={{ display: "flex", flexDirection: "column", height: "...", overflow: "hidden", minHeight: 0 }}
+>
+  <PanelCard
+    title="Configuración"
+    description="Descripción opcional del panel"
+    secondaryAction={<Button variant="secondary" size="sm">Cancelar</Button>}
+    primaryAction={<Button variant="actionPrimary" size="sm">Guardar</Button>}
+  >
+    {/* PanelCardBody envuelve automáticamente el contenido */}
+    {/* contenido: formularios, secciones, etc. */}
+  </PanelCard>
+</PageShell>
+```
+
+## 5. Casos de Uso
+
+PanelCard es obligatorio para:
+
+- Configuración de cuenta
+- Perfil de usuario
+- Seguridad
+- Apariencia
+- Integraciones
+- Permisos
+- Formularios administrativos
+
+## Referencia
+
+- **Componente**: `@ui/containers/PanelCard`
+- **Documentación**: UI SYSTEM MAP → PATTERNS → Panel Card Pattern
+- **Ejemplo**: `apps/control/app/(shell)/lab/apariencia/page.tsx`

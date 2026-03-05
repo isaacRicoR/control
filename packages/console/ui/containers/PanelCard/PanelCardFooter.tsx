@@ -7,7 +7,8 @@ import type { PanelCardFooterProps } from "./PanelCard.types";
 
 /**
  * PanelCardFooter — Footer del Panel Card Pattern.
- * DangerAction separado a la izquierda; acciones principales alineadas a la derecha.
+ * Compacto, sticky. DangerAction separado a la izquierda; acciones principales alineadas a la derecha.
+ * Padding: spacing[16] (estándar formularios).
  */
 export const PanelCardFooter: React.FC<PanelCardFooterProps> = ({
     dangerAction,
@@ -19,17 +20,21 @@ export const PanelCardFooter: React.FC<PanelCardFooterProps> = ({
     const { theme } = useTheme();
     const semantic = colors[theme].semantic;
 
+    const baseFooterStyle: React.CSSProperties = {
+        flexShrink: 0,
+        borderTop: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+        padding: spacing[16],
+        display: "flex",
+        alignItems: "center",
+        gap: spacing[12],
+    };
+
     if (children) {
         return (
             <footer
                 style={{
-                    flexShrink: 0,
-                    borderTop: `1px solid ${semantic.border.subtle || semantic.border.default}`,
-                    padding: spacing[24],
-                    display: "flex",
-                    alignItems: "center",
+                    ...baseFooterStyle,
                     justifyContent: "flex-end",
-                    gap: spacing[12],
                 }}
             >
                 {children}
@@ -37,44 +42,31 @@ export const PanelCardFooter: React.FC<PanelCardFooterProps> = ({
         );
     }
 
-    const hasActions = dangerAction || secondaryAction || primaryAction || status;
+    const hasLeft = dangerAction || status;
+    const hasRight = secondaryAction || primaryAction;
+    const hasActions = hasLeft || hasRight;
     if (!hasActions) return null;
 
     return (
         <footer
             style={{
-                flexShrink: 0,
-                borderTop: `1px solid ${semantic.border.subtle || semantic.border.default}`,
-                padding: spacing[24],
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: spacing[16],
+                ...baseFooterStyle,
+                justifyContent: hasLeft && hasRight ? "space-between" : "flex-end",
                 flexWrap: "wrap",
             }}
         >
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: spacing[12],
-                    order: 1,
-                }}
-            >
-                {dangerAction}
-                {status}
-            </div>
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: spacing[12],
-                    order: 2,
-                }}
-            >
-                {secondaryAction}
-                {primaryAction}
-            </div>
+            {hasLeft && (
+                <div style={{ display: "flex", alignItems: "center", gap: spacing[12] }}>
+                    {dangerAction}
+                    {status}
+                </div>
+            )}
+            {hasRight && (
+                <div style={{ display: "flex", alignItems: "center", gap: spacing[12] }}>
+                    {secondaryAction}
+                    {primaryAction}
+                </div>
+            )}
         </footer>
     );
 };
