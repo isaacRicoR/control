@@ -3,9 +3,9 @@
 import React, { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { PageShell } from "@ui/containers/PageShell/PageShell";
+import { PanelCard } from "@ui/containers/PanelCard";
 import { CardTabsHeader } from "@ui/molecules/CardTabsHeader";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
-import { PagePanelTemplate } from "../../_components/PagePanelTemplate";
 import { Button } from "@ui/atoms/Button/Button";
 import { Input } from "@ui/atoms/Input/Input";
 import { Text } from "@ui/atoms/Text/Text";
@@ -33,7 +33,13 @@ type BaseTokens = {
     accent: string;
 };
 
-function baseFromTokens(t: { background: string; surface: string; border: string; text: string; accent: string }): BaseTokens {
+function baseFromTokens(t: {
+    background: string;
+    surface: string;
+    border: string;
+    text: string;
+    accent: string;
+}): BaseTokens {
     return {
         background: t.background,
         surface: t.surface,
@@ -43,22 +49,95 @@ function baseFromTokens(t: { background: string; surface: string; border: string
     };
 }
 
+function ModoAyudaSwitch({
+    value,
+    onChange,
+}: {
+    value: boolean;
+    onChange: (v: boolean) => void;
+}) {
+    const { theme } = useTheme();
+    const semantic = colors[theme].semantic;
+
+    return (
+        <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                gap: spacing[8],
+            }}
+        >
+            <span
+                style={{
+                    fontSize: typography.fontSize.sm,
+                    color: semantic.text.muted,
+                    fontFamily: typography.fontFamily.primary,
+                }}
+            >
+                Modo ayuda
+            </span>
+            <button
+                type="button"
+                role="switch"
+                aria-checked={value}
+                onClick={() => onChange(!value)}
+                style={{
+                    width: 44,
+                    height: 24,
+                    borderRadius: 12,
+                    border: "none",
+                    cursor: "pointer",
+                    backgroundColor: value ? semantic.primary.default : semantic.border.default,
+                    padding: 2,
+                    transition: "background-color 0.2s ease",
+                }}
+            >
+                <span
+                    style={{
+                        display: "block",
+                        width: 20,
+                        height: 20,
+                        borderRadius: "50%",
+                        backgroundColor: "#fff",
+                        transform: value ? "translateX(20px)" : "translateX(0)",
+                        transition: "transform 0.2s ease",
+                    }}
+                />
+            </button>
+            <span
+                style={{
+                    fontSize: typography.fontSize.sm,
+                    color: semantic.text.muted,
+                    fontFamily: typography.fontFamily.primary,
+                }}
+            >
+                {value ? "ON" : "OFF"}
+            </span>
+        </div>
+    );
+}
+
 export default function AparienciaPage() {
     const router = useRouter();
     const { theme } = useTheme();
     const { currentPreset } = useVisualPreset();
     const { showToast } = useToast();
-    const semantic = colors.semantic;
+    const semantic = colors[theme].semantic;
 
     const [activeTab, setActiveTab] = useState("Base");
+    const [modoAyuda, setModoAyuda] = useState(false);
 
     const canonicalTokens = useMemo(
         () => getThemeTokens(currentPreset, theme as "dark" | "light"),
         [currentPreset, theme]
     );
 
-    const [localTokens, setLocalTokens] = useState<BaseTokens>(() => baseFromTokens(canonicalTokens));
-    const [originalTokens, setOriginalTokens] = useState<BaseTokens>(() => baseFromTokens(canonicalTokens));
+    const [localTokens, setLocalTokens] = useState<BaseTokens>(() =>
+        baseFromTokens(canonicalTokens)
+    );
+    const [originalTokens, setOriginalTokens] = useState<BaseTokens>(() =>
+        baseFromTokens(canonicalTokens)
+    );
 
     const handleChange = (field: keyof BaseTokens, value: string) => {
         setLocalTokens((prev) => ({ ...prev, [field]: value }));
@@ -72,10 +151,13 @@ export default function AparienciaPage() {
         const payload = { ...localTokens, preset: currentPreset, mode: theme };
         console.log("[Apariencia] Guardar (mock):", payload);
         setOriginalTokens(localTokens);
-        showToast({ type: "success", title: "Guardado (mock)", description: "Los cambios se simularon correctamente." });
+        showToast({
+            type: "success",
+            title: "Guardado (mock)",
+            description: "Los cambios se simularon correctamente.",
+        });
     };
 
-    // Admin-only: Dev UI habilitado y rol OWNER
     if (!DEV_UI_ENABLED || mockSession.role !== "OWNER") {
         return (
             <PageShell
@@ -116,15 +198,27 @@ export default function AparienciaPage() {
                 minHeight: 0,
             }}
         >
-            <PagePanelTemplate
-                header={
+            <PanelCard
+                title="Apariencia"
+                description="Configuración del tema visual del sistema"
+                headerActions={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
+                tabs={
                     <CardTabsHeader
                         tabs={TABS}
                         value={activeTab}
                         onChange={setActiveTab}
                         tabsGap={spacing[16]}
                         leftSlot={
-                            <div style={{ paddingLeft: spacing[12], paddingRight: spacing[8], paddingTop: spacing[12], paddingBottom: spacing[12], display: "flex", alignItems: "center" }}>
+                            <div
+                                style={{
+                                    paddingLeft: spacing[12],
+                                    paddingRight: spacing[8],
+                                    paddingTop: spacing[12],
+                                    paddingBottom: spacing[12],
+                                    display: "flex",
+                                    alignItems: "center",
+                                }}
+                            >
                                 <ActionIcon
                                     name="chevron-left"
                                     label="Volver"
@@ -135,118 +229,201 @@ export default function AparienciaPage() {
                         ariaLabel="Secciones de apariencia"
                     />
                 }
-                body={
-                    <>
-                        {activeTab === "Base" && (
-                            <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
-                                {/* Lectura: preset y mode */}
+                secondaryAction={
+                    <Button variant="secondary" size="sm" onClick={handleCancel}>
+                        Cancelar
+                    </Button>
+                }
+                primaryAction={
+                    <Button variant="actionPrimary" size="sm" onClick={handleSave}>
+                        Guardar cambios
+                    </Button>
+                }
+            >
+                {/* Sección Base — Identidad visual global */}
+                {activeTab === "Base" && (
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
+                        <Text
+                            variant="body"
+                            style={{
+                                color: semantic.text.muted,
+                                fontWeight: typography.fontWeight.semibold,
+                                marginBottom: spacing[8],
+                            }}
+                        >
+                            Identidad visual del tema
+                        </Text>
+                        <div
+                            style={{
+                                display: "grid",
+                                gridTemplateColumns: "1fr 1fr",
+                                gap: spacing[16],
+                                maxWidth: 400,
+                                padding: spacing[16],
+                                backgroundColor: semantic.surface.default,
+                                border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                                borderRadius: radius.card,
+                            }}
+                        >
+                            <Text variant="body" style={{ color: semantic.text.disabled }}>
+                                Preset activo
+                            </Text>
+                            <Text
+                                variant="body"
+                                style={{
+                                    color: semantic.text.default,
+                                    fontWeight: typography.fontWeight.medium,
+                                }}
+                            >
+                                {currentPreset === "control" ? "Control" : "Security"}
+                            </Text>
+                            <Text variant="body" style={{ color: semantic.text.disabled }}>
+                                Modo
+                            </Text>
+                            <Text
+                                variant="body"
+                                style={{
+                                    color: semantic.text.default,
+                                    fontWeight: typography.fontWeight.medium,
+                                }}
+                            >
+                                {theme === "dark" ? "Oscuro" : "Claro"}
+                            </Text>
+                        </div>
+                        <div
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: spacing[16],
+                                maxWidth: 400,
+                            }}
+                        >
+                            <Input
+                                label="Accent"
+                                value={localTokens.accent}
+                                onChange={(e) => handleChange("accent", e.target.value)}
+                            />
+                            <Input
+                                label="Background"
+                                value={localTokens.background}
+                                onChange={(e) => handleChange("background", e.target.value)}
+                            />
+                            <Input
+                                label="Surface"
+                                value={localTokens.surface}
+                                onChange={(e) => handleChange("surface", e.target.value)}
+                            />
+                            <Input
+                                label="Text"
+                                value={localTokens.text}
+                                onChange={(e) => handleChange("text", e.target.value)}
+                            />
+                            <Input
+                                label="Border"
+                                value={localTokens.border}
+                                onChange={(e) => handleChange("border", e.target.value)}
+                            />
+                        </div>
+                    </div>
+                )}
+
+                {/* Sección Estados — Colores de feedback */}
+                {activeTab === "Estados" && (
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
+                        <Text
+                            variant="body"
+                            style={{
+                                color: semantic.text.muted,
+                                fontWeight: typography.fontWeight.semibold,
+                                marginBottom: spacing[8],
+                            }}
+                        >
+                            Colores de feedback del sistema
+                        </Text>
+                        <div
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: spacing[16],
+                                maxWidth: 400,
+                            }}
+                        >
+                            <Input label="Success" value="" placeholder="—" disabled />
+                            <Input label="Warning" value="" placeholder="—" disabled />
+                            <Input label="Danger" value="" placeholder="—" disabled />
+                            <Input label="Info" value="" placeholder="—" disabled />
+                        </div>
+                    </div>
+                )}
+
+                {/* Sección Componentes — Apariencia de componentes */}
+                {activeTab === "Componentes" && (
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
+                        <Text
+                            variant="body"
+                            style={{
+                                color: semantic.text.muted,
+                                fontWeight: typography.fontWeight.semibold,
+                                marginBottom: spacing[8],
+                            }}
+                        >
+                            Apariencia específica de componentes
+                        </Text>
+                        <div
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: spacing[12],
+                            }}
+                        >
+                            {["Buttons", "Cards", "Inputs", "Tables", "Badges"].map((name) => (
                                 <div
+                                    key={name}
                                     style={{
-                                        display: "grid",
-                                        gridTemplateColumns: "1fr 1fr",
-                                        gap: spacing[16],
-                                        maxWidth: 400,
                                         padding: spacing[16],
                                         backgroundColor: semantic.surface.default,
                                         border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
                                         borderRadius: radius.card,
+                                        color: semantic.text.muted,
+                                        fontSize: typography.fontSize.sm,
                                     }}
                                 >
-                                    <Text variant="body" style={{ color: semantic.text.disabled }}>
-                                        Preset activo
-                                    </Text>
-                                    <Text variant="body" style={{ color: semantic.text.default, fontWeight: typography.fontWeight.medium }}>
-                                        {currentPreset === "control" ? "Control" : "Security"}
-                                    </Text>
-                                    <Text variant="body" style={{ color: semantic.text.disabled }}>
-                                        Modo
-                                    </Text>
-                                    <Text variant="body" style={{ color: semantic.text.default, fontWeight: typography.fontWeight.medium }}>
-                                        {theme === "dark" ? "Oscuro" : "Claro"}
-                                    </Text>
+                                    {name}
                                 </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
 
-                                {/* Inputs para 5 tokens */}
-                                <div style={{ display: "flex", flexDirection: "column", gap: spacing[16], maxWidth: 400 }}>
-                                    <Input
-                                        label="Background"
-                                        value={localTokens.background}
-                                        onChange={(e) => handleChange("background", e.target.value)}
-                                    />
-                                    <Input
-                                        label="Surface"
-                                        value={localTokens.surface}
-                                        onChange={(e) => handleChange("surface", e.target.value)}
-                                    />
-                                    <Input
-                                        label="Border"
-                                        value={localTokens.border}
-                                        onChange={(e) => handleChange("border", e.target.value)}
-                                    />
-                                    <Input
-                                        label="Text"
-                                        value={localTokens.text}
-                                        onChange={(e) => handleChange("text", e.target.value)}
-                                    />
-                                    <Input
-                                        label="Accent"
-                                        value={localTokens.accent}
-                                        onChange={(e) => handleChange("accent", e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                        )}
-
-                        {activeTab === "Estados" && (
-                            <div style={{ padding: spacing[24], minHeight: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <Text variant="body" style={{ color: semantic.text.disabled }}>
-                                    Próximamente: Estados
-                                </Text>
-                            </div>
-                        )}
-
-                        {activeTab === "Componentes" && (
-                            <div style={{ padding: spacing[24], minHeight: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <Text variant="body" style={{ color: semantic.text.disabled }}>
-                                    Próximamente: Componentes
-                                </Text>
-                            </div>
-                        )}
-
-                        {activeTab === "Avanzado" && (
-                            <div style={{ padding: spacing[24], minHeight: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <Text variant="body" style={{ color: semantic.text.disabled }}>
-                                    Próximamente: Avanzado
-                                </Text>
-                            </div>
-                        )}
-                    </>
-                }
-                footer={
-                    <>
-                        <Button
-                            variant="secondary"
-                            size="sm"
-                            onClick={handleCancel}
+                {/* Sección Avanzado — Ajustes avanzados */}
+                {activeTab === "Avanzado" && (
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
+                        <Text
+                            variant="body"
                             style={{
-                                borderRadius: radius.card,
+                                color: semantic.text.muted,
+                                fontWeight: typography.fontWeight.semibold,
+                                marginBottom: spacing[8],
                             }}
                         >
-                            Cancelar
-                        </Button>
-                        <Button
-                            variant="actionPrimary"
-                            size="sm"
-                            onClick={handleSave}
+                            Ajustes avanzados del sistema visual
+                        </Text>
+                        <div
                             style={{
-                                borderRadius: radius.card,
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: spacing[16],
+                                maxWidth: 400,
                             }}
                         >
-                            Guardar
-                        </Button>
-                    </>
-                }
-            />
+                            <Input label="Semantic tokens" value="" placeholder="—" disabled />
+                            <Input label="Radius" value="" placeholder="—" disabled />
+                            <Input label="Spacing" value="" placeholder="—" disabled />
+                            <Input label="Shadows" value="" placeholder="—" disabled />
+                        </div>
+                    </div>
+                )}
+            </PanelCard>
         </PageShell>
     );
 }
