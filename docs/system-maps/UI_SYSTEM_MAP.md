@@ -1,7 +1,7 @@
 # UI SYSTEM MAP
 
 > Inventario oficial del sistema de interfaz — CONTROL Design System  
-> Última actualización: 2026-02-16
+> Última actualización: 2026-03-05
 
 ---
 
@@ -37,6 +37,26 @@ components/
 ├── layouts/       → Estructura de página (shell, sidebar, topbar)
 ├── patterns/      → Patrones reutilizables entre features
 ```
+
+---
+
+## Estado del inventario UI
+
+Este documento incluye dos tipos de componentes:
+
+**Componentes Implementados (✅)**  
+Existen actualmente en el codebase y pueden ser utilizados inmediatamente.
+
+**Componentes Planificados (❌)**  
+Están definidos como parte del Design System pero aún no han sido implementados.
+
+**Regla**: Los componentes marcados como ❌ **no deben implementarse dentro de features directamente**.
+
+Si se requiere uno:
+
+1. Debe crearse oficialmente dentro del Design System
+2. Debe registrarse en este documento
+3. Luego puede ser usado por los módulos del sistema
 
 ---
 
@@ -85,9 +105,9 @@ components/
 
 | Componente | Estado | Ruta | Nota de uso |
 |-----------|--------|------|-------------|
-| Spinner | ✅ | `atoms/Spinner/` | Indicador de carga circular animado (SVG + Tokens) |
+| Spinner | ✅ | `atoms/Spinner/` | Indicador de carga circular animado (SVG + Tokens). Resiliente a falta de ThemeContext |
+| SkeletonBlock | ✅ | `atoms/SkeletonBlock/` | Primitiva de placeholder de carga; base para DetailSkeleton y ListSkeleton |
 | ProgressBar | ❌ | `atoms/ProgressBar/` | Barra de progreso horizontal |
-| Skeleton | ⚠️ | *(inline en DataTable)* | Placeholder animado; existe como lógica interna, no como atom |
 
 ---
 
@@ -126,6 +146,8 @@ components/
 | TableDropdown | ✅ | `containers/DataTable/TableDropdown.tsx` | Dropdown selector reutilizable (filtro, rows-per-page) |
 | ActionMenu | ✅ | `molecules/ActionMenu/` | Menú contextual con secciones, íconos y variantes |
 | SelectSingle | ✅ | `molecules/SelectSingle/` | Select con dropdown flotante y scrollbar estilizado |
+| ConfirmDialog | ✅ | `molecules/ConfirmDialog/` | Modal de confirmación con tonos (default, error, warning, info, success). Layout compacto premium |
+| StatusTabs | ✅ | `molecules/StatusTabs/` | Tabs de filtro por estado con badges y underline animado (Users, Devices) |
 | SelectMulti | ❌ | `molecules/SelectMulti/` | Select multi-valor con chips |
 | FilterChips | ❌ | `molecules/FilterChips/` | Chips activos de filtro con botón de eliminar |
 
@@ -159,6 +181,18 @@ components/
 | ErrorState | ✅ | `containers/ErrorState/` | Estado de error con ícono danger, título, mensaje y retry |
 | LoadingState | ❌ | `containers/LoadingState/` | Estado de carga a pantalla completa (wrapper de Spinner) |
 
+### Toast System (Feedback global)
+
+| Sistema | Estado | Ruta principal | Componentes |
+|---------|--------|----------------|-------------|
+| **Toast System** | ✅ | `packages/console/core/toast/` | ToastProvider, useToast, ToastStack, ToastItem, errorToastHelper |
+
+Sistema global de notificaciones breves para feedback de acciones del usuario.
+
+**Tipos soportados**: success, error, warning, info.
+
+**Uso**: `useToast()` → `showToast({ type, title, description })`. Integrado con `normalizedErrorToToast` para mapear errores del Connector.
+
 ### Pendientes
 
 | Componente | Estado | Ruta | Nota de uso |
@@ -166,7 +200,7 @@ components/
 | Drawer | ❌ | `containers/Drawer/` | Panel lateral deslizable (alternativa a modal) |
 | FilterBar | ❌ | `containers/FilterBar/` | Barra horizontal de filtros activos |
 | SearchBar | ❌ | `containers/SearchBar/` | Barra de búsqueda global |
-| ConfirmationModal | ❌ | `containers/ConfirmationModal/` | Modal de confirmación "¿Estás seguro?" con acciones |
+| ConfirmationModal | → | Ver **ConfirmDialog** (implementado) | Modal de confirmación implementado en `molecules/ConfirmDialog/` |
 
 ### KanbanBoard
 
@@ -180,6 +214,15 @@ components/
 
 ## 6. PATTERNS
 
+### Skeletons
+
+| Componente | Estado | Ruta | Descripción |
+|------------|--------|------|-------------|
+| DetailSkeleton | ✅ | `patterns/skeletons/DetailSkeleton.tsx` | Skeleton estructural para vistas de detalle (header + cards) durante carga |
+| ListSkeleton | ✅ | `patterns/skeletons/ListSkeleton.tsx` | Skeleton estructural para listados/tablas durante carga |
+
+### Patrones de flujo
+
 | Patrón | Estado | Descripción |
 |--------|--------|-------------|
 | **CRUD Pattern** | ✅ | Lista + Crear + Editar para una entidad (Users, Devices) |
@@ -187,7 +230,7 @@ components/
 | **Dashboard Grid Pattern** | ❌ | Grid de StatCards + gráficas + tablas resumidas |
 | **Form 2-Column Pattern** | ✅ | Layout de formulario con visual izquierdo + campos derecho (`FormLayout`) |
 | **Wizard / Stepper Pattern** | ❌ | Flujo multi-paso con progreso visible y validación por paso |
-| **Confirmation Pattern** | ❌ | Modal de confirmación antes de acciones destructivas |
+| **Confirmation Pattern** | ✅ | Modal de confirmación antes de acciones destructivas → **ConfirmDialog** |
 | **Bulk Actions Pattern** | ❌ | Selección múltiple + barra de acciones masivas en tabla |
 | **Status Tabs Pattern** | ✅ | Tabs que filtran datos por estado con counts dinámicos (Users, Devices) |
 | **Inline Expandable Row Pattern** | ❌ | Fila de tabla que se expande para mostrar detalle sin navegar |
@@ -227,7 +270,7 @@ Estándar para los 8 estados fundamentales de interfaz.
 
 ### 4. Success
 - **Dónde aplica**: Confirmación post-acción (crear, editar, borrar).
-- **Componente**: `FormActions` (estado success) o `Toast` (pendiente).
+- **Componente**: `FormActions` (estado success) o **Toast System** (ToastProvider + useToast).
 - **Checklist**:
   - [ ] Feedback inmediato (< 200ms).
   - [ ] Color semántico `success`.
