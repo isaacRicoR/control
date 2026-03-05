@@ -189,6 +189,8 @@ Si se requiere uno:
 
 Sistema global de notificaciones breves para feedback de acciones del usuario.
 
+**Scope**: Global UI feedback system utilizado por todos los cartuchos del sistema. El Toast System pertenece a la infraestructura de **Console / Core UI** y no a ningún feature específico. Cualquier módulo del sistema utiliza el mismo sistema de notificaciones.
+
 **Tipos soportados**: success, error, warning, info.
 
 **Uso**: `useToast()` → `showToast({ type, title, description })`. Integrado con `normalizedErrorToToast` para mapear errores del Connector.
@@ -244,7 +246,11 @@ Estándar para los 8 estados fundamentales de interfaz.
 
 ### 1. Loading
 - **Dónde aplica**: Carga inicial de página, tablas, tarjetas o envío de formularios.
-- **Componente**: `atoms/Spinner` (para bloques pequeños) o `Skeleton` (para estructuras conocidas).
+- **Componente**:
+  - `atoms/Spinner` → para cargas pequeñas o parciales
+  - `atoms/SkeletonBlock` → primitiva base de skeleton
+  - `patterns/skeletons/ListSkeleton` → skeleton estructural para tablas/listas
+  - `patterns/skeletons/DetailSkeleton` → skeleton estructural para vistas de detalle
 - **Checklist**:
   - [ ] No bloquear toda la UI si es carga parcial.
   - [ ] Usar `aria-busy="true"`.
@@ -333,7 +339,7 @@ Entornos internos para desarrollo y pruebas de componentes aislados.
 
 ---
 
-## 9. Cómo usar este mapa
+## 10. Cómo usar este mapa
 
 1. **Antes de crear una pantalla nueva** → revisar este inventario.
 2. **Si la pieza no existe** → crearla oficialmente (ej: `LoadingState` wrapper).
