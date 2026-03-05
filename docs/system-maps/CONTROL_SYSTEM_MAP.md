@@ -60,6 +60,21 @@ Jerarquía oficial para la construcción de pantallas dentro de `apps/control`.
 
 ---
 
+## 🧬 UI DNA (Sistema Visual)
+
+El sistema visual de Control se basa en cuatro patrones fundamentales congelados:
+
+- Panel Layout
+- Listing Layout
+- Form Layout
+- UI Interaction Patterns
+
+Estos patrones se aplican mediante reglas de Cursor (.mdc) y garantizan consistencia visual automática en todos los módulos presentes y futuros.
+
+Cualquier nueva pantalla en `apps/control` debe heredar estos patrones y no crear layouts personalizados fuera de estas reglas.
+
+---
+
 ## 💎 DESIGN SYSTEM & TOKENS
 
 El sistema ha eliminado completamente los valores hardcodeados en favor de una arquitectura 100% basada en tokens semánticos.
@@ -68,6 +83,26 @@ El sistema ha eliminado completamente los valores hardcodeados en favor de una a
 - **Espaciado**: Uso exclusivo de `spacing.*`. **0% hardcoded margins/paddings**.
 - **Radios**: Uso estandarizado de `radius.card` (18px) para todos los contenedores y botones de acción.
 - **Tipografía**: Uso de `typography.fontWeight.semibold` (600) para títulos de sección.
+
+### Theme Engine
+
+El sistema de tokens permite modificación dinámica del tema visual mediante la herramienta de Apariencia.
+
+Ubicación:
+apps/control/app/(shell)/lab/apariencia
+
+Capacidades:
+
+- Edición de tokens semánticos
+- Cambio de modo Dark / Light
+- Registro de presets de tema
+- Aplicación inmediata sin recompilación
+
+Infraestructura relacionada:
+
+- Theme Registry
+- Token Overrides
+- Persistencia de preferencia de usuario
 
 ---
 
@@ -228,7 +263,7 @@ Acceso exclusivo para administradores y desarrolladores (Owner role).
 Piezas de arquitectura UI reutilizables.
 
 - **PagePanelTemplate**: ❄️ STABLE (Slot-based layout para Paneles).
-- **DataTable**: Tabla de datos con paginación y estados — **CERRADO** (100% genérico).
+- **DataTable**: Tabla de datos con paginación y estados — ❄️ FROZEN (100% genérico).
 - **TableToolbar**: Barra de herramientas estandarizada (Tabs, Search, Actions).
 - **CardTabsHeader**: Header reutilizable para tarjetas con tabs. Altura: **55px**.
 - **PageShell**: Contenedor semántico de páginas (Título, Breadcrumbs).
@@ -258,7 +293,7 @@ Piezas de arquitectura UI reutilizables.
 | Componente | Estado | Notas |
 |---|---|---|
 | **Arquitectura Base** | ✅ CERRADA | Consola + Cartucho, SSR Safe |
-| **UI Layouts (Panel/List/Form)** | ❄️ FROZEN | Formalizados mediante `.mdc` rules |
+| **UI Layouts (Panel/Listing/Form)** | ❄️ FROZEN | Formalizados mediante `.mdc` rules |
 | **Security Layer** | ✅ IMPLEMENTADO | Route Guards, Permisos RBAC |
 | **Contrato Universal** | ✅ CERRADO | v2.1 LTS |
 | **Connector Layer** | ✅ IMPLEMENTADO | 0 errors, 0 warnings |
@@ -293,7 +328,7 @@ Módulos funcionales que heredarán los patrones UI congelados.
 
 ## 🕵️ ÚLTIMOS CAMBIOS (Fecha de corte: 2026-03-04)
 
-- **UI Patterns Frozen**: Formalización de `PanelLayout`, `ListingLayout`, `FormLayout` y `UI Patterns` mediante reglas de Cursor (.mdc).
+- **UI Patterns Frozen**: Formalización de Panel Layout, Listing Layout, Form Layout y UI Interaction Patterns mediante reglas de Cursor (.mdc).
 - **Standard Layout Template**: Creación de `PagePanelTemplate` para unificar comportamiento de Header/Footer fijos y Body scrolleable.
 - **Listing Alignment**: Sincronización visual de Users List y Devices List (Tabs, Toolbars, Interacciones).
 - **Design System Cleanup**: Eliminación total de colores y espaciados hardcodeados en las pantallas principales.
