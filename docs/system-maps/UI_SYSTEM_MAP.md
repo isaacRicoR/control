@@ -30,7 +30,7 @@ Este documento define todas las piezas oficiales del sistema UI para productos A
 Toda pieza debe vivir en la carpeta correspondiente a su nivel de complejidad:
 
 ```
-components/
+packages/console/ui/
 ├── atoms/         → Piezas atómicas, sin dependencias internas
 ├── molecules/     → Combinación de 2-3 atoms
 ├── containers/    → Organismos complejos, con lógica de UI
@@ -136,7 +136,6 @@ Proceso obligatorio para nuevas piezas:
 |-----------|--------|------|-------------|
 | FormField | ❌ | `molecules/FormField/` | Label + Input + error + helper text unificados |
 | FormGroup | ❌ | `molecules/FormGroup/` | Agrupación de campos con título de sección |
-| FormSection | ✅ | `containers/FormSection/` | Sección colapsable con título y contenido |
 | FormActions | ✅ | `patterns/form/FormActions.tsx` | Footer de formulario con Cancel/Submit + loading/error/success. Obligatorio: `<Button shape="panel">` en sus botones. |
 
 ### Navigation
@@ -185,7 +184,8 @@ Proceso obligatorio para nuevas piezas:
 
 | Componente | Estado | Ruta | Nota de uso |
 |-----------|--------|------|-------------|
-| Card | ✅ | `molecules/Card/` | Contenedor con borde, radius y padding opcional |
+| Card | ✅ | `containers/Card/` | Contenedor con borde, radius y padding opcional |
+| FormSection | ✅ | `containers/FormSection/` | Sección colapsable con título y contenido |
 | PanelCard | ✅ | `containers/PanelCard/` | Contenedor estándar para paneles (configuración, perfil, formularios). Implementa Panel Card Pattern. PanelCardFooter: solo acepta props estructuradas, no botones JSX. |
 | Section | ✅ | `containers/Section/` | Sección con título y contenido |
 | PageShell | ✅ | `containers/PageShell/` | Shell de página con título, breadcrumbs, acciones y layout fluid/boxed |
@@ -220,7 +220,6 @@ Sistema global de notificaciones breves para feedback de acciones del usuario.
 | Drawer | ❌ | `containers/Drawer/` | Panel lateral deslizable (alternativa a modal) |
 | FilterBar | ❌ | `containers/FilterBar/` | Barra horizontal de filtros activos |
 | SearchBar | ❌ | `containers/SearchBar/` | Barra de búsqueda global |
-| ConfirmationModal | → | Ver **ConfirmDialog** (implementado) | Modal de confirmación implementado en `molecules/ConfirmDialog/` |
 
 ### KanbanBoard
 
