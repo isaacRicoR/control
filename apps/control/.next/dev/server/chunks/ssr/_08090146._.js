@@ -361,7 +361,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/packages/console/tokens/index.ts [app-ssr] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/colors.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/spacing.ts [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/context/ThemeProvider.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/Button/Button.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Spinner$2f$Spinner$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/Spinner/Spinner.tsx [app-ssr] (ecmascript)");
@@ -371,16 +370,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f
 ;
 ;
 ;
-/** Variants, size y radius oficiales del Design System para panel footers. Igual que FormActions. NO cambiar. */ const FOOTER_BUTTON_SIZE = "sm";
-const FOOTER_BUTTON_STYLE = {
-    borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["radius"].xl
-};
+/** Variants, size y shape oficiales del Design System para panel footers. Igual que FormActions. NO cambiar. */ const FOOTER_BUTTON_SIZE = "sm";
 const PanelCardFooter = ({ primaryLabel, primaryOnClick, primaryLoading = false, primaryDisabled = false, secondaryLabel, secondaryOnClick, secondaryDisabled = false, dangerLabel, dangerOnClick, dangerDisabled = false, status })=>{
     const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useTheme"])();
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"][theme].semantic;
     const hasDanger = Boolean(dangerLabel && dangerOnClick);
     const hasLeft = hasDanger || status;
-    const hasRight = true; // secondary + primary siempre presentes
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
         style: {
             flexShrink: 0,
@@ -403,20 +398,20 @@ const PanelCardFooter = ({ primaryLabel, primaryOnClick, primaryLoading = false,
                     hasDanger && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                         variant: "error",
                         size: FOOTER_BUTTON_SIZE,
+                        shape: "panel",
                         onClick: dangerOnClick,
                         disabled: dangerDisabled,
-                        style: FOOTER_BUTTON_STYLE,
                         children: dangerLabel
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/PanelCard/PanelCardFooter.tsx",
-                        lineNumber: 55,
+                        lineNumber: 53,
                         columnNumber: 25
                     }, ("TURBOPACK compile-time value", void 0)),
                     status
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/containers/PanelCard/PanelCardFooter.tsx",
-                lineNumber: 53,
+                lineNumber: 51,
                 columnNumber: 17
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -429,21 +424,21 @@ const PanelCardFooter = ({ primaryLabel, primaryOnClick, primaryLoading = false,
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                         variant: "secondary",
                         size: FOOTER_BUTTON_SIZE,
+                        shape: "panel",
                         onClick: secondaryOnClick,
                         disabled: secondaryDisabled || primaryLoading,
-                        style: FOOTER_BUTTON_STYLE,
                         children: secondaryLabel
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/PanelCard/PanelCardFooter.tsx",
-                        lineNumber: 69,
+                        lineNumber: 67,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                         variant: "actionPrimary",
                         size: FOOTER_BUTTON_SIZE,
+                        shape: "panel",
                         onClick: primaryOnClick,
                         disabled: primaryDisabled,
-                        style: FOOTER_BUTTON_STYLE,
                         children: primaryLoading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             style: {
                                 display: "inline-flex",
@@ -455,31 +450,31 @@ const PanelCardFooter = ({ primaryLabel, primaryOnClick, primaryLoading = false,
                                     size: 16
                                 }, void 0, false, {
                                     fileName: "[project]/packages/console/ui/containers/PanelCard/PanelCardFooter.tsx",
-                                    lineNumber: 87,
+                                    lineNumber: 85,
                                     columnNumber: 29
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 "Guardando..."
                             ]
                         }, void 0, true, {
                             fileName: "[project]/packages/console/ui/containers/PanelCard/PanelCardFooter.tsx",
-                            lineNumber: 86,
+                            lineNumber: 84,
                             columnNumber: 25
                         }, ("TURBOPACK compile-time value", void 0)) : primaryLabel
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/containers/PanelCard/PanelCardFooter.tsx",
-                        lineNumber: 78,
+                        lineNumber: 76,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/containers/PanelCard/PanelCardFooter.tsx",
-                lineNumber: 68,
+                lineNumber: 66,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/packages/console/ui/containers/PanelCard/PanelCardFooter.tsx",
-        lineNumber: 40,
+        lineNumber: 38,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };

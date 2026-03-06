@@ -1140,14 +1140,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/packages/console/tokens/index.ts [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/colors.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/spacing.ts [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/radius.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/atoms/Button/Button.tsx [app-client] (ecmascript)");
 "use client";
 ;
 ;
 ;
-/** Opacity applied to interactive elements during loading state */ const LOADING_OPACITY = 0.6;
 const FormActions = ({ error, success, loading = false, disabled = false, mode, onCancel, onSubmit, cancelLabel = "Cancelar", submitLabel })=>{
     const isDisabled = disabled || loading;
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"].semantic;
@@ -1170,7 +1168,7 @@ const FormActions = ({ error, success, loading = false, disabled = false, mode, 
                 children: error
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/patterns/form/FormActions.tsx",
-                lineNumber: 48,
+                lineNumber: 45,
                 columnNumber: 17
             }, ("TURBOPACK compile-time value", void 0)),
             !error && success && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1181,7 +1179,7 @@ const FormActions = ({ error, success, loading = false, disabled = false, mode, 
                 children: success
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/patterns/form/FormActions.tsx",
-                lineNumber: 59,
+                lineNumber: 56,
                 columnNumber: 17
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1194,43 +1192,37 @@ const FormActions = ({ error, success, loading = false, disabled = false, mode, 
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                         variant: "secondary",
                         size: "sm",
+                        shape: "panel",
                         onClick: onCancel,
                         disabled: isDisabled,
-                        style: {
-                            borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].xl,
-                            opacity: isDisabled ? LOADING_OPACITY : 1
-                        },
                         children: cancelLabel
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/patterns/form/FormActions.tsx",
-                        lineNumber: 70,
+                        lineNumber: 67,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                         variant: "actionPrimary",
                         size: "sm",
+                        shape: "panel",
                         onClick: onSubmit,
                         disabled: isDisabled,
-                        style: {
-                            borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].xl,
-                            opacity: isDisabled ? LOADING_OPACITY : 1
-                        },
                         children: loading ? "Guardando..." : submitLabel ?? (mode === "create" ? "Guardar" : "Guardar Cambios")
                     }, void 0, false, {
                         fileName: "[project]/packages/console/ui/patterns/form/FormActions.tsx",
-                        lineNumber: 83,
+                        lineNumber: 77,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/packages/console/ui/patterns/form/FormActions.tsx",
-                lineNumber: 69,
+                lineNumber: 66,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/packages/console/ui/patterns/form/FormActions.tsx",
-        lineNumber: 36,
+        lineNumber: 33,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
