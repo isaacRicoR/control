@@ -20,6 +20,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
    */
   variant?: 'primary' | 'actionPrimary' | 'secondary' | 'white' | 'create' | 'error';
   size?: 'md' | 'sm';
+  /**
+   * default — radius.md (estándar botones).
+   * panel   — radius.xl (formularios, panel footers; igual que FormActions).
+   */
+  shape?: 'default' | 'panel';
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
@@ -28,6 +33,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   onClick,
   variant = 'primary',
   size = 'md',
+  shape = 'default',
   style,
   className,
   ...props
@@ -118,7 +124,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
 
         /* 🎨 Tokens */
         padding: `0 ${paddingX}px`,
-        borderRadius: radius.md,
+        borderRadius: shape === 'panel' ? radius.xl : radius.md,
         fontFamily: typography.fontFamily.primary,
         fontSize: typography.fontSize.md,
         lineHeight: "1", // Center text in explicit height

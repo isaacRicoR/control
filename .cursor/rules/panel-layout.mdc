@@ -27,6 +27,8 @@ PageShell
 - **No crear footers personalizados**. El footer debe usar `PanelCardFooter` con props estrictas.
 - **FooterActions MUST use PanelCardFooter strict props** — NO pasar botones custom (`primaryAction`, `secondaryAction`, etc. como JSX). Usar `footer={{ primaryLabel, primaryOnClick, secondaryLabel, secondaryOnClick, ... }}`.
 - **No manual Button variants in panel footers.** PanelCardFooter renderiza internamente los Button oficiales del Design System.
+- **Panel footers MUST use Button shape="panel"** (no inline styles).
+- **FormActions MUST use Button shape="panel"** (no inline styles).
 - **Scroll**: Solo puede existir dentro de `PanelCardBody`.
 
 ## 3. Reglas de Layout

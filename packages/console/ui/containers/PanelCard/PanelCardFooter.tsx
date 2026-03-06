@@ -1,15 +1,14 @@
 "use client";
 
 import React from "react";
-import { colors, spacing, radius } from "@tokens";
+import { colors, spacing } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";
 import { Button } from "@ui/atoms/Button/Button";
 import { Spinner } from "@ui/atoms/Spinner/Spinner";
 import type { PanelCardFooterProps } from "./PanelCard.types";
 
-/** Variants, size y radius oficiales del Design System para panel footers. Igual que FormActions. NO cambiar. */
+/** Variants, size y shape oficiales del Design System para panel footers. Igual que FormActions. NO cambiar. */
 const FOOTER_BUTTON_SIZE = "sm" as const;
-const FOOTER_BUTTON_STYLE: React.CSSProperties = { borderRadius: radius.xl };
 
 /**
  * PanelCardFooter — Footer del Panel Card Pattern.
@@ -55,9 +54,9 @@ export const PanelCardFooter: React.FC<PanelCardFooterProps> = ({
                         <Button
                             variant="error"
                             size={FOOTER_BUTTON_SIZE}
+                            shape="panel"
                             onClick={dangerOnClick!}
                             disabled={dangerDisabled}
-                            style={FOOTER_BUTTON_STYLE}
                         >
                             {dangerLabel}
                         </Button>
@@ -69,18 +68,18 @@ export const PanelCardFooter: React.FC<PanelCardFooterProps> = ({
                 <Button
                     variant="secondary"
                     size={FOOTER_BUTTON_SIZE}
+                    shape="panel"
                     onClick={secondaryOnClick}
                     disabled={secondaryDisabled || primaryLoading}
-                    style={FOOTER_BUTTON_STYLE}
                 >
                     {secondaryLabel}
                 </Button>
                 <Button
                     variant="actionPrimary"
                     size={FOOTER_BUTTON_SIZE}
+                    shape="panel"
                     onClick={primaryOnClick}
                     disabled={primaryDisabled}
-                    style={FOOTER_BUTTON_STYLE}
                 >
                     {primaryLoading ? (
                         <span style={{ display: "inline-flex", alignItems: "center", gap: spacing[8] }}>

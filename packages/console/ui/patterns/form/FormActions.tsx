@@ -1,10 +1,7 @@
 "use client";
 
-import { colors, spacing, radius, typography } from "@tokens";
+import { colors, spacing, typography } from "@tokens";
 import { Button } from "@ui/atoms/Button/Button";
-
-/** Opacity applied to interactive elements during loading state */
-const LOADING_OPACITY = 0.6;
 
 interface FormActionsProps {
     error?: string;
@@ -70,12 +67,9 @@ export const FormActions = ({
                 <Button
                     variant="secondary"
                     size="sm"
+                    shape="panel"
                     onClick={onCancel}
                     disabled={isDisabled}
-                    style={{
-                        borderRadius: radius.xl,
-                        opacity: isDisabled ? LOADING_OPACITY : 1,
-                    }}
                 >
                     {cancelLabel}
                 </Button>
@@ -83,12 +77,9 @@ export const FormActions = ({
                 <Button
                     variant="actionPrimary"
                     size="sm"
+                    shape="panel"
                     onClick={onSubmit}
                     disabled={isDisabled}
-                    style={{
-                        borderRadius: radius.xl,
-                        opacity: isDisabled ? LOADING_OPACITY : 1,
-                    }}
                 >
                     {loading
                         ? "Guardando..."
