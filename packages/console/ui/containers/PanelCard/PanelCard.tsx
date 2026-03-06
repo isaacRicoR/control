@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { colors, radius, spacing } from "@tokens";
+import { colors, radius } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";
 import { PanelCardHeader } from "./PanelCardHeader";
 import { PanelCardBody } from "./PanelCardBody";

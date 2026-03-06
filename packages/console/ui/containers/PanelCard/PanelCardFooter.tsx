@@ -33,7 +33,6 @@ export const PanelCardFooter: React.FC<PanelCardFooterProps> = ({
 
     const hasDanger = Boolean(dangerLabel && dangerOnClick);
     const hasLeft = hasDanger || status;
-    const hasRight = true; // secondary + primary siempre presentes
 
     return (
         <footer

@@ -17,6 +17,8 @@ const eslintConfig = defineConfig([
     },
     rules: {
       "control/require-use-client-when-using-hooks": "error",
+      "control/no-inline-border-radius": "error",
+      "control/require-panel-button-shape-in-footers": "error",
     },
   },
   // Override default ignores of eslint-config-next.

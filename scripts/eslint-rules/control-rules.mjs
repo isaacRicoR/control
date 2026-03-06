@@ -94,6 +94,95 @@ const plugin = {
         };
       },
     },
+
+    "no-inline-border-radius": {
+      meta: {
+        type: "problem",
+        docs: {
+          description: "No uses style.borderRadius. Usa Button shape=... o tokens vía Design System.",
+          category: "Best Practices",
+          recommended: true,
+        },
+        fixable: null,
+        schema: [],
+      },
+      create(context) {
+        const filename = context.getFilename?.() ?? "";
+        const isCritical =
+          filename.includes("FormActions.tsx") ||
+          filename.includes("PanelCardFooter.tsx");
+        if (!isCritical) return {};
+
+        return {
+          JSXAttribute(node) {
+            const name = node.name?.name ?? node.name?.value;
+            if (name !== "style") return;
+
+            const expr = node.value?.expression ?? node.value;
+            if (!expr || expr.type !== "ObjectExpression") return;
+
+            for (const prop of expr.properties) {
+              const key = prop.key?.name ?? prop.key?.value;
+              if (key === "borderRadius") {
+                context.report({
+                  node: prop,
+                  message:
+                    "No uses style.borderRadius. Usa Button shape=... o tokens vía Design System.",
+                });
+                return;
+              }
+            }
+          },
+        };
+      },
+    },
+
+    "require-panel-button-shape-in-footers": {
+      meta: {
+        type: "problem",
+        docs: {
+          description: "En footers de panel debes usar <Button shape='panel' ...>.",
+          category: "Best Practices",
+          recommended: true,
+        },
+        fixable: null,
+        schema: [],
+      },
+      create(context) {
+        const filename = context.getFilename?.() ?? "";
+        const isFormActions = filename.includes("FormActions.tsx");
+        const isPanelCardFooter = filename.includes("PanelCardFooter.tsx");
+        if (!isFormActions && !isPanelCardFooter) return {};
+
+        return {
+          JSXOpeningElement(node) {
+            const tagName =
+              node.name?.name ?? node.name?.property?.name ?? "";
+            if (tagName !== "Button") return;
+
+            let hasShapePanel = false;
+            for (const attr of node.attributes) {
+              if (attr.type !== "JSXAttribute") continue;
+              const attrName = attr.name?.name ?? attr.name?.value;
+              if (attrName !== "shape") continue;
+
+              const val = attr.value?.expression ?? attr.value;
+              if (val?.type === "Literal" && val.value === "panel") {
+                hasShapePanel = true;
+                break;
+              }
+            }
+
+            if (!hasShapePanel) {
+              context.report({
+                node,
+                message: "En footers de panel debes usar <Button shape='panel' ...>.",
+              });
+            }
+          },
+        };
+      },
+    },
   },
 };
 

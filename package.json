@@ -15,7 +15,8 @@
     "build:control": "npm run build --workspace=apps/control",
     "verify:structure": "node scripts/verify-structure.js && npm run lint",
     "scan:hardcodes": "node scripts/scan-hardcoded-colors.mjs",
-    "scan:hardcodes:strict": "node scripts/scan-hardcoded-colors.mjs --strict"
+    "scan:hardcodes:strict": "node scripts/scan-hardcoded-colors.mjs --strict",
+    "check:ui-guards": "eslint packages/console/ui/patterns/form/FormActions.tsx packages/console/ui/containers/PanelCard packages/console/ui/atoms/Button --max-warnings 0 && node scripts/check-ui-guards.mjs"
   },
   "dependencies": {
     "next": "16.1.6",
