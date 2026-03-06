@@ -9,7 +9,7 @@
 
 Modelo de aislamiento total para escalabilidad y mantenimiento.
 
-- **Consola**: Infraestructura base (`app/layout.tsx`, `components/layouts/AppShell`). Provee Sidebar, TopBar, Theme y Auth Context.
+- **Consola**: Infraestructura base (`app/layout.tsx`, `packages/console/ui/layouts/AppShell`). Provee Sidebar, TopBar, Theme y Auth Context.
 - **Cartucho**: Módulos de negocio independientes (`/users`, `/devices`).
 - **Aislamiento**: 1 Consola activa por Cartucho. Los módulos son "enchufables".
 - **Backend**: Operando con Mock Data y endpoints API locales bajo patrón: Controller → Service → Repository (mock), con Envelope estándar y wiring real desde frontend.
@@ -232,9 +232,9 @@ Infraestructura base de la aplicación.
 
 - **Layout Root**: `app/layout.tsx` (HTML, Body, Fonts).
 - **Layout Shell**: `app/(shell)/layout.tsx` (Implementa `AppShell`) — Branding inyectado desde config.
-- **AppShell**: `components/layouts/AppShell` — Shell limpio, contenedor principal genérico.
-- **Sidebar**: `components/layouts/Sidebar` — Desacoplado por cartucho; navegación inyectada desde configuración.
-- **TopBar**: `components/layouts/TopBar` — Barra superior sticky.
+- **AppShell**: `packages/console/ui/layouts/AppShell` — Shell limpio, contenedor principal genérico.
+- **Sidebar**: `packages/console/ui/layouts/Sidebar` — Desacoplado por cartucho; navegación inyectada desde configuración.
+- **TopBar**: `packages/console/ui/layouts/TopBar` — Barra superior sticky.
 
 ### Estado de la Consola Base
 
@@ -257,7 +257,7 @@ Funcionalidades de negocio implementadas en `app/(shell)`.
 - **List**: `/users/list` (DataTable, TableToolbar, Filtros). Dataset ampliado (18+ registros) para pruebas de paginación y Avatars.
 - **Create**: `/users/create` (Formulario de creación).
 - **Detail**: `/users/[id]` (Vista de detalle con Tabs y Cards).
-  - *Governance*: Implementado en `src/core/governance/fieldEdit.ts`.
+  - *Governance*: Implementado en `packages/console/core/governance/fieldEdit.ts`.
 
 ### Preferences & Persistence (UX Infrastructure)
 El sistema implementa una jerarquía de persistencia de preferencias de usuario (ej: `pageSize`).
