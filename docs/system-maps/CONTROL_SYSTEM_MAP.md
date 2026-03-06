@@ -1,6 +1,6 @@
 # CONTROL — SYSTEM MAP
 
-> **Estado**: Actualizado al 2026-03-04
+> **Estado**: Actualizado al 2026-03-05
 > **Alcance**: Únicamente lo que existe en el codebase `c:\dev\controldev`.
 
 ---
@@ -12,11 +12,11 @@ Modelo de aislamiento total para escalabilidad y mantenimiento.
 - **Consola**: Infraestructura base (`app/layout.tsx`, `components/layouts/AppShell`). Provee Sidebar, TopBar, Theme y Auth Context.
 - **Cartucho**: Módulos de negocio independientes (`/users`, `/devices`).
 - **Aislamiento**: 1 Consola activa por Cartucho. Los módulos son "enchufables".
-- **Backend**: Operando con Mock Data y endpoints API locales bajo patrón: Controller → Service → Query (simulado), con Envelope estándar y wiring real desde frontend.
+- **Backend**: Operando con Mock Data y endpoints API locales bajo patrón: Controller → Service → Repository (mock), con Envelope estándar y wiring real desde frontend.
 
 | Capa | Contenido | Estado |
 |---|---|---|
-| **Core** | Design System, Connector (`src/core/connector/`), Auth Logic | CERRADO |
+| **Core** | Design System, Connector (`packages/console/core/connector/`), Auth Logic | CERRADO |
 | **Console** | Shell (`AppShell`, `Sidebar`, `TopBar`, layouts) | CERRADO |
 | **Features** | Cartuchos de negocio (`app/(shell)/users`, `devices`) | ESTABLE (Patrones UI congelados) |
 | **Security** | Route Guards, Permisos RBAC, Middleware | IMPLEMENTADO |
@@ -32,7 +32,7 @@ El sistema utiliza reglas de IA para garantizar que los patrones visuales se man
 
 | Regla | Propósito | Estado |
 |---|---|---|
-| `.cursor/rules/panel-layout.mdc` | Estándar de Paneles (Header/Body/Footer) | ❄️ FROZEN |
+| `.cursor/rules/panel-layout.mdc` | Estándar de Paneles (Header/Body/Footer). **PROHIBIDO** style inline en footers. **OBLIGATORIO** `Button shape="panel"` en FormActions y PanelCardFooter | ❄️ FROZEN |
 | `.cursor/rules/listing-layout.mdc` | Estándar de Listados (Scroll interno, Toolbar) | ❄️ FROZEN |
 | `.cursor/rules/form-layout.mdc` | Estándar de Formularios (Grid, SectionTitles) | ❄️ FROZEN |
 | `.cursor/rules/ui-patterns.mdc` | Estándar de Botones, Avatars e Interacciones | ❄️ FROZEN |
@@ -90,7 +90,7 @@ El sistema ha eliminado completamente los valores hardcodeados en favor de una a
 
 - **Colores**: Uso exclusivo de `semantic.*` (ej: `semantic.border.subtle`). **0% hardcoded colors**.
 - **Espaciado**: Uso exclusivo de `spacing.*`. **0% hardcoded margins/paddings**.
-- **Radios**: Uso estandarizado de `radius.card` (18px) para todos los contenedores y botones de acción.
+- **Radios**: Uso estandarizado de tokens (`radius.md`, `radius.xl`). Botones: prop `shape` controla el radius — `shape="default"` → `radius.md`, `shape="panel"` → `radius.xl`. Obligatorio en footers de Panel y FormActions.
 - **Tipografía**: Uso de `typography.fontWeight.semibold` (600) para títulos de sección.
 
 ### Theme Engine
@@ -205,7 +205,7 @@ Define el protocolo único de comunicación entre el frontend y cualquier backen
 
 ## 🔌 FRONTEND CONNECTOR LAYER
 
-**Ubicación**: `src/core/connector/`
+**Ubicación**: `packages/console/core/connector/`
 **Estado**: **IMPLEMENTADO** — Clean (0 errors, 0 warnings)
 
 Capa de abstracción que encapsula toda comunicación HTTP. Ningún feature habla directamente con `fetch`.
@@ -222,7 +222,7 @@ Capa de abstracción que encapsula toda comunicación HTTP. Ningún feature habl
 ### Regla Arquitectónica
 
 > **Ningún feature accede directamente a `fetch` o a APIs HTTP.**
-> Todo flujo de datos pasa por `src/core/connector/`. Esta regla es **no negociable**.
+> Todo flujo de datos pasa por `packages/console/core/connector/`. Esta regla es **no negociable**.
 
 ---
 
@@ -319,10 +319,13 @@ Acceso exclusivo para administradores y desarrolladores (Owner role).
 - **ESLint Quality Gate**:
   - Configuración: **Flat Config v9** (`eslint.config.mjs`).
   - **Custom Rule**: `control/require-use-client-when-using-hooks`. Obliga a usar `"use client"` en cualquier archivo UI/App que utilice hooks de React o Next.js Navigation.
+  - **Guard Rails UI**:
+    - `control/no-inline-border-radius`: Bloquea `style={{ borderRadius }}`. Mensaje: "No uses style.borderRadius. Usa Button shape='panel' o tokens del Design System."
+    - `control/require-panel-button-shape-in-footers`: Exige `<Button shape="panel">` en FormActions y PanelCardFooter.
 
 ---
 
-## 5️⃣ COMPONENTES SISTÉMICOS (`components/containers` & `molecules`)
+## 5️⃣ COMPONENTES SISTÉMICOS (`packages/console/ui/containers` & `molecules`)
 
 Piezas de arquitectura UI reutilizables.
 
@@ -348,11 +351,13 @@ Piezas de arquitectura UI reutilizables.
 ### Lint & Quality
 - **ESLint v9**: Operando con Flat Config.
 - **Custom Shield**: Regla local de bloqueo para asegurar directivas client-side en hooks.
+- **Guard Rails UI**: Reglas `control/no-inline-border-radius` y `control/require-panel-button-shape-in-footers` para consistencia de botones en footers.
+- **Script de verificación**: `check:ui-guards` — Valida que no exista `borderRadius` inline y que FormActions y PanelCardFooter usen `shape="panel"`.
 - **Type Safety**: Tipado estricto en el Connector y Repositories.
 
 ---
 
-## 📊 ESTADO ACTUAL DEL PROYECTO (Snapshot 2026-03-04)
+## 📊 ESTADO ACTUAL DEL PROYECTO (Snapshot 2026-03-05)
 
 | Componente | Estado | Notas |
 |---|---|---|
@@ -363,7 +368,7 @@ Piezas de arquitectura UI reutilizables.
 | **Connector Layer** | ✅ IMPLEMENTADO | 0 errors, 0 warnings |
 | **Preferences Layer** | ✅ ESTABLE | Persistencia por pantalla + fallback |
 | **Design System** | ❄️ FROZEN | 100% Token-based (0% hardcoded) |
-| **ESLint Rules** | ✅ IMPLEMENTADO | Regla custom "use client" obligatoria |
+| **ESLint Rules** | ✅ IMPLEMENTADO | Regla "use client" + Guard Rails UI (no-inline-border-radius, require-panel-button-shape-in-footers) |
 | **Backend Real** | ⏳ NO IMPLEMENTADO | Mock Data (Dataset de usuarios ampliado) |
 
 ---
@@ -390,8 +395,38 @@ Módulos funcionales que heredarán los patrones UI congelados.
 
 ---
 
-## 🕵️ ÚLTIMOS CAMBIOS (Fecha de corte: 2026-03-04)
+## 🛡️ RESULTADO ARQUITECTÓNICO (Guard Rails UI)
 
+El sistema garantiza:
+
+- **Consistencia visual** en botones de panel mediante `Button shape="panel"`.
+- **Prohibición de estilos manuales** vía regla ESLint `control/no-inline-border-radius`.
+- **Enforcement automático** vía ESLint (`control/require-panel-button-shape-in-footers`).
+- **Enforcement adicional** vía script `check:ui-guards`.
+
+### Panel Footer Hard Lock
+
+`PanelCardFooter` no acepta botones como JSX. Solo acepta props estructuradas:
+
+```tsx
+footer={{
+  primaryLabel: "Guardar",
+  primaryOnClick: handleSave,
+  secondaryLabel: "Cancelar",
+  secondaryOnClick: handleCancel
+}}
+```
+
+Internamente renderiza `Button variant="secondary"`, `Button variant="actionPrimary"`, `Button shape="panel"`, `Button size="sm"`.
+
+---
+
+## 🕵️ ÚLTIMOS CAMBIOS (Fecha de corte: 2026-03-05)
+
+- **Button shape prop**: Nuevo prop oficial `shape: "default" | "panel"` (default → radius.md, panel → radius.xl). Obligatorio en footers de Panel y FormActions.
+- **Panel Footer Hard Lock**: PanelCardFooter solo acepta props estructuradas; no acepta botones JSX.
+- **Guard Rails UI**: ESLint rules `control/no-inline-border-radius` y `control/require-panel-button-shape-in-footers`.
+- **Script check:ui-guards**: Verifica borderRadius inline y uso de shape="panel" en footers.
 - **UI Patterns Frozen**: Formalización de Panel Layout, Listing Layout, Form Layout y UI Interaction Patterns mediante reglas de Cursor (.mdc).
 - **Standard Layout Template**: Creación de `PagePanelTemplate` para unificar comportamiento de Header/Footer fijos y Body scrolleable.
 - **Listing Alignment**: Sincronización visual de Users List y Devices List (Tabs, Toolbars, Interacciones).

@@ -114,7 +114,7 @@ Proceso obligatorio para nuevas piezas:
 
 | Componente | Estado | Ruta | Nota de uso |
 |-----------|--------|------|-------------|
-| Button | ✅ | `atoms/Button/` | Botón con variantes (primary, white, ghost, danger) |
+| Button | ✅ | `atoms/Button/` | Botón con variantes (primary, white, ghost, danger). **Prop `shape`**: `"default"` → radius.md, `"panel"` → radius.xl. Uso obligatorio `shape="panel"` en footers de Panel y FormActions. |
 | ActionIcon | ✅ | `atoms/ActionIcon/` | Botón iconográfico con hover circle |
 | Link | ❌ | `atoms/Link/` | Enlace estilizado con variante inline/standalone |
 
@@ -137,7 +137,7 @@ Proceso obligatorio para nuevas piezas:
 | FormField | ❌ | `molecules/FormField/` | Label + Input + error + helper text unificados |
 | FormGroup | ❌ | `molecules/FormGroup/` | Agrupación de campos con título de sección |
 | FormSection | ✅ | `containers/FormSection/` | Sección colapsable con título y contenido |
-| FormActions | ✅ | `patterns/form/FormActions.tsx` | Footer de formulario con Cancel/Submit + loading/error/success |
+| FormActions | ✅ | `patterns/form/FormActions.tsx` | Footer de formulario con Cancel/Submit + loading/error/success. Obligatorio: `<Button shape="panel">` en sus botones. |
 
 ### Navigation
 
@@ -186,7 +186,7 @@ Proceso obligatorio para nuevas piezas:
 | Componente | Estado | Ruta | Nota de uso |
 |-----------|--------|------|-------------|
 | Card | ✅ | `molecules/Card/` | Contenedor con borde, radius y padding opcional |
-| PanelCard | ✅ | `containers/PanelCard/` | Contenedor estándar para paneles (configuración, perfil, formularios). Implementa Panel Card Pattern |
+| PanelCard | ✅ | `containers/PanelCard/` | Contenedor estándar para paneles (configuración, perfil, formularios). Implementa Panel Card Pattern. PanelCardFooter: solo acepta props estructuradas, no botones JSX. |
 | Section | ✅ | `containers/Section/` | Sección con título y contenido |
 | PageShell | ✅ | `containers/PageShell/` | Shell de página con título, breadcrumbs, acciones y layout fluid/boxed |
 | ModalShell | ✅ | `containers/ModalShell/` | Modal con overlay, título, close y contenido |
@@ -286,6 +286,19 @@ PanelCard
     ├ PrimaryAction (Guardar / Aplicar)
     └ Status feedback (Guardado / Error)
 ```
+
+**Panel Footer Hard Lock**: PanelCardFooter no acepta botones como JSX. Solo acepta props estructuradas:
+
+```tsx
+footer={{
+  primaryLabel: "Guardar",
+  primaryOnClick: handleSave,
+  secondaryLabel: "Cancelar",
+  secondaryOnClick: handleCancel
+}}
+```
+
+Internamente renderiza: `Button variant="secondary"`, `Button variant="actionPrimary"`, `Button shape="panel"`, `Button size="sm"`.
 
 **Reglas de uso**:
 
@@ -393,7 +406,35 @@ Para garantizar la consistencia, todos los componentes deben seguir estos están
 - **Footer Glued**: Las acciones de pie de página en Cards tipo panel deben tocar los bordes del contenedor sin "aire" inferior.
 - **Labels Muted**: Los labels de `Input` y `SelectField` deben usar estrictamente el token `semantic.text.muted`.
 - **Botones Panel**: En vistas de tipo panel o tablas, el tamaño de botón estándar es `size="sm"` (36px).
+- **Button shape="panel"**: Obligatorio en FormActions y PanelCardFooter. Garantiza `radius.xl` consistente.
 - **Prohibición de Hacks**: Queda estrictamente prohibido el uso de paddings, márgenes o alturas manuales ("hacks") por pantalla. Todo ajuste debe ser a través de props de componentes o tokens globales.
+- **Prohibición borderRadius inline**: No usar `style={{ borderRadius }}`. Usar `Button shape="panel"` o tokens del Design System.
+
+---
+
+## 8.1 Guard Rails del Sistema UI
+
+Enforcement automático vía ESLint y script de verificación.
+
+### ESLint Rules
+
+| Regla | Bloquea/Exige | Mensaje |
+|-------|---------------|---------|
+| `control/no-inline-border-radius` | Bloquea `style={{ borderRadius }}` | "No uses style.borderRadius. Usa Button shape='panel' o tokens del Design System." |
+| `control/require-panel-button-shape-in-footers` | Exige `<Button shape="panel">` | En FormActions y PanelCardFooter |
+
+### Script de verificación
+
+| Script | Validación |
+|--------|------------|
+| `check:ui-guards` | No exista `borderRadius` inline; FormActions y PanelCardFooter usen `shape="panel"` |
+
+### Resultado
+
+- Consistencia visual en botones de panel
+- Prohibición de estilos manuales
+- Enforcement automático vía ESLint
+- Enforcement adicional vía script
 
 ---
 
