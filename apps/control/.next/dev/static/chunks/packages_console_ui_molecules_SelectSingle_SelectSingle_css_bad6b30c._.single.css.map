@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/packages/console/ui/molecules/SelectSingle/SelectSingle.css"],"sourcesContent":["/* SelectSingle.css */\r\n\r\n.select-single-container {\r\n    position: relative;\r\n    width: 100%;\r\n}\r\n\r\n\r\n\r\n.select-option.is-selected {\r\n    font-weight: 500;\r\n}\r\n\r\n\r\n/* Scrollbar styling for dropdown (optional, using defaults) */\r\n.select-dropdown::-webkit-scrollbar {\r\n    width: 8px;\r\n}\r\n\r\n.select-dropdown::-webkit-scrollbar-track {\r\n    background: transparent;\r\n}\r\n\r\n.select-dropdown::-webkit-scrollbar-thumb {\r\n    background: var(--semantic-border-default);\r\n    border-radius: 4px;\r\n}\r\n\r\n.select-dropdown::-webkit-scrollbar-thumb:hover {\r\n    background: var(--semantic-border-active);\r\n}"],"names":[],"mappings":"AAEA;;;;;AAOA;;;;AAMA;;;;AAIA;;;;AAIA;;;;;AAKA"}}]
-}
