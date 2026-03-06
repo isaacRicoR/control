@@ -1,72 +1,97 @@
 "use client";
 
 import React from "react";
-import { colors, spacing } from "@tokens";
+import { colors, spacing, radius } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";
+import { Button } from "@ui/atoms/Button/Button";
+import { Spinner } from "@ui/atoms/Spinner/Spinner";
 import type { PanelCardFooterProps } from "./PanelCard.types";
+
+/** Variants, size y radius oficiales del Design System para panel footers. Igual que FormActions. NO cambiar. */
+const FOOTER_BUTTON_SIZE = "sm" as const;
+const FOOTER_BUTTON_STYLE: React.CSSProperties = { borderRadius: radius.xl };
 
 /**
  * PanelCardFooter — Footer del Panel Card Pattern.
- * Compacto, sticky. DangerAction separado a la izquierda; acciones principales alineadas a la derecha.
- * Padding: spacing[16] (estándar formularios).
+ * Panel Footer Hard Lock: solo props estrictas. Renderiza Button internamente con variants oficiales.
+ * Prohibido: styles manuales, wrappers extra, variants distintos.
  */
 export const PanelCardFooter: React.FC<PanelCardFooterProps> = ({
-    dangerAction,
-    secondaryAction,
-    primaryAction,
+    primaryLabel,
+    primaryOnClick,
+    primaryLoading = false,
+    primaryDisabled = false,
+    secondaryLabel,
+    secondaryOnClick,
+    secondaryDisabled = false,
+    dangerLabel,
+    dangerOnClick,
+    dangerDisabled = false,
     status,
-    children,
 }) => {
     const { theme } = useTheme();
     const semantic = colors[theme].semantic;
 
-    const baseFooterStyle: React.CSSProperties = {
-        flexShrink: 0,
-        borderTop: `1px solid ${semantic.border.subtle || semantic.border.default}`,
-        padding: spacing[16],
-        display: "flex",
-        alignItems: "center",
-        gap: spacing[12],
-    };
-
-    if (children) {
-        return (
-            <footer
-                style={{
-                    ...baseFooterStyle,
-                    justifyContent: "flex-end",
-                }}
-            >
-                {children}
-            </footer>
-        );
-    }
-
-    const hasLeft = dangerAction || status;
-    const hasRight = secondaryAction || primaryAction;
-    const hasActions = hasLeft || hasRight;
-    if (!hasActions) return null;
+    const hasDanger = Boolean(dangerLabel && dangerOnClick);
+    const hasLeft = hasDanger || status;
+    const hasRight = true; // secondary + primary siempre presentes
 
     return (
         <footer
             style={{
-                ...baseFooterStyle,
-                justifyContent: hasLeft && hasRight ? "space-between" : "flex-end",
+                flexShrink: 0,
+                borderTop: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                padding: spacing[16],
+                display: "flex",
+                alignItems: "center",
+                gap: spacing[12],
+                justifyContent: hasLeft ? "space-between" : "flex-end",
                 flexWrap: "wrap",
             }}
         >
             {hasLeft && (
                 <div style={{ display: "flex", alignItems: "center", gap: spacing[12] }}>
-                    {dangerAction}
+                    {hasDanger && (
+                        <Button
+                            variant="error"
+                            size={FOOTER_BUTTON_SIZE}
+                            onClick={dangerOnClick!}
+                            disabled={dangerDisabled}
+                            style={FOOTER_BUTTON_STYLE}
+                        >
+                            {dangerLabel}
+                        </Button>
+                    )}
                     {status}
                 </div>
             )}
-            {hasRight && (
-                <div style={{ display: "flex", alignItems: "center", gap: spacing[12] }}>
-                    {secondaryAction}
-                    {primaryAction}
-                </div>
-            )}
+            <div style={{ display: "flex", alignItems: "center", gap: spacing[12] }}>
+                <Button
+                    variant="secondary"
+                    size={FOOTER_BUTTON_SIZE}
+                    onClick={secondaryOnClick}
+                    disabled={secondaryDisabled || primaryLoading}
+                    style={FOOTER_BUTTON_STYLE}
+                >
+                    {secondaryLabel}
+                </Button>
+                <Button
+                    variant="actionPrimary"
+                    size={FOOTER_BUTTON_SIZE}
+                    onClick={primaryOnClick}
+                    disabled={primaryDisabled}
+                    style={FOOTER_BUTTON_STYLE}
+                >
+                    {primaryLoading ? (
+                        <span style={{ display: "inline-flex", alignItems: "center", gap: spacing[8] }}>
+                            <Spinner size={16} />
+                            Guardando...
+                        </span>
+                    ) : (
+                        primaryLabel
+                    )}
+                </Button>
+            </div>
         </footer>
     );
 };
