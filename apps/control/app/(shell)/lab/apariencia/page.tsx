@@ -6,7 +6,6 @@ import { PageShell } from "@ui/containers/PageShell/PageShell";
 import { PanelCard } from "@ui/containers/PanelCard";
 import { CardTabsHeader } from "@ui/molecules/CardTabsHeader";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
-import { Button } from "@ui/atoms/Button/Button";
 import { Input } from "@ui/atoms/Input/Input";
 import { Text } from "@ui/atoms/Text/Text";
 import { spacing, colors, typography, radius, layout } from "@tokens";
@@ -179,6 +178,7 @@ export default function AparienciaPage() {
         );
     }
 
+    // Estructura según panel-layout.mdc: PageShell > PanelCard > Header, Tabs, Body (scroll), Footer (sticky)
     return (
         <PageShell
             title="Apariencia"
@@ -229,16 +229,12 @@ export default function AparienciaPage() {
                         ariaLabel="Secciones de apariencia"
                     />
                 }
-                secondaryAction={
-                    <Button variant="secondary" size="sm" onClick={handleCancel}>
-                        Cancelar
-                    </Button>
-                }
-                primaryAction={
-                    <Button variant="actionPrimary" size="sm" onClick={handleSave}>
-                        Guardar cambios
-                    </Button>
-                }
+                footer={{
+                    primaryLabel: "Guardar cambios",
+                    primaryOnClick: handleSave,
+                    secondaryLabel: "Cancelar",
+                    secondaryOnClick: handleCancel,
+                }}
             >
                 {/* Sección Base — Identidad visual global */}
                 {activeTab === "Base" && (

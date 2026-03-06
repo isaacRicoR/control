@@ -24,18 +24,10 @@ PageShell
 ## 2. Reglas Obligatorias
 
 - **No crear layouts manuales** para pantallas tipo panel.
-- **No crear footers personalizados**. El footer debe usar `PanelCardFooter`.
+- **No crear footers personalizados**. El footer debe usar `PanelCardFooter` con props estrictas.
+- **FooterActions MUST use PanelCardFooter strict props** — NO pasar botones custom (`primaryAction`, `secondaryAction`, etc. como JSX). Usar `footer={{ primaryLabel, primaryOnClick, secondaryLabel, secondaryOnClick, ... }}`.
+- **No manual Button variants in panel footers.** PanelCardFooter renderiza internamente los Button oficiales del Design System.
 - **Scroll**: Solo puede existir dentro de `PanelCardBody`.
-- **Acciones del footer**: Deben usar exclusivamente botones del Design System.
-
-### Botones permitidos en el footer
-
-```tsx
-<Button variant="secondary">Cancelar</Button>
-<Button variant="actionPrimary">Guardar</Button>
-```
-
-No aplicar estilos manuales a los botones.
 
 ## 3. Reglas de Layout
 
@@ -55,8 +47,12 @@ No aplicar estilos manuales a los botones.
   <PanelCard
     title="Configuración"
     description="Descripción opcional del panel"
-    secondaryAction={<Button variant="secondary" size="sm">Cancelar</Button>}
-    primaryAction={<Button variant="actionPrimary" size="sm">Guardar</Button>}
+    footer={{
+      primaryLabel: "Guardar",
+      primaryOnClick: handleSave,
+      secondaryLabel: "Cancelar",
+      secondaryOnClick: handleCancel,
+    }}
   >
     {/* PanelCardBody envuelve automáticamente el contenido */}
     {/* contenido: formularios, secciones, etc. */}

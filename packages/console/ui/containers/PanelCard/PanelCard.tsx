@@ -21,21 +21,9 @@ export const PanelCard: React.FC<PanelCardProps> = ({
     tabs,
     children,
     footer,
-    dangerAction,
-    secondaryAction,
-    primaryAction,
-    status,
 }) => {
     const { theme } = useTheme();
     const semantic = colors[theme].semantic;
-
-    const hasExplicitFooter = footer != null;
-    const hasComposedFooter =
-        dangerAction != null ||
-        secondaryAction != null ||
-        primaryAction != null ||
-        status != null;
-    const showFooter = hasExplicitFooter || hasComposedFooter;
 
     return (
         <section
@@ -63,18 +51,7 @@ export const PanelCard: React.FC<PanelCardProps> = ({
 
             <PanelCardBody>{children}</PanelCardBody>
 
-            {showFooter && (
-                hasExplicitFooter ? (
-                    <PanelCardFooter>{footer}</PanelCardFooter>
-                ) : (
-                    <PanelCardFooter
-                        dangerAction={dangerAction}
-                        secondaryAction={secondaryAction}
-                        primaryAction={primaryAction}
-                        status={status}
-                    />
-                )
-            )}
+            {footer != null && <PanelCardFooter {...footer} />}
         </section>
     );
 };

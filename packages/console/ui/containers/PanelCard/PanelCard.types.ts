@@ -1,5 +1,20 @@
 import type { ReactNode } from "react";
 
+/** Panel Footer Hard Lock — Props estrictas. NO acepta ReactNode de botones. */
+export interface PanelCardFooterProps {
+    primaryLabel: string;
+    primaryOnClick: () => void;
+    primaryLoading?: boolean;
+    primaryDisabled?: boolean;
+    secondaryLabel: string;
+    secondaryOnClick: () => void;
+    secondaryDisabled?: boolean;
+    dangerLabel?: string;
+    dangerOnClick?: () => void;
+    dangerDisabled?: boolean;
+    status?: ReactNode;
+}
+
 export interface PanelCardProps {
     /** Título del panel */
     title?: string;
@@ -11,16 +26,8 @@ export interface PanelCardProps {
     tabs?: ReactNode;
     /** Contenido del body (formularios, secciones, etc.) */
     children: ReactNode;
-    /** Contenido del footer (acciones) */
-    footer?: ReactNode;
-    /** Acción destructiva (opcional, separada visualmente) */
-    dangerAction?: ReactNode;
-    /** Acción secundaria (ej: Cancelar) */
-    secondaryAction?: ReactNode;
-    /** Acción primaria (ej: Guardar / Aplicar) */
-    primaryAction?: ReactNode;
-    /** Estado de guardado (ej: "Guardado", mensaje de error) */
-    status?: ReactNode;
+    /** Footer: props estrictas (Panel Footer Hard Lock). NO pasar botones custom. */
+    footer?: PanelCardFooterProps;
 }
 
 export interface PanelCardHeaderProps {
@@ -32,17 +39,4 @@ export interface PanelCardHeaderProps {
 
 export interface PanelCardBodyProps {
     children: ReactNode;
-}
-
-export interface PanelCardFooterProps {
-    /** Acción destructiva (alineada a la izquierda, separada) */
-    dangerAction?: ReactNode;
-    /** Acción secundaria (ej: Cancelar) */
-    secondaryAction?: ReactNode;
-    /** Acción primaria (ej: Guardar) */
-    primaryAction?: ReactNode;
-    /** Estado de guardado o feedback */
-    status?: ReactNode;
-    /** Contenido custom del footer (si se usa, ignora las props de acción) */
-    children?: ReactNode;
 }
