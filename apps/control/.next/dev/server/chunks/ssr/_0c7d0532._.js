@@ -4608,7 +4608,8 @@ function UsersListClient() {
                         display: "flex",
                         alignItems: "center",
                         gap: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][12],
-                        cursor: "pointer"
+                        cursor: "pointer",
+                        userSelect: "none"
                     },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Avatar$2f$Avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Avatar"], {
@@ -4617,7 +4618,7 @@ function UsersListClient() {
                             backgroundColor: row.initialsColor
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 152,
+                            lineNumber: 153,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4631,7 +4632,7 @@ function UsersListClient() {
                                     children: row.name
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                    lineNumber: 158,
+                                    lineNumber: 159,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4643,13 +4644,13 @@ function UsersListClient() {
                                     children: row.email
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                    lineNumber: 165,
+                                    lineNumber: 166,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 157,
+                            lineNumber: 158,
                             columnNumber: 21
                         }, this)
                     ]
@@ -4670,7 +4671,7 @@ function UsersListClient() {
                     children: row.phone
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 180,
+                    lineNumber: 181,
                     columnNumber: 17
                 }, this)
         },
@@ -4687,7 +4688,7 @@ function UsersListClient() {
                     children: row.role
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 190,
+                    lineNumber: 191,
                     columnNumber: 37
                 }, this)
         },
@@ -4704,7 +4705,7 @@ function UsersListClient() {
                     children: row.department
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 198,
+                    lineNumber: 199,
                     columnNumber: 17
                 }, this),
             hideBelow: "md"
@@ -4729,7 +4730,7 @@ function UsersListClient() {
                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["typography"].fontSize.sm
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 215,
+                    lineNumber: 216,
                     columnNumber: 21
                 }, this);
             }
@@ -4742,7 +4743,7 @@ function UsersListClient() {
                     status: row.status
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 229,
+                    lineNumber: 230,
                     columnNumber: 17
                 }, this),
             hideBelow: "lg"
@@ -4759,7 +4760,7 @@ function UsersListClient() {
                     children: row.lastActivity
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 237,
+                    lineNumber: 238,
                     columnNumber: 17
                 }, this),
             hideBelow: "xl"
@@ -4784,7 +4785,7 @@ function UsersListClient() {
                             onClick: ()=>router.push(`/users/${row.id}`)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 247,
+                            lineNumber: 248,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$access$2f$PermissionGate$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PermissionGate"], {
@@ -4801,12 +4802,12 @@ function UsersListClient() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                lineNumber: 256,
+                                lineNumber: 257,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 255,
+                            lineNumber: 256,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$access$2f$PermissionGate$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PermissionGate"], {
@@ -4820,7 +4821,7 @@ function UsersListClient() {
                                     hoverColor: actionIconHoverColor
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                    lineNumber: 271,
+                                    lineNumber: 272,
                                     columnNumber: 38
                                 }, void 0),
                                 title: "Acciones de usuario",
@@ -4859,18 +4860,18 @@ function UsersListClient() {
                                 ]
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                lineNumber: 270,
+                                lineNumber: 271,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 269,
+                            lineNumber: 270,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 246,
+                    lineNumber: 247,
                     columnNumber: 17
                 }, this),
             hideBelow: "xl"
@@ -4922,7 +4923,7 @@ function UsersListClient() {
             columns: 5
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-            lineNumber: 363,
+            lineNumber: 364,
             columnNumber: 46
         }, this);
         if (debugState === "error") return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$ErrorState$2f$ErrorState$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ErrorState"], {
@@ -4930,7 +4931,7 @@ function UsersListClient() {
             description: "Simulated fetch error (debug)."
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-            lineNumber: 364,
+            lineNumber: 365,
             columnNumber: 44
         }, this);
         if (debugState === "empty") return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$EmptyState$2f$EmptyState$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["EmptyState"], {
@@ -4939,7 +4940,7 @@ function UsersListClient() {
             icon: "users"
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-            lineNumber: 365,
+            lineNumber: 366,
             columnNumber: 44
         }, this);
     }
@@ -4953,28 +4954,28 @@ function UsersListClient() {
                         children: "Panel"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 375,
-                        columnNumber: 25
-                    }, void 0),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        children: "›"
-                    }, void 0, false, {
-                        fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
                         lineNumber: 376,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        children: "Usuarios"
+                        children: "›"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
                         lineNumber: 377,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        children: "›"
+                        children: "Usuarios"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
                         lineNumber: 378,
+                        columnNumber: 25
+                    }, void 0),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        children: "›"
+                    }, void 0, false, {
+                        fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
+                        lineNumber: 379,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -4984,7 +4985,7 @@ function UsersListClient() {
                         children: "Lista"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 379,
+                        lineNumber: 380,
                         columnNumber: 25
                     }, void 0)
                 ]
@@ -5004,12 +5005,12 @@ function UsersListClient() {
                 columns: 5
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                lineNumber: 391,
+                lineNumber: 392,
                 columnNumber: 17
             }, this)
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-            lineNumber: 370,
+            lineNumber: 371,
             columnNumber: 13
         }, this);
     }
@@ -5023,28 +5024,28 @@ function UsersListClient() {
                         children: "Panel"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 403,
-                        columnNumber: 25
-                    }, void 0),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        children: "›"
-                    }, void 0, false, {
-                        fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
                         lineNumber: 404,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        children: "Usuarios"
+                        children: "›"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
                         lineNumber: 405,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        children: "›"
+                        children: "Usuarios"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
                         lineNumber: 406,
+                        columnNumber: 25
+                    }, void 0),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        children: "›"
+                    }, void 0, false, {
+                        fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
+                        lineNumber: 407,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5054,7 +5055,7 @@ function UsersListClient() {
                         children: "Lista"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 407,
+                        lineNumber: 408,
                         columnNumber: 25
                     }, void 0)
                 ]
@@ -5078,12 +5079,12 @@ function UsersListClient() {
                 }
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                lineNumber: 419,
+                lineNumber: 420,
                 columnNumber: 17
             }, this)
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-            lineNumber: 398,
+            lineNumber: 399,
             columnNumber: 13
         }, this);
     }
@@ -5106,28 +5107,28 @@ function UsersListClient() {
                             children: "Panel"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 444,
-                            columnNumber: 25
-                        }, void 0),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            children: "›"
-                        }, void 0, false, {
-                            fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
                             lineNumber: 445,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            children: "Usuarios"
+                            children: "›"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
                             lineNumber: 446,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            children: "›"
+                            children: "Usuarios"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
                             lineNumber: 447,
+                            columnNumber: 25
+                        }, void 0),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            children: "›"
+                        }, void 0, false, {
+                            fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
+                            lineNumber: 448,
                             columnNumber: 25
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5137,7 +5138,7 @@ function UsersListClient() {
                             children: "Lista"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 448,
+                            lineNumber: 449,
                             columnNumber: 25
                         }, void 0)
                     ]
@@ -5159,19 +5160,19 @@ function UsersListClient() {
                                 size: 16
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                lineNumber: 459,
+                                lineNumber: 460,
                                 columnNumber: 29
                             }, void 0),
                             "Crear usuario"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                        lineNumber: 453,
+                        lineNumber: 454,
                         columnNumber: 25
                     }, void 0)
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 452,
+                    lineNumber: 453,
                     columnNumber: 21
                 }, void 0),
                 headerStyle: {
@@ -5217,7 +5218,7 @@ function UsersListClient() {
                                 align: "left"
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                lineNumber: 500,
+                                lineNumber: 501,
                                 columnNumber: 29
                             }, void 0),
                             endContent: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -5230,7 +5231,7 @@ function UsersListClient() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                        lineNumber: 509,
+                                        lineNumber: 510,
                                         columnNumber: 33
                                     }, void 0),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5250,19 +5251,19 @@ function UsersListClient() {
                                             color: semantic.text.default
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                            lineNumber: 515,
+                                            lineNumber: 516,
                                             columnNumber: 37
                                         }, void 0)
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                                        lineNumber: 514,
+                                        lineNumber: 515,
                                         columnNumber: 33
                                     }, void 0)
                                 ]
                             }, void 0, true)
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 491,
+                            lineNumber: 492,
                             columnNumber: 21
                         }, this),
                         filteredRows.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$EmptyState$2f$EmptyState$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["EmptyState"], {
@@ -5271,7 +5272,7 @@ function UsersListClient() {
                             icon: "users"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 523,
+                            lineNumber: 524,
                             columnNumber: 25
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$DataTable$2f$DataTable$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DataTable"], {
                             ariaLabel: "Tabla de usuarios",
@@ -5280,18 +5281,18 @@ function UsersListClient() {
                             filterQuery: searchQuery
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                            lineNumber: 529,
+                            lineNumber: 530,
                             columnNumber: 25
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 477,
+                    lineNumber: 478,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                lineNumber: 439,
+                lineNumber: 440,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$ModalShell$2f$ModalShell$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ModalShell"], {
@@ -5315,12 +5316,12 @@ function UsersListClient() {
                     onSubmit: handleSaveUser
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                    lineNumber: 545,
+                    lineNumber: 546,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/users/list/UsersListClient.tsx",
-                lineNumber: 539,
+                lineNumber: 540,
                 columnNumber: 13
             }, this)
         ]

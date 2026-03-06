@@ -3136,7 +3136,7 @@ const STATUS_TABS = [
     {
         label: "Bloqueados",
         filterValue: "Bloqueado",
-        variant: "error"
+        variant: "danger"
     }
 ];
 function DevicesListClient() {
@@ -3404,7 +3404,8 @@ function DevicesListClient() {
                         display: "flex",
                         alignItems: "center",
                         gap: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["spacing"][12],
-                        cursor: "pointer"
+                        cursor: "pointer",
+                        userSelect: "none"
                     },
                     onClick: ()=>router.push(`/devices/${row.id}`),
                     children: [
@@ -3764,7 +3765,7 @@ function DevicesListClient() {
                     tabs: STATUS_TABS.map((tab)=>({
                             label: tab.label,
                             count: getTabCount(tab.filterValue),
-                            variant: tab.variant === 'error' ? 'danger' : tab.variant
+                            variant: tab.variant
                         })),
                     activeTab: activeTab,
                     onTabChange: handleTabChange,
