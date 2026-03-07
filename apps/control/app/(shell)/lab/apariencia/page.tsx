@@ -4,7 +4,9 @@ import React, { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { PageShell } from "@ui/containers/PageShell/PageShell";
 import { PanelCard } from "@ui/containers/PanelCard";
+import { Card } from "@ui/molecules/Card";
 import { CardTabsHeader } from "@ui/molecules/CardTabsHeader";
+import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
 import { Input } from "@ui/atoms/Input/Input";
 import { Text } from "@ui/atoms/Text/Text";
@@ -17,7 +19,14 @@ import { AccessDeniedState } from "@ui/containers/AccessDeniedState/AccessDenied
 import { DEV_UI_ENABLED } from "@core/flags/devFlags";
 import { mockSession } from "@core/auth/mockSession";
 
+/** Temas disponibles. Estructura preparada para múltiples (Control = tema base del sistema). */
+const AVAILABLE_THEMES = [
+    { value: "control", label: "Control" },
+    // Futuro: { value: "security", label: "Security" },
+] as const;
+
 const TABS = [
+    { label: "Galería", value: "Galería" },
     { label: "Base", value: "Base" },
     { label: "Estados", value: "Estados" },
     { label: "Componentes", value: "Componentes" },
@@ -387,7 +396,52 @@ export default function AparienciaPage() {
                     secondaryOnClick: handleCancel,
                 }}
             >
-                {/* Sección Base — Centro de control visual del tema */}
+                {/* Sección Galería — Temas disponibles (sin selector) */}
+                {activeTab === "Galería" && (
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: spacing.lg,
+                            maxWidth: 480,
+                            alignSelf: "flex-start",
+                        }}
+                    >
+                        <Text
+                            variant="body"
+                            style={{
+                                color: semantic.text.muted,
+                                fontWeight: typography.fontWeight.semibold,
+                            }}
+                        >
+                            Temas disponibles
+                        </Text>
+                        <div
+                            style={{
+                                padding: spacing.lg,
+                                backgroundColor: semantic.surface.default,
+                                border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                                borderRadius: radius.card,
+                            }}
+                        >
+                            <Text variant="body" style={{ color: semantic.text.default }}>
+                                Control
+                            </Text>
+                            <Text
+                                variant="body"
+                                style={{
+                                    color: semantic.text.muted,
+                                    fontSize: typography.fontSize.sm,
+                                    marginTop: spacing[4],
+                                }}
+                            >
+                                Tema base del sistema
+                            </Text>
+                        </div>
+                    </div>
+                )}
+
+                {/* Sección Base — Centro de control visual del tema (cards independientes) */}
                 {activeTab === "Base" && (
                     <div
                         style={{
@@ -396,110 +450,115 @@ export default function AparienciaPage() {
                             gap: spacing.lg,
                             maxWidth: 480,
                             alignSelf: "flex-start",
-                            alignItems: "flex-start",
+                            width: "100%",
                         }}
                     >
-                        {/* 1. Identidad visual del tema */}
-                        <Text
-                            variant="body"
-                            style={{
-                                color: semantic.text.muted,
-                                fontWeight: typography.fontWeight.semibold,
-                            }}
-                        >
-                            Identidad visual del tema
-                        </Text>
-
-                        <div
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: spacing.lg,
-                                width: "100%",
-                                padding: spacing.lg,
-                                backgroundColor: semantic.surface.default,
-                                border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
-                                borderRadius: radius.card,
-                            }}
-                        >
-                            <Text variant="body" style={{ color: semantic.text.muted }}>
-                                Preset activo:{" "}
-                                <span
+                        <Card title="Identidad del tema">
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: spacing.lg,
+                                }}
+                            >
+                                <div
                                     style={{
-                                        color: semantic.text.default,
-                                        fontWeight: typography.fontWeight.medium,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: spacing[12],
                                     }}
                                 >
-                                    {currentPreset === "control" ? "Control" : "Security"}
-                                </span>
-                            </Text>
-                            <div>
-                                <Text
-                                    variant="body"
-                                    style={{
-                                        color: semantic.text.muted,
-                                        marginBottom: spacing.sm,
-                                        display: "block",
-                                    }}
-                                >
-                                    Modo editado
-                                </Text>
-                                <ModeSegmentedControl
-                                    value={editMode}
-                                    onChange={setEditMode}
-                                    semantic={semantic}
-                                />
+                                    <Text
+                                        variant="body"
+                                        style={{
+                                            color: semantic.text.muted,
+                                            fontWeight: typography.fontWeight.medium,
+                                        }}
+                                    >
+                                        Preset activo:
+                                    </Text>
+                                    <div style={{ minWidth: spacing[24] * 6 }}>
+                                        <SelectSingle
+                                            options={[...AVAILABLE_THEMES]}
+                                            value={currentPreset}
+                                            onChange={(v) => setPreset(v as "control" | "security")}
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <Text
+                                        variant="body"
+                                        style={{
+                                            color: semantic.text.muted,
+                                            marginBottom: spacing.sm,
+                                            display: "block",
+                                        }}
+                                    >
+                                        Modo editado
+                                    </Text>
+                                    <ModeSegmentedControl
+                                        value={editMode}
+                                        onChange={setEditMode}
+                                        semantic={semantic}
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        </Card>
 
-                        {/* 2. Tokens base */}
-                        <Text
-                            variant="body"
-                            style={{
-                                color: semantic.text.muted,
-                                fontWeight: typography.fontWeight.semibold,
-                            }}
-                        >
-                            Tokens base
-                        </Text>
+                        <Card title="Tokens base">
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: spacing.lg,
+                                }}
+                            >
+                                {BASE_TOKEN_KEYS.map(({ key, label }) => (
+                                    <TokenRowWithSwatch
+                                        key={key}
+                                        label={label}
+                                        value={currentTokens[key]}
+                                        onChange={(v) => handleChange(editMode, key, v)}
+                                        semantic={semantic}
+                                    />
+                                ))}
+                            </div>
+                        </Card>
 
-                        <div
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: spacing.lg,
-                                width: "100%",
-                            }}
-                        >
-                            {BASE_TOKEN_KEYS.map(({ key, label }) => (
-                                <TokenRowWithSwatch
-                                    key={key}
-                                    label={label}
-                                    value={currentTokens[key]}
-                                    onChange={(v) => handleChange(editMode, key, v)}
-                                    semantic={semantic}
-                                />
-                            ))}
-                        </div>
-
-                        {/* 3. Vista previa */}
-                        <Text
-                            variant="body"
-                            style={{
-                                color: semantic.text.muted,
-                                fontWeight: typography.fontWeight.semibold,
-                            }}
-                        >
-                            Vista previa
-                        </Text>
-
-                        <ThemePreview tokens={currentTokens} semantic={semantic} />
+                        <Card title="Vista previa">
+                            <ThemePreview tokens={currentTokens} semantic={semantic} />
+                        </Card>
                     </div>
                 )}
 
                 {/* Sección Estados — Colores de feedback */}
                 {activeTab === "Estados" && (
                     <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: spacing[12],
+                                marginBottom: spacing[8],
+                            }}
+                        >
+                            <Text
+                                variant="body"
+                                style={{
+                                    color: semantic.text.muted,
+                                    fontWeight: typography.fontWeight.medium,
+                                }}
+                            >
+                                Tema:
+                            </Text>
+                            <div style={{ minWidth: spacing[24] * 6 }}>
+                                <SelectSingle
+                                    options={[...AVAILABLE_THEMES]}
+                                    value={currentPreset}
+                                    onChange={(v) => setPreset(v as "control" | "security")}
+                                />
+                            </div>
+                        </div>
                         <Text
                             variant="body"
                             style={{
@@ -529,6 +588,31 @@ export default function AparienciaPage() {
                 {/* Sección Componentes — Apariencia de componentes */}
                 {activeTab === "Componentes" && (
                     <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: spacing[12],
+                                marginBottom: spacing[8],
+                            }}
+                        >
+                            <Text
+                                variant="body"
+                                style={{
+                                    color: semantic.text.muted,
+                                    fontWeight: typography.fontWeight.medium,
+                                }}
+                            >
+                                Tema:
+                            </Text>
+                            <div style={{ minWidth: spacing[24] * 6 }}>
+                                <SelectSingle
+                                    options={[...AVAILABLE_THEMES]}
+                                    value={currentPreset}
+                                    onChange={(v) => setPreset(v as "control" | "security")}
+                                />
+                            </div>
+                        </div>
                         <Text
                             variant="body"
                             style={{
@@ -568,6 +652,31 @@ export default function AparienciaPage() {
                 {/* Sección Avanzado — Ajustes avanzados */}
                 {activeTab === "Avanzado" && (
                     <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: spacing[12],
+                                marginBottom: spacing[8],
+                            }}
+                        >
+                            <Text
+                                variant="body"
+                                style={{
+                                    color: semantic.text.muted,
+                                    fontWeight: typography.fontWeight.medium,
+                                }}
+                            >
+                                Tema:
+                            </Text>
+                            <div style={{ minWidth: spacing[24] * 6 }}>
+                                <SelectSingle
+                                    options={[...AVAILABLE_THEMES]}
+                                    value={currentPreset}
+                                    onChange={(v) => setPreset(v as "control" | "security")}
+                                />
+                            </div>
+                        </div>
                         <Text
                             variant="body"
                             style={{
