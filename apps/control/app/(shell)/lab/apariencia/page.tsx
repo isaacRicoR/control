@@ -407,7 +407,7 @@ function ThemeGalleryCard({
                             <span
                                 key={tag}
                                 style={{
-                                    padding: `${spacing[2]}px ${spacing[6]}px`,
+                                    padding: `${spacing.xs}px ${spacing[12]}px`,
                                     fontFamily: typography.fontFamily.primary,
                                     fontSize: typography.fontSize.xs,
                                     color: semantic.text.muted,
