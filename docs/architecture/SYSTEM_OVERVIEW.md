@@ -153,6 +153,19 @@ Algunas rutas antiguas o heredadas pueden seguir apareciendo en:
 
 Estas rutas pueden haber sido reemplazadas por la estructura actual (ej: `design/tokens` → `packages/console/tokens`).
 
+### Aliases del proyecto
+
+En `apps/control/tsconfig.json` están definidos los siguientes paths (base: `apps/control`):
+
+| Alias | Ruta real | Uso |
+|-------|-----------|-----|
+| `@ui/*` | `../../packages/console/ui/*` | Componentes del Design System |
+| `@core/*` | `../../packages/console/core/*` | Connector, Toast, Auth, Preferences, etc. |
+| `@tokens` / `@tokens/*` | `../../packages/console/tokens` | Tokens de diseño (colors, spacing, radius) |
+| `@server/*` | `../../server/*` | Backend, envelope, services, db |
+
+Estos aliases permiten importaciones limpias sin rutas relativas largas.
+
 ### Regla antes de eliminar
 
 **Nunca eliminar carpetas, rutas o aliases por intuición.**

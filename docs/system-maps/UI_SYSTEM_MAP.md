@@ -94,7 +94,7 @@ Proceso obligatorio para nuevas piezas:
 | DatePicker | ❌ | `atoms/DatePicker/` | Selector de fecha con calendario |
 | TimePicker | ❌ | `atoms/TimePicker/` | Selector de hora |
 | FileUpload | ❌ | `atoms/FileUpload/` | Zona de subida de archivos (drag & drop + botón) |
-| SearchInput | ❌ | `atoms/SearchInput/` | Input especializado con ícono de búsqueda y clear |
+| SearchInput | ✅ | `atoms/SearchInput/` | Input especializado con ícono de búsqueda y clear |
 
 ### Display
 
@@ -105,7 +105,7 @@ Proceso obligatorio para nuevas piezas:
 | Icon | ✅ | `atoms/Icon/` | Wrapper sobre Lucide icons, size y color por props |
 | FloatingSurface | ✅ | `atoms/FloatingSurface/` | Superficie flotante con borde, sombra y scrollbar |
 | Spacer | ✅ | `atoms/Spacer/` | Espaciador vertical/horizontal basado en tokens |
-| Avatar | ❌ | `atoms/Avatar/` | Círculo con iniciales o imagen de usuario |
+| Avatar | ✅ | `atoms/Avatar/` | Círculo con iniciales o imagen de usuario |
 | Divider | ❌ | `atoms/Divider/` | Separador horizontal/vertical semántico |
 | Tooltip | ❌ | `atoms/Tooltip/` | Texto auxiliar emergente on hover |
 | Label | ❌ | `atoms/Label/` | Etiqueta de texto asociada a un form control |
@@ -115,6 +115,7 @@ Proceso obligatorio para nuevas piezas:
 | Componente | Estado | Ruta | Nota de uso |
 |-----------|--------|------|-------------|
 | Button | ✅ | `atoms/Button/` | Botón con variantes (primary, white, ghost, danger). **Prop `shape`**: `"default"` → radius.md, `"panel"` → radius.xl. Uso obligatorio `shape="panel"` en footers de Panel y FormActions. |
+| PrimaryActionButton | ✅ | `atoms/PrimaryActionButton/` | Botón de acción primaria reutilizable con variantes |
 | ActionIcon | ✅ | `atoms/ActionIcon/` | Botón iconográfico con hover circle |
 | Link | ❌ | `atoms/Link/` | Enlace estilizado con variante inline/standalone |
 
@@ -134,7 +135,7 @@ Proceso obligatorio para nuevas piezas:
 
 | Componente | Estado | Ruta | Nota de uso |
 |-----------|--------|------|-------------|
-| FormField | ❌ | `molecules/FormField/` | Label + Input + error + helper text unificados |
+| FormField | ✅ | `patterns/FormField/` | Label + Input + error + helper text unificados |
 | FormGroup | ❌ | `molecules/FormGroup/` | Agrupación de campos con título de sección |
 | FormActions | ✅ | `patterns/form/FormActions.tsx` | Footer de formulario con Cancel/Submit + loading/error/success. Obligatorio: `<Button shape="panel">` en sus botones. |
 
@@ -164,6 +165,7 @@ Proceso obligatorio para nuevas piezas:
 | SelectSingle | ✅ | `molecules/SelectSingle/` | Select con dropdown flotante y scrollbar estilizado |
 | ConfirmDialog | ✅ | `molecules/ConfirmDialog/` | Modal de confirmación con tonos (default, error, warning, info, success). Layout compacto premium |
 | StatusTabs | ✅ | `molecules/StatusTabs/` | Tabs de filtro por estado con badges y underline animado (Users, Devices) |
+| DeviceStatusCell | ✅ | `molecules/DeviceStatusCell.tsx` | Celda de estado de dispositivo para tablas (badge + estado) |
 | SelectMulti | ❌ | `molecules/SelectMulti/` | Select multi-valor con chips |
 | FilterChips | ❌ | `molecules/FilterChips/` | Chips activos de filtro con botón de eliminar |
 
@@ -184,7 +186,7 @@ Proceso obligatorio para nuevas piezas:
 
 | Componente | Estado | Ruta | Nota de uso |
 |-----------|--------|------|-------------|
-| Card | ✅ | `containers/Card/` | Contenedor con borde, radius y padding opcional |
+| Card | ✅ | `molecules/Card/` | Contenedor con borde, radius y padding opcional |
 | FormSection | ✅ | `containers/FormSection/` | Sección colapsable con título y contenido |
 | PanelCard | ✅ | `containers/PanelCard/` | Contenedor estándar para paneles (configuración, perfil, formularios). Implementa Panel Card Pattern. PanelCardFooter: solo acepta props estructuradas, no botones JSX. |
 | Section | ✅ | `containers/Section/` | Sección con título y contenido |
@@ -197,6 +199,8 @@ Proceso obligatorio para nuevas piezas:
 |-----------|--------|------|-------------|
 | EmptyState | ✅ | `containers/EmptyState/` | Icono, título, descripción y acción opcional (centrado) |
 | ErrorState | ✅ | `containers/ErrorState/` | Estado de error con ícono danger, título, mensaje y retry |
+| NotFoundState | ✅ | `containers/NotFoundState/` | Estado 404 con ícono de búsqueda, título y acción de vuelta |
+| AccessDeniedState | ✅ | `containers/AccessDeniedState/` | Estado 403 con ícono de candado, título y mensaje de acceso denegado |
 | LoadingState | ❌ | `containers/LoadingState/` | Estado de carga a pantalla completa (wrapper de Spinner) |
 
 ### Toast System (Feedback global)
@@ -317,6 +321,18 @@ Internamente renderiza: `Button variant="secondary"`, `Button variant="actionPri
 - Formularios administrativos
 
 Este patrón debe ser utilizado por cualquier módulo que implemente vistas tipo panel dentro del sistema.
+
+### PagePanelTemplate (componente estructural app/shell)
+
+**PagePanelTemplate** implementa el layout del Panel Card Pattern (Header/Body/Footer) pero **no forma parte del Design System compartido**.
+
+| Aspecto | Valor |
+|---------|-------|
+| **Ubicación** | `apps/control/app/(shell)/_components/PagePanelTemplate.tsx` |
+| **Ownership** | Componente estructural a nivel shell/app |
+| **Rol** | Orquestación de layout para vistas de detalle en la app actual |
+
+No pertenece a `packages/console/ui/*`; es una pieza de orquestación específica del cartucho CONTROL.
 
 ---
 

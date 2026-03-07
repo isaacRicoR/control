@@ -39,7 +39,7 @@ Contiene la arquitectura técnica del sistema.
 Archivos incluidos:
 - SYSTEM_OVERVIEW.md
 - SYSTEM_TARGET_ARCHITECTURE.md
-- UNIVERSAL_CONNECTOR_CONTRACT_v2.1.md
+- UNIVERSAL_CONNECTOR_CONTRACT_v2_1.md
 - FIELD_EDIT_GOVERNANCE_MODEL.md
 
 ## 2. Mapas del sistema
@@ -72,6 +72,11 @@ Ejemplo:
 Ubicación: docs/theme/
 
 Documentación relacionada con el tema de UI, tokens y sistema visual.
+
+Incluye:
+- CONTROL_UI_SPEC_v1.md
+- FOCUS_RING_SOURCE_REPORT.md
+- TOKEN_MAP_USERS_LIST_DARK.md
 
 ## 6. Historial
 Ubicación: docs/history/

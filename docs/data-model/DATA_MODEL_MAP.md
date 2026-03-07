@@ -5,6 +5,16 @@
 
 ---
 
+## Aclaración: Modelo objetivo vs backend actual
+
+Este documento describe el **modelo objetivo / normalizado** del sistema.
+
+El backend actual opera parcialmente con **mock DTOs y estructuras temporales**. Por lo tanto, puede haber diferencias entre las entidades documentadas aquí y los mocks existentes en el repo (por ejemplo: campos en español, denormalización, ausencia de `organizationId` en algunos DTOs).
+
+Las entidades y relaciones definidas más abajo son el diseño de referencia para la evolución del sistema.
+
+---
+
 ## 1. Propósito
 
 Este documento define la estructura de datos del sistema CONTROL, incluyendo:

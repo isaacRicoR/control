@@ -51,6 +51,8 @@ Jerarquía oficial para la construcción de pantallas dentro de `apps/control`.
 2. **PagePanelTemplate**  
    Template reutilizable para vistas tipo panel que implementa el **Panel Card Pattern** definido en el **UI SYSTEM MAP**.
 
+   **Ubicación**: `apps/control/app/(shell)/_components/PagePanelTemplate.tsx` — Es un componente estructural de app/shell, no pertenece al paquete compartido `packages/console/ui/*`. Su rol es la orquestación de layout en la app actual.
+
    Este template organiza la interfaz en tres zonas estructurales:
 
    - **HeaderTools**: Back navigation + Tabs cuando aplica.
@@ -329,7 +331,7 @@ Acceso exclusivo para administradores y desarrolladores (Owner role).
 
 Piezas de arquitectura UI reutilizables.
 
-- **PagePanelTemplate**: ❄️ STABLE (Slot-based layout para Paneles).
+- **PagePanelTemplate**: ❄️ STABLE (Slot-based layout para Paneles). Ubicado en `apps/control/app/(shell)/_components/` — componente estructural de app/shell, no en `packages/console/ui/*`.
 - **DataTable**: Tabla de datos con paginación y estados — ❄️ FROZEN (100% genérico).
 - **TableToolbar**: Barra de herramientas estandarizada (Tabs, Search, Actions).
 - **CardTabsHeader**: Header reutilizable para tarjetas con tabs. Altura: **55px**.
