@@ -248,60 +248,13 @@ function ModoAyudaSwitch({
     const semantic = colors[theme].semantic;
 
     return (
-        <div
-            style={{
-                display: "flex",
-                alignItems: "center",
-                gap: spacing[8],
-            }}
-        >
-            <span
-                style={{
-                    fontSize: typography.fontSize.sm,
-                    color: semantic.text.muted,
-                    fontFamily: typography.fontFamily.primary,
-                }}
-            >
-                Modo ayuda
-            </span>
-            <button
-                type="button"
-                role="switch"
-                aria-checked={value}
-                onClick={() => onChange(!value)}
-                style={{
-                    width: 44,
-                    height: 24,
-                    borderRadius: 12,
-                    border: "none",
-                    cursor: "pointer",
-                    backgroundColor: value ? semantic.primary.default : semantic.border.default,
-                    padding: 2,
-                    transition: "background-color 0.2s ease",
-                }}
-            >
-                <span
-                    style={{
-                        display: "block",
-                        width: 20,
-                        height: 20,
-                        borderRadius: "50%",
-                        backgroundColor: "#fff",
-                        transform: value ? "translateX(20px)" : "translateX(0)",
-                        transition: "transform 0.2s ease",
-                    }}
-                />
-            </button>
-            <span
-                style={{
-                    fontSize: typography.fontSize.sm,
-                    color: semantic.text.muted,
-                    fontFamily: typography.fontFamily.primary,
-                }}
-            >
-                {value ? "ON" : "OFF"}
-            </span>
-        </div>
+        <ActionIcon
+            name="alert-circle"
+            size={18}
+            color={value ? semantic.primary.default : semantic.text.disabled}
+            hoverColor={value ? semantic.primary.default : undefined}
+            onClick={() => onChange(!value)}
+        />
     );
 }
 
@@ -410,9 +363,6 @@ export default function AparienciaPage() {
             }}
         >
             <PanelCard
-                title="Apariencia"
-                description="Configuración del tema visual del sistema"
-                headerActions={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
                 tabs={
                     <CardTabsHeader
                         tabs={TABS}
@@ -420,23 +370,13 @@ export default function AparienciaPage() {
                         onChange={setActiveTab}
                         tabsGap={spacing[16]}
                         leftSlot={
-                            <div
-                                style={{
-                                    paddingLeft: spacing[12],
-                                    paddingRight: spacing[8],
-                                    paddingTop: spacing[12],
-                                    paddingBottom: spacing[12],
-                                    display: "flex",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <ActionIcon
-                                    name="chevron-left"
-                                    label="Volver"
-                                    onClick={() => router.back()}
-                                />
-                            </div>
+                            <ActionIcon
+                                name="chevron-left"
+                                label="Volver"
+                                onClick={() => router.back()}
+                            />
                         }
+                        rightSlot={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
                         ariaLabel="Secciones de apariencia"
                     />
                 }

@@ -17,6 +17,7 @@ import type { PanelCardProps } from "./PanelCard.types";
 export const PanelCard: React.FC<PanelCardProps> = ({
     title,
     description,
+    headerStart,
     headerActions,
     tabs,
     children,
@@ -40,10 +41,11 @@ export const PanelCard: React.FC<PanelCardProps> = ({
             }}
             aria-label={title ?? "Panel"}
         >
-            {(title || description || tabs || headerActions) && (
+            {(title || description || headerStart || tabs || headerActions) && (
                 <PanelCardHeader
                     title={title}
                     description={description}
+                    headerStart={headerStart}
                     tabs={tabs}
                     actions={headerActions}
                 />

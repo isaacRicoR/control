@@ -62,7 +62,6 @@ export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
     };
 
     const hasLeftSlot = leftSlot != null;
-    const dividerHeight = Math.round(ROW_HEIGHT * 0.65);
     const hasRightSlot = rightSlot != null;
 
     return (
@@ -70,9 +69,7 @@ export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
             role="tablist"
             aria-label={ariaLabel}
             style={{
-                borderBottom: `1px solid ${semantic.border.subtle || semantic.border.default}`,
                 marginTop: -spacing[24],
-                marginBottom: spacing[24],
                 position: "relative",
             }}
         >
@@ -85,28 +82,19 @@ export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
                 }}
             >
                 {hasLeftSlot && (
-                    <>
-                        <div
-                            style={{
-                                height: ROW_HEIGHT,
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                lineHeight: 0,
-                            }}
-                        >
-                            {leftSlot}
-                        </div>
-                        <div
-                            style={{
-                                width: 1,
-                                height: dividerHeight,
-                                backgroundColor: semantic.border.subtle || semantic.border.default,
-                                flexShrink: 0,
-                            }}
-                            aria-hidden
-                        />
-                    </>
+                    <div
+                        style={{
+                            height: ROW_HEIGHT,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            lineHeight: 0,
+                            flexShrink: 0,
+                            marginLeft: -spacing[8],
+                        }}
+                    >
+                        {leftSlot}
+                    </div>
                 )}
                 <div
                     style={{

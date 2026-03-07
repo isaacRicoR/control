@@ -20,6 +20,8 @@ export interface PanelCardProps {
     title?: string;
     /** Descripción opcional del panel */
     description?: string;
+    /** Contenido izquierdo del header (ej: flecha de regreso) */
+    headerStart?: ReactNode;
     /** Acciones del header (alineadas a la derecha) */
     headerActions?: ReactNode;
     /** Tabs o navegación interna del header */
@@ -33,6 +35,7 @@ export interface PanelCardProps {
 export interface PanelCardHeaderProps {
     title?: string;
     description?: string;
+    headerStart?: ReactNode;
     tabs?: ReactNode;
     actions?: ReactNode;
 }
