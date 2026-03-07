@@ -350,14 +350,17 @@ function ThemeGalleryCard({
                             position: "absolute",
                             top: spacing[8],
                             right: spacing[8],
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
                             padding: `${spacing[4]}px ${spacing[8]}px`,
+                            borderRadius: radius.md,
                             fontFamily: typography.fontFamily.primary,
                             fontSize: typography.fontSize.xs,
                             fontWeight: typography.fontWeight.medium,
-                            color: semantic.text.default,
-                            backgroundColor: semantic.surface.default,
-                            border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
-                            borderRadius: radius.sm,
+                            lineHeight: 1,
+                            backgroundColor: semantic.success[300],
+                            color: semantic.text.onSolid ?? semantic.text.active,
                         }}
                     >
                         Activo
