@@ -48,6 +48,195 @@ function baseFromTokens(t: {
     };
 }
 
+type ThemeEditMode = "dark" | "light";
+
+const BASE_TOKEN_KEYS: { key: keyof BaseTokens; label: string }[] = [
+    { key: "accent", label: "Accent" },
+    { key: "background", label: "Background" },
+    { key: "surface", label: "Surface" },
+    { key: "text", label: "Text" },
+];
+
+function ModeSegmentedControl({
+    value,
+    onChange,
+    semantic,
+}: {
+    value: ThemeEditMode;
+    onChange: (v: ThemeEditMode) => void;
+    semantic: (typeof colors.dark)["semantic"];
+}) {
+    const options: { value: ThemeEditMode; label: string }[] = [
+        { value: "dark", label: "Oscuro" },
+        { value: "light", label: "Claro" },
+    ];
+    return (
+        <div
+            role="tablist"
+            aria-label="Modo editado"
+            style={{
+                display: "flex",
+                flexWrap: "nowrap",
+                borderRadius: radius.sm,
+                border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                backgroundColor: semantic.surface.hover || semantic.surface.default,
+                padding: spacing[2],
+                gap: spacing[2],
+            }}
+        >
+            {options.map((opt) => {
+                const isActive = value === opt.value;
+                return (
+                    <button
+                        key={opt.value}
+                        type="button"
+                        role="tab"
+                        aria-selected={isActive}
+                        onClick={() => onChange(opt.value)}
+                        style={{
+                            flex: 1,
+                            minWidth: 0,
+                            padding: `${spacing[8]}px ${spacing[12]}px`,
+                            fontFamily: typography.fontFamily.primary,
+                            fontSize: typography.fontSize.sm,
+                            fontWeight: typography.fontWeight.medium,
+                            color: isActive ? semantic.text.active : semantic.text.muted,
+                            backgroundColor: isActive ? semantic.surface.default : "transparent",
+                            border: "none",
+                            borderRadius: radius.sm,
+                            cursor: "pointer",
+                            transition: "color 0.2s, background-color 0.2s",
+                        }}
+                    >
+                        {opt.label}
+                    </button>
+                );
+            })}
+        </div>
+    );
+}
+
+function TokenRowWithSwatch({
+    label,
+    value,
+    onChange,
+    semantic,
+}: {
+    label: string;
+    value: string;
+    onChange: (v: string) => void;
+    semantic: (typeof colors.dark)["semantic"];
+}) {
+    return (
+        <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                gap: spacing.md,
+                width: "100%",
+            }}
+        >
+            <Text
+                variant="body"
+                style={{
+                    color: semantic.text.muted,
+                    fontWeight: typography.fontWeight.medium,
+                    minWidth: 88,
+                    flexShrink: 0,
+                }}
+            >
+                {label}
+            </Text>
+            <Input
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                style={{ flex: 1, minWidth: 0 }}
+            />
+            <div
+                style={{
+                    width: spacing[40],
+                    height: spacing[40],
+                    flexShrink: 0,
+                    borderRadius: radius.sm,
+                    border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                    backgroundColor: value || semantic.surface.default,
+                }}
+                aria-hidden
+            />
+        </div>
+    );
+}
+
+function ThemePreview({
+    tokens,
+    semantic,
+}: {
+    tokens: BaseTokens;
+    semantic: (typeof colors.dark)["semantic"];
+}) {
+    return (
+        <div
+            style={{
+                backgroundColor: tokens.background,
+                borderRadius: radius.card,
+                padding: spacing.lg,
+                border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                display: "flex",
+                flexDirection: "column",
+                gap: spacing.md,
+                width: "100%",
+            }}
+        >
+            <div
+                style={{
+                    backgroundColor: tokens.surface,
+                    borderRadius: radius.md,
+                    padding: spacing.md,
+                    border: `1px solid ${tokens.border}`,
+                }}
+            >
+                <Text
+                    variant="body"
+                    style={{
+                        color: tokens.text,
+                        fontWeight: typography.fontWeight.semibold,
+                    }}
+                >
+                    Texto principal
+                </Text>
+                <Text
+                    variant="body"
+                    style={{
+                        color: tokens.text,
+                        fontSize: typography.fontSize.sm,
+                        marginTop: spacing[4],
+                        opacity: 0.75,
+                    }}
+                >
+                    Texto secundario
+                </Text>
+            </div>
+            <button
+                type="button"
+                style={{
+                    alignSelf: "flex-start",
+                    padding: `${spacing[8]}px ${spacing[16]}px`,
+                    fontFamily: typography.fontFamily.primary,
+                    fontSize: typography.fontSize.sm,
+                    fontWeight: typography.fontWeight.medium,
+                    backgroundColor: tokens.accent,
+                    color: tokens.background,
+                    border: "none",
+                    borderRadius: radius.md,
+                    cursor: "default",
+                }}
+            >
+                Accent
+            </button>
+        </div>
+    );
+}
+
 function ModoAyudaSwitch({
     value,
     onChange,
@@ -125,31 +314,53 @@ export default function AparienciaPage() {
 
     const [activeTab, setActiveTab] = useState("Base");
     const [modoAyuda, setModoAyuda] = useState(false);
+    const [editMode, setEditMode] = useState<ThemeEditMode>("dark");
 
-    const canonicalTokens = useMemo(
-        () => getThemeTokens(currentPreset, theme as "dark" | "light"),
-        [currentPreset, theme]
+    const canonicalDark = useMemo(
+        () => getThemeTokens(currentPreset, "dark"),
+        [currentPreset]
+    );
+    const canonicalLight = useMemo(
+        () => getThemeTokens(currentPreset, "light"),
+        [currentPreset]
     );
 
-    const [localTokens, setLocalTokens] = useState<BaseTokens>(() =>
-        baseFromTokens(canonicalTokens)
-    );
-    const [originalTokens, setOriginalTokens] = useState<BaseTokens>(() =>
-        baseFromTokens(canonicalTokens)
-    );
+    const [localTokensByMode, setLocalTokensByMode] = useState<{
+        dark: BaseTokens;
+        light: BaseTokens;
+    }>(() => ({
+        dark: baseFromTokens(canonicalDark),
+        light: baseFromTokens(canonicalLight),
+    }));
+    const [originalTokensByMode, setOriginalTokensByMode] = useState<{
+        dark: BaseTokens;
+        light: BaseTokens;
+    }>(() => ({
+        dark: baseFromTokens(canonicalDark),
+        light: baseFromTokens(canonicalLight),
+    }));
 
-    const handleChange = (field: keyof BaseTokens, value: string) => {
-        setLocalTokens((prev) => ({ ...prev, [field]: value }));
+    const currentTokens = localTokensByMode[editMode];
+
+    const handleChange = (mode: ThemeEditMode, field: keyof BaseTokens, value: string) => {
+        setLocalTokensByMode((prev) => ({
+            ...prev,
+            [mode]: { ...prev[mode], [field]: value },
+        }));
     };
 
     const handleCancel = () => {
-        setLocalTokens(originalTokens);
+        setLocalTokensByMode(originalTokensByMode);
     };
 
     const handleSave = () => {
-        const payload = { ...localTokens, preset: currentPreset, mode: theme };
+        const payload = {
+            dark: localTokensByMode.dark,
+            light: localTokensByMode.light,
+            preset: currentPreset,
+        };
         console.log("[Apariencia] Guardar (mock):", payload);
-        setOriginalTokens(localTokens);
+        setOriginalTokensByMode(localTokensByMode);
         showToast({
             type: "success",
             title: "Guardado (mock)",
@@ -236,90 +447,113 @@ export default function AparienciaPage() {
                     secondaryOnClick: handleCancel,
                 }}
             >
-                {/* Sección Base — Identidad visual global */}
+                {/* Sección Base — Centro de control visual del tema */}
                 {activeTab === "Base" && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: spacing.lg,
+                            maxWidth: 480,
+                            alignSelf: "flex-start",
+                            alignItems: "flex-start",
+                        }}
+                    >
+                        {/* 1. Identidad visual del tema */}
                         <Text
                             variant="body"
                             style={{
                                 color: semantic.text.muted,
                                 fontWeight: typography.fontWeight.semibold,
-                                marginBottom: spacing[8],
                             }}
                         >
                             Identidad visual del tema
                         </Text>
+
                         <div
                             style={{
-                                display: "grid",
-                                gridTemplateColumns: "1fr 1fr",
-                                gap: spacing[16],
-                                maxWidth: 400,
-                                padding: spacing[16],
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: spacing.lg,
+                                width: "100%",
+                                padding: spacing.lg,
                                 backgroundColor: semantic.surface.default,
                                 border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
                                 borderRadius: radius.card,
                             }}
                         >
-                            <Text variant="body" style={{ color: semantic.text.disabled }}>
-                                Preset activo
+                            <Text variant="body" style={{ color: semantic.text.muted }}>
+                                Preset activo:{" "}
+                                <span
+                                    style={{
+                                        color: semantic.text.default,
+                                        fontWeight: typography.fontWeight.medium,
+                                    }}
+                                >
+                                    {currentPreset === "control" ? "Control" : "Security"}
+                                </span>
                             </Text>
-                            <Text
-                                variant="body"
-                                style={{
-                                    color: semantic.text.default,
-                                    fontWeight: typography.fontWeight.medium,
-                                }}
-                            >
-                                {currentPreset === "control" ? "Control" : "Security"}
-                            </Text>
-                            <Text variant="body" style={{ color: semantic.text.disabled }}>
-                                Modo
-                            </Text>
-                            <Text
-                                variant="body"
-                                style={{
-                                    color: semantic.text.default,
-                                    fontWeight: typography.fontWeight.medium,
-                                }}
-                            >
-                                {theme === "dark" ? "Oscuro" : "Claro"}
-                            </Text>
+                            <div>
+                                <Text
+                                    variant="body"
+                                    style={{
+                                        color: semantic.text.muted,
+                                        marginBottom: spacing.sm,
+                                        display: "block",
+                                    }}
+                                >
+                                    Modo editado
+                                </Text>
+                                <ModeSegmentedControl
+                                    value={editMode}
+                                    onChange={setEditMode}
+                                    semantic={semantic}
+                                />
+                            </div>
                         </div>
+
+                        {/* 2. Tokens base */}
+                        <Text
+                            variant="body"
+                            style={{
+                                color: semantic.text.muted,
+                                fontWeight: typography.fontWeight.semibold,
+                            }}
+                        >
+                            Tokens base
+                        </Text>
+
                         <div
                             style={{
                                 display: "flex",
                                 flexDirection: "column",
-                                gap: spacing[16],
-                                maxWidth: 400,
+                                gap: spacing.lg,
+                                width: "100%",
                             }}
                         >
-                            <Input
-                                label="Accent"
-                                value={localTokens.accent}
-                                onChange={(e) => handleChange("accent", e.target.value)}
-                            />
-                            <Input
-                                label="Background"
-                                value={localTokens.background}
-                                onChange={(e) => handleChange("background", e.target.value)}
-                            />
-                            <Input
-                                label="Surface"
-                                value={localTokens.surface}
-                                onChange={(e) => handleChange("surface", e.target.value)}
-                            />
-                            <Input
-                                label="Text"
-                                value={localTokens.text}
-                                onChange={(e) => handleChange("text", e.target.value)}
-                            />
-                            <Input
-                                label="Border"
-                                value={localTokens.border}
-                                onChange={(e) => handleChange("border", e.target.value)}
-                            />
+                            {BASE_TOKEN_KEYS.map(({ key, label }) => (
+                                <TokenRowWithSwatch
+                                    key={key}
+                                    label={label}
+                                    value={currentTokens[key]}
+                                    onChange={(v) => handleChange(editMode, key, v)}
+                                    semantic={semantic}
+                                />
+                            ))}
                         </div>
+
+                        {/* 3. Vista previa */}
+                        <Text
+                            variant="body"
+                            style={{
+                                color: semantic.text.muted,
+                                fontWeight: typography.fontWeight.semibold,
+                            }}
+                        >
+                            Vista previa
+                        </Text>
+
+                        <ThemePreview tokens={currentTokens} semantic={semantic} />
                     </div>
                 )}
 

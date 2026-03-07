@@ -116,6 +116,8 @@ export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
                         alignItems: "center",
                         flex: 1,
                         minWidth: 0,
+                        flexWrap: "nowrap",
+                        overflowX: "auto",
                         gap: tabsGap,
                     }}
                 >
