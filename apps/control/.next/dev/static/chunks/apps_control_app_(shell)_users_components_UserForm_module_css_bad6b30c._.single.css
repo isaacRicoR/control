@@ -1,0 +1,60 @@
+/* [project]/apps/control/app/(shell)/users/components/UserForm.module.css [app-client] (css) */
+.UserForm-module__YobMcW__layoutGrid {
+  grid-template-columns: 250px 1fr;
+  width: 100%;
+  display: grid;
+}
+
+.UserForm-module__YobMcW__visualCol {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.UserForm-module__YobMcW__formCol {
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+}
+
+.UserForm-module__YobMcW__formColumnGrid {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+}
+
+.UserForm-module__YobMcW__formFieldColumn {
+  flex-direction: column;
+  display: flex;
+}
+
+.UserForm-module__YobMcW__avatarPlaceholder {
+  background-color: var(--avatar-bg);
+  color: var(--avatar-icon);
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: background-color .2s, color .2s;
+  display: flex;
+}
+
+.UserForm-module__YobMcW__avatarPlaceholder:hover {
+  background-color: var(--avatar-bg-hover);
+  color: var(--avatar-icon-hover);
+}
+
+@media (max-width: 768px) {
+  .UserForm-module__YobMcW__layoutGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .UserForm-module__YobMcW__visualCol {
+    order: -1;
+    width: 100%;
+  }
+
+  .UserForm-module__YobMcW__formColumnGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*# sourceMappingURL=apps_control_app_%28shell%29_users_components_UserForm_module_css_bad6b30c._.single.css.map*/

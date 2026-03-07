@@ -1,0 +1,89 @@
+/* [project]/packages/console/ui/atoms/Textarea/Textarea.css [app-client] (css) */
+.textarea-field {
+  width: 100%;
+  height: var(--input-height, 48px);
+  padding: calc(var(--textarea-padding-top)  - 8px) var(--textarea-padding-x) var(--textarea-padding-bottom) calc(var(--textarea-padding-x)  - 7px);
+  background-color: var(--textarea-bg);
+  border: 1px solid var(--textarea-border);
+  border-radius: var(--textarea-radius);
+  color: var(--textarea-text);
+  appearance: none;
+  resize: vertical;
+  scrollbar-width: thin;
+  scrollbar-color: var(--semantic-border-default) transparent;
+  outline: none;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: border-color .2s, box-shadow .2s;
+  display: block;
+  overflow-y: auto;
+}
+
+.textarea-field::-webkit-scrollbar {
+  width: 8px;
+}
+
+.textarea-field::-webkit-scrollbar-track {
+  background: none;
+}
+
+.textarea-field::-webkit-scrollbar-thumb {
+  background: var(--semantic-border-default);
+  border-radius: 4px;
+}
+
+.textarea-field::-webkit-scrollbar-thumb:hover {
+  background: var(--semantic-border-active);
+}
+
+.textarea-field:hover:not(:disabled):not(.has-error) {
+  border-color: var(--textarea-border-hover);
+}
+
+.textarea-field:focus {
+  border-color: var(--textarea-border-focus);
+}
+
+.textarea-field.has-error {
+  border-color: var(--textarea-border-error);
+}
+
+.textarea-field:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  background-color: var(--textarea-bg);
+}
+
+.textarea-label {
+  left: calc(var(--textarea-padding-x)  - 12px);
+  color: var(--textarea-label);
+  pointer-events: none;
+  transform-origin: 0 0;
+  font-size: .875rem;
+  line-height: 1;
+  transition: all .2s ease-out;
+  position: absolute;
+  top: 24px;
+  transform: translateY(-50%);
+}
+
+.textarea-required-asterisk {
+  position: relative;
+  top: 4px;
+}
+
+.textarea-field:focus + .textarea-label, .textarea-field:not(:placeholder-shown) + .textarea-label {
+  top: 11px;
+  transform: translateY(-50%)scale(.75);
+}
+
+.textarea-field:focus + .textarea-label {
+  color: var(--textarea-label-focus);
+}
+
+.textarea-field.has-error:focus + .textarea-label, .textarea-field.has-error:not(:placeholder-shown) + .textarea-label {
+  color: var(--textarea-label-error);
+}
+
+/*# sourceMappingURL=packages_console_ui_atoms_Textarea_Textarea_css_bad6b30c._.single.css.map*/

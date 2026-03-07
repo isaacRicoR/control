@@ -1,0 +1,4 @@
+{
+  "/(shell)/users/list/page": "app/(shell)/users/list/page.js",
+  "/api/users/route": "app/api/users/route.js"
+}

@@ -1,0 +1,3 @@
+module.exports=[61405,a=>{"use strict";a.i(70396);var b=a.i(73727);a.i(5246);let c={userId:"isaac",role:"OWNER"};async function d(){return c}async function e(a){await d()||(0,b.redirect)("/login"),console.log(`[RouteGuard] Session validated for ${a.entity}:${a.action}`)}a.s(["requireAuth",()=>e],61405)},47131,a=>{"use strict";var b=a.i(7997),c=a.i(61405);async function d({children:a}){return await (0,c.requireAuth)({action:"view",entity:"devices"}),(0,b.jsx)(b.Fragment,{children:a})}a.s(["default",()=>d,"dynamic",0,"force-dynamic"])}];
+
+//# sourceMappingURL=_b2ba059d._.js.map

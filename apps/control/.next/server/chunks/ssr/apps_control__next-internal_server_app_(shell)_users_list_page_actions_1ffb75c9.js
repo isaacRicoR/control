@@ -1,0 +1,3 @@
+module.exports=[22586,(a,b,c)=>{}];
+
+//# sourceMappingURL=apps_control__next-internal_server_app_%28shell%29_users_list_page_actions_1ffb75c9.js.map
