@@ -129,3 +129,51 @@ El desarrollo del sistema CONTROL sigue estos principios:
 | Connector | Estable |
 | Módulos actuales | Users y Devices |
 | Backend | Actualmente con mock data |
+
+---
+
+## 8. Estructura vigente del proyecto
+
+La estructura actual del proyecto está organizada principalmente en:
+
+- `packages/console/ui` — Componentes visuales, layouts, patterns
+- `packages/console/core` — Connector, Preferences, Toast, Auth, Governance
+- `packages/console/tokens` — Tokens de diseño (colores, spacing, tipografía)
+- `apps/control` — Aplicación principal y módulos de negocio
+
+### Rutas heredadas
+
+Algunas rutas antiguas o heredadas pueden seguir apareciendo en:
+
+- Documentación antigua
+- Aliases de configuración (ej: `tsconfig.json`)
+- Carpetas vacías o remanentes de una estructura anterior
+
+**Ejemplos de rutas heredadas posibles**: `design/tokens`, `src/core`, `components/*`
+
+Estas rutas pueden haber sido reemplazadas por la estructura actual (ej: `design/tokens` → `packages/console/tokens`).
+
+### Regla antes de eliminar
+
+**Nunca eliminar carpetas, rutas o aliases por intuición.**
+
+Antes de cualquier limpieza estructural se debe hacer una auditoría que confirme:
+
+- Si la carpeta existe
+- Si contiene archivos
+- Si tiene uso actual en el código
+- Si tiene referencias reales en el repo
+- Si fue reemplazada por una nueva estructura
+
+### Proceso correcto
+
+```
+Auditoría → Evidencia → Decisión → Limpieza
+```
+
+1. **Auditoría**: Revisar contenido y referencias reales
+2. **Evidencia**: Documentar hallazgos (no asumir)
+3. **Decisión**: Decidir conservar, archivar o eliminar
+4. **Limpieza**: Ejecutar solo después de validación manual
+
+Este documento define la estructura vigente real del proyecto y debe usarse como referencia rápida antes de hacer limpieza del repo.

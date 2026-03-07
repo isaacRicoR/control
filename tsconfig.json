@@ -21,21 +21,6 @@
     "paths": {
       "@/*": [
         "./*"
-      ],
-      "@/design/tokens": [
-        "design/tokens"
-      ],
-      "@/design/tokens/*": [
-        "design/tokens/*"
-      ],
-      "@/features/*": [
-        "src/features/*"
-      ],
-      "design/tokens": [
-        "design/tokens"
-      ],
-      "design/tokens/*": [
-        "design/tokens/*"
       ]
     },
     "plugins": [

@@ -67,12 +67,12 @@ Debe soportar:
 
 ## 3. Capas Oficiales del Sistema
 La arquitectura se compone de las siguientes capas:
-1.  `design/tokens`
-2.  `components` (atoms, molecules, layouts)
-3.  `features` (cartucho)
-4.  `app` (router y ensamblado)
-5.  `server` (queries + services + controllers)
-6.  `lab` (validación de patrones aislados)
+1.  `packages/console/tokens` — Tokens de diseño (colores, spacing, tipografía)
+2.  `packages/console/ui` — Componentes (atoms, molecules, containers, layouts, patterns)
+3.  `apps/control/app/(shell)/` — Módulos de negocio (cartuchos)
+4.  `apps/control/app` — Router y ensamblado
+5.  `server` — Queries + services + controllers (backend)
+6.  `apps/control/app/(shell)/lab` — Validación de patrones aislados
 
 Cada capa tiene una sola responsabilidad.
 
