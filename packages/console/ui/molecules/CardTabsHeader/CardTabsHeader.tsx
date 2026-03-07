@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
+import "./CardTabsHeader.css";
 import { colors, spacing, typography } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";
 
@@ -97,6 +98,7 @@ export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
                     </div>
                 )}
                 <div
+                    className="card-tabs-header-scroll"
                     style={{
                         position: "relative",
                         height: ROW_HEIGHT,
@@ -154,6 +156,8 @@ export const CardTabsHeader: React.FC<CardTabsHeaderProps> = ({
                             alignItems: "center",
                             justifyContent: "center",
                             lineHeight: 0,
+                            flexShrink: 0,
+                            marginRight: -spacing[8],
                         }}
                     >
                         {rightSlot}

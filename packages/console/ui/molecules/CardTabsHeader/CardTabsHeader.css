@@ -1,0 +1,10 @@
+/* Oculta el scrollbar horizontal manteniendo scroll funcional (mouse, trackpad, touch). */
+
+.card-tabs-header-scroll {
+    -ms-overflow-style: none;  /* IE / Edge legacy */
+    scrollbar-width: none;     /* Firefox */
+}
+
+.card-tabs-header-scroll::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari, Edge Chromium */
+}

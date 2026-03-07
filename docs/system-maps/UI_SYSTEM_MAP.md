@@ -425,6 +425,40 @@ Para garantizar la consistencia, todos los componentes deben seguir estos están
 - **Prohibición de Hacks**: Queda estrictamente prohibido el uso de paddings, márgenes o alturas manuales ("hacks") por pantalla. Todo ajuste debe ser a través de props de componentes o tokens globales.
 - **Prohibición borderRadius inline**: No usar `style={{ borderRadius }}`. Usar `Button shape="panel"` o tokens del Design System.
 
+### Surface Hierarchy (Jerarquía de superficies)
+
+Regla general del sistema visual para evitar conflictos entre fondos de cards y estados hover de iconos u otros elementos interactivos.
+
+**Niveles de la jerarquía**:
+
+| Nivel | Token / Uso | Descripción |
+|-------|-------------|-------------|
+| **panel.background** | `surface.default` | Fondo base de paneles o contenedores principales del sistema. |
+| **surface.card** | `surface.card` | Fondo de cards internas dentro de paneles. Ligeramente más claro que `panel.background` para separación sutil, sin comprometer el contraste del contenido. |
+| **surface.hover** | `surface.hover` / `surface.hoverElevated` | Color usado para estados hover de iconos, acciones pequeñas y elementos interactivos. Debe ser más claro que `surface.card` para que el hover sea perceptible. |
+
+**Regla obligatoria del sistema**:
+
+```
+panel.background  (surface.default)
+        ↓
+surface.card      (surface.card)
+        ↓
+surface.hover     (surface.hover / surface.hoverElevated)
+```
+
+Cada nivel debe ser visualmente más claro que el anterior para garantizar que los estados hover sean perceptibles.
+
+**Regla adicional**: Si en algún contexto se decide usar el color actual de hover como fondo de una card para aumentar contraste con el panel, entonces el token de hover debe moverse un nivel arriba en la jerarquía (`surface.hoverElevated`) para mantener la visibilidad del estado hover.
+
+**Nota sobre contraste de cards**: Las cards internas dentro de paneles deben ser ligeramente más claras que el fondo del panel para que se distingan visualmente. Sin embargo, el contraste debe ser sutil.
+
+| Regla | Descripción |
+|-------|-------------|
+| **Regla de contraste** | `panel.background` → `surface.card` (+ leve incremento de brillo) → `surface.hover` |
+| **Prohibición** | El fondo de card no debe usar el mismo color que `surface.hover`. |
+| **Objetivo** | Contraste suficiente para separar la card del panel, pero no tan alto que reduzca la legibilidad del texto o haga que el contenido se vea "lavado". Mantener buena legibilidad del contenido interno y evitar conflictos con estados hover del sistema. |
+
 ---
 
 ## 8.1 Guard Rails del Sistema UI

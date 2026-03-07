@@ -54,6 +54,9 @@ export type SemanticTokenGroup = Record<SemanticState, string> & {
   muted?: string;
   emphasis?: string;
   onSolid?: string;
+  card?: string;
+  /** Surface for icon/control hover when card uses surface.hover. One step above surface.hover. */
+  hoverElevated?: string;
 };
 
 export type SemanticPalette = Record<Exclude<SemanticGroup, "sidebar" | "button" | "icon">, SemanticTokenGroup> & {
@@ -138,7 +141,9 @@ const semanticActive: SemanticPalette = {
   },
   surface: {
     default: "var(--semantic-surface-default)",
+    card: "var(--semantic-surface-card)",
     hover: "var(--semantic-surface-hover)",
+    hoverElevated: "var(--semantic-surface-hover-elevated)",
     active: "var(--semantic-surface-active)",
     disabled: "var(--semantic-surface-disabled)",
     focus: "var(--semantic-surface-focus)",

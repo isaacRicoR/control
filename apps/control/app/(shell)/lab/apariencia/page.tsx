@@ -8,6 +8,7 @@ import { Card } from "@ui/molecules/Card";
 import { CardTabsHeader } from "@ui/molecules/CardTabsHeader";
 import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
+import { Button } from "@ui/atoms/Button/Button";
 import { Input } from "@ui/atoms/Input/Input";
 import { Text } from "@ui/atoms/Text/Text";
 import { spacing, colors, typography, radius, layout } from "@tokens";
@@ -24,6 +25,35 @@ const AVAILABLE_THEMES = [
     { value: "control", label: "Control" },
     // Futuro: { value: "security", label: "Security" },
 ] as const;
+
+/** Datos para la galería de temas. previewColors se obtiene de themeRegistry en runtime. */
+type GalleryTheme = {
+    id: string;
+    name: string;
+    description: string;
+    recommendedUse: string;
+    tags: string[];
+    isDefault: boolean;
+};
+
+const GALLERY_THEMES: GalleryTheme[] = [
+    {
+        id: "control",
+        name: "Control",
+        description: "Tema base del sistema",
+        recommendedUse: "SaaS · Dashboards · Sistemas internos",
+        tags: ["Dark", "Minimal", "Corporate"],
+        isDefault: true,
+    },
+    {
+        id: "security",
+        name: "Security",
+        description: "Tema para productos de seguridad y enterprise",
+        recommendedUse: "Seguridad · Enterprise",
+        tags: ["Dark", "Corporate"],
+        isDefault: false,
+    },
+];
 
 const TABS = [
     { label: "Galería", value: "Galería" },
@@ -267,10 +297,168 @@ function ModoAyudaSwitch({
     );
 }
 
+function ThemeGalleryCard({
+    theme: galleryTheme,
+    isActive,
+    onSelect,
+    semantic,
+}: {
+    theme: GalleryTheme;
+    isActive: boolean;
+    onSelect: () => void;
+    semantic: (typeof colors.dark)["semantic"];
+}) {
+    const [isHovered, setIsHovered] = useState(false);
+    const previewColors = useMemo(() => {
+        const dark = getThemeTokens(galleryTheme.id as "control" | "security", "dark");
+        const light = getThemeTokens(galleryTheme.id as "control" | "security", "light");
+        return [dark.background, dark.surface, dark.accent, light.background, light.accent];
+    }, [galleryTheme.id]);
+
+    return (
+        <div
+            role="article"
+            aria-label={`Tema ${galleryTheme.name}`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: 0,
+                backgroundColor: semantic.surface.card ?? semantic.surface.default,
+                border: `1px solid ${semantic.border.default}`,
+                borderRadius: radius.card,
+                overflow: "hidden",
+                boxShadow: isHovered ? "0 4px 16px rgba(0,0,0,0.14)" : "none",
+                transition: "box-shadow 0.2s ease, border-color 0.2s ease",
+            }}
+        >
+            {/* Header: preview del tema */}
+            <div
+                style={{
+                    height: 88,
+                    flexShrink: 0,
+                    background: `linear-gradient(135deg, ${previewColors[0]} 0%, ${previewColors[1]} 30%, ${previewColors[2]} 70%, ${previewColors[3]} 100%)`,
+                    borderTopLeftRadius: radius.card,
+                    borderTopRightRadius: radius.card,
+                    position: "relative",
+                }}
+            >
+                {isActive && (
+                    <span
+                        style={{
+                            position: "absolute",
+                            top: spacing[8],
+                            right: spacing[8],
+                            padding: `${spacing[4]}px ${spacing[8]}px`,
+                            fontFamily: typography.fontFamily.primary,
+                            fontSize: typography.fontSize.xs,
+                            fontWeight: typography.fontWeight.medium,
+                            color: semantic.text.default,
+                            backgroundColor: semantic.surface.default,
+                            border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                            borderRadius: radius.sm,
+                        }}
+                    >
+                        Activo
+                    </span>
+                )}
+            </div>
+
+            {/* Body: nombre, descripción, leyenda, tags */}
+            <div
+                style={{
+                    flex: 1,
+                    minHeight: 0,
+                    padding: spacing.lg,
+                    paddingTop: spacing.md,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: spacing[8],
+                }}
+            >
+                <Text variant="body" style={{ color: semantic.text.default, fontWeight: typography.fontWeight.semibold }}>
+                    {galleryTheme.name}
+                </Text>
+                <Text
+                    variant="body"
+                    style={{
+                        color: semantic.text.muted,
+                        fontSize: typography.fontSize.sm,
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        minWidth: 0,
+                    }}
+                >
+                    {galleryTheme.description}
+                </Text>
+
+                {/* Información secundaria */}
+                <Text variant="body" style={{ color: semantic.text.muted, fontSize: typography.fontSize.xs }}>
+                    {galleryTheme.recommendedUse}
+                </Text>
+
+                {/* Tags */}
+                {galleryTheme.tags.length > 0 && (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: spacing[4] }}>
+                        {galleryTheme.tags.slice(0, 3).map((tag) => (
+                            <span
+                                key={tag}
+                                style={{
+                                    padding: `${spacing[2]}px ${spacing[6]}px`,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.xs,
+                                    color: semantic.text.muted,
+                                    backgroundColor: semantic.surface.hover || semantic.surface.default,
+                                    border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                                    borderRadius: radius.sm,
+                                }}
+                            >
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            {/* Footer: acciones fijas abajo */}
+            <div
+                style={{
+                    flexShrink: 0,
+                    padding: spacing.lg,
+                    paddingTop: spacing.md,
+                    borderTop: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                }}
+            >
+                <div
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: spacing[8],
+                    }}
+                >
+                    <Button
+                        variant="actionPrimary"
+                        size="sm"
+                        shape="panel"
+                        onClick={onSelect}
+                    >
+                        Usar tema
+                    </Button>
+                    <ActionIcon name="more-horizontal" size={16} label="Opciones" />
+                </div>
+            </div>
+        </div>
+    );
+}
+
 export default function AparienciaPage() {
     const router = useRouter();
     const { theme } = useTheme();
-    const { currentPreset } = useVisualPreset();
+    const { currentPreset, setPreset } = useVisualPreset();
     const { showToast } = useToast();
     const semantic = colors[theme].semantic;
 
@@ -396,15 +584,14 @@ export default function AparienciaPage() {
                     secondaryOnClick: handleCancel,
                 }}
             >
-                {/* Sección Galería — Temas disponibles (sin selector) */}
+                {/* Sección Galería — Temas disponibles */}
                 {activeTab === "Galería" && (
                     <div
                         style={{
                             display: "flex",
                             flexDirection: "column",
                             gap: spacing.lg,
-                            maxWidth: 480,
-                            alignSelf: "flex-start",
+                            width: "100%",
                         }}
                     >
                         <Text
@@ -418,25 +605,24 @@ export default function AparienciaPage() {
                         </Text>
                         <div
                             style={{
-                                padding: spacing.lg,
-                                backgroundColor: semantic.surface.default,
-                                border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
-                                borderRadius: radius.card,
+                                display: "grid",
+                                gridTemplateColumns: "repeat(auto-fill, minmax(260px, 290px))",
+                                gap: spacing.lg,
+                                width: "100%",
+                                justifyContent: "start",
                             }}
+                            role="list"
+                            aria-label="Galería de temas"
                         >
-                            <Text variant="body" style={{ color: semantic.text.default }}>
-                                Control
-                            </Text>
-                            <Text
-                                variant="body"
-                                style={{
-                                    color: semantic.text.muted,
-                                    fontSize: typography.fontSize.sm,
-                                    marginTop: spacing[4],
-                                }}
-                            >
-                                Tema base del sistema
-                            </Text>
+                            {GALLERY_THEMES.map((t) => (
+                                <ThemeGalleryCard
+                                    key={t.id}
+                                    theme={t}
+                                    isActive={currentPreset === t.id}
+                                    onSelect={() => setPreset(t.id as "control" | "security")}
+                                    semantic={semantic}
+                                />
+                            ))}
                         </div>
                     </div>
                 )}

@@ -41,7 +41,9 @@ export const ActionIcon = ({
                 cursor: "pointer",
                 padding: spacing[8], // 8px ensures 32-34px target
                 borderRadius: radius.md,
-                backgroundColor: isHovered ? semantic.surface.hover : "transparent",
+                backgroundColor: isHovered
+                    ? semantic.surface.hoverElevated ?? semantic.surface.hover
+                    : "transparent",
                 transition: "all 0.2s ease",
                 display: "inline-flex",
                 alignItems: "center",
