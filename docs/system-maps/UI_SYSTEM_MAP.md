@@ -145,6 +145,7 @@ Proceso obligatorio para nuevas piezas:
 |-----------|--------|------|-------------|
 | TabsInline | ⚠️ | *(inline en toolbar)* | Tabs funcionales con underline animado; no es componente standalone |
 | Breadcrumb | ⚠️ | *(inline en PageShell)* | Breadcrumbs via JSX; no es componente standalone |
+| SecondaryNavSidebar | ✅ | `molecules/SecondaryNavSidebar/` | Navegación vertical secundaria para pantallas de settings/configuración. Reutiliza patrón de item activo, hover y spacing del sistema sin clonar la sidebar principal. |
 | Pagination | ✅ | `containers/DataTable/TableFooter.tsx` | Paginación con "Filas por página" y navegación prev/next |
 
 ### Data Display

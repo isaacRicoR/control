@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
 import { PageShell } from "@ui/containers/PageShell/PageShell";
 import { PanelCard } from "@ui/containers/PanelCard";
-import { Card } from "@ui/molecules/Card";
-import { CardTabsHeader } from "@ui/molecules/CardTabsHeader";
 import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
+import { SecondaryNavSidebar } from "@ui/molecules/SecondaryNavSidebar";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
 import { Button } from "@ui/atoms/Button/Button";
 import { Input } from "@ui/atoms/Input/Input";
@@ -15,7 +13,6 @@ import { spacing, colors, typography, radius, layout } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";
 import { useVisualPreset } from "@core/visual/visualPresetStore";
 import { getThemeTokens } from "@core/visual/themeRegistry";
-import { useToast } from "@core/toast/useToast";
 import { AccessDeniedState } from "@ui/containers/AccessDeniedState/AccessDeniedState";
 import { DEV_UI_ENABLED } from "@core/flags/devFlags";
 import { mockSession } from "@core/auth/mockSession";
@@ -88,6 +85,7 @@ function baseFromTokens(t: {
 }
 
 type ThemeEditMode = "dark" | "light";
+type ColorSelectOption = { value: string; label: string };
 
 const BASE_TOKEN_KEYS: { key: keyof BaseTokens; label: string }[] = [
     { key: "accent", label: "Accent" },
@@ -95,6 +93,20 @@ const BASE_TOKEN_KEYS: { key: keyof BaseTokens; label: string }[] = [
     { key: "surface", label: "Surface" },
     { key: "text", label: "Text" },
 ];
+
+function uniqueColorOptions(options: ColorSelectOption[]) {
+    return options.filter(
+        (option, index, all) => all.findIndex((candidate) => candidate.value === option.value) === index
+    );
+}
+
+function ensureCurrentColorOption(value: string, options: ColorSelectOption[]) {
+    if (options.some((option) => option.value === value)) {
+        return options;
+    }
+
+    return [{ value, label: `● ${value.toUpperCase()}` }, ...options];
+}
 
 function ModeSegmentedControl({
     value,
@@ -158,38 +170,33 @@ function ModeSegmentedControl({
 function TokenRowWithSwatch({
     label,
     value,
+    options,
     onChange,
     semantic,
 }: {
     label: string;
     value: string;
+    options: ColorSelectOption[];
     onChange: (v: string) => void;
     semantic: (typeof colors.dark)["semantic"];
 }) {
     return (
         <div
             style={{
-                display: "flex",
+                display: "grid",
+                gridTemplateColumns: "minmax(0, 1fr) auto",
                 alignItems: "center",
-                gap: spacing.md,
+                gap: spacing[12],
                 width: "100%",
+                minWidth: 0,
             }}
         >
-            <Text
-                variant="body"
-                style={{
-                    color: semantic.text.muted,
-                    fontWeight: typography.fontWeight.medium,
-                    minWidth: 88,
-                    flexShrink: 0,
-                }}
-            >
-                {label}
-            </Text>
-            <Input
+            <SelectSingle
+                label={label}
+                helperText={value.toUpperCase()}
+                options={options}
                 value={value}
-                onChange={(e) => onChange(e.target.value)}
-                style={{ flex: 1, minWidth: 0 }}
+                onChange={onChange}
             />
             <div
                 style={{
@@ -459,10 +466,8 @@ function ThemeGalleryCard({
 }
 
 export default function AparienciaPage() {
-    const router = useRouter();
     const { theme } = useTheme();
     const { currentPreset, setPreset } = useVisualPreset();
-    const { showToast } = useToast();
     const semantic = colors[theme].semantic;
 
     const [activeTab, setActiveTab] = useState("Base");
@@ -485,40 +490,57 @@ export default function AparienciaPage() {
         dark: baseFromTokens(canonicalDark),
         light: baseFromTokens(canonicalLight),
     }));
-    const [originalTokensByMode, setOriginalTokensByMode] = useState<{
-        dark: BaseTokens;
-        light: BaseTokens;
-    }>(() => ({
-        dark: baseFromTokens(canonicalDark),
-        light: baseFromTokens(canonicalLight),
-    }));
-
     const currentTokens = localTokensByMode[editMode];
+    const baseColorOptions = useMemo<Record<(typeof BASE_TOKEN_KEYS)[number]["key"], ColorSelectOption[]>>(() => {
+        const controlPack = getThemeTokens("control", editMode);
+        const securityPack = getThemeTokens("security", editMode);
+
+        return {
+            accent: ensureCurrentColorOption(
+                currentTokens.accent,
+                uniqueColorOptions([
+                    { value: controlPack.accent, label: "● Verde" },
+                    { value: securityPack.accent, label: "● Azul" },
+                    { value: controlPack.warning, label: "● Amarillo" },
+                    { value: controlPack.danger, label: "● Rojo" },
+                    { value: controlPack.info, label: "● Celeste" },
+                ])
+            ),
+            background: ensureCurrentColorOption(
+                currentTokens.background,
+                uniqueColorOptions([
+                    { value: controlPack.background, label: "● Base" },
+                    { value: securityPack.background, label: "● Profundo" },
+                    { value: controlPack.surface, label: "● Superficie" },
+                    { value: controlPack.border, label: "● Pizarra" },
+                ])
+            ),
+            surface: ensureCurrentColorOption(
+                currentTokens.surface,
+                uniqueColorOptions([
+                    { value: controlPack.surface, label: "● Surface" },
+                    { value: securityPack.surface, label: "● Elevada" },
+                    { value: controlPack.border, label: "● Gris" },
+                    { value: controlPack.background, label: "● Base" },
+                ])
+            ),
+            text: ensureCurrentColorOption(
+                currentTokens.text,
+                uniqueColorOptions([
+                    { value: controlPack.text, label: "● Texto base" },
+                    { value: securityPack.text, label: "● Texto claro" },
+                    { value: controlPack.pending, label: "● Muted" },
+                    { value: controlPack.buttonActionPrimaryBg, label: "● Contraste" },
+                ])
+            ),
+        };
+    }, [currentTokens, editMode]);
 
     const handleChange = (mode: ThemeEditMode, field: keyof BaseTokens, value: string) => {
         setLocalTokensByMode((prev) => ({
             ...prev,
             [mode]: { ...prev[mode], [field]: value },
         }));
-    };
-
-    const handleCancel = () => {
-        setLocalTokensByMode(originalTokensByMode);
-    };
-
-    const handleSave = () => {
-        const payload = {
-            dark: localTokensByMode.dark,
-            light: localTokensByMode.light,
-            preset: currentPreset,
-        };
-        console.log("[Apariencia] Guardar (mock):", payload);
-        setOriginalTokensByMode(localTokensByMode);
-        showToast({
-            type: "success",
-            title: "Guardado (mock)",
-            description: "Los cambios se simularon correctamente.",
-        });
     };
 
     if (!DEV_UI_ENABLED || mockSession.role !== "OWNER") {
@@ -545,6 +567,7 @@ export default function AparienciaPage() {
     // Estructura según panel-layout.mdc: PageShell > PanelCard > Header, Tabs, Body (scroll), Footer (sticky)
     return (
         <PageShell
+            variant="fluid"
             title="Apariencia"
             breadcrumbs={
                 <>
@@ -562,31 +585,52 @@ export default function AparienciaPage() {
                 minHeight: 0,
             }}
         >
-            <PanelCard
-                tabs={
-                    <CardTabsHeader
-                        tabs={TABS}
+            <PanelCard>
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "220px minmax(0, 1fr)",
+                        gap: spacing[24],
+                        width: "100%",
+                        minHeight: "100%",
+                    }}
+                >
+                    <SecondaryNavSidebar
+                        items={TABS}
                         value={activeTab}
                         onChange={setActiveTab}
-                        tabsGap={spacing[16]}
-                        leftSlot={
-                            <ActionIcon
-                                name="chevron-left"
-                                label="Volver"
-                                onClick={() => router.back()}
-                            />
-                        }
-                        rightSlot={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
                         ariaLabel="Secciones de apariencia"
                     />
-                }
-                footer={{
-                    primaryLabel: "Guardar cambios",
-                    primaryOnClick: handleSave,
-                    secondaryLabel: "Cancelar",
-                    secondaryOnClick: handleCancel,
-                }}
-            >
+
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: spacing[24],
+                            minWidth: 0,
+                        }}
+                    >
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                gap: spacing[16],
+                            }}
+                        >
+                            <Text
+                                variant="body"
+                                style={{
+                                    color: semantic.text.active,
+                                    fontWeight: typography.fontWeight.semibold,
+                                    fontSize: typography.fontSize.md,
+                                }}
+                            >
+                                {activeTab}
+                            </Text>
+                            <ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />
+                        </div>
+
                 {/* Sección Galería — Temas disponibles */}
                 {activeTab === "Galería" && (
                     <div
@@ -630,93 +674,189 @@ export default function AparienciaPage() {
                     </div>
                 )}
 
-                {/* Sección Base — Centro de control visual del tema (cards independientes) */}
+                {/* Sección Base — Panel de configuración visual por secciones */}
                 {activeTab === "Base" && (
                     <div
                         style={{
                             display: "flex",
                             flexDirection: "column",
-                            gap: spacing.lg,
-                            maxWidth: 480,
-                            alignSelf: "flex-start",
+                            gap: spacing[24],
                             width: "100%",
                         }}
                     >
-                        <Card title="Identidad del tema">
-                            <div
+                        <div
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: spacing[24],
+                                width: "100%",
+                                padding: spacing[24],
+                                backgroundColor: semantic.surface.card ?? semantic.surface.default,
+                                border: `1px solid ${semantic.border.default}`,
+                                borderRadius: radius.card,
+                            }}
+                        >
+                            <section
                                 style={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    gap: spacing.lg,
+                                    gap: spacing[16],
                                 }}
                             >
                                 <div
                                     style={{
                                         display: "flex",
-                                        alignItems: "center",
-                                        gap: spacing[12],
+                                        flexDirection: "column",
+                                        gap: spacing[8],
                                     }}
                                 >
                                     <Text
                                         variant="body"
                                         style={{
-                                            color: semantic.text.muted,
-                                            fontWeight: typography.fontWeight.medium,
+                                            color: semantic.text.default,
+                                            fontWeight: typography.fontWeight.semibold,
                                         }}
                                     >
-                                        Preset activo:
+                                        Tema
                                     </Text>
-                                    <div style={{ minWidth: spacing[24] * 6 }}>
+                                    <div
+                                        style={{
+                                            height: 1,
+                                            backgroundColor: semantic.border.subtle || semantic.border.default,
+                                        }}
+                                        aria-hidden
+                                    />
+                                </div>
+                                <div
+                                    style={{
+                                        display: "grid",
+                                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                                        gap: spacing[16],
+                                        width: "100%",
+                                    }}
+                                >
+                                    <div style={{ minWidth: 0 }}>
                                         <SelectSingle
+                                            label="Preset activo"
                                             options={[...AVAILABLE_THEMES]}
                                             value={currentPreset}
                                             onChange={(v) => setPreset(v as "control" | "security")}
                                         />
                                     </div>
-                                </div>
-                                <div>
-                                    <Text
-                                        variant="body"
+                                    <div
                                         style={{
-                                            color: semantic.text.muted,
-                                            marginBottom: spacing.sm,
-                                            display: "block",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            gap: spacing[8],
+                                            minWidth: 0,
                                         }}
                                     >
-                                        Modo editado
-                                    </Text>
-                                    <ModeSegmentedControl
-                                        value={editMode}
-                                        onChange={setEditMode}
-                                        semantic={semantic}
-                                    />
+                                        <Text
+                                            variant="body"
+                                            style={{
+                                                color: semantic.text.muted,
+                                                fontWeight: typography.fontWeight.medium,
+                                            }}
+                                        >
+                                            Modo editado
+                                        </Text>
+                                        <ModeSegmentedControl
+                                            value={editMode}
+                                            onChange={setEditMode}
+                                            semantic={semantic}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        </Card>
+                            </section>
 
-                        <Card title="Tokens base">
-                            <div
+                            <section
                                 style={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    gap: spacing.lg,
+                                    gap: spacing[16],
                                 }}
                             >
-                                {BASE_TOKEN_KEYS.map(({ key, label }) => (
-                                    <TokenRowWithSwatch
-                                        key={key}
-                                        label={label}
-                                        value={currentTokens[key]}
-                                        onChange={(v) => handleChange(editMode, key, v)}
-                                        semantic={semantic}
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: spacing[8],
+                                    }}
+                                >
+                                    <Text
+                                        variant="body"
+                                        style={{
+                                            color: semantic.text.default,
+                                            fontWeight: typography.fontWeight.semibold,
+                                        }}
+                                    >
+                                        Colores base
+                                    </Text>
+                                    <div
+                                        style={{
+                                            height: 1,
+                                            backgroundColor: semantic.border.subtle || semantic.border.default,
+                                        }}
+                                        aria-hidden
                                     />
-                                ))}
-                            </div>
-                        </Card>
+                                </div>
+                                <div
+                                    style={{
+                                        display: "grid",
+                                        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                                        gap: spacing[16],
+                                        width: "100%",
+                                    }}
+                                >
+                                    {BASE_TOKEN_KEYS.map(({ key, label }) => (
+                                        <TokenRowWithSwatch
+                                            key={key}
+                                            label={label}
+                                            value={currentTokens[key]}
+                                            options={baseColorOptions[key]}
+                                            onChange={(v) => handleChange(editMode, key, v)}
+                                            semantic={semantic}
+                                        />
+                                    ))}
+                                </div>
+                            </section>
 
-                        <Card title="Vista previa">
-                            <ThemePreview tokens={currentTokens} semantic={semantic} />
-                        </Card>
+                            <section
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: spacing[16],
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: spacing[8],
+                                    }}
+                                >
+                                    <Text
+                                        variant="body"
+                                        style={{
+                                            color: semantic.text.default,
+                                            fontWeight: typography.fontWeight.semibold,
+                                        }}
+                                    >
+                                        Vista previa
+                                    </Text>
+                                    <div
+                                        style={{
+                                            height: 1,
+                                            backgroundColor: semantic.border.subtle || semantic.border.default,
+                                        }}
+                                        aria-hidden
+                                    />
+                                </div>
+                                <div style={{ width: "100%" }}>
+                                    <ThemePreview tokens={currentTokens} semantic={semantic} />
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 )}
 
@@ -891,6 +1031,8 @@ export default function AparienciaPage() {
                         </div>
                     </div>
                 )}
+                    </div>
+                </div>
             </PanelCard>
         </PageShell>
     );
