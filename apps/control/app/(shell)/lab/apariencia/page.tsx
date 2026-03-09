@@ -4,7 +4,7 @@ import React, { useState, useMemo } from "react";
 import { PageShell } from "@ui/containers/PageShell/PageShell";
 import { PanelCard } from "@ui/containers/PanelCard";
 import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
-import { SecondaryNavSidebar } from "@ui/molecules/SecondaryNavSidebar";
+import { SecondaryNavSidebar, SECONDARY_NAV_SIDEBAR_WIDTH } from "@ui/molecules/SecondaryNavSidebar";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
 import { Button } from "@ui/atoms/Button/Button";
 import { Input } from "@ui/atoms/Input/Input";
@@ -481,6 +481,7 @@ export default function AparienciaPage() {
     const semantic = colors[theme].semantic;
 
     const [activeTab, setActiveTab] = useState("Base");
+    const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [modoAyuda, setModoAyuda] = useState(false);
     const [editMode, setEditMode] = useState<ThemeEditMode>("dark");
 
@@ -600,11 +601,12 @@ export default function AparienciaPage() {
                     style={{
                         flex: 1,
                         display: "grid",
-                        gridTemplateColumns: "176px minmax(0, 1fr)",
+                        gridTemplateColumns: `${sidebarCollapsed ? SECONDARY_NAV_SIDEBAR_WIDTH.collapsed : SECONDARY_NAV_SIDEBAR_WIDTH.expanded}px minmax(0, 1fr)`,
                         gridTemplateRows: "1fr",
                         width: "100%",
                         minHeight: 0,
                         overflow: "hidden",
+                        transition: "grid-template-columns 0.25s ease",
                     }}
                 >
                     <div
@@ -620,6 +622,8 @@ export default function AparienciaPage() {
                             groups={TABS_GROUPS}
                             value={activeTab}
                             onChange={setActiveTab}
+                            collapsed={sidebarCollapsed}
+                            onCollapsedChange={setSidebarCollapsed}
                             ariaLabel="Secciones de apariencia"
                         />
                     </div>

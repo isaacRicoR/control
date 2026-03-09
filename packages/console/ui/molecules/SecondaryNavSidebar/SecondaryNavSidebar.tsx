@@ -24,17 +24,21 @@ export type SecondaryNavSidebarProps = {
     groups?: SecondaryNavSidebarGroup[];
     value: string;
     onChange: (value: string) => void;
+    /** Sidebar colapsada (solo iconos) */
+    collapsed?: boolean;
+    /** Callback al cambiar estado colapsado */
+    onCollapsedChange?: (collapsed: boolean) => void;
     ariaLabel?: string;
 };
 
-const ITEM_HEIGHT = 40;
+const ITEM_HEIGHT = 34;
 
 const groupTitleStyle = (semantic: (typeof colors.dark)["semantic"], isFirst: boolean): React.CSSProperties => ({
     textTransform: "uppercase",
     color: semantic.text.muted ?? semantic.text.disabled,
     fontSize: typography.fontSize.xs,
     fontWeight: typography.fontWeight.medium,
-    marginTop: isFirst ? spacing[24] : spacing[16],
+    marginTop: isFirst ? spacing[4] : spacing[12],
     marginBottom: spacing[12],
     paddingLeft: spacing[12],
     letterSpacing: "0.05em",
@@ -50,6 +54,8 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
     groups,
     value,
     onChange,
+    collapsed = false,
+    onCollapsedChange,
     ariaLabel = "Subsecciones",
 }) => {
     const { theme } = useTheme();
@@ -72,7 +78,7 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
                     display: "flex",
                     flexDirection: "column",
                     gap: 0,
-                    padding: `${spacing[20]} ${spacing[16]}`,
+                    padding: collapsed ? `${spacing[8]} ${spacing[8]} ${spacing[12]}` : `${spacing[8]} ${spacing[16]} ${spacing[12]}`,
                     backgroundColor: "transparent",
                     border: "none",
                     borderRadius: 0,
@@ -80,14 +86,89 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
                     scrollbarWidth: "none",
                     msOverflowStyle: "none",
                     minWidth: 0,
+                    transition: "padding 0.25s ease",
                 }}
                 className="secondary-nav-sidebar-scroll"
                 aria-label={ariaLabel}
             >
+                {onCollapsedChange != null && (
+                    <div
+                        style={{
+                            flexShrink: 0,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: collapsed ? "center" : "flex-end",
+                            paddingTop: spacing[4],
+                            paddingRight: spacing[4],
+                            paddingLeft: spacing[4],
+                            paddingBottom: 0,
+                            marginBottom: 0,
+                        }}
+                    >
+                        <button
+                            type="button"
+                            onClick={() => onCollapsedChange(!collapsed)}
+                            aria-label={collapsed ? "Expandir sidebar" : "Colapsar sidebar"}
+                            aria-expanded={!collapsed}
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: 36,
+                                height: 36,
+                                padding: 0,
+                                border: "none",
+                                borderRadius: radius.md,
+                                backgroundColor: "transparent",
+                                color: semantic.text.muted ?? semantic.text.default,
+                                cursor: "pointer",
+                                transition: "background-color 0.2s ease, color 0.2s ease",
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = semantic.surface.hover;
+                                e.currentTarget.style.color = semantic.text.hover;
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = "transparent";
+                                e.currentTarget.style.color = semantic.text.muted ?? semantic.text.default;
+                            }}
+                        >
+                            <Icon
+                                size={18}
+                                name={collapsed ? "chevron-right" : "chevron-left"}
+                                title={collapsed ? "Expandir" : "Colapsar"}
+                            />
+                        </button>
+                    </div>
+                )}
                 {resolvedGroups.map((group, groupIndex) => (
-                    <div key={group.title || groupIndex} style={{ marginBottom: groupIndex < resolvedGroups.length - 1 ? spacing[16] : 0 }}>
+                    <div key={group.title || groupIndex} style={{ marginBottom: groupIndex < resolvedGroups.length - 1 ? spacing[8] : 0 }}>
                         {group.title.trim() !== "" && (
-                            <div style={groupTitleStyle(semantic, groupIndex === 0)}>{group.title}</div>
+                            <div
+                                style={{
+                                    ...groupTitleStyle(semantic, groupIndex === 0),
+                                    ...(collapsed ? { position: "relative" as const } : {}),
+                                }}
+                                aria-hidden={collapsed}
+                            >
+                                <span style={collapsed ? { opacity: 0, display: "block" } : undefined}>
+                                    {group.title}
+                                </span>
+                                {collapsed && (
+                                    <div
+                                        style={{
+                                            position: "absolute",
+                                            bottom: 0,
+                                            left: 0,
+                                            right: 0,
+                                            height: 1,
+                                            backgroundColor: semantic.border.subtle ?? semantic.border.default,
+                                            pointerEvents: "none",
+                                        }}
+                                        aria-hidden
+                                    />
+                                )}
+                            </div>
                         )}
                         <div style={{ display: "flex", flexDirection: "column", gap: 0, cursor: "default" }}>
                             {group.items.map((item) => {
@@ -107,8 +188,8 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
                                         key={item.value}
                                         style={{
                                             paddingBottom: spacing[4],
-                                            paddingLeft: spacing[4],
-                                            paddingRight: spacing[4],
+                                            paddingLeft: collapsed ? spacing[4] : spacing[4],
+                                            paddingRight: collapsed ? spacing[4] : spacing[4],
                                             cursor: isDisabled ? "not-allowed" : "pointer",
                                             width: "100%",
                                             boxSizing: "border-box",
@@ -129,11 +210,11 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
                                         }}
                                     >
                                         <div
-                                            style={{
-                                                display: "flex",
-                                                alignItems: "center",
-                                                height: ITEM_HEIGHT,
-                                                padding: `0 ${spacing[12]}px`,
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            height: ITEM_HEIGHT,
+                                            padding: `0 ${spacing[12]}px`,
                                                 borderRadius: radius.md,
                                                 backgroundColor: bg,
                                                 color: fg,
@@ -141,25 +222,27 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
                                                 transition: "background-color 0.2s ease, color 0.2s ease",
                                             }}
                                         >
-                                            <div style={{ display: "flex", alignItems: "center", gap: spacing[12], minWidth: 0 }}>
+                                            <div style={{ display: "flex", alignItems: "center", gap: collapsed ? 0 : spacing[12], minWidth: 0, justifyContent: collapsed ? "center" : "flex-start" }}>
                                                 {item.icon != null && (
                                                     <span style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                                                         <Icon size={16} name={item.icon} title={item.label} color={iconColor} />
                                                     </span>
                                                 )}
-                                                <span
-                                                    style={{
-                                                        fontFamily: typography.fontFamily.primary,
-                                                        fontSize: typography.fontSize.sm,
-                                                        fontWeight: showSelected ? typography.fontWeight.medium : typography.fontWeight.regular,
-                                                        color: "inherit",
-                                                        overflow: "hidden",
-                                                        textOverflow: "ellipsis",
-                                                        whiteSpace: "nowrap",
-                                                    }}
-                                                >
-                                                    {item.label}
-                                                </span>
+                                                {!collapsed && (
+                                                    <span
+                                                        style={{
+                                                            fontFamily: typography.fontFamily.primary,
+                                                            fontSize: typography.fontSize.sm,
+                                                            fontWeight: typography.fontWeight.regular,
+                                                            color: "inherit",
+                                                            overflow: "hidden",
+                                                            textOverflow: "ellipsis",
+                                                            whiteSpace: "nowrap",
+                                                        }}
+                                                    >
+                                                        {item.label}
+                                                    </span>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
