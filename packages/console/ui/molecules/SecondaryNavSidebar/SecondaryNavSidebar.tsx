@@ -32,10 +32,13 @@ export type SecondaryNavSidebarProps = {
 };
 
 const ITEM_HEIGHT = 34;
+const COLLAPSE_BUTTON_SIZE = 36;
+const CHEVRON_ICON_SIZE = 18;
+const ITEM_PADDING_HORIZONTAL = spacing[4];
 
-const groupTitleStyle = (semantic: (typeof colors.dark)["semantic"], isFirst: boolean): React.CSSProperties => ({
+const groupTitleStyle = (semantic: (typeof colors.dark)["semantic"] & { sidebar?: { groupLabel?: string } }, isFirst: boolean): React.CSSProperties => ({
     textTransform: "uppercase",
-    color: semantic.text.muted ?? semantic.text.disabled,
+    color: semantic.sidebar?.groupLabel ?? semantic.text.muted ?? semantic.text.disabled,
     fontSize: typography.fontSize.xs,
     fontWeight: typography.fontWeight.medium,
     marginTop: isFirst ? spacing[4] : spacing[12],
@@ -114,8 +117,8 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                width: 36,
-                                height: 36,
+                                width: COLLAPSE_BUTTON_SIZE,
+                                height: COLLAPSE_BUTTON_SIZE,
                                 padding: 0,
                                 border: "none",
                                 borderRadius: radius.md,
@@ -134,7 +137,7 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
                             }}
                         >
                             <Icon
-                                size={18}
+                                size={CHEVRON_ICON_SIZE}
                                 name={collapsed ? "chevron-right" : "chevron-left"}
                                 title={collapsed ? "Expandir" : "Colapsar"}
                             />
@@ -184,43 +187,41 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
                                 const iconColor = fg;
 
                                 return (
-                                    <div
+                                    <button
                                         key={item.value}
-                                        style={{
-                                            paddingBottom: spacing[4],
-                                            paddingLeft: collapsed ? spacing[4] : spacing[4],
-                                            paddingRight: collapsed ? spacing[4] : spacing[4],
-                                            cursor: isDisabled ? "not-allowed" : "pointer",
-                                            width: "100%",
-                                            boxSizing: "border-box",
-                                        }}
-                                        role="button"
-                                        tabIndex={isDisabled ? -1 : 0}
+                                        type="button"
+                                        disabled={isDisabled}
                                         aria-pressed={isActive}
-                                        aria-disabled={isDisabled}
                                         onClick={() => !isDisabled && onChange(item.value)}
                                         onMouseEnter={() => setHoveredValue(item.value)}
                                         onMouseLeave={() => setHoveredValue(null)}
-                                        onKeyDown={(e) => {
-                                            if (isDisabled) return;
-                                            if (e.key === "Enter" || e.key === " ") {
-                                                e.preventDefault();
-                                                onChange(item.value);
-                                            }
+                                        style={{
+                                            padding: 0,
+                                            paddingBottom: spacing[4],
+                                            paddingLeft: ITEM_PADDING_HORIZONTAL,
+                                            paddingRight: ITEM_PADDING_HORIZONTAL,
+                                            margin: 0,
+                                            border: "none",
+                                            background: "none",
+                                            cursor: isDisabled ? "not-allowed" : "pointer",
+                                            width: "100%",
+                                            boxSizing: "border-box",
+                                            fontFamily: "inherit",
+                                            textAlign: "left",
                                         }}
                                     >
-                                        <div
+                                        <span
                                         style={{
                                             display: "flex",
                                             alignItems: "center",
                                             height: ITEM_HEIGHT,
                                             padding: `0 ${spacing[12]}px`,
-                                                borderRadius: radius.md,
-                                                backgroundColor: bg,
-                                                color: fg,
-                                                opacity: isDisabled ? 0.5 : 1,
-                                                transition: "background-color 0.2s ease, color 0.2s ease",
-                                            }}
+                                            borderRadius: radius.md,
+                                            backgroundColor: bg,
+                                            color: fg,
+                                            opacity: isDisabled ? 0.5 : 1,
+                                            transition: "background-color 0.2s ease, color 0.2s ease",
+                                        }}
                                         >
                                             <div style={{ display: "flex", alignItems: "center", gap: collapsed ? 0 : spacing[12], minWidth: 0, justifyContent: collapsed ? "center" : "flex-start" }}>
                                                 {item.icon != null && (
@@ -244,8 +245,8 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
                                                     </span>
                                                 )}
                                             </div>
-                                        </div>
-                                    </div>
+                                        </span>
+                                    </button>
                                 );
                             })}
                         </div>
