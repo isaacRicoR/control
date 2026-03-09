@@ -45,7 +45,7 @@ export const PageShell: FC<PageShellProps> = ({
             zIndex: zIndex.sidebar,
             backgroundColor: semantic.background.default,
             ...(showHeaderDivider ? { borderBottom: `1px solid ${semantic.border.default}` } : {}),
-            marginBottom: spacing[24],
+            marginBottom: layoutTokens.pageHeaderToContentSpacing,
             paddingBottom: spacing[16],
             display: "grid",
             gridTemplateColumns: "1fr auto",

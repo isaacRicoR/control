@@ -13,6 +13,8 @@ export type LayoutTokens = {
     expanded: number;
   };
   appBarHeight: number;
+  /** Distancia vertical entre PageHeader (título + breadcrumb) y el primer bloque de contenido */
+  pageHeaderToContentSpacing: number;
   components: {
     avatar: {
       md: number;
@@ -42,6 +44,8 @@ export const layout: LayoutTokens = {
   },
 
   appBarHeight: 64,
+
+  pageHeaderToContentSpacing: 12,
 
   components: {
     avatar: {
