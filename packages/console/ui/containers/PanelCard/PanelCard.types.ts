@@ -16,6 +16,8 @@ export interface PanelCardFooterProps {
 }
 
 export interface PanelCardProps {
+    /** Estilo aplicado al body (ej. padding: 0 para layouts full-bleed) */
+    bodyStyle?: React.CSSProperties;
     /** Título del panel */
     title?: string;
     /** Descripción opcional del panel */
@@ -42,4 +44,6 @@ export interface PanelCardHeaderProps {
 
 export interface PanelCardBodyProps {
     children: ReactNode;
+    /** Estilo opcional para sobrescribir/ampliar el body */
+    style?: React.CSSProperties;
 }

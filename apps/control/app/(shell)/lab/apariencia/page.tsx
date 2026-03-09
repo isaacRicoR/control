@@ -52,12 +52,22 @@ const GALLERY_THEMES: GalleryTheme[] = [
     },
 ];
 
-const TABS = [
-    { label: "Galería", value: "Galería" },
-    { label: "Base", value: "Base" },
-    { label: "Estados", value: "Estados" },
-    { label: "Componentes", value: "Componentes" },
-    { label: "Avanzado", value: "Avanzado" },
+const TABS_GROUPS = [
+    {
+        title: "General",
+        items: [
+            { label: "Galería", value: "Galería", icon: "grid" },
+            { label: "Base", value: "Base", icon: "settings" },
+        ],
+    },
+    {
+        title: "Configuración",
+        items: [
+            { label: "Estados", value: "Estados", icon: "alert-circle" },
+            { label: "Componentes", value: "Componentes", icon: "code" },
+            { label: "Avanzado", value: "Avanzado", icon: "edit" },
+        ],
+    },
 ];
 
 type BaseTokens = {
@@ -564,7 +574,7 @@ export default function AparienciaPage() {
         );
     }
 
-    // Estructura según panel-layout.mdc: PageShell > PanelCard > Header, Tabs, Body (scroll), Footer (sticky)
+    // Layout tipo settings: PageShell > PanelCard (gran superficie) > grid (sidebar | content)
     return (
         <PageShell
             variant="fluid"
@@ -585,71 +595,79 @@ export default function AparienciaPage() {
                 minHeight: 0,
             }}
         >
-            <PanelCard>
+            <PanelCard bodyStyle={{ padding: 0, display: "flex", flexDirection: "column", minHeight: 0 }}>
                 <div
                     style={{
+                        flex: 1,
                         display: "grid",
-                        gridTemplateColumns: "220px minmax(0, 1fr)",
-                        gap: spacing[24],
+                        gridTemplateColumns: "176px minmax(0, 1fr)",
+                        gridTemplateRows: "1fr",
                         width: "100%",
-                        minHeight: "100%",
+                        minHeight: 0,
+                        overflow: "hidden",
                     }}
                 >
-                    <SecondaryNavSidebar
-                        items={TABS}
-                        value={activeTab}
-                        onChange={setActiveTab}
-                        ariaLabel="Secciones de apariencia"
-                    />
-
                     <div
                         style={{
                             display: "flex",
                             flexDirection: "column",
-                            gap: spacing[24],
-                            minWidth: 0,
+                            minHeight: 0,
+                            gridRow: "1 / -1",
+                            borderRight: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
                         }}
                     >
+                        <SecondaryNavSidebar
+                            groups={TABS_GROUPS}
+                            value={activeTab}
+                            onChange={setActiveTab}
+                            ariaLabel="Secciones de apariencia"
+                        />
+                    </div>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: spacing[32],
+                        minWidth: 0,
+                        minHeight: 0,
+                        overflowY: "auto",
+                        padding: spacing[24],
+                    }}
+                >
                         <div
                             style={{
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "space-between",
                                 gap: spacing[16],
+                                flexShrink: 0,
                             }}
                         >
-                            <Text
-                                variant="body"
+                            <h2
                                 style={{
-                                    color: semantic.text.active,
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.lg,
                                     fontWeight: typography.fontWeight.semibold,
-                                    fontSize: typography.fontSize.md,
+                                    color: semantic.text.active,
                                 }}
                             >
                                 {activeTab}
-                            </Text>
+                            </h2>
                             <ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />
                         </div>
 
-                {/* Sección Galería — Temas disponibles */}
+                {/* Galería — grid de temas */}
                 {activeTab === "Galería" && (
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: spacing.lg,
-                            width: "100%",
-                        }}
-                    >
-                        <Text
-                            variant="body"
+                    <section style={{ display: "flex", flexDirection: "column", gap: spacing[16], width: "100%" }}>
+                        <div
                             style={{
-                                color: semantic.text.muted,
-                                fontWeight: typography.fontWeight.semibold,
+                                height: 1,
+                                backgroundColor: semantic.border.subtle || semantic.border.default,
+                                width: "100%",
                             }}
-                        >
-                            Temas disponibles
-                        </Text>
+                            aria-hidden
+                        />
                         <div
                             style={{
                                 display: "grid",
@@ -671,367 +689,375 @@ export default function AparienciaPage() {
                                 />
                             ))}
                         </div>
-                    </div>
+                    </section>
                 )}
 
-                {/* Sección Base — Panel de configuración visual por secciones */}
+                {/* Base — panel de configuración por secciones (sin card contenedora) */}
                 {activeTab === "Base" && (
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: spacing[24],
-                            width: "100%",
-                        }}
-                    >
-                        <div
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: spacing[24],
-                                width: "100%",
-                                padding: spacing[24],
-                                backgroundColor: semantic.surface.card ?? semantic.surface.default,
-                                border: `1px solid ${semantic.border.default}`,
-                                borderRadius: radius.card,
-                            }}
-                        >
-                            <section
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[32], width: "100%" }}>
+                        <section style={{ display: "flex", flexDirection: "column", gap: spacing[12], width: "100%" }}>
+                            <p
                                 style={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    gap: spacing[16],
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.sm,
+                                    fontWeight: typography.fontWeight.semibold,
+                                    color: semantic.text.muted,
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.04em",
                                 }}
                             >
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: spacing[8],
-                                    }}
-                                >
-                                    <Text
-                                        variant="body"
-                                        style={{
-                                            color: semantic.text.default,
-                                            fontWeight: typography.fontWeight.semibold,
-                                        }}
-                                    >
-                                        Tema
-                                    </Text>
-                                    <div
-                                        style={{
-                                            height: 1,
-                                            backgroundColor: semantic.border.subtle || semantic.border.default,
-                                        }}
-                                        aria-hidden
+                                Tema
+                            </p>
+                            <div
+                                style={{
+                                    height: 1,
+                                    backgroundColor: semantic.border.subtle || semantic.border.default,
+                                    width: "100%",
+                                }}
+                                aria-hidden
+                            />
+                            <div
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                                    gap: spacing[20],
+                                    width: "100%",
+                                }}
+                            >
+                                <div style={{ minWidth: 0 }}>
+                                    <SelectSingle
+                                        label="Preset activo"
+                                        options={[...AVAILABLE_THEMES]}
+                                        value={currentPreset}
+                                        onChange={(v) => setPreset(v as "control" | "security")}
                                     />
                                 </div>
-                                <div
-                                    style={{
-                                        display: "grid",
-                                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                                        gap: spacing[16],
-                                        width: "100%",
-                                    }}
-                                >
-                                    <div style={{ minWidth: 0 }}>
-                                        <SelectSingle
-                                            label="Preset activo"
-                                            options={[...AVAILABLE_THEMES]}
-                                            value={currentPreset}
-                                            onChange={(v) => setPreset(v as "control" | "security")}
-                                        />
-                                    </div>
-                                    <div
+                                <div style={{ minWidth: 0 }}>
+                                    <label
                                         style={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            gap: spacing[8],
-                                            minWidth: 0,
+                                            display: "block",
+                                            marginBottom: spacing[8],
+                                            fontFamily: typography.fontFamily.primary,
+                                            fontSize: typography.fontSize.sm,
+                                            fontWeight: typography.fontWeight.medium,
+                                            color: semantic.text.muted,
                                         }}
                                     >
-                                        <Text
-                                            variant="body"
-                                            style={{
-                                                color: semantic.text.muted,
-                                                fontWeight: typography.fontWeight.medium,
-                                            }}
-                                        >
-                                            Modo editado
-                                        </Text>
-                                        <ModeSegmentedControl
-                                            value={editMode}
-                                            onChange={setEditMode}
-                                            semantic={semantic}
-                                        />
-                                    </div>
+                                        Modo editado
+                                    </label>
+                                    <ModeSegmentedControl
+                                        value={editMode}
+                                        onChange={setEditMode}
+                                        semantic={semantic}
+                                    />
                                 </div>
-                            </section>
+                            </div>
+                        </section>
 
-                            <section
+                        <section style={{ display: "flex", flexDirection: "column", gap: spacing[12], width: "100%" }}>
+                            <p
                                 style={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    gap: spacing[16],
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.sm,
+                                    fontWeight: typography.fontWeight.semibold,
+                                    color: semantic.text.muted,
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.04em",
                                 }}
                             >
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: spacing[8],
-                                    }}
-                                >
-                                    <Text
-                                        variant="body"
-                                        style={{
-                                            color: semantic.text.default,
-                                            fontWeight: typography.fontWeight.semibold,
-                                        }}
-                                    >
-                                        Colores base
-                                    </Text>
-                                    <div
-                                        style={{
-                                            height: 1,
-                                            backgroundColor: semantic.border.subtle || semantic.border.default,
-                                        }}
-                                        aria-hidden
+                                Colores base
+                            </p>
+                            <div
+                                style={{
+                                    height: 1,
+                                    backgroundColor: semantic.border.subtle || semantic.border.default,
+                                    width: "100%",
+                                }}
+                                aria-hidden
+                            />
+                            <div
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                                    gap: spacing[20],
+                                    width: "100%",
+                                }}
+                            >
+                                {BASE_TOKEN_KEYS.map(({ key, label }) => (
+                                    <TokenRowWithSwatch
+                                        key={key}
+                                        label={label}
+                                        value={currentTokens[key]}
+                                        options={baseColorOptions[key]}
+                                        onChange={(v) => handleChange(editMode, key, v)}
+                                        semantic={semantic}
                                     />
-                                </div>
-                                <div
-                                    style={{
-                                        display: "grid",
-                                        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                                        gap: spacing[16],
-                                        width: "100%",
-                                    }}
-                                >
-                                    {BASE_TOKEN_KEYS.map(({ key, label }) => (
-                                        <TokenRowWithSwatch
-                                            key={key}
-                                            label={label}
-                                            value={currentTokens[key]}
-                                            options={baseColorOptions[key]}
-                                            onChange={(v) => handleChange(editMode, key, v)}
-                                            semantic={semantic}
-                                        />
-                                    ))}
-                                </div>
-                            </section>
+                                ))}
+                            </div>
+                        </section>
 
-                            <section
+                        <section style={{ display: "flex", flexDirection: "column", gap: spacing[12], width: "100%" }}>
+                            <p
                                 style={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    gap: spacing[16],
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.sm,
+                                    fontWeight: typography.fontWeight.semibold,
+                                    color: semantic.text.muted,
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.04em",
                                 }}
                             >
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: spacing[8],
-                                    }}
-                                >
-                                    <Text
-                                        variant="body"
-                                        style={{
-                                            color: semantic.text.default,
-                                            fontWeight: typography.fontWeight.semibold,
-                                        }}
-                                    >
-                                        Vista previa
-                                    </Text>
-                                    <div
-                                        style={{
-                                            height: 1,
-                                            backgroundColor: semantic.border.subtle || semantic.border.default,
-                                        }}
-                                        aria-hidden
-                                    />
-                                </div>
-                                <div style={{ width: "100%" }}>
-                                    <ThemePreview tokens={currentTokens} semantic={semantic} />
-                                </div>
-                            </section>
-                        </div>
+                                Vista previa
+                            </p>
+                            <div
+                                style={{
+                                    height: 1,
+                                    backgroundColor: semantic.border.subtle || semantic.border.default,
+                                    width: "100%",
+                                }}
+                                aria-hidden
+                            />
+                            <div style={{ width: "100%" }}>
+                                <ThemePreview tokens={currentTokens} semantic={semantic} />
+                            </div>
+                        </section>
                     </div>
                 )}
 
-                {/* Sección Estados — Colores de feedback */}
+                {/* Estados — colores de feedback */}
                 {activeTab === "Estados" && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: spacing[12],
-                                marginBottom: spacing[8],
-                            }}
-                        >
-                            <Text
-                                variant="body"
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[32], width: "100%" }}>
+                        <section style={{ display: "flex", flexDirection: "column", gap: spacing[12], width: "100%" }}>
+                            <p
                                 style={{
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.sm,
+                                    fontWeight: typography.fontWeight.semibold,
                                     color: semantic.text.muted,
-                                    fontWeight: typography.fontWeight.medium,
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.04em",
                                 }}
                             >
-                                Tema:
-                            </Text>
-                            <div style={{ minWidth: spacing[24] * 6 }}>
+                                Tema
+                            </p>
+                            <div
+                                style={{
+                                    height: 1,
+                                    backgroundColor: semantic.border.subtle || semantic.border.default,
+                                    width: "100%",
+                                }}
+                                aria-hidden
+                            />
+                            <div style={{ maxWidth: 320 }}>
                                 <SelectSingle
+                                    label="Preset activo"
                                     options={[...AVAILABLE_THEMES]}
                                     value={currentPreset}
                                     onChange={(v) => setPreset(v as "control" | "security")}
                                 />
                             </div>
-                        </div>
-                        <Text
-                            variant="body"
-                            style={{
-                                color: semantic.text.muted,
-                                fontWeight: typography.fontWeight.semibold,
-                                marginBottom: spacing[8],
-                            }}
-                        >
-                            Colores de feedback del sistema
-                        </Text>
-                        <div
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: spacing[16],
-                                maxWidth: 400,
-                            }}
-                        >
-                            <Input label="Success" value="" placeholder="—" disabled />
-                            <Input label="Warning" value="" placeholder="—" disabled />
-                            <Input label="Danger" value="" placeholder="—" disabled />
-                            <Input label="Info" value="" placeholder="—" disabled />
-                        </div>
+                        </section>
+                        <section style={{ display: "flex", flexDirection: "column", gap: spacing[12], width: "100%" }}>
+                            <p
+                                style={{
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.sm,
+                                    fontWeight: typography.fontWeight.semibold,
+                                    color: semantic.text.muted,
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.04em",
+                                }}
+                            >
+                                Colores de feedback
+                            </p>
+                            <div
+                                style={{
+                                    height: 1,
+                                    backgroundColor: semantic.border.subtle || semantic.border.default,
+                                    width: "100%",
+                                }}
+                                aria-hidden
+                            />
+                            <div
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+                                    gap: spacing[16],
+                                    width: "100%",
+                                }}
+                            >
+                                <Input label="Success" value="" placeholder="—" disabled />
+                                <Input label="Warning" value="" placeholder="—" disabled />
+                                <Input label="Danger" value="" placeholder="—" disabled />
+                                <Input label="Info" value="" placeholder="—" disabled />
+                            </div>
+                        </section>
                     </div>
                 )}
 
-                {/* Sección Componentes — Apariencia de componentes */}
+                {/* Componentes — apariencia por componente */}
                 {activeTab === "Componentes" && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: spacing[12],
-                                marginBottom: spacing[8],
-                            }}
-                        >
-                            <Text
-                                variant="body"
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[32], width: "100%" }}>
+                        <section style={{ display: "flex", flexDirection: "column", gap: spacing[12], width: "100%" }}>
+                            <p
                                 style={{
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.sm,
+                                    fontWeight: typography.fontWeight.semibold,
                                     color: semantic.text.muted,
-                                    fontWeight: typography.fontWeight.medium,
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.04em",
                                 }}
                             >
-                                Tema:
-                            </Text>
-                            <div style={{ minWidth: spacing[24] * 6 }}>
+                                Tema
+                            </p>
+                            <div
+                                style={{
+                                    height: 1,
+                                    backgroundColor: semantic.border.subtle || semantic.border.default,
+                                    width: "100%",
+                                }}
+                                aria-hidden
+                            />
+                            <div style={{ maxWidth: 320 }}>
                                 <SelectSingle
+                                    label="Preset activo"
                                     options={[...AVAILABLE_THEMES]}
                                     value={currentPreset}
                                     onChange={(v) => setPreset(v as "control" | "security")}
                                 />
                             </div>
-                        </div>
-                        <Text
-                            variant="body"
-                            style={{
-                                color: semantic.text.muted,
-                                fontWeight: typography.fontWeight.semibold,
-                                marginBottom: spacing[8],
-                            }}
-                        >
-                            Apariencia específica de componentes
-                        </Text>
-                        <div
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: spacing[12],
-                            }}
-                        >
-                            {["Buttons", "Cards", "Inputs", "Tables", "Badges"].map((name) => (
-                                <div
-                                    key={name}
-                                    style={{
-                                        padding: spacing[16],
-                                        backgroundColor: semantic.surface.default,
-                                        border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
-                                        borderRadius: radius.card,
-                                        color: semantic.text.muted,
-                                        fontSize: typography.fontSize.sm,
-                                    }}
-                                >
-                                    {name}
-                                </div>
-                            ))}
-                        </div>
+                        </section>
+                        <section style={{ display: "flex", flexDirection: "column", gap: spacing[12], width: "100%" }}>
+                            <p
+                                style={{
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.sm,
+                                    fontWeight: typography.fontWeight.semibold,
+                                    color: semantic.text.muted,
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.04em",
+                                }}
+                            >
+                                Componentes
+                            </p>
+                            <div
+                                style={{
+                                    height: 1,
+                                    backgroundColor: semantic.border.subtle || semantic.border.default,
+                                    width: "100%",
+                                }}
+                                aria-hidden
+                            />
+                            <div
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
+                                    gap: spacing[12],
+                                    width: "100%",
+                                }}
+                            >
+                                {["Buttons", "Cards", "Inputs", "Tables", "Badges"].map((name) => (
+                                    <div
+                                        key={name}
+                                        style={{
+                                            padding: `${spacing[12]} ${spacing[16]}`,
+                                            backgroundColor: semantic.surface.default,
+                                            border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                                            borderRadius: radius.sm,
+                                            color: semantic.text.muted,
+                                            fontSize: typography.fontSize.sm,
+                                            fontWeight: typography.fontWeight.medium,
+                                        }}
+                                    >
+                                        {name}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
                     </div>
                 )}
 
-                {/* Sección Avanzado — Ajustes avanzados */}
+                {/* Avanzado — ajustes del sistema visual */}
                 {activeTab === "Avanzado" && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[24] }}>
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: spacing[12],
-                                marginBottom: spacing[8],
-                            }}
-                        >
-                            <Text
-                                variant="body"
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[32], width: "100%" }}>
+                        <section style={{ display: "flex", flexDirection: "column", gap: spacing[12], width: "100%" }}>
+                            <p
                                 style={{
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.sm,
+                                    fontWeight: typography.fontWeight.semibold,
                                     color: semantic.text.muted,
-                                    fontWeight: typography.fontWeight.medium,
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.04em",
                                 }}
                             >
-                                Tema:
-                            </Text>
-                            <div style={{ minWidth: spacing[24] * 6 }}>
+                                Tema
+                            </p>
+                            <div
+                                style={{
+                                    height: 1,
+                                    backgroundColor: semantic.border.subtle || semantic.border.default,
+                                    width: "100%",
+                                }}
+                                aria-hidden
+                            />
+                            <div style={{ maxWidth: 320 }}>
                                 <SelectSingle
+                                    label="Preset activo"
                                     options={[...AVAILABLE_THEMES]}
                                     value={currentPreset}
                                     onChange={(v) => setPreset(v as "control" | "security")}
                                 />
                             </div>
-                        </div>
-                        <Text
-                            variant="body"
-                            style={{
-                                color: semantic.text.muted,
-                                fontWeight: typography.fontWeight.semibold,
-                                marginBottom: spacing[8],
-                            }}
-                        >
-                            Ajustes avanzados del sistema visual
-                        </Text>
-                        <div
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: spacing[16],
-                                maxWidth: 400,
-                            }}
-                        >
-                            <Input label="Semantic tokens" value="" placeholder="—" disabled />
-                            <Input label="Radius" value="" placeholder="—" disabled />
-                            <Input label="Spacing" value="" placeholder="—" disabled />
-                            <Input label="Shadows" value="" placeholder="—" disabled />
-                        </div>
+                        </section>
+                        <section style={{ display: "flex", flexDirection: "column", gap: spacing[12], width: "100%" }}>
+                            <p
+                                style={{
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.sm,
+                                    fontWeight: typography.fontWeight.semibold,
+                                    color: semantic.text.muted,
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.04em",
+                                }}
+                            >
+                                Ajustes avanzados
+                            </p>
+                            <div
+                                style={{
+                                    height: 1,
+                                    backgroundColor: semantic.border.subtle || semantic.border.default,
+                                    width: "100%",
+                                }}
+                                aria-hidden
+                            />
+                            <div
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+                                    gap: spacing[16],
+                                    width: "100%",
+                                }}
+                            >
+                                <Input label="Semantic tokens" value="" placeholder="—" disabled />
+                                <Input label="Radius" value="" placeholder="—" disabled />
+                                <Input label="Spacing" value="" placeholder="—" disabled />
+                                <Input label="Shadows" value="" placeholder="—" disabled />
+                            </div>
+                        </section>
                     </div>
                 )}
-                    </div>
+                </div>
                 </div>
             </PanelCard>
         </PageShell>

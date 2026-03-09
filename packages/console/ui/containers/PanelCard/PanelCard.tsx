@@ -15,6 +15,7 @@ import type { PanelCardProps } from "./PanelCard.types";
  * Usado por: Configuración, Perfil, Seguridad, Integraciones, Apariencia, Formularios administrativos.
  */
 export const PanelCard: React.FC<PanelCardProps> = ({
+    bodyStyle,
     title,
     description,
     headerStart,
@@ -51,7 +52,7 @@ export const PanelCard: React.FC<PanelCardProps> = ({
                 />
             )}
 
-            <PanelCardBody>{children}</PanelCardBody>
+            <PanelCardBody style={bodyStyle}>{children}</PanelCardBody>
 
             {footer != null && <PanelCardFooter {...footer} />}
         </section>

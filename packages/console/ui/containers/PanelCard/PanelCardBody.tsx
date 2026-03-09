@@ -10,16 +10,17 @@ import "./PanelCardBody.css";
  * Layout flexible para formularios, configuraciones, secciones, listas.
  * Usa scrollbar custom del sistema (mismo patrón que SelectSingle, Textarea).
  */
-export const PanelCardBody: React.FC<PanelCardBodyProps> = ({ children }) => {
+export const PanelCardBody: React.FC<PanelCardBodyProps> = ({ children, style: customStyle }) => {
+    const baseStyle: React.CSSProperties = {
+        flex: 1,
+        overflowY: "auto",
+        minHeight: 0,
+        padding: spacing[24],
+    };
     return (
         <div
             className="panel-card-body-scroll"
-            style={{
-                flex: 1,
-                overflowY: "auto",
-                minHeight: 0,
-                padding: spacing[24],
-            }}
+            style={{ ...baseStyle, ...customStyle }}
         >
             {children}
         </div>
