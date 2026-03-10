@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { PageShell } from "@ui/containers/PageShell/PageShell";
 import { PanelCard } from "@ui/containers/PanelCard";
 import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
+import { FloatingSurface } from "@ui/atoms/FloatingSurface/FloatingSurface";
 import { SecondaryNavSidebar, SECONDARY_NAV_SIDEBAR_WIDTH } from "@ui/molecules/SecondaryNavSidebar";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
 import { Icon } from "@ui/atoms/Icon/Icon";
@@ -108,6 +109,14 @@ const BASE_TOKEN_KEYS: { key: keyof BaseTokens; label: string }[] = [
     { key: "text", label: "Texto" },
 ];
 
+/** Dónde se usa cada token de color base en el sistema */
+const COLOR_USAGE: Record<keyof BaseTokens, string[]> = {
+    accent: ["Buttons · Primary", "Links", "Focus states", "Surface highlights"],
+    background: ["Page background", "App shell", "Surface base"],
+    surface: ["Cards", "Panels", "Inputs", "Elevated surfaces"],
+    text: ["Body text", "Labels", "Headings", "Text emphasis"],
+};
+
 function uniqueColorOptions(options: ColorSelectOption[]) {
     return options.filter(
         (option, index, all) => all.findIndex((candidate) => candidate.value === option.value) === index
@@ -120,6 +129,96 @@ function ensureCurrentColorOption(value: string, options: ColorSelectOption[]) {
     }
 
     return [{ value, label: `● ${value.toUpperCase()}` }, ...options];
+}
+
+function hexToHsv(hex: string): { h: number; s: number; v: number } {
+    const m = hex.replace(/^#/, "").match(/^([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    if (!m) return { h: 0, s: 0, v: 100 };
+    let r = 0,
+        g = 0,
+        b = 0;
+    if (m[1].length === 3) {
+        r = parseInt(m[1][0] + m[1][0], 16) / 255;
+        g = parseInt(m[1][1] + m[1][1], 16) / 255;
+        b = parseInt(m[1][2] + m[1][2], 16) / 255;
+    } else {
+        r = parseInt(m[1].slice(0, 2), 16) / 255;
+        g = parseInt(m[1].slice(2, 4), 16) / 255;
+        b = parseInt(m[1].slice(4, 6), 16) / 255;
+    }
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    const d = max - min;
+    const v = max;
+    const s = max === 0 ? 0 : (d / max) * 100;
+    let h = 0;
+    if (d !== 0) {
+        switch (max) {
+            case r:
+                h = (60 * ((g - b) / d) + (g < b ? 360 : 0)) % 360;
+                break;
+            case g:
+                h = 60 * ((b - r) / d) + 120;
+                break;
+            default:
+                h = 60 * ((r - g) / d) + 240;
+        }
+    }
+    return { h, s, v: v * 100 };
+}
+
+function hsvToHex(h: number, s: number, v: number): string {
+    s /= 100;
+    v /= 100;
+    const c = v * s;
+    const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+    const m = v - c;
+    let r = 0,
+        g = 0,
+        b = 0;
+    if (h < 60) {
+        r = c;
+        g = x;
+    } else if (h < 120) {
+        r = x;
+        g = c;
+    } else if (h < 180) {
+        g = c;
+        b = x;
+    } else if (h < 240) {
+        g = x;
+        b = c;
+    } else if (h < 300) {
+        r = x;
+        b = c;
+    } else {
+        r = c;
+        b = x;
+    }
+    const R = Math.round((r + m) * 255);
+    const G = Math.round((g + m) * 255);
+    const B = Math.round((b + m) * 255);
+    return `#${R.toString(16).padStart(2, "0")}${G.toString(16).padStart(2, "0")}${B.toString(16).padStart(2, "0")}`.toUpperCase();
+}
+
+function isValidHex(hex: string): boolean {
+    return /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.test(hex);
+}
+
+function normalizeHex(hex: string): string {
+    const m = hex.replace(/^#/, "").match(/^([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    if (!m) return "#000000";
+    if (m[1].length === 3) {
+        return (
+            "#" +
+            m[1]
+                .split("")
+                .map((c) => c + c)
+                .join("")
+                .toUpperCase()
+        );
+    }
+    return "#" + m[1].toUpperCase();
 }
 
 function ModeSegmentedControl({
@@ -226,6 +325,532 @@ function TokenRowWithSwatch({
                 }}
                 aria-hidden
             />
+        </div>
+    );
+}
+
+function BaseColorSelector({
+    value,
+    options,
+    onChange,
+    semantic,
+}: {
+    value: string;
+    options: ColorSelectOption[];
+    onChange: (v: string) => void;
+    semantic: (typeof colors.dark)["semantic"];
+}) {
+    const [isOpen, setIsOpen] = useState(false);
+    const [showPicker, setShowPicker] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const initialHsv = useMemo(() => hexToHsv(value || "#000000"), []);
+    const [hsv, setHsv] = useState(initialHsv);
+    const [hexInput, setHexInput] = useState(() => {
+        const v = value || "#000000";
+        return v.startsWith("#") ? v.toUpperCase() : `#${v.toUpperCase()}`;
+    });
+    const displayLabel = options.find((o) => o.value.toLowerCase() === (value || "").toLowerCase())?.label ?? hexInput;
+
+    useEffect(() => {
+        if (isOpen && showPicker) {
+            const h = hexToHsv(value || "#000000");
+            setHsv(h);
+            setHexInput((value || "#000000").toUpperCase().replace(/^#?/, value?.startsWith("#") ? value : `#${value}`));
+        }
+    }, [isOpen, showPicker, value]);
+
+    useEffect(() => {
+        if (!isOpen) return;
+        const handleClickOutside = (e: MouseEvent) => {
+            if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+                setIsOpen(false);
+                setShowPicker(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [isOpen]);
+
+    const applyHex = useCallback(
+        (hex: string) => {
+            const norm = normalizeHex(hex);
+            if (isValidHex(hex)) {
+                onChange(norm);
+                setHsv(hexToHsv(norm));
+            }
+        },
+        [onChange]
+    );
+
+    const updateFrom2D = useCallback(
+        (clientX: number, clientY: number, target: HTMLDivElement) => {
+            const rect = target.getBoundingClientRect();
+            const x = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+            const y = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+            const s = x * 100;
+            const v = (1 - y) * 100;
+            const hex = hsvToHex(hsv.h, s, v);
+            setHsv((p) => ({ ...p, s, v }));
+            setHexInput(hex);
+            applyHex(hex);
+        },
+        [hsv.h, applyHex]
+    );
+
+    const updateFromHue = useCallback(
+        (clientX: number, target: HTMLDivElement) => {
+            const rect = target.getBoundingClientRect();
+            const h = Math.max(0, Math.min(360, ((clientX - rect.left) / rect.width) * 360));
+            const hex = hsvToHex(h, hsv.s, hsv.v);
+            setHsv((p) => ({ ...p, h }));
+            setHexInput(hex);
+            applyHex(hex);
+        },
+        [hsv.s, hsv.v, applyHex]
+    );
+
+    const sbRef = useRef<HTMLDivElement>(null);
+    const hueRef = useRef<HTMLDivElement>(null);
+    const [dragging, setDragging] = useState<"2d" | "hue" | null>(null);
+
+    useEffect(() => {
+        if (!dragging) return;
+        const onMove = (e: MouseEvent) => {
+            if (dragging === "2d" && sbRef.current) updateFrom2D(e.clientX, e.clientY, sbRef.current);
+            if (dragging === "hue" && hueRef.current) updateFromHue(e.clientX, hueRef.current);
+        };
+        const onUp = () => setDragging(null);
+        document.addEventListener("mousemove", onMove);
+        document.addEventListener("mouseup", onUp);
+        return () => {
+            document.removeEventListener("mousemove", onMove);
+            document.removeEventListener("mouseup", onUp);
+        };
+    }, [dragging, updateFrom2D, updateFromHue]);
+
+    const handleHexBlur = () => {
+        if (isValidHex(hexInput)) {
+            const norm = normalizeHex(hexInput);
+            onChange(norm);
+            setHexInput(norm);
+            setHsv(hexToHsv(norm));
+        } else {
+            setHexInput((value || "#000000").toUpperCase().replace(/^#?/, value?.startsWith("#") ? value : `#${value}`));
+        }
+    };
+
+    const currentHex = hsvToHex(hsv.h, hsv.s, hsv.v);
+
+    return (
+        <div ref={containerRef} style={{ position: "relative", minWidth: 120 }}>
+            <div
+                role="button"
+                tabIndex={0}
+                onClick={() => setIsOpen(!isOpen)}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setIsOpen(!isOpen);
+                    }
+                }}
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: spacing[8],
+                    width: "100%",
+                    minHeight: spacing[48],
+                    padding: `0 ${spacing[12]}px`,
+                    backgroundColor: semantic.surface.default,
+                    border: `1px solid ${semantic.border.default}`,
+                    borderRadius: radius.md,
+                    cursor: "pointer",
+                    fontFamily: typography.fontFamily.primary,
+                    fontSize: typography.fontSize.sm,
+                    color: semantic.text.default,
+                }}
+            >
+                <div
+                    style={{
+                        width: spacing[24],
+                        height: spacing[24],
+                        flexShrink: 0,
+                        borderRadius: radius.sm,
+                        border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                        backgroundColor: value || semantic.surface.default,
+                    }}
+                />
+                <span style={{ flex: 1, textAlign: "left", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {displayLabel}
+                </span>
+                <Icon name="chevron-down" size={16} color={semantic.text.muted} />
+            </div>
+
+            {isOpen && (
+                <FloatingSurface
+                    style={{
+                        position: "absolute",
+                        top: "calc(100% + 4px)",
+                        left: 0,
+                        minWidth: 280,
+                        zIndex: 1000,
+                    }}
+                >
+                    <div style={{ padding: spacing[12] }}>
+                        {options.map((opt) => (
+                            <div
+                                key={opt.value}
+                                role="option"
+                                onClick={() => {
+                                    onChange(opt.value);
+                                    setIsOpen(false);
+                                    setShowPicker(false);
+                                }}
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: spacing[8],
+                                    padding: `${spacing[8]}px ${spacing[12]}px`,
+                                    borderRadius: radius.sm,
+                                    cursor: "pointer",
+                                    backgroundColor: opt.value.toLowerCase() === (value || "").toLowerCase() ? semantic.surface.selected : "transparent",
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.sm,
+                                    color: semantic.text.default,
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        width: 20,
+                                        height: 20,
+                                        borderRadius: radius.sm,
+                                        border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                                        backgroundColor: opt.value,
+                                    }}
+                                />
+                                {opt.label}
+                            </div>
+                        ))}
+
+                        <div
+                            role="button"
+                            onClick={() => setShowPicker(!showPicker)}
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: spacing[8],
+                                padding: `${spacing[8]}px ${spacing[12]}px`,
+                                borderRadius: radius.sm,
+                                cursor: "pointer",
+                                marginTop: spacing[4],
+                                borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                                paddingTop: spacing[12],
+                                fontFamily: typography.fontFamily.primary,
+                                fontSize: typography.fontSize.sm,
+                                fontWeight: typography.fontWeight.medium,
+                                color: semantic.primary.default ?? semantic.text.default,
+                            }}
+                        >
+                            <Icon name="edit" size={16} color={semantic.primary.default} />
+                            Personalizado
+                        </div>
+
+                        {showPicker && (
+                            <div
+                                style={{
+                                    marginTop: spacing[12],
+                                    paddingTop: spacing[12],
+                                    borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                                }}
+                            >
+                                <div
+                                    ref={sbRef}
+                                    onMouseDown={(e) => {
+                                        e.preventDefault();
+                                        updateFrom2D(e.clientX, e.clientY, e.currentTarget);
+                                        setDragging("2d");
+                                    }}
+                                    style={{
+                                        width: "100%",
+                                        height: 140,
+                                        borderRadius: radius.md,
+                                        background: `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), hsl(${hsv.h}, 100%, 50%)`,
+                                        cursor: "crosshair",
+                                        position: "relative",
+                                    }}
+                                />
+                                <div
+                                    ref={hueRef}
+                                    onMouseDown={(e) => {
+                                        e.preventDefault();
+                                        updateFromHue(e.clientX, e.currentTarget);
+                                        setDragging("hue");
+                                    }}
+                                    style={{
+                                        width: "100%",
+                                        height: 10,
+                                        marginTop: spacing[8],
+                                        borderRadius: radius.full,
+                                        background: "linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)",
+                                        cursor: "pointer",
+                                    }}
+                                />
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: spacing[12],
+                                        marginTop: spacing[12],
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            width: spacing[40],
+                                            height: spacing[40],
+                                            borderRadius: radius.sm,
+                                            border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                                            backgroundColor: currentHex,
+                                            flexShrink: 0,
+                                        }}
+                                    />
+                                    <input
+                                        type="text"
+                                        value={hexInput}
+                                        onChange={(e) => setHexInput(e.target.value)}
+                                        onBlur={handleHexBlur}
+                                        onKeyDown={(e) => e.key === "Enter" && handleHexBlur()}
+                                        placeholder="#000000"
+                                        style={{
+                                            flex: 1,
+                                            padding: `${spacing[8]}px ${spacing[12]}px`,
+                                            fontFamily: typography.fontFamily.mono ?? typography.fontFamily.primary,
+                                            fontSize: typography.fontSize.sm,
+                                            color: semantic.text.default,
+                                            backgroundColor: semantic.surface.hover ?? semantic.surface.default,
+                                            border: `1px solid ${semantic.border.default}`,
+                                            borderRadius: radius.sm,
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </FloatingSurface>
+            )}
+        </div>
+    );
+}
+
+function BaseColorExpandableRow({
+    label,
+    value,
+    hex,
+    options,
+    onChange,
+    usage,
+    isExpanded,
+    onToggle,
+    semantic,
+}: {
+    label: string;
+    value: string;
+    hex: string;
+    options: ColorSelectOption[];
+    onChange: (v: string) => void;
+    usage: string[];
+    isExpanded: boolean;
+    onToggle: () => void;
+    semantic: (typeof colors.dark)["semantic"];
+}) {
+    return (
+        <div
+            style={{
+                borderBottom: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+            }}
+        >
+            <button
+                type="button"
+                onClick={onToggle}
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: spacing[12],
+                    width: "100%",
+                    padding: `${spacing[12]}px 0`,
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    textAlign: "left",
+                }}
+                aria-expanded={isExpanded}
+            >
+                <div
+                    style={{
+                        width: spacing[32],
+                        height: spacing[32],
+                        flexShrink: 0,
+                        borderRadius: radius.sm,
+                        border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                        backgroundColor: value || semantic.surface.default,
+                    }}
+                    aria-hidden
+                />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                    <span
+                        style={{
+                            fontFamily: typography.fontFamily.primary,
+                            fontSize: typography.fontSize.sm,
+                            fontWeight: typography.fontWeight.medium,
+                            color: semantic.text.default,
+                        }}
+                    >
+                        {label}
+                    </span>
+                    <span
+                        style={{
+                            display: "block",
+                            fontFamily: typography.fontFamily.mono ?? typography.fontFamily.primary,
+                            fontSize: typography.fontSize.xs,
+                            color: semantic.text.muted,
+                            marginTop: spacing[4],
+                        }}
+                    >
+                        {hex}
+                    </span>
+                </div>
+                <div style={{ minWidth: 120, maxWidth: 180 }} onClick={(e) => e.stopPropagation()}>
+                    <BaseColorSelector
+                        options={options}
+                        value={value}
+                        onChange={(v) => onChange(v)}
+                        semantic={semantic}
+                    />
+                </div>
+                <span
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        transform: isExpanded ? "rotate(180deg)" : "none",
+                        transition: "transform 0.2s ease",
+                    }}
+                >
+                    <Icon name="chevron-down" size={16} color={semantic.text.muted} />
+                </span>
+            </button>
+            {isExpanded && (
+                <div
+                    style={{
+                        padding: spacing[12],
+                        paddingTop: 0,
+                        paddingBottom: spacing[16],
+                    }}
+                >
+                    <div
+                        style={{
+                            padding: spacing[12],
+                            backgroundColor: semantic.surface.hover ?? semantic.surface.default,
+                            borderRadius: radius.sm,
+                        }}
+                    >
+                        <span
+                            style={{
+                                fontFamily: typography.fontFamily.primary,
+                                fontSize: typography.fontSize.xs,
+                                fontWeight: typography.fontWeight.medium,
+                                color: semantic.text.muted,
+                                textTransform: "uppercase",
+                                letterSpacing: "0.05em",
+                            }}
+                        >
+                            Dónde se usa
+                        </span>
+                        <ul
+                            style={{
+                                margin: `${spacing[8]}px 0 0`,
+                                paddingLeft: spacing[16],
+                                listStyle: "disc",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: spacing[4],
+                            }}
+                        >
+                            {usage.map((item) => (
+                                <li
+                                    key={item}
+                                    style={{
+                                        fontFamily: typography.fontFamily.primary,
+                                        fontSize: typography.fontSize.sm,
+                                        color: semantic.text.default,
+                                    }}
+                                >
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
+
+function BaseColorsCard({
+    mode,
+    tokens,
+    options,
+    onChange,
+    expandedKey,
+    onExpandToggle,
+    semantic,
+}: {
+    mode: "dark" | "light";
+    tokens: BaseTokens;
+    options: Record<keyof BaseTokens, ColorSelectOption[]>;
+    onChange: (field: keyof BaseTokens, value: string) => void;
+    expandedKey: keyof BaseTokens | null;
+    onExpandToggle: (key: keyof BaseTokens) => void;
+    semantic: (typeof colors.dark)["semantic"];
+}) {
+    const title = mode === "dark" ? "Modo oscuro" : "Modo claro";
+    return (
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 0,
+                backgroundColor: semantic.surface.card ?? semantic.surface.default,
+                borderRadius: radius.card,
+                border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                padding: spacing[24],
+                boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
+            }}
+        >
+            <h3
+                style={{
+                    margin: 0,
+                    marginBottom: spacing[16],
+                    fontFamily: typography.fontFamily.primary,
+                    fontSize: typography.fontSize.md,
+                    fontWeight: typography.fontWeight.semibold,
+                    color: semantic.text.default,
+                }}
+            >
+                {title}
+            </h3>
+            {BASE_TOKEN_KEYS.map(({ key, label }) => (
+                <BaseColorExpandableRow
+                    key={key}
+                    label={label}
+                    value={tokens[key]}
+                    hex={tokens[key].toUpperCase()}
+                    options={options[key]}
+                    onChange={(v) => onChange(key, v)}
+                    usage={COLOR_USAGE[key]}
+                    isExpanded={expandedKey === key}
+                    onToggle={() => onExpandToggle(key)}
+                    semantic={semantic}
+                />
+            ))}
         </div>
     );
 }
@@ -614,6 +1239,7 @@ export default function AparienciaPage() {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [modoAyuda, setModoAyuda] = useState(false);
     const [selectedBaseSub, setSelectedBaseSub] = useState<"tema" | "colores" | null>("tema");
+    const [expandedColoresKey, setExpandedColoresKey] = useState<string | null>(null);
     const handleTabChange = (value: string) => setActiveTab(value);
     const [editMode, setEditMode] = useState<ThemeEditMode>("dark");
 
@@ -678,6 +1304,64 @@ export default function AparienciaPage() {
             ),
         };
     }, [currentTokens, editMode]);
+
+    const baseColorOptionsByMode = useMemo<
+        Record<ThemeEditMode, Record<(typeof BASE_TOKEN_KEYS)[number]["key"], ColorSelectOption[]>>
+    >(() => {
+        const controlPack = getThemeTokens("control", "dark");
+        const securityPack = getThemeTokens("security", "dark");
+        const controlLight = getThemeTokens("control", "light");
+        const securityLight = getThemeTokens("security", "light");
+
+        const buildOptions = (tokens: BaseTokens, mode: ThemeEditMode) => {
+            const control = mode === "dark" ? controlPack : controlLight;
+            const security = mode === "dark" ? securityPack : securityLight;
+            return {
+                accent: ensureCurrentColorOption(
+                    tokens.accent,
+                    uniqueColorOptions([
+                        { value: control.accent, label: "● Verde" },
+                        { value: security.accent, label: "● Azul" },
+                        { value: control.warning, label: "● Amarillo" },
+                        { value: control.danger, label: "● Rojo" },
+                        { value: control.info, label: "● Celeste" },
+                    ])
+                ),
+                background: ensureCurrentColorOption(
+                    tokens.background,
+                    uniqueColorOptions([
+                        { value: control.background, label: "● Base" },
+                        { value: security.background, label: "● Profundo" },
+                        { value: control.surface, label: "● Superficie" },
+                        { value: control.border, label: "● Pizarra" },
+                    ])
+                ),
+                surface: ensureCurrentColorOption(
+                    tokens.surface,
+                    uniqueColorOptions([
+                        { value: control.surface, label: "● Surface" },
+                        { value: security.surface, label: "● Elevada" },
+                        { value: control.border, label: "● Gris" },
+                        { value: control.background, label: "● Base" },
+                    ])
+                ),
+                text: ensureCurrentColorOption(
+                    tokens.text,
+                    uniqueColorOptions([
+                        { value: control.text, label: "● Texto base" },
+                        { value: security.text, label: "● Texto claro" },
+                        { value: control.pending, label: "● Muted" },
+                        { value: control.buttonActionPrimaryBg, label: "● Contraste" },
+                    ])
+                ),
+            };
+        };
+
+        return {
+            dark: buildOptions(localTokensByMode.dark, "dark"),
+            light: buildOptions(localTokensByMode.light, "light"),
+        };
+    }, [localTokensByMode]);
 
     const handleChange = (mode: ThemeEditMode, field: keyof BaseTokens, value: string) => {
         setLocalTokensByMode((prev) => ({
@@ -1050,27 +1734,53 @@ export default function AparienciaPage() {
                             {selectedBaseSub === "colores" && (
                                 <div
                                     style={{
-                                        display: "grid",
-                                        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                                        display: "flex",
+                                        flexDirection: "column",
                                         gap: spacing[24],
-                                        maxWidth: 500,
-                                        backgroundColor: semantic.surface.card ?? semantic.surface.default,
-                                        borderRadius: radius.card,
-                                        border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                                        padding: spacing[24],
-                                        boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
+                                        maxWidth: 560,
                                     }}
                                 >
-                                    {BASE_TOKEN_KEYS.map(({ key, label }) => (
-                                        <TokenRowWithSwatch
-                                            key={key}
-                                            label={label}
-                                            value={currentTokens[key]}
-                                            options={baseColorOptions[key]}
-                                            onChange={(v) => handleChange(editMode, key, v)}
-                                            semantic={semantic}
-                                        />
-                                    ))}
+                                    <h3
+                                        style={{
+                                            margin: 0,
+                                            fontFamily: typography.fontFamily.primary,
+                                            fontSize: typography.fontSize.md,
+                                            fontWeight: typography.fontWeight.semibold,
+                                            color: semantic.text.default,
+                                        }}
+                                    >
+                                        Colores base
+                                    </h3>
+                                    <BaseColorsCard
+                                        mode="dark"
+                                        tokens={localTokensByMode.dark}
+                                        options={baseColorOptionsByMode.dark}
+                                        onChange={(k, v) => handleChange("dark", k, v)}
+                                        expandedKey={
+                                            expandedColoresKey?.startsWith("dark-")
+                                                ? (expandedColoresKey.replace("dark-", "") as keyof BaseTokens)
+                                                : null
+                                        }
+                                        onExpandToggle={(k) =>
+                                            setExpandedColoresKey((prev) => (prev === `dark-${k}` ? null : `dark-${k}`))
+                                        }
+                                        semantic={semantic}
+                                    />
+                                    <BaseColorsCard
+                                        mode="light"
+                                        tokens={localTokensByMode.light}
+                                        options={baseColorOptionsByMode.light}
+                                        onChange={(k, v) => handleChange("light", k, v)}
+                                        expandedKey={
+                                            expandedColoresKey?.startsWith("light-")
+                                                ? (expandedColoresKey.replace("light-", "") as keyof BaseTokens)
+                                                : null
+                                        }
+                                        onExpandToggle={(k) =>
+                                            setExpandedColoresKey((prev) => (prev === `light-${k}` ? null : `light-${k}`))
+                                        }
+                                        semantic={semantic}
+                                    />
                                 </div>
                             )}
                         </div>
