@@ -2050,13 +2050,13 @@ export default function AparienciaPage() {
                     style={{
                         display: "flex",
                         flexDirection: "column",
-                        gap: activeTab === "Base" ? 0 : spacing[16],
+                        gap: activeTab === "Base" || activeTab === "Galería" ? 0 : spacing[16],
                         minWidth: 0,
                         minHeight: 0,
                         flex: 1,
                         overflowY: "auto",
                         overflowX: activeTab === "Base" ? "auto" : "hidden",
-                        padding: activeTab === "Base" ? 0 : spacing[16],
+                        padding: activeTab === "Base" || activeTab === "Galería" ? 0 : spacing[16],
                     }}
                 >
                         <div
@@ -2067,7 +2067,7 @@ export default function AparienciaPage() {
                                 gap: spacing[16],
                                 flexShrink: 0,
                                 position: "relative",
-                                ...(activeTab === "Base"
+                                ...(activeTab === "Base" || activeTab === "Galería"
                                     ? {
                                           paddingTop: spacing[8],
                                           paddingBottom: 0,
@@ -2078,7 +2078,7 @@ export default function AparienciaPage() {
                                     : {}),
                             }}
                         >
-                            {activeTab === "Base" && (
+                            {(activeTab === "Base" || activeTab === "Galería") && (
                                 <div
                                     style={{
                                         position: "absolute",
@@ -2112,6 +2112,32 @@ export default function AparienciaPage() {
                                         semantic={semantic}
                                     />
                                 </div>
+                            ) : activeTab === "Galería" ? (
+                                <div
+                                    style={{
+                                        flex: 1,
+                                        minWidth: 0,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        width: "100%",
+                                        paddingTop: 9.5,
+                                        paddingBottom: 9.5,
+                                        paddingLeft: spacing[16],
+                                        paddingRight: spacing[16],
+                                    }}
+                                >
+                                    <h2
+                                        style={{
+                                            margin: 0,
+                                            fontFamily: typography.fontFamily.primary,
+                                            fontSize: typography.fontSize.lg,
+                                            fontWeight: typography.fontWeight.semibold,
+                                            color: semantic.text.active,
+                                        }}
+                                    >
+                                        Galería
+                                    </h2>
+                                </div>
                             ) : (
                                 <h2
                                     style={{
@@ -2129,15 +2155,33 @@ export default function AparienciaPage() {
 
                 {/* Galería — grid de temas */}
                 {activeTab === "Galería" && (
-                    <section style={{ display: "flex", flexDirection: "column", gap: spacing[16], width: "100%" }}>
+                    <div
+                        className="base-section-scroll"
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "100%",
+                            minHeight: 0,
+                            flex: 1,
+                            overflow: "auto",
+                            paddingTop: spacing[12],
+                        }}
+                    >
                         <div
                             style={{
-                                height: 1,
-                                width: "100%",
-                                backgroundColor: semantic.border.subtle ?? semantic.border.default,
+                                flex: 1,
+                                minHeight: 0,
+                                paddingTop: spacing[16],
+                                paddingBottom: spacing[24],
                             }}
-                            aria-hidden
-                        />
+                        >
+                        <div
+                            style={{
+                                padding: spacing[16],
+                                boxSizing: "border-box",
+                                width: "100%",
+                            }}
+                        >
                         <div
                             style={{
                                 display: "grid",
@@ -2164,7 +2208,9 @@ export default function AparienciaPage() {
                                 />
                             ))}
                         </div>
-                    </section>
+                        </div>
+                        </div>
+                    </div>
                 )}
 
                 {/* Base — tabs horizontales + contenido */}
