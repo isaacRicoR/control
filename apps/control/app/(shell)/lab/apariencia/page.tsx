@@ -8,6 +8,7 @@ import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
 import { FloatingSurface } from "@ui/atoms/FloatingSurface/FloatingSurface";
 import { SecondaryNavSidebar, SECONDARY_NAV_SIDEBAR_WIDTH } from "@ui/molecules/SecondaryNavSidebar";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
+import { Tooltip } from "@ui/atoms/Tooltip";
 import { Icon } from "@ui/atoms/Icon/Icon";
 import { Button } from "@ui/atoms/Button/Button";
 import { Input } from "@ui/atoms/Input/Input";
@@ -623,6 +624,43 @@ function BaseColorSelector({
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
+    const calculatePopoverPosition = useCallback((): PopoverPosition | null => {
+        if (typeof window === "undefined") return null;
+        const rect = triggerRef.current?.getBoundingClientRect();
+        if (!rect) return null;
+        const popoverWidth = 320;
+        const popoverHeight = 340;
+        const margin = 8;
+        const gapToIcon = -8;
+        const spaceLeft = rect.left - margin;
+        const placement: "right" | "left" = spaceLeft >= popoverWidth ? "left" : "right";
+        let left = placement === "left" ? rect.left - popoverWidth - gapToIcon : rect.right + gapToIcon;
+        let top = rect.top;
+        const spaceBelow = window.innerHeight - rect.top - margin;
+        if (spaceBelow < popoverHeight) {
+            top = window.innerHeight - popoverHeight - margin * 2;
+        }
+        left = Math.max(margin, Math.min(left, window.innerWidth - popoverWidth - margin));
+        top = Math.max(margin, Math.min(top, window.innerHeight - popoverHeight - margin));
+        return { top, left, placement };
+    }, []);
+
+    useEffect(() => {
+        if (!isOpen || typeof window === "undefined") return;
+        const handleResize = () => {
+            const nextIsMobile = window.innerWidth < breakpoints.md;
+            setIsMobile(nextIsMobile);
+            if (nextIsMobile) {
+                setDropdownRect({ top: 0, left: 0, placement: "right" });
+            } else {
+                const pos = calculatePopoverPosition();
+                if (pos) setDropdownRect(pos);
+            }
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, [isOpen, calculatePopoverPosition]);
+
     useEffect(() => {
         if (!isOpen) {
             setDropdownRect(null);
@@ -933,11 +971,11 @@ function BaseColorSelector({
                         }}
                     />
                     {eyedropperSupported && (
+                        <Tooltip content="Cuentagotas">
                         <button
                             type="button"
                             onClick={handleEyedropper}
                             aria-label="Cuentagotas"
-                            title="Cuentagotas"
                             style={{
                                 display: "flex",
                                 alignItems: "center",
@@ -957,6 +995,7 @@ function BaseColorSelector({
                                 <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.32 0z" />
                             </svg>
                         </button>
+                        </Tooltip>
                     )}
                 </div>
             </div>
@@ -989,6 +1028,7 @@ function BaseColorSelector({
                 {showRecents && (
                     <div style={{ display: "flex", flexWrap: "wrap", gap: spacing[8], marginTop: spacing[8] }}>
                         {originalValue && (
+                            <Tooltip content={`Original: ${originalValue}`}>
                             <button
                                 type="button"
                                 onClick={() => applyHex(originalValue)}
@@ -1002,15 +1042,15 @@ function BaseColorSelector({
                                     cursor: "pointer",
                                     boxSizing: "border-box",
                                 }}
-                                title={`Original: ${originalValue}`}
                             />
+                            </Tooltip>
                         )}
                         {recentColors
                             .filter((hex) => !originalValue || hex.toUpperCase() !== originalValue.toUpperCase())
                             .slice(0, RECENT_COLORS_MAX)
                             .map((hex) => (
+                                <Tooltip key={hex} content={hex}>
                                 <button
-                                    key={hex}
                                     type="button"
                                     onClick={() => applyHex(hex)}
                                     style={{
@@ -1022,8 +1062,8 @@ function BaseColorSelector({
                                         backgroundColor: hex,
                                         cursor: "pointer",
                                     }}
-                                    title={hex}
                                 />
+                                </Tooltip>
                             ))}
                         {!originalValue && recentColors.length === 0 && (
                             <p style={{ width: "100%", margin: 0, fontSize: typography.fontSize.xs, color: semantic.text.muted }}>
@@ -1196,7 +1236,14 @@ function BaseColorExpandableRow({
                     />
                 </BaseColorRowRightControl>
             </div>
-            {isExpanded && (
+            <div
+                style={{
+                    overflow: "hidden",
+                    maxHeight: isExpanded ? 400 : 0,
+                    opacity: isExpanded ? 1 : 0,
+                    transition: "max-height 220ms ease-out, opacity 200ms ease-out",
+                }}
+            >
                 <div
                     style={{
                         padding: spacing[12],
@@ -1248,7 +1295,7 @@ function BaseColorExpandableRow({
                         </ul>
                     </div>
                 </div>
-            )}
+            </div>
         </div>
     );
 }
@@ -1259,7 +1306,7 @@ function BaseColorsCard({
     originalTokens,
     options,
     onChange,
-    expandedKey,
+    expandedByKey,
     onExpandToggle,
     titleAction,
     semantic,
@@ -1269,7 +1316,7 @@ function BaseColorsCard({
     originalTokens: BaseTokens;
     options: Record<BaseTokenKey, ColorSelectOption[]>;
     onChange: (field: BaseTokenKey, value: string) => void;
-    expandedKey: BaseTokenKey | null;
+    expandedByKey: Record<BaseTokenKey, boolean>;
     onExpandToggle: (key: BaseTokenKey) => void;
     titleAction?: React.ReactNode;
     semantic: (typeof colors.dark)["semantic"];
@@ -1313,7 +1360,7 @@ function BaseColorsCard({
             </div>
             {BASE_TOKEN_KEYS.map(({ key, label }) => (
                 <BaseColorExpandableRow
-                    key={key}
+                    key={`${mode}-${key}`}
                     label={label}
                     value={tokens[key]}
                     hex={tokens[key].toUpperCase()}
@@ -1321,7 +1368,7 @@ function BaseColorsCard({
                     options={options[key]}
                     onChange={(v) => onChange(key, v)}
                     usage={COLOR_USAGE[key]}
-                    isExpanded={expandedKey === key}
+                    isExpanded={expandedByKey[key]}
                     onToggle={() => onExpandToggle(key)}
                     semantic={semantic}
                 />
@@ -1714,7 +1761,12 @@ export default function AparienciaPage() {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [modoAyuda, setModoAyuda] = useState(false);
     const [selectedBaseSub, setSelectedBaseSub] = useState<"tema" | "colores" | null>("tema");
-    const [expandedColoresKey, setExpandedColoresKey] = useState<string | null>(null);
+    const initialExpandedByKey = (): Record<BaseTokenKey, boolean> =>
+        Object.fromEntries(BASE_TOKEN_KEYS.map(({ key }) => [key, false])) as Record<BaseTokenKey, boolean>;
+    const [expandedColores, setExpandedColores] = useState<{
+        dark: Record<BaseTokenKey, boolean>;
+        light: Record<BaseTokenKey, boolean>;
+    }>({ dark: initialExpandedByKey(), light: initialExpandedByKey() });
     const handleTabChange = (value: string) => setActiveTab(value);
     const [editMode, setEditMode] = useState<ThemeEditMode>("dark");
 
@@ -2078,6 +2130,7 @@ export default function AparienciaPage() {
                                     style={{
                                         display: "flex",
                                         flexDirection: "column",
+                                        alignItems: "flex-start",
                                         flex: 1,
                                         minHeight: 0,
                                         minWidth: 0,
@@ -2192,52 +2245,51 @@ export default function AparienciaPage() {
                                     style={{
                                         display: "flex",
                                         flexDirection: "row",
-                                        flexWrap: "nowrap",
+                                        flexWrap: "wrap",
                                         gap: spacing[24],
                                         width: "100%",
                                         flex: 1,
                                         minHeight: 0,
-                                        alignItems: "stretch",
+                                        alignItems: "flex-start",
+                                        justifyContent: "flex-start",
                                         overflowX: "auto",
                                         minWidth: 0,
                                         padding: spacing[16],
                                         boxSizing: "border-box",
                                     }}
                                 >
-                                    <div style={{ width: 360, flexShrink: 0, flex: 1, minHeight: 0, display: "flex" }}>
+                                    <div key="dark" style={{ minWidth: 320, maxWidth: 420, flex: "1 1 320", minHeight: 0, display: "flex" }}>
                                         <BaseColorsCard
                                             mode="dark"
                                             tokens={localTokensByMode.dark}
                                             originalTokens={canonicalDark}
                                             options={baseColorOptionsByMode.dark}
                                             onChange={(k, v) => handleChange("dark", k, v)}
-                                            expandedKey={
-                                                expandedColoresKey?.startsWith("dark-")
-                                                    ? (expandedColoresKey.replace("dark-", "") as BaseTokenKey)
-                                                    : null
-                                            }
+                                            expandedByKey={expandedColores.dark}
                                             onExpandToggle={(k) =>
-                                                setExpandedColoresKey((prev) => (prev === `dark-${k}` ? null : `dark-${k}`))
+                                                setExpandedColores((prev) => ({
+                                                    ...prev,
+                                                    dark: { ...prev.dark, [k]: !prev.dark[k] },
+                                                }))
                                             }
                                             titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
                                             semantic={semantic}
                                         />
                                     </div>
-                                    <div style={{ width: 360, flexShrink: 0, flex: 1, minHeight: 0, display: "flex" }}>
+                                    <div key="light" style={{ minWidth: 320, maxWidth: 420, flex: "1 1 320", minHeight: 0, display: "flex" }}>
                                         <BaseColorsCard
                                             mode="light"
                                             tokens={localTokensByMode.light}
                                             originalTokens={canonicalLight}
                                             options={baseColorOptionsByMode.light}
-                                        onChange={(k, v) => handleChange("light", k, v)}
-                                        expandedKey={
-                                            expandedColoresKey?.startsWith("light-")
-                                                ? (expandedColoresKey.replace("light-", "") as BaseTokenKey)
-                                                : null
-                                        }
-                                        onExpandToggle={(k) =>
-                                            setExpandedColoresKey((prev) => (prev === `light-${k}` ? null : `light-${k}`))
-                                        }
+                                            onChange={(k, v) => handleChange("light", k, v)}
+                                            expandedByKey={expandedColores.light}
+                                            onExpandToggle={(k) =>
+                                                setExpandedColores((prev) => ({
+                                                    ...prev,
+                                                    light: { ...prev.light, [k]: !prev.light[k] },
+                                                }))
+                                            }
                                         titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
                                         semantic={semantic}
                                     />
