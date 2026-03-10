@@ -322,8 +322,8 @@ function BaseTabs({
                 flexWrap: "nowrap",
                 alignItems: "stretch",
                 gap: 0,
-                flex: 1,
-                minWidth: 0,
+                flex: "0 0 auto",
+                minWidth: "min-content",
                 position: "relative",
             }}
         >
@@ -340,7 +340,10 @@ function BaseTabs({
                         aria-selected={isActive}
                         onClick={() => onChange(tab.value)}
                         style={{
-                            padding: `${spacing[16]}px ${spacing[16]}px`,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: `${spacing[12]}px ${spacing[16]}px`,
                             fontFamily: typography.fontFamily.primary,
                             fontSize: typography.fontSize.sm,
                             fontWeight: typography.fontWeight.medium,
@@ -367,6 +370,7 @@ function BaseTabs({
                     backgroundColor: semantic.text.active,
                     transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     pointerEvents: "none",
+                    zIndex: 1,
                 }}
                 aria-hidden
             />
@@ -911,6 +915,8 @@ function BaseColorsCard({
                 display: "flex",
                 flexDirection: "column",
                 gap: 0,
+                flex: 1,
+                minHeight: 0,
                 backgroundColor: semantic.surface.card ?? semantic.surface.default,
                 borderRadius: radius.card,
                 border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
@@ -1535,6 +1541,8 @@ export default function AparienciaPage() {
                             display: "flex",
                             flexDirection: "column",
                             minHeight: 0,
+                            minWidth: 0,
+                            overflowX: "hidden",
                             gridRow: "1 / -1",
                             borderRight: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
                         }}
@@ -1553,13 +1561,13 @@ export default function AparienciaPage() {
                     style={{
                         display: "flex",
                         flexDirection: "column",
-                        gap: spacing[16],
+                        gap: activeTab === "Base" ? 0 : spacing[16],
                         minWidth: 0,
                         minHeight: 0,
                         flex: 1,
                         overflowY: "auto",
-                        overflowX: "hidden",
-                        padding: spacing[16],
+                        overflowX: activeTab === "Base" ? "auto" : "hidden",
+                        padding: activeTab === "Base" ? 0 : spacing[16],
                     }}
                 >
                         <div
@@ -1572,12 +1580,11 @@ export default function AparienciaPage() {
                                 position: "relative",
                                 ...(activeTab === "Base"
                                     ? {
-                                          width: `calc(100% + ${spacing[16] * 2}px)`,
-                                          marginLeft: -spacing[16],
-                                          marginRight: -spacing[16],
-                                          marginTop: -spacing[16],
-                                          paddingLeft: spacing[16],
-                                          paddingRight: spacing[16],
+                                          paddingTop: spacing[8],
+                                          paddingBottom: 0,
+                                          paddingLeft: 0,
+                                          paddingRight: 0,
+                                          width: "100%",
                                       }
                                     : {}),
                             }}
@@ -1587,20 +1594,35 @@ export default function AparienciaPage() {
                                     style={{
                                         position: "absolute",
                                         bottom: 0,
-                                        left: -spacing[16],
-                                        right: -spacing[16],
+                                        left: 0,
+                                        right: 0,
                                         height: 1,
+                                        width: "100%",
                                         backgroundColor: semantic.border.subtle ?? semantic.border.default,
                                     }}
                                     aria-hidden
                                 />
                             )}
                             {activeTab === "Base" ? (
-                                <BaseTabs
-                                    value={(selectedBaseSub ?? "tema") as "tema" | "colores"}
-                                    onChange={(v) => setSelectedBaseSub(v)}
-                                    semantic={semantic}
-                                />
+                                <div
+                                    className="base-tabs-scroll"
+                                    style={{
+                                        overflowX: "auto",
+                                        overflowY: "visible",
+                                        flex: 1,
+                                        minWidth: 0,
+                                        display: "flex",
+                                        width: "100%",
+                                        paddingLeft: spacing[16],
+                                        paddingRight: spacing[16],
+                                    }}
+                                >
+                                    <BaseTabs
+                                        value={(selectedBaseSub ?? "tema") as "tema" | "colores"}
+                                        onChange={(v) => setSelectedBaseSub(v)}
+                                        semantic={semantic}
+                                    />
+                                </div>
                             ) : (
                                 <h2
                                     style={{
@@ -1657,6 +1679,12 @@ export default function AparienciaPage() {
                     <style>{`
                         .base-section-scroll::-webkit-scrollbar { display: none; }
                         .base-section-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+                        .base-colores-cards-scroll::-webkit-scrollbar { display: none; }
+                        .base-colores-cards-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+                        .base-tabs-scroll::-webkit-scrollbar { display: none; }
+                        .base-tabs-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+                        .base-tema-scroll::-webkit-scrollbar { display: none; }
+                        .base-tema-scroll { scrollbar-width: none; -ms-overflow-style: none; }
                     `}</style>
                     <div className="base-section-scroll"
                         style={{
@@ -1666,16 +1694,32 @@ export default function AparienciaPage() {
                             minHeight: 0,
                             flex: 1,
                             overflow: "auto",
+                            paddingTop: spacing[12],
                         }}
                     >
                         <div
                             style={{
                                 flex: 1,
                                 minHeight: 0,
-                                paddingTop: spacing[24],
+                                paddingTop: spacing[16],
+                                paddingBottom: spacing[24],
                             }}
                         >
                             {(selectedBaseSub ?? "tema") === "tema" && (
+                                <div
+                                    className="base-tema-scroll"
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        flex: 1,
+                                        minHeight: 0,
+                                        minWidth: 0,
+                                        overflowX: "auto",
+                                        padding: spacing[16],
+                                        boxSizing: "border-box",
+                                        width: "100%",
+                                    }}
+                                >
                                 <div
                                     style={{
                                         display: "flex",
@@ -1754,9 +1798,8 @@ export default function AparienciaPage() {
                                     <div
                                         style={{
                                             display: "flex",
-                                            alignItems: "flex-start",
-                                            justifyContent: "space-between",
-                                            gap: spacing[16],
+                                            flexDirection: "column",
+                                            gap: spacing[12],
                                         }}
                                     >
                                         <span
@@ -1769,41 +1812,52 @@ export default function AparienciaPage() {
                                         >
                                             Vista previa
                                         </span>
-                                        <div style={{ flex: 1, minWidth: 0, display: "flex", justifyContent: "flex-end" }}>
-                                            <div style={{ minWidth: 280, flexShrink: 0 }}>
-                                                <ThemePreview tokens={currentTokens} semantic={semantic} />
-                                            </div>
+                                        <div style={{ minWidth: 280, width: "100%", maxWidth: 400 }}>
+                                            <ThemePreview tokens={currentTokens} semantic={semantic} />
                                         </div>
                                     </div>
+                                </div>
                                 </div>
                             )}
                             {selectedBaseSub === "colores" && (
                                 <div
+                                    className="base-colores-cards-scroll"
                                     style={{
                                         display: "flex",
-                                        flexDirection: "column",
+                                        flexDirection: "row",
+                                        flexWrap: "nowrap",
                                         gap: spacing[24],
-                                        maxWidth: 560,
+                                        width: "100%",
+                                        flex: 1,
+                                        minHeight: 0,
+                                        alignItems: "stretch",
+                                        overflowX: "auto",
+                                        minWidth: 0,
+                                        padding: spacing[16],
+                                        boxSizing: "border-box",
                                     }}
                                 >
-                                    <BaseColorsCard
-                                        mode="dark"
-                                        tokens={localTokensByMode.dark}
-                                        options={baseColorOptionsByMode.dark}
-                                        onChange={(k, v) => handleChange("dark", k, v)}
-                                        expandedKey={
-                                            expandedColoresKey?.startsWith("dark-")
-                                                ? (expandedColoresKey.replace("dark-", "") as keyof BaseTokens)
-                                                : null
-                                        }
-                                        onExpandToggle={(k) =>
-                                            setExpandedColoresKey((prev) => (prev === `dark-${k}` ? null : `dark-${k}`))
-                                        }
-                                        titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
-                                        semantic={semantic}
-                                    />
-                                    <BaseColorsCard
-                                        mode="light"
+                                    <div style={{ width: 360, flexShrink: 0, flex: 1, minHeight: 0, display: "flex" }}>
+                                        <BaseColorsCard
+                                            mode="dark"
+                                            tokens={localTokensByMode.dark}
+                                            options={baseColorOptionsByMode.dark}
+                                            onChange={(k, v) => handleChange("dark", k, v)}
+                                            expandedKey={
+                                                expandedColoresKey?.startsWith("dark-")
+                                                    ? (expandedColoresKey.replace("dark-", "") as keyof BaseTokens)
+                                                    : null
+                                            }
+                                            onExpandToggle={(k) =>
+                                                setExpandedColoresKey((prev) => (prev === `dark-${k}` ? null : `dark-${k}`))
+                                            }
+                                            titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
+                                            semantic={semantic}
+                                        />
+                                    </div>
+                                    <div style={{ width: 360, flexShrink: 0, flex: 1, minHeight: 0, display: "flex" }}>
+                                        <BaseColorsCard
+                                            mode="light"
                                         tokens={localTokensByMode.light}
                                         options={baseColorOptionsByMode.light}
                                         onChange={(k, v) => handleChange("light", k, v)}
@@ -1818,6 +1872,7 @@ export default function AparienciaPage() {
                                         titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
                                         semantic={semantic}
                                     />
+                                    </div>
                                 </div>
                             )}
                         </div>

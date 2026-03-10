@@ -86,6 +86,7 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
                     border: "none",
                     borderRadius: 0,
                     overflowY: "auto",
+                    overflowX: "hidden",
                     scrollbarWidth: "none",
                     msOverflowStyle: "none",
                     minWidth: 0,
