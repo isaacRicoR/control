@@ -16,6 +16,7 @@ import { Text } from "@ui/atoms/Text/Text";
 import { spacing, colors, typography, radius, layout, breakpoints } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";
 import { useVisualPreset } from "@core/visual/visualPresetStore";
+import { useToast } from "@core/toast/useToast";
 import { getThemeTokens } from "@core/visual/themeRegistry";
 import { AccessDeniedState } from "@ui/containers/AccessDeniedState/AccessDeniedState";
 import { PresetSelector } from "@ui/dev/PresetSelector";
@@ -58,6 +59,7 @@ const GALLERY_THEMES: GalleryTheme[] = [
 ];
 
 const CONTENT_MAX_WIDTH = 560;
+const LAB_APARIENCIA_OVERIDES_KEY = "control.lab.apariencia.overrides";
 
 const TABS_GROUPS = [
     {
@@ -84,6 +86,16 @@ type BaseTokens = {
     text: string;
     accent: string;
 };
+
+function baseTokensEqual(a: BaseTokens, b: BaseTokens): boolean {
+    return (
+        a.accent === b.accent &&
+        a.background === b.background &&
+        a.surface === b.surface &&
+        a.text === b.text &&
+        a.border === b.border
+    );
+}
 
 function baseFromTokens(t: {
     background: string;
@@ -1154,6 +1166,7 @@ function BaseColorExpandableRow({
     isExpanded: boolean;
     onToggle: () => void;
     semantic: (typeof colors.dark)["semantic"];
+    onCopyHex?: (hex: string) => void;
 }) {
     return (
         <div
@@ -1208,7 +1221,9 @@ function BaseColorExpandableRow({
                     </span>
                     <span
                         style={{
-                            display: "block",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: spacing[4],
                             fontFamily: (typography.fontFamily as { mono?: string }).mono ?? typography.fontFamily.primary,
                             fontSize: typography.fontSize.xs,
                             color: semantic.text.muted,
@@ -1216,6 +1231,41 @@ function BaseColorExpandableRow({
                         }}
                     >
                         {hex}
+                        {onCopyHex && (
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    navigator.clipboard.writeText(hex);
+                                    onCopyHex(hex);
+                                }}
+                                aria-label="Copiar color"
+                                style={{
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    padding: spacing[2],
+                                    margin: -spacing[2],
+                                    background: "none",
+                                    border: "none",
+                                    borderRadius: radius.sm,
+                                    cursor: "pointer",
+                                    color: semantic.text.muted,
+                                    opacity: 0.7,
+                                    transition: "opacity 0.2s ease, color 0.2s ease",
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.opacity = "1";
+                                    e.currentTarget.style.color = semantic.text.default;
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.opacity = "0.7";
+                                    e.currentTarget.style.color = semantic.text.muted;
+                                }}
+                            >
+                                <Icon name="copy" size={14} />
+                            </button>
+                        )}
                     </span>
                 </div>
                 <BaseColorRowRightControl
@@ -1310,6 +1360,8 @@ function BaseColorsCard({
     onExpandToggle,
     titleAction,
     semantic,
+    isDirty,
+    onSave,
 }: {
     mode: "dark" | "light";
     tokens: BaseTokens;
@@ -1320,6 +1372,9 @@ function BaseColorsCard({
     onExpandToggle: (key: BaseTokenKey) => void;
     titleAction?: React.ReactNode;
     semantic: (typeof colors.dark)["semantic"];
+    isDirty?: boolean;
+    onSave?: () => void;
+    onCopyHex?: (hex: string) => void;
 }) {
     const title = mode === "dark" ? "Modo oscuro" : "Modo claro";
     return (
@@ -1333,7 +1388,10 @@ function BaseColorsCard({
                 backgroundColor: semantic.surface.card ?? semantic.surface.default,
                 borderRadius: radius.card,
                 border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                padding: spacing[24],
+                paddingTop: spacing[24],
+                paddingLeft: spacing[24],
+                paddingRight: spacing[24],
+                paddingBottom: 0,
                 boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
             }}
         >
@@ -1371,8 +1429,38 @@ function BaseColorsCard({
                     isExpanded={expandedByKey[key]}
                     onToggle={() => onExpandToggle(key)}
                     semantic={semantic}
+                    onCopyHex={onCopyHex}
                 />
             ))}
+            {onSave != null && (
+                <div
+                    style={{
+                        flexShrink: 0,
+                        marginTop: spacing[16],
+                        marginLeft: -spacing[24],
+                        marginRight: -spacing[24],
+                        borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                        padding: spacing[16],
+                        paddingLeft: spacing[24],
+                        paddingRight: spacing[24],
+                        display: "flex",
+                        alignItems: "center",
+                        gap: spacing[12],
+                        justifyContent: "flex-end",
+                        flexWrap: "wrap",
+                    }}
+                >
+                    <Button
+                        variant="actionPrimary"
+                        size="sm"
+                        shape="panel"
+                        onClick={onSave}
+                        disabled={!isDirty}
+                    >
+                        Guardar cambios
+                    </Button>
+                </div>
+            )}
         </div>
     );
 }
@@ -1822,9 +1910,33 @@ function ThemeGalleryCard({
     );
 }
 
+function loadLabOverrides(preset: string): { dark: BaseTokens | null; light: BaseTokens | null } {
+    try {
+        if (typeof window === "undefined" || !window.localStorage) return { dark: null, light: null };
+        const raw = window.localStorage.getItem(`${LAB_APARIENCIA_OVERIDES_KEY}.${preset}`);
+        if (!raw) return { dark: null, light: null };
+        const parsed = JSON.parse(raw) as { dark?: BaseTokens; light?: BaseTokens };
+        return { dark: parsed.dark ?? null, light: parsed.light ?? null };
+    } catch {
+        return { dark: null, light: null };
+    }
+}
+
+function saveLabOverrides(preset: string, mode: ThemeEditMode, tokens: BaseTokens): void {
+    try {
+        if (typeof window === "undefined" || !window.localStorage) return;
+        const existing = loadLabOverrides(preset);
+        const next = { ...existing, [mode]: tokens };
+        window.localStorage.setItem(`${LAB_APARIENCIA_OVERIDES_KEY}.${preset}`, JSON.stringify(next));
+    } catch {
+        // no-op
+    }
+}
+
 export default function AparienciaPage() {
     const { theme } = useTheme();
     const { currentPreset, setPreset } = useVisualPreset();
+    const { showToast } = useToast();
     const semantic = colors[theme].semantic;
 
     const [activeTab, setActiveTab] = useState("Base");
@@ -1849,13 +1961,22 @@ export default function AparienciaPage() {
         [currentPreset]
     );
 
-    const [localTokensByMode, setLocalTokensByMode] = useState<{
-        dark: BaseTokens;
-        light: BaseTokens;
-    }>(() => ({
-        dark: baseFromTokens(canonicalDark),
-        light: baseFromTokens(canonicalLight),
-    }));
+    const getInitialTokens = useCallback(() => {
+        const ov = loadLabOverrides(currentPreset);
+        return {
+            dark: ov.dark ?? baseFromTokens(getThemeTokens(currentPreset, "dark")),
+            light: ov.light ?? baseFromTokens(getThemeTokens(currentPreset, "light")),
+        };
+    }, [currentPreset]);
+
+    const [localTokensByMode, setLocalTokensByMode] = useState(() => getInitialTokens());
+    const [lastSavedByMode, setLastSavedByMode] = useState(() => getInitialTokens());
+
+    useEffect(() => {
+        const next = getInitialTokens();
+        setLocalTokensByMode(next);
+        setLastSavedByMode(next);
+    }, [currentPreset, getInitialTokens]);
     const currentTokens = localTokensByMode[editMode];
     const baseColorOptions = useMemo<Record<(typeof BASE_TOKEN_KEYS)[number]["key"], ColorSelectOption[]>>(() => {
         const controlPack = getThemeTokens("control", editMode);
@@ -1965,6 +2086,13 @@ export default function AparienciaPage() {
             ...prev,
             [mode]: { ...prev[mode], [field]: value },
         }));
+    };
+
+    const handleSaveBaseColors = (mode: ThemeEditMode) => {
+        const tokens = localTokensByMode[mode];
+        setLastSavedByMode((prev) => ({ ...prev, [mode]: tokens }));
+        saveLabOverrides(currentPreset, mode, tokens);
+        showToast({ title: "Cambios guardados", type: "success" });
     };
 
     if (!DEV_UI_ENABLED || mockSession.role !== "OWNER") {
@@ -2397,6 +2525,8 @@ export default function AparienciaPage() {
                                             }
                                             titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
                                             semantic={semantic}
+                                            isDirty={!baseTokensEqual(localTokensByMode.dark, lastSavedByMode.dark)}
+                                            onSave={() => handleSaveBaseColors("dark")}
                                         />
                                     </div>
                                     <div key="light" style={{ minWidth: 320, maxWidth: 420, flex: "1 1 320", minHeight: 0, display: "flex" }}>
@@ -2415,6 +2545,8 @@ export default function AparienciaPage() {
                                             }
                                         titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
                                         semantic={semantic}
+                                        isDirty={!baseTokensEqual(localTokensByMode.light, lastSavedByMode.light)}
+                                        onSave={() => handleSaveBaseColors("light")}
                                     />
                                     </div>
                                 </div>

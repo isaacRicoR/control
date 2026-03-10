@@ -53,9 +53,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   const paddingX = isSmall ? spacing[12] : spacing[16];
 
   if (disabled) {
-    bg = colors.semantic.primary.disabled;
-    text = colors.semantic.text.disabled;
-    border = colors.semantic.border.disabled;
+    // Variant-specific disabled: actionPrimary/secondary use neutral surface for cleaner look
+    const semantic = colors[theme].semantic;
+    if (variant === 'actionPrimary' || variant === 'secondary') {
+      bg = semantic.surface.default;
+      text = semantic.text.muted ?? semantic.text.disabled;
+      border = semantic.border.subtle ?? semantic.border.default;
+    } else {
+      bg = colors.semantic.primary.disabled;
+      text = colors.semantic.text.disabled;
+      border = colors.semantic.border.disabled;
+    }
   } else if (variant === 'primary') {
     bg = themeTokens?.buttonPrimaryBg ?? colors.semantic.primary.default;
     text = themeTokens?.buttonPrimaryText ?? colors.semantic.text.onSolid;
