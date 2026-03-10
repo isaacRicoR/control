@@ -494,7 +494,11 @@ Entornos internos para desarrollo y pruebas de componentes aislados.
 
 | Ruta | Estado | Propósito |
 |------|--------|-----------|
-| `/lab` | ✅ **Oficial** | Entorno de desarrollo aislado para probar átomos, moléculas y organismos fuera de la lógica de negocio. |
+| `/lab` | ✅ **Oficial** | Entorno de desarrollo aislado para probar átomos, moléculas y organismos fuera de la lógica de negocio. Incluye sección de experimentación UX en `/lab/apariencia` antes de formalizar componentes. |
+
+### Nota sobre Color Picker (Experimental)
+
+El **selector de color** (color picker) actual está en **fase experimental** dentro de `/lab/apariencia`. Aún no es un componente oficial del Design System. Implementa: color picker 2D, hue slider, formatos HEX/RGB/HSL, colores recientes, herramienta eyedropper, y apertura desde botón editar. En desktop se abre como popover; en pantallas pequeñas como modal centrado. Hasta su formalización, no debe reutilizarse fuera de lab.
 
 ---
 

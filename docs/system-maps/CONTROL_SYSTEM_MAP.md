@@ -294,6 +294,18 @@ Herramienta de configuración de tokens visuales (Desarrollador → Apariencia).
 
 ---
 
+## Laboratory Modules (Fase Experimental)
+
+Módulos que se encuentran en **fase de laboratorio** en la ruta `/lab`. No forman parte del producto final ni del Design System oficial hasta su formalización.
+
+| Módulo | Ruta | Descripción | Estado |
+|--------|------|-------------|--------|
+| **Appearance System** | `/lab/apariencia` | Sistema de gestión de temas (Theme Management System). Diseño y experimentación de UX/UI para configuración de tokens visuales antes de convertirse en componentes reutilizables. | 🧪 **LABORATORIO** |
+
+> **Regla**: Los componentes desarrollados en `/lab` son experimentales. Antes de promoverlos al Design System oficial, deben registrarse en **UI SYSTEM MAP** y cumplir el proceso de formalización.
+
+---
+
 ## 3️⃣ SEGURIDAD Y ACCESO (RBAC)
 
 Sistema de protección de rutas y componentes.

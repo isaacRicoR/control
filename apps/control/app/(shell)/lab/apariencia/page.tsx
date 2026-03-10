@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useRef, useEffect, useCallback } from "react";
+import React, { useState, useMemo, useRef, useEffect, useLayoutEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { PageShell } from "@ui/containers/PageShell/PageShell";
 import { PanelCard } from "@ui/containers/PanelCard";
@@ -12,7 +12,7 @@ import { Icon } from "@ui/atoms/Icon/Icon";
 import { Button } from "@ui/atoms/Button/Button";
 import { Input } from "@ui/atoms/Input/Input";
 import { Text } from "@ui/atoms/Text/Text";
-import { spacing, colors, typography, radius, layout } from "@tokens";
+import { spacing, colors, typography, radius, layout, breakpoints } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";
 import { useVisualPreset } from "@core/visual/visualPresetStore";
 import { getThemeTokens } from "@core/visual/themeRegistry";
@@ -573,6 +573,7 @@ function BaseColorSelector({
 }) {
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownRect, setDropdownRect] = useState<{ top: number; left: number } | null>(null);
+    const [isMobile, setIsMobile] = useState(false);
     const [colorFormat, setColorFormat] = useState<ColorFormat>("hex");
     const [showRecents, setShowRecents] = useState(false);
     const [recentColors, setRecentColors] = useState<string[]>(() => [...recentColorsStore]);
@@ -611,16 +612,39 @@ function BaseColorSelector({
     }, [isOpen, hsv.h, hsv.s, hsv.v, colorFormat]);
 
     useEffect(() => {
+        const checkMobile = () => setIsMobile(typeof window !== "undefined" && window.innerWidth < breakpoints.md);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    useEffect(() => {
         if (!isOpen) {
             setDropdownRect(null);
             return;
         }
-        const rect = containerRef.current?.getBoundingClientRect();
-        if (rect) {
-            const dropdownWidth = 280;
-            const iconMode = variant === "icon";
-            const left = iconMode ? rect.right - dropdownWidth : rect.left;
-            setDropdownRect({ top: rect.bottom + 8, left });
+        const handleEsc = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setIsOpen(false);
+        };
+        document.addEventListener("keydown", handleEsc);
+        if (isMobile) {
+            document.body.style.overflow = "hidden";
+        }
+        if (!isMobile) {
+            const rect = containerRef.current?.getBoundingClientRect();
+            if (rect) {
+                const dropdownWidth = 280;
+                const dropdownHeightApprox = 340;
+                const iconMode = variant === "icon";
+                const left = iconMode ? rect.right - dropdownWidth : rect.left;
+                const spaceBelow = typeof window !== "undefined" ? window.innerHeight - rect.bottom - 8 : 999;
+                const spaceAbove = typeof window !== "undefined" ? rect.top - 8 : 999;
+                const preferAbove = spaceBelow < dropdownHeightApprox && spaceAbove >= dropdownHeightApprox;
+                const top = preferAbove ? rect.top - dropdownHeightApprox - 8 : rect.bottom + 8;
+                setDropdownRect({ top, left });
+            }
+        } else {
+            setDropdownRect({ top: 0, left: 0 });
         }
         const handleClickOutside = (e: MouseEvent) => {
             const target = e.target as Node;
@@ -633,8 +657,37 @@ function BaseColorSelector({
             setIsOpen(false);
         };
         document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, [isOpen, variant]);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleEsc);
+            if (isMobile) document.body.style.overflow = "";
+        };
+    }, [isOpen, variant, isMobile]);
+
+    useLayoutEffect(() => {
+        if (!isOpen || isMobile || !dropdownRect || !containerRef.current) return;
+        const measure = () => {
+            const el = dropdownRef.current;
+            const rect = containerRef.current?.getBoundingClientRect();
+            if (!el || !rect) return;
+            const height = el.getBoundingClientRect().height;
+            const spaceBelow = window.innerHeight - rect.bottom - 8;
+            const spaceAbove = rect.top - 8;
+            setDropdownRect((prev) => {
+                if (!prev) return prev;
+                const placedAbove = prev.top < rect.top;
+                if (placedAbove) {
+                    const idealTop = rect.top - height - 8;
+                    if (Math.abs(prev.top - idealTop) > 2) return { ...prev, top: idealTop };
+                } else if (spaceBelow < height && spaceAbove >= height) {
+                    return { ...prev, top: rect.top - height - 8 };
+                }
+                return prev;
+            });
+        };
+        const id = requestAnimationFrame(measure);
+        return () => cancelAnimationFrame(id);
+    }, [isOpen, dropdownRect, isMobile]);
 
     const applyHex = useCallback(
         (hex: string) => {
@@ -795,203 +848,232 @@ function BaseColorSelector({
         </div>
     );
 
+    const pickerContent = (
+        <div style={{ padding: spacing[12] }}>
+            {/* Color picker: 2D area + hue bar */}
+            <div
+                ref={sbRef}
+                onMouseDown={(e) => {
+                    e.preventDefault();
+                    updateFrom2D(e.clientX, e.clientY, e.currentTarget);
+                    setDragging("2d");
+                }}
+                style={{
+                    width: "100%",
+                    height: 140,
+                    borderRadius: radius.md,
+                    background: `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), hsl(${hsv.h}, 100%, 50%)`,
+                    cursor: "crosshair",
+                    position: "relative",
+                }}
+            />
+            <div
+                ref={hueRef}
+                onMouseDown={(e) => {
+                    e.preventDefault();
+                    updateFromHue(e.clientX, e.currentTarget);
+                    setDragging("hue");
+                }}
+                style={{
+                    width: "100%",
+                    height: 10,
+                    marginTop: spacing[8],
+                    borderRadius: radius.full,
+                    background: "linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)",
+                    cursor: "pointer",
+                }}
+            />
+            {/* Preview + format selector + input + eyedropper */}
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: spacing[8],
+                    marginTop: spacing[12],
+                }}
+            >
+                <div
+                    style={{
+                        width: spacing[40],
+                        height: spacing[40],
+                        borderRadius: radius.sm,
+                        border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                        backgroundColor: hsvToHex(hsv.h, hsv.s, hsv.v),
+                        flexShrink: 0,
+                    }}
+                />
+                <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: spacing[4] }}>
+                    <div style={{ display: "flex", gap: spacing[4] }}>
+                        {(["hex", "rgb", "hsl"] as const).map((fmt) => (
+                            <button
+                                key={fmt}
+                                type="button"
+                                onClick={() => setColorFormat(fmt)}
+                                style={{
+                                    padding: `${spacing[4]}px ${spacing[8]}px`,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.xs,
+                                    fontWeight: typography.fontWeight.medium,
+                                    color: colorFormat === fmt ? semantic.text.active : semantic.text.muted,
+                                    backgroundColor: colorFormat === fmt ? semantic.surface.selected ?? semantic.surface.hover : "transparent",
+                                    border: "none",
+                                    borderRadius: radius.sm,
+                                    cursor: "pointer",
+                                    textTransform: "uppercase",
+                                }}
+                            >
+                                {fmt}
+                            </button>
+                        ))}
+                    </div>
+                    <input
+                        type="text"
+                        value={formatInput}
+                        onChange={(e) => setFormatInput(e.target.value)}
+                        onBlur={handleFormatBlur}
+                        onKeyDown={(e) => e.key === "Enter" && handleFormatBlur()}
+                        placeholder={colorFormat === "hex" ? "#000000" : colorFormat === "rgb" ? "rgb(0, 0, 0)" : "hsl(0, 0%, 0%)"}
+                        style={{
+                            width: "100%",
+                            padding: `${spacing[8]}px ${spacing[8]}px`,
+                            fontFamily: (typography.fontFamily as { mono?: string }).mono ?? typography.fontFamily.primary,
+                            fontSize: typography.fontSize.sm,
+                            color: semantic.text.default,
+                            backgroundColor: semantic.surface.hover ?? semantic.surface.default,
+                            border: `1px solid ${semantic.border.default}`,
+                            borderRadius: radius.sm,
+                        }}
+                    />
+                </div>
+                {eyedropperSupported && (
+                    <button
+                        type="button"
+                        onClick={handleEyedropper}
+                        aria-label="Cuentagotas"
+                        title="Cuentagotas"
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            width: spacing[40],
+                            height: spacing[40],
+                            flexShrink: 0,
+                            padding: 0,
+                            background: semantic.surface.hover ?? semantic.surface.default,
+                            border: `1px solid ${semantic.border.default}`,
+                            borderRadius: radius.sm,
+                            cursor: "pointer",
+                            color: semantic.text.muted,
+                        }}
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M18 2L22 6l-8 8-2-2 8-8z" />
+                            <path d="M14 8l-2 2-4-4 2-2 4 4z" />
+                            <path d="M4 12l8 8 2-2-8-8-2 2z" />
+                        </svg>
+                    </button>
+                )}
+            </div>
+            {/* Collapsible Recientes */}
+            <div style={{ marginTop: spacing[12], borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`, paddingTop: spacing[12] }}>
+                <button
+                    type="button"
+                    onClick={() => setShowRecents(!showRecents)}
+                    aria-expanded={showRecents}
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                        padding: 0,
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        fontFamily: typography.fontFamily.primary,
+                        fontSize: typography.fontSize.sm,
+                        fontWeight: typography.fontWeight.medium,
+                        color: semantic.text.muted,
+                    }}
+                >
+                    Recientes
+                    <span style={{ transform: showRecents ? "rotate(180deg)" : "none", transition: "transform 0.2s ease", display: "flex" }}>
+                        <Icon name="chevron-down" size={16} color="currentColor" />
+                    </span>
+                </button>
+                {showRecents && recentColors.length > 0 && (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: spacing[8], marginTop: spacing[8] }}>
+                        {recentColors.slice(0, RECENT_COLORS_MAX).map((hex) => (
+                            <button
+                                key={hex}
+                                type="button"
+                                onClick={() => applyHex(hex)}
+                                style={{
+                                    width: 28,
+                                    height: 28,
+                                    padding: 0,
+                                    borderRadius: radius.sm,
+                                    border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                                    backgroundColor: hex,
+                                    cursor: "pointer",
+                                }}
+                                title={hex}
+                            />
+                        ))}
+                    </div>
+                )}
+                {showRecents && recentColors.length === 0 && (
+                    <p style={{ margin: `${spacing[8]}px 0 0`, fontSize: typography.fontSize.xs, color: semantic.text.muted }}>
+                        Sin colores recientes
+                    </p>
+                )}
+            </div>
+        </div>
+    );
+
     const dropdownContent =
         isOpen &&
         dropdownRect &&
         typeof document !== "undefined" &&
         createPortal(
             <div ref={dropdownRef}>
-                <FloatingSurface
-                    style={{
-                        position: "fixed",
-                        top: dropdownRect.top,
-                        left: dropdownRect.left,
-                        minWidth: 280,
-                        zIndex: 1000,
-                    }}
-                >
-                    <div style={{ padding: spacing[12] }}>
-                        {/* Color picker: 2D area + hue bar */}
-                        <div
-                            ref={sbRef}
-                            onMouseDown={(e) => {
-                                e.preventDefault();
-                                updateFrom2D(e.clientX, e.clientY, e.currentTarget);
-                                setDragging("2d");
-                            }}
-                            style={{
-                                width: "100%",
-                                height: 140,
-                                borderRadius: radius.md,
-                                background: `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), hsl(${hsv.h}, 100%, 50%)`,
-                                cursor: "crosshair",
-                                position: "relative",
-                            }}
-                        />
-                        <div
-                            ref={hueRef}
-                            onMouseDown={(e) => {
-                                e.preventDefault();
-                                updateFromHue(e.clientX, e.currentTarget);
-                                setDragging("hue");
-                            }}
-                            style={{
-                                width: "100%",
-                                height: 10,
-                                marginTop: spacing[8],
-                                borderRadius: radius.full,
-                                background: "linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)",
-                                cursor: "pointer",
-                            }}
-                        />
-                        {/* Preview + format selector + input + eyedropper */}
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: spacing[8],
-                                marginTop: spacing[12],
-                            }}
+                {isMobile ? (
+                    <div
+                        role="dialog"
+                        aria-modal="true"
+                        onClick={(e) => {
+                            if (e.target === e.currentTarget) setIsOpen(false);
+                        }}
+                        style={{
+                            position: "fixed",
+                            inset: 0,
+                            zIndex: 999,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: spacing[16],
+                            backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        }}
+                    >
+                        <FloatingSurface
+                            onClick={(e) => e.stopPropagation()}
+                            style={{ minWidth: 280, width: "100%", maxWidth: 320 }}
                         >
-                            <div
-                                style={{
-                                    width: spacing[40],
-                                    height: spacing[40],
-                                    borderRadius: radius.sm,
-                                    border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                                    backgroundColor: hsvToHex(hsv.h, hsv.s, hsv.v),
-                                    flexShrink: 0,
-                                }}
-                            />
-                            <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: spacing[4] }}>
-                                <div style={{ display: "flex", gap: spacing[4] }}>
-                                    {(["hex", "rgb", "hsl"] as const).map((fmt) => (
-                                        <button
-                                            key={fmt}
-                                            type="button"
-                                            onClick={() => setColorFormat(fmt)}
-                                            style={{
-                                                padding: `${spacing[4]}px ${spacing[8]}px`,
-                                                fontFamily: typography.fontFamily.primary,
-                                                fontSize: typography.fontSize.xs,
-                                                fontWeight: typography.fontWeight.medium,
-                                                color: colorFormat === fmt ? semantic.text.active : semantic.text.muted,
-                                                backgroundColor: colorFormat === fmt ? semantic.surface.selected ?? semantic.surface.hover : "transparent",
-                                                border: "none",
-                                                borderRadius: radius.sm,
-                                                cursor: "pointer",
-                                                textTransform: "uppercase",
-                                            }}
-                                        >
-                                            {fmt}
-                                        </button>
-                                    ))}
-                                </div>
-                                <input
-                                    type="text"
-                                    value={formatInput}
-                                    onChange={(e) => setFormatInput(e.target.value)}
-                                    onBlur={handleFormatBlur}
-                                    onKeyDown={(e) => e.key === "Enter" && handleFormatBlur()}
-                                    placeholder={colorFormat === "hex" ? "#000000" : colorFormat === "rgb" ? "rgb(0, 0, 0)" : "hsl(0, 0%, 0%)"}
-                                    style={{
-                                        width: "100%",
-                                        padding: `${spacing[8]}px ${spacing[8]}px`,
-                                        fontFamily: (typography.fontFamily as { mono?: string }).mono ?? typography.fontFamily.primary,
-                                        fontSize: typography.fontSize.sm,
-                                        color: semantic.text.default,
-                                        backgroundColor: semantic.surface.hover ?? semantic.surface.default,
-                                        border: `1px solid ${semantic.border.default}`,
-                                        borderRadius: radius.sm,
-                                    }}
-                                />
-                            </div>
-                            {eyedropperSupported && (
-                                <button
-                                    type="button"
-                                    onClick={handleEyedropper}
-                                    aria-label="Cuentagotas"
-                                    title="Cuentagotas"
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        width: spacing[40],
-                                        height: spacing[40],
-                                        flexShrink: 0,
-                                        padding: 0,
-                                        background: semantic.surface.hover ?? semantic.surface.default,
-                                        border: `1px solid ${semantic.border.default}`,
-                                        borderRadius: radius.sm,
-                                        cursor: "pointer",
-                                        color: semantic.text.muted,
-                                    }}
-                                >
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M18 2L22 6l-8 8-2-2 8-8z" />
-                                        <path d="M14 8l-2 2-4-4 2-2 4 4z" />
-                                        <path d="M4 12l8 8 2-2-8-8-2 2z" />
-                                    </svg>
-                                </button>
-                            )}
-                        </div>
-                        {/* Collapsible Recientes */}
-                        <div style={{ marginTop: spacing[12], borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`, paddingTop: spacing[12] }}>
-                            <button
-                                type="button"
-                                onClick={() => setShowRecents(!showRecents)}
-                                aria-expanded={showRecents}
-                                style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "space-between",
-                                    width: "100%",
-                                    padding: 0,
-                                    background: "none",
-                                    border: "none",
-                                    cursor: "pointer",
-                                    fontFamily: typography.fontFamily.primary,
-                                    fontSize: typography.fontSize.sm,
-                                    fontWeight: typography.fontWeight.medium,
-                                    color: semantic.text.muted,
-                                }}
-                            >
-                                Recientes
-                                <span style={{ transform: showRecents ? "rotate(180deg)" : "none", transition: "transform 0.2s ease", display: "flex" }}>
-                                    <Icon name="chevron-down" size={16} color="currentColor" />
-                                </span>
-                            </button>
-                            {showRecents && recentColors.length > 0 && (
-                                <div style={{ display: "flex", flexWrap: "wrap", gap: spacing[8], marginTop: spacing[8] }}>
-                                    {recentColors.slice(0, RECENT_COLORS_MAX).map((hex) => (
-                                        <button
-                                            key={hex}
-                                            type="button"
-                                            onClick={() => {
-                                                applyHex(hex);
-                                            }}
-                                            style={{
-                                                width: 28,
-                                                height: 28,
-                                                padding: 0,
-                                                borderRadius: radius.sm,
-                                                border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                                                backgroundColor: hex,
-                                                cursor: "pointer",
-                                            }}
-                                            title={hex}
-                                        />
-                                    ))}
-                                </div>
-                            )}
-                            {showRecents && recentColors.length === 0 && (
-                                <p style={{ margin: `${spacing[8]}px 0 0`, fontSize: typography.fontSize.xs, color: semantic.text.muted }}>
-                                    Sin colores recientes
-                                </p>
-                            )}
-                        </div>
+                            {pickerContent}
+                        </FloatingSurface>
                     </div>
-                </FloatingSurface>
+                ) : (
+                    <FloatingSurface
+                        style={{
+                            position: "fixed",
+                            top: dropdownRect!.top,
+                            left: dropdownRect!.left,
+                            minWidth: 280,
+                            zIndex: 1000,
+                        }}
+                    >
+                        {pickerContent}
+                    </FloatingSurface>
+                )}
             </div>,
             document.body
         );

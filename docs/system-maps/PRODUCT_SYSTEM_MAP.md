@@ -208,7 +208,17 @@ Reglas que gobiernan el crecimiento del sistema.
 
 ---
 
-## 7. Roadmap de Módulos
+## 7. Módulos Experimentales (Laboratorio)
+
+Módulos en fase de experimentación en la ruta `/lab`. No forman parte del producto final hasta su formalización.
+
+| Módulo | Ruta | Descripción |
+|--------|------|-------------|
+| **Appearance** | `/lab/apariencia` | Theme Management System — sistema de gestión y configuración de temas. En experimentación UX/UI antes de convertirse en componentes oficiales del Design System. |
+
+---
+
+## 8. Roadmap de Módulos
 
 | Módulo | Estado |
 |--------|--------|
@@ -223,7 +233,7 @@ Reglas que gobiernan el crecimiento del sistema.
 
 ---
 
-## 8. Gobernanza del Producto
+## 9. Gobernanza del Producto
 
 **Regla**: Antes de crear un nuevo módulo:
 
@@ -233,7 +243,7 @@ Reglas que gobiernan el crecimiento del sistema.
 
 ---
 
-## 9. Relación con otros documentos
+## 10. Relación con otros documentos
 
 Este documento se conecta con:
 

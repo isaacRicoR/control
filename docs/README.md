@@ -97,6 +97,10 @@ Ubicación: docs/ops/logs/
 
 Bitácoras operativas y cambios en la documentación a lo largo del tiempo.
 
+Ejemplo: APPEARANCE_LAB_SESSION.md — registro de la sesión de laboratorio del módulo Appearance.
+
+**Nota sobre `/lab`**: Existe una sección `/lab` utilizada para experimentación de UX antes de formalizar componentes. Los módulos en `/lab` (por ejemplo `/lab/apariencia`) no forman parte del producto final hasta su formalización y registro en los mapas oficiales.
+
 ## 9. Propuestas
 Ubicación: docs/proposals/
 
