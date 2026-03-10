@@ -73,7 +73,7 @@ export const PresetSelector: FC<PresetSelectorProps> = ({ showDevPrefix = false 
                     style={{
                         position: "absolute",
                         top: "100%",
-                        left: 0,
+                        right: 0,
                         marginTop: spacing[4],
                         width: 160,
                         background: semantic.surface.default,
@@ -93,7 +93,8 @@ export const PresetSelector: FC<PresetSelectorProps> = ({ showDevPrefix = false 
                                 aria-selected={isActive}
                                 style={{
                                     padding: `${spacing[8]}px ${spacing[12]}px`,
-                                    fontSize: typography.fontSize.xs,
+                                    fontSize: typography.fontSize.sm,
+                                    fontWeight: typography.fontWeight.regular,
                                     color: isActive ? semantic.primary.default : semantic.text.default,
                                     backgroundColor: isActive ? semantic.surface.hover : "transparent",
                                     cursor: "pointer",

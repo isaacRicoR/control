@@ -248,6 +248,7 @@ function ThemePreview({
                 flexDirection: "column",
                 gap: spacing[16],
                 width: "100%",
+                minWidth: 280,
                 maxWidth: 360,
                 boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
             }}
@@ -275,6 +276,8 @@ function ThemePreview({
                         color: tokens.text,
                         fontSize: typography.fontSize.sm,
                         opacity: 0.7,
+                        whiteSpace: "normal",
+                        overflowWrap: "break-word",
                     }}
                 >
                     Texto secundario con menor énfasis.
@@ -611,7 +614,6 @@ export default function AparienciaPage() {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [modoAyuda, setModoAyuda] = useState(false);
     const [selectedBaseSub, setSelectedBaseSub] = useState<"tema" | "colores" | null>("tema");
-
     const handleTabChange = (value: string) => setActiveTab(value);
     const [editMode, setEditMode] = useState<ThemeEditMode>("dark");
 
@@ -707,6 +709,9 @@ export default function AparienciaPage() {
 
     // Layout tipo settings: PageShell > PanelCard (gran superficie) > grid (sidebar | content)
     return (
+        <>
+        <style>{`.apariencia-content-scroll::-webkit-scrollbar { display: none; }
+.apariencia-content-scroll { scrollbar-width: none; -ms-overflow-style: none; }`}</style>
         <PageShell
             variant="fluid"
             title="Apariencia"
@@ -758,6 +763,7 @@ export default function AparienciaPage() {
                         />
                     </div>
                 <div
+                    className="apariencia-content-scroll"
                     style={{
                         display: "flex",
                         flexDirection: "column",
@@ -844,7 +850,12 @@ export default function AparienciaPage() {
 
                 {/* Base — línea horizontal y vertical que llegan a los bordes */}
                 {activeTab === "Base" && (
-                    <div
+                    <>
+                    <style>{`
+                        .base-section-scroll::-webkit-scrollbar { display: none; }
+                        .base-section-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+                    `}</style>
+                    <div className="base-section-scroll"
                         style={{
                             display: "flex",
                             flexDirection: "column",
@@ -855,16 +866,24 @@ export default function AparienciaPage() {
                             minHeight: 0,
                             flex: 1,
                             alignSelf: "stretch",
-                            overflow: "hidden",
+                            overflow: "auto",
                         }}
                     >
                         <div
                             style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                minWidth: 804,
+                                flex: 1,
+                                minHeight: 0,
+                            }}
+                        >
+                        <div
+                            style={{
                                 height: 1,
-                                backgroundColor: semantic.border.subtle ?? semantic.border.default,
                                 width: "100%",
                                 flexShrink: 0,
-                                alignSelf: "stretch",
+                                backgroundColor: semantic.border.subtle ?? semantic.border.default,
                             }}
                             aria-hidden
                         />
@@ -872,9 +891,15 @@ export default function AparienciaPage() {
                             style={{
                                 flex: 1,
                                 minHeight: 0,
-                                overflow: "hidden",
+                                overflow: "visible",
+                            }}
+                        >
+                        <div
+                            style={{
                                 display: "flex",
                                 flexDirection: "row",
+                                minHeight: "100%",
+                                minWidth: 804,
                             }}
                         >
                         <div
@@ -914,10 +939,9 @@ export default function AparienciaPage() {
                         <div
                             style={{
                                 flex: 1,
-                                minWidth: 0,
+                                minWidth: 460,
                                 padding: spacing[24],
-                                overflowY: "auto",
-                                overflowX: "hidden",
+                                paddingRight: spacing[40],
                             }}
                         >
                             {(selectedBaseSub ?? "tema") === "tema" && (
@@ -926,7 +950,10 @@ export default function AparienciaPage() {
                                         display: "flex",
                                         flexDirection: "column",
                                         gap: spacing[24],
+                                        minWidth: 460,
                                         maxWidth: 500,
+                                        flexShrink: 0,
+                                        marginRight: spacing[16],
                                         backgroundColor: semantic.surface.card ?? semantic.surface.default,
                                         borderRadius: radius.card,
                                         border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
@@ -956,6 +983,14 @@ export default function AparienciaPage() {
                                     </div>
                                     <div
                                         style={{
+                                            height: 1,
+                                            width: "100%",
+                                            backgroundColor: semantic.border.subtle ?? semantic.border.default,
+                                        }}
+                                        aria-hidden
+                                    />
+                                    <div
+                                        style={{
                                             display: "flex",
                                             alignItems: "center",
                                             justifyContent: "space-between",
@@ -980,6 +1015,14 @@ export default function AparienciaPage() {
                                     </div>
                                     <div
                                         style={{
+                                            height: 1,
+                                            width: "100%",
+                                            backgroundColor: semantic.border.subtle ?? semantic.border.default,
+                                        }}
+                                        aria-hidden
+                                    />
+                                    <div
+                                        style={{
                                             display: "flex",
                                             alignItems: "flex-start",
                                             justifyContent: "space-between",
@@ -997,7 +1040,9 @@ export default function AparienciaPage() {
                                             Vista previa
                                         </span>
                                         <div style={{ flex: 1, minWidth: 0, display: "flex", justifyContent: "flex-end" }}>
-                                            <ThemePreview tokens={currentTokens} semantic={semantic} />
+                                            <div style={{ minWidth: 280, flexShrink: 0 }}>
+                                                <ThemePreview tokens={currentTokens} semantic={semantic} />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1030,7 +1075,10 @@ export default function AparienciaPage() {
                             )}
                         </div>
                         </div>
+                        </div>
+                        </div>
                     </div>
+                    </>
                 )}
 
                 {/* Estados — secciones apiladas, ancho proporcional */}
@@ -1141,5 +1189,6 @@ export default function AparienciaPage() {
                 </div>
             </PanelCard>
         </PageShell>
+        </>
     );
 }
