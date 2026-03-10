@@ -1595,11 +1595,13 @@ function ThemeGalleryCard({
     theme: galleryTheme,
     isActive,
     onSelect,
+    onEdit,
     semantic,
 }: {
     theme: GalleryTheme;
     isActive: boolean;
     onSelect: () => void;
+    onEdit: () => void;
     semantic: (typeof colors.dark)["semantic"];
 }) {
     const [isHovered, setIsHovered] = useState(false);
@@ -1643,7 +1645,7 @@ function ThemeGalleryCard({
                         style={{
                             position: "absolute",
                             top: spacing[8],
-                            right: spacing[8],
+                            left: spacing[8],
                             display: "inline-flex",
                             alignItems: "center",
                             justifyContent: "center",
@@ -1674,9 +1676,44 @@ function ThemeGalleryCard({
                     gap: spacing[8],
                 }}
             >
-                <Text variant="body" style={{ color: semantic.text.default, fontWeight: typography.fontWeight.semibold }}>
-                    {galleryTheme.name}
-                </Text>
+                <div
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                        gap: spacing[8],
+                    }}
+                >
+                    <Text variant="body" style={{ color: semantic.text.default, fontWeight: typography.fontWeight.semibold }}>
+                        {galleryTheme.name}
+                    </Text>
+                    <span
+                        style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: spacing[2],
+                            borderRadius: radius.sm,
+                            cursor: "pointer",
+                            flexShrink: 0,
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = semantic.surface.hover ?? semantic.surface.default;
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = "transparent";
+                        }}
+                        role="button"
+                        aria-label="Opciones"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") e.currentTarget.click();
+                        }}
+                    >
+                        <ActionIcon name="more-horizontal" size={14} label="Opciones" />
+                    </span>
+                </div>
                 <Text
                     variant="body"
                     style={{
@@ -1724,9 +1761,11 @@ function ThemeGalleryCard({
             <div
                 style={{
                     flexShrink: 0,
-                    padding: spacing.lg,
                     paddingTop: spacing.md,
-                    borderTop: `1px solid ${semantic.border.subtle || semantic.border.default}`,
+                    paddingBottom: spacing.lg,
+                    paddingLeft: spacing.lg,
+                    paddingRight: spacing[12],
+                    borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
                 }}
             >
                 <div
@@ -1734,6 +1773,7 @@ function ThemeGalleryCard({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
+                        width: "100%",
                         gap: spacing[8],
                     }}
                 >
@@ -1745,7 +1785,37 @@ function ThemeGalleryCard({
                     >
                         Usar tema
                     </Button>
-                    <ActionIcon name="more-horizontal" size={16} label="Opciones" />
+                    <button
+                        type="button"
+                        onClick={onEdit}
+                        style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: spacing[4],
+                            padding: `${spacing[4]}px ${spacing[8]}px`,
+                            fontFamily: typography.fontFamily.primary,
+                            fontSize: typography.fontSize.sm,
+                            fontWeight: typography.fontWeight.medium,
+                            color: semantic.text.muted,
+                            background: "none",
+                            border: "none",
+                            borderRadius: radius.sm,
+                            cursor: "pointer",
+                            transition: "color 0.2s ease",
+                            marginLeft: "auto",
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.color = semantic.text.default;
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.color = semantic.text.muted;
+                        }}
+                    >
+                        Editar
+                        <span style={{ display: "inline-flex", transform: "translateY(2px)" }}>
+                            <Icon name="chevron-right" size={14} />
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -2063,8 +2133,8 @@ export default function AparienciaPage() {
                         <div
                             style={{
                                 height: 1,
-                                backgroundColor: semantic.border.subtle || semantic.border.default,
                                 width: "100%",
+                                backgroundColor: semantic.border.subtle ?? semantic.border.default,
                             }}
                             aria-hidden
                         />
@@ -2085,6 +2155,11 @@ export default function AparienciaPage() {
                                     theme={t}
                                     isActive={currentPreset === t.id}
                                     onSelect={() => setPreset(t.id as "control" | "security")}
+                                    onEdit={() => {
+                                        setActiveTab("Base");
+                                        setSelectedBaseSub("tema");
+                                        setPreset(t.id as "control" | "security");
+                                    }}
                                     semantic={semantic}
                                 />
                             ))}
