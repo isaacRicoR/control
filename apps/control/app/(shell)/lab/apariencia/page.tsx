@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { PageShell } from "@ui/containers/PageShell/PageShell";
 import { PanelCard } from "@ui/containers/PanelCard";
 import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
@@ -102,7 +103,9 @@ function baseFromTokens(t: {
 type ThemeEditMode = "dark" | "light";
 type ColorSelectOption = { value: string; label: string };
 
-const BASE_TOKEN_KEYS: { key: keyof BaseTokens; label: string }[] = [
+type BaseTokenKey = "accent" | "background" | "surface" | "text";
+
+const BASE_TOKEN_KEYS: { key: BaseTokenKey; label: string }[] = [
     { key: "accent", label: "Acento" },
     { key: "background", label: "Fondo" },
     { key: "surface", label: "Superficie" },
@@ -110,7 +113,7 @@ const BASE_TOKEN_KEYS: { key: keyof BaseTokens; label: string }[] = [
 ];
 
 /** Dónde se usa cada token de color base en el sistema */
-const COLOR_USAGE: Record<keyof BaseTokens, string[]> = {
+const COLOR_USAGE: Record<BaseTokenKey, string[]> = {
     accent: ["Buttons · Primary", "Links", "Focus states", "Surface highlights"],
     background: ["Page background", "App shell", "Surface base"],
     surface: ["Cards", "Panels", "Inputs", "Elevated surfaces"],
@@ -220,6 +223,78 @@ function normalizeHex(hex: string): string {
     }
     return "#" + m[1].toUpperCase();
 }
+
+type ColorFormat = "hex" | "rgb" | "hsl";
+
+function hexToRgb(hex: string): { r: number; g: number; b: number } {
+    const m = hex.replace(/^#/, "").match(/^([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    if (!m) return { r: 0, g: 0, b: 0 };
+    let r = 0, g = 0, b = 0;
+    if (m[1].length === 3) {
+        r = parseInt(m[1][0] + m[1][0], 16);
+        g = parseInt(m[1][1] + m[1][1], 16);
+        b = parseInt(m[1][2] + m[1][2], 16);
+    } else {
+        r = parseInt(m[1].slice(0, 2), 16);
+        g = parseInt(m[1].slice(2, 4), 16);
+        b = parseInt(m[1].slice(4, 6), 16);
+    }
+    return { r, g, b };
+}
+
+function hexToHsl(hex: string): { h: number; s: number; l: number } {
+    const { r, g, b } = hexToRgb(hex);
+    const rn = r / 255, gn = g / 255, bn = b / 255;
+    const max = Math.max(rn, gn, bn), min = Math.min(rn, gn, bn);
+    let h = 0, s = 0;
+    const l = (max + min) / 2;
+    if (max !== min) {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        if (max === rn) h = ((gn - bn) / d + (gn < bn ? 6 : 0)) / 6;
+        else if (max === gn) h = ((bn - rn) / d + 2) / 6;
+        else h = ((rn - gn) / d + 4) / 6;
+    }
+    return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+}
+
+function rgbToHex(r: number, g: number, b: number): string {
+    const R = Math.max(0, Math.min(255, Math.round(r)));
+    const G = Math.max(0, Math.min(255, Math.round(g)));
+    const B = Math.max(0, Math.min(255, Math.round(b)));
+    return `#${R.toString(16).padStart(2, "0")}${G.toString(16).padStart(2, "0")}${B.toString(16).padStart(2, "0")}`.toUpperCase();
+}
+
+function hslToHex(h: number, s: number, l: number): string {
+    s /= 100;
+    l /= 100;
+    const c = (1 - Math.abs(2 * l - 1)) * s;
+    const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+    const m = l - c / 2;
+    let r = 0, g = 0, b = 0;
+    if (h < 60) { r = c; g = x; }
+    else if (h < 120) { r = x; g = c; }
+    else if (h < 180) { g = c; b = x; }
+    else if (h < 240) { g = x; b = c; }
+    else if (h < 300) { r = x; b = c; }
+    else { r = c; b = x; }
+    return rgbToHex((r + m) * 255, (g + m) * 255, (b + m) * 255);
+}
+
+function parseRgb(str: string): { r: number; g: number; b: number } | null {
+    const m = str.match(/^\s*rgb?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)\s*$/i);
+    if (!m) return null;
+    return { r: +m[1], g: +m[2], b: +m[3] };
+}
+
+function parseHsl(str: string): { h: number; s: number; l: number } | null {
+    const m = str.match(/^\s*hsl\s*\(\s*(\d+)\s*,\s*(\d+)%?\s*,\s*(\d+)%?\s*\)\s*$/i);
+    if (!m) return null;
+    return { h: +m[1], s: +m[2], l: +m[3] };
+}
+
+const RECENT_COLORS_MAX = 5;
+const recentColorsStore: string[] = [];
 
 function ModeSegmentedControl({
     value,
@@ -424,20 +499,86 @@ function TokenRowWithSwatch({
     );
 }
 
+function BaseColorRowRightControl({
+    children,
+    onExpandClick,
+    isExpanded,
+    semantic,
+}: {
+    children: React.ReactNode;
+    onExpandClick: (e: React.MouseEvent) => void;
+    isExpanded: boolean;
+    semantic: (typeof colors.dark)["semantic"];
+}) {
+    const [chevronHovered, setChevronHovered] = useState(false);
+    const iconDefault = semantic.icon?.muted ?? semantic.text.muted;
+    const iconHover = semantic.icon?.active ?? semantic.text.hover;
+    return (
+        <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                gap: spacing[4],
+            }}
+        >
+            <div onClick={(e) => e.stopPropagation()}>{children}</div>
+            <button
+                type="button"
+                onClick={onExpandClick}
+                onMouseEnter={() => setChevronHovered(true)}
+                onMouseLeave={() => setChevronHovered(false)}
+                aria-expanded={isExpanded}
+                aria-label={isExpanded ? "Contraer" : "Expandir"}
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: spacing[8],
+                    minWidth: spacing[32],
+                    minHeight: spacing[32],
+                    background: chevronHovered ? semantic.surface.hoverElevated ?? semantic.surface.hover : "transparent",
+                    border: "none",
+                    borderRadius: radius.md,
+                    cursor: "pointer",
+                    color: chevronHovered ? iconHover : iconDefault,
+                    transition: "background-color 0.2s ease, color 0.2s ease",
+                }}
+            >
+                <span
+                    style={{
+                        display: "flex",
+                        transform: isExpanded ? "rotate(180deg)" : "none",
+                        transition: "transform 0.2s ease",
+                    }}
+                >
+                    <Icon name="chevron-down" size={16} color="currentColor" />
+                </span>
+            </button>
+        </div>
+    );
+}
+
 function BaseColorSelector({
     value,
     options,
     onChange,
     semantic,
+    variant = "full",
 }: {
     value: string;
     options: ColorSelectOption[];
     onChange: (v: string) => void;
     semantic: (typeof colors.dark)["semantic"];
+    variant?: "full" | "icon";
 }) {
     const [isOpen, setIsOpen] = useState(false);
-    const [showPicker, setShowPicker] = useState(false);
+    const [dropdownRect, setDropdownRect] = useState<{ top: number; left: number } | null>(null);
+    const [colorFormat, setColorFormat] = useState<ColorFormat>("hex");
+    const [showRecents, setShowRecents] = useState(false);
+    const [recentColors, setRecentColors] = useState<string[]>(() => [...recentColorsStore]);
+    const [formatInput, setFormatInput] = useState("");
     const containerRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     const initialHsv = useMemo(() => hexToHsv(value || "#000000"), []);
     const [hsv, setHsv] = useState(initialHsv);
@@ -448,24 +589,52 @@ function BaseColorSelector({
     const displayLabel = options.find((o) => o.value.toLowerCase() === (value || "").toLowerCase())?.label ?? hexInput;
 
     useEffect(() => {
-        if (isOpen && showPicker) {
-            const h = hexToHsv(value || "#000000");
-            setHsv(h);
-            setHexInput((value || "#000000").toUpperCase().replace(/^#?/, value?.startsWith("#") ? value : `#${value}`));
-        }
-    }, [isOpen, showPicker, value]);
+        if (!isOpen) return;
+        const raw = value || "#000000";
+        const hex = raw.startsWith("#") ? raw.toUpperCase() : `#${raw.toUpperCase()}`;
+        setHsv(hexToHsv(hex));
+        setHexInput(hex);
+        setRecentColors([...recentColorsStore]);
+    }, [isOpen, value]);
 
     useEffect(() => {
         if (!isOpen) return;
+        const hex = hsvToHex(hsv.h, hsv.s, hsv.v);
+        if (colorFormat === "hex") setFormatInput(hex);
+        else if (colorFormat === "rgb") {
+            const { r, g, b } = hexToRgb(hex);
+            setFormatInput(`rgb(${r}, ${g}, ${b})`);
+        } else {
+            const { h, s, l } = hexToHsl(hex);
+            setFormatInput(`hsl(${h}, ${s}%, ${l}%)`);
+        }
+    }, [isOpen, hsv.h, hsv.s, hsv.v, colorFormat]);
+
+    useEffect(() => {
+        if (!isOpen) {
+            setDropdownRect(null);
+            return;
+        }
+        const rect = containerRef.current?.getBoundingClientRect();
+        if (rect) {
+            const dropdownWidth = 280;
+            const iconMode = variant === "icon";
+            const left = iconMode ? rect.right - dropdownWidth : rect.left;
+            setDropdownRect({ top: rect.bottom + 8, left });
+        }
         const handleClickOutside = (e: MouseEvent) => {
-            if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-                setIsOpen(false);
-                setShowPicker(false);
+            const target = e.target as Node;
+            if (
+                containerRef.current?.contains(target) ||
+                dropdownRef.current?.contains(target)
+            ) {
+                return;
             }
+            setIsOpen(false);
         };
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, [isOpen]);
+    }, [isOpen, variant]);
 
     const applyHex = useCallback(
         (hex: string) => {
@@ -473,6 +642,11 @@ function BaseColorSelector({
             if (isValidHex(hex)) {
                 onChange(norm);
                 setHsv(hexToHsv(norm));
+                setHexInput(norm);
+                const next = [norm, ...recentColorsStore.filter((c) => c.toUpperCase() !== norm.toUpperCase())].slice(0, RECENT_COLORS_MAX);
+                recentColorsStore.length = 0;
+                recentColorsStore.push(...next);
+                setRecentColors([...recentColorsStore]);
             }
         },
         [onChange]
@@ -524,214 +698,308 @@ function BaseColorSelector({
         };
     }, [dragging, updateFrom2D, updateFromHue]);
 
-    const handleHexBlur = () => {
-        if (isValidHex(hexInput)) {
-            const norm = normalizeHex(hexInput);
-            onChange(norm);
-            setHexInput(norm);
-            setHsv(hexToHsv(norm));
+    const currentHex = hsvToHex(hsv.h, hsv.s, hsv.v);
+
+    const getFormatString = useCallback((hex: string) => {
+        const norm = hex.startsWith("#") ? hex : `#${hex}`;
+        if (colorFormat === "hex") return norm.toUpperCase();
+        if (colorFormat === "rgb") {
+            const { r, g, b } = hexToRgb(norm);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+        const { h, s, l } = hexToHsl(norm);
+        return `hsl(${h}, ${s}%, ${l}%)`;
+    }, [colorFormat]);
+
+    const handleFormatBlur = () => {
+        const current = value || "#000000";
+        const fallback = getFormatString(current);
+        if (colorFormat === "hex" && isValidHex(formatInput)) {
+            applyHex(normalizeHex(formatInput));
+        } else if (colorFormat === "rgb") {
+            const parsed = parseRgb(formatInput);
+            if (parsed) applyHex(rgbToHex(parsed.r, parsed.g, parsed.b));
+            else setFormatInput(fallback);
+        } else if (colorFormat === "hsl") {
+            const parsed = parseHsl(formatInput);
+            if (parsed) applyHex(hslToHex(parsed.h, parsed.s, parsed.l));
+            else setFormatInput(fallback);
         } else {
-            setHexInput((value || "#000000").toUpperCase().replace(/^#?/, value?.startsWith("#") ? value : `#${value}`));
+            setFormatInput(fallback);
         }
     };
 
-    const currentHex = hsvToHex(hsv.h, hsv.s, hsv.v);
+    const [eyedropperSupported] = useState(() => typeof window !== "undefined" && "EyeDropper" in window);
+    const handleEyedropper = useCallback(async () => {
+        if (typeof window === "undefined" || !("EyeDropper" in window)) return;
+        try {
+            const dropper = new (window as unknown as { EyeDropper: new () => { open: () => Promise<{ sRGBHex: string }> } }).EyeDropper();
+            const result = await dropper.open();
+            const hex = result.sRGBHex.toUpperCase();
+            applyHex(hex.startsWith("#") ? hex : `#${hex}`);
+        } catch {
+            // User cancelled or unsupported
+        }
+    }, [applyHex]);
+    const isIconVariant = variant === "icon";
 
-    return (
-        <div ref={containerRef} style={{ position: "relative", minWidth: 120 }}>
+    const trigger = isIconVariant ? (
+        <ActionIcon
+            name="edit"
+            size={16}
+            color={semantic.text.muted}
+            label="Editar color"
+            onClick={() => setIsOpen(!isOpen)}
+        />
+    ) : (
+        <div
+            role="button"
+            tabIndex={0}
+            onClick={() => setIsOpen(!isOpen)}
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setIsOpen(!isOpen);
+                }
+            }}
+            style={{
+                display: "flex",
+                alignItems: "center",
+                gap: spacing[8],
+                width: "100%",
+                minHeight: spacing[48],
+                padding: `0 ${spacing[12]}px`,
+                backgroundColor: semantic.surface.default,
+                border: `1px solid ${semantic.border.default}`,
+                borderRadius: radius.md,
+                cursor: "pointer",
+                fontFamily: typography.fontFamily.primary,
+                fontSize: typography.fontSize.sm,
+                color: semantic.text.default,
+            }}
+        >
             <div
-                role="button"
-                tabIndex={0}
-                onClick={() => setIsOpen(!isOpen)}
-                onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setIsOpen(!isOpen);
-                    }
-                }}
                 style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: spacing[8],
-                    width: "100%",
-                    minHeight: spacing[48],
-                    padding: `0 ${spacing[12]}px`,
-                    backgroundColor: semantic.surface.default,
-                    border: `1px solid ${semantic.border.default}`,
-                    borderRadius: radius.md,
-                    cursor: "pointer",
-                    fontFamily: typography.fontFamily.primary,
-                    fontSize: typography.fontSize.sm,
-                    color: semantic.text.default,
+                    width: spacing[24],
+                    height: spacing[24],
+                    flexShrink: 0,
+                    borderRadius: "50%",
+                    border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                    backgroundColor: value || semantic.surface.default,
                 }}
-            >
-                <div
-                    style={{
-                        width: spacing[24],
-                        height: spacing[24],
-                        flexShrink: 0,
-                        borderRadius: radius.sm,
-                        border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                        backgroundColor: value || semantic.surface.default,
-                    }}
-                />
-                <span style={{ flex: 1, textAlign: "left", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {displayLabel}
-                </span>
-                <Icon name="chevron-down" size={16} color={semantic.text.muted} />
-            </div>
+            />
+            <span style={{ flex: 1, textAlign: "left", overflow: "hidden", textOverflow: "ellipsis" }}>
+                {displayLabel}
+            </span>
+            <Icon name="chevron-down" size={16} color={semantic.text.muted} />
+        </div>
+    );
 
-            {isOpen && (
+    const dropdownContent =
+        isOpen &&
+        dropdownRect &&
+        typeof document !== "undefined" &&
+        createPortal(
+            <div ref={dropdownRef}>
                 <FloatingSurface
                     style={{
-                        position: "absolute",
-                        top: "calc(100% + 4px)",
-                        left: 0,
+                        position: "fixed",
+                        top: dropdownRect.top,
+                        left: dropdownRect.left,
                         minWidth: 280,
                         zIndex: 1000,
                     }}
                 >
                     <div style={{ padding: spacing[12] }}>
-                        {options.map((opt) => (
-                            <div
-                                key={opt.value}
-                                role="option"
-                                onClick={() => {
-                                    onChange(opt.value);
-                                    setIsOpen(false);
-                                    setShowPicker(false);
-                                }}
-                                style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: spacing[8],
-                                    padding: `${spacing[8]}px ${spacing[12]}px`,
-                                    borderRadius: radius.sm,
-                                    cursor: "pointer",
-                                    backgroundColor: opt.value.toLowerCase() === (value || "").toLowerCase() ? semantic.surface.selected : "transparent",
-                                    fontFamily: typography.fontFamily.primary,
-                                    fontSize: typography.fontSize.sm,
-                                    color: semantic.text.default,
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        width: 20,
-                                        height: 20,
-                                        borderRadius: radius.sm,
-                                        border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                                        backgroundColor: opt.value,
-                                    }}
-                                />
-                                {opt.label}
-                            </div>
-                        ))}
-
+                        {/* Color picker: 2D area + hue bar */}
                         <div
-                            role="button"
-                            onClick={() => setShowPicker(!showPicker)}
+                            ref={sbRef}
+                            onMouseDown={(e) => {
+                                e.preventDefault();
+                                updateFrom2D(e.clientX, e.clientY, e.currentTarget);
+                                setDragging("2d");
+                            }}
+                            style={{
+                                width: "100%",
+                                height: 140,
+                                borderRadius: radius.md,
+                                background: `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), hsl(${hsv.h}, 100%, 50%)`,
+                                cursor: "crosshair",
+                                position: "relative",
+                            }}
+                        />
+                        <div
+                            ref={hueRef}
+                            onMouseDown={(e) => {
+                                e.preventDefault();
+                                updateFromHue(e.clientX, e.currentTarget);
+                                setDragging("hue");
+                            }}
+                            style={{
+                                width: "100%",
+                                height: 10,
+                                marginTop: spacing[8],
+                                borderRadius: radius.full,
+                                background: "linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)",
+                                cursor: "pointer",
+                            }}
+                        />
+                        {/* Preview + format selector + input + eyedropper */}
+                        <div
                             style={{
                                 display: "flex",
                                 alignItems: "center",
                                 gap: spacing[8],
-                                padding: `${spacing[8]}px ${spacing[12]}px`,
-                                borderRadius: radius.sm,
-                                cursor: "pointer",
-                                marginTop: spacing[4],
-                                borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                                paddingTop: spacing[12],
-                                fontFamily: typography.fontFamily.primary,
-                                fontSize: typography.fontSize.sm,
-                                fontWeight: typography.fontWeight.medium,
-                                color: semantic.primary.default ?? semantic.text.default,
+                                marginTop: spacing[12],
                             }}
                         >
-                            <Icon name="edit" size={16} color={semantic.primary.default} />
-                            Personalizado
-                        </div>
-
-                        {showPicker && (
                             <div
                                 style={{
-                                    marginTop: spacing[12],
-                                    paddingTop: spacing[12],
-                                    borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                                    width: spacing[40],
+                                    height: spacing[40],
+                                    borderRadius: radius.sm,
+                                    border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                                    backgroundColor: hsvToHex(hsv.h, hsv.s, hsv.v),
+                                    flexShrink: 0,
                                 }}
-                            >
-                                <div
-                                    ref={sbRef}
-                                    onMouseDown={(e) => {
-                                        e.preventDefault();
-                                        updateFrom2D(e.clientX, e.clientY, e.currentTarget);
-                                        setDragging("2d");
-                                    }}
+                            />
+                            <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: spacing[4] }}>
+                                <div style={{ display: "flex", gap: spacing[4] }}>
+                                    {(["hex", "rgb", "hsl"] as const).map((fmt) => (
+                                        <button
+                                            key={fmt}
+                                            type="button"
+                                            onClick={() => setColorFormat(fmt)}
+                                            style={{
+                                                padding: `${spacing[4]}px ${spacing[8]}px`,
+                                                fontFamily: typography.fontFamily.primary,
+                                                fontSize: typography.fontSize.xs,
+                                                fontWeight: typography.fontWeight.medium,
+                                                color: colorFormat === fmt ? semantic.text.active : semantic.text.muted,
+                                                backgroundColor: colorFormat === fmt ? semantic.surface.selected ?? semantic.surface.hover : "transparent",
+                                                border: "none",
+                                                borderRadius: radius.sm,
+                                                cursor: "pointer",
+                                                textTransform: "uppercase",
+                                            }}
+                                        >
+                                            {fmt}
+                                        </button>
+                                    ))}
+                                </div>
+                                <input
+                                    type="text"
+                                    value={formatInput}
+                                    onChange={(e) => setFormatInput(e.target.value)}
+                                    onBlur={handleFormatBlur}
+                                    onKeyDown={(e) => e.key === "Enter" && handleFormatBlur()}
+                                    placeholder={colorFormat === "hex" ? "#000000" : colorFormat === "rgb" ? "rgb(0, 0, 0)" : "hsl(0, 0%, 0%)"}
                                     style={{
                                         width: "100%",
-                                        height: 140,
-                                        borderRadius: radius.md,
-                                        background: `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), hsl(${hsv.h}, 100%, 50%)`,
-                                        cursor: "crosshair",
-                                        position: "relative",
+                                        padding: `${spacing[8]}px ${spacing[8]}px`,
+                                        fontFamily: (typography.fontFamily as { mono?: string }).mono ?? typography.fontFamily.primary,
+                                        fontSize: typography.fontSize.sm,
+                                        color: semantic.text.default,
+                                        backgroundColor: semantic.surface.hover ?? semantic.surface.default,
+                                        border: `1px solid ${semantic.border.default}`,
+                                        borderRadius: radius.sm,
                                     }}
                                 />
-                                <div
-                                    ref={hueRef}
-                                    onMouseDown={(e) => {
-                                        e.preventDefault();
-                                        updateFromHue(e.clientX, e.currentTarget);
-                                        setDragging("hue");
-                                    }}
-                                    style={{
-                                        width: "100%",
-                                        height: 10,
-                                        marginTop: spacing[8],
-                                        borderRadius: radius.full,
-                                        background: "linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)",
-                                        cursor: "pointer",
-                                    }}
-                                />
-                                <div
+                            </div>
+                            {eyedropperSupported && (
+                                <button
+                                    type="button"
+                                    onClick={handleEyedropper}
+                                    aria-label="Cuentagotas"
+                                    title="Cuentagotas"
                                     style={{
                                         display: "flex",
                                         alignItems: "center",
-                                        gap: spacing[12],
-                                        marginTop: spacing[12],
+                                        justifyContent: "center",
+                                        width: spacing[40],
+                                        height: spacing[40],
+                                        flexShrink: 0,
+                                        padding: 0,
+                                        background: semantic.surface.hover ?? semantic.surface.default,
+                                        border: `1px solid ${semantic.border.default}`,
+                                        borderRadius: radius.sm,
+                                        cursor: "pointer",
+                                        color: semantic.text.muted,
                                     }}
                                 >
-                                    <div
-                                        style={{
-                                            width: spacing[40],
-                                            height: spacing[40],
-                                            borderRadius: radius.sm,
-                                            border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                                            backgroundColor: currentHex,
-                                            flexShrink: 0,
-                                        }}
-                                    />
-                                    <input
-                                        type="text"
-                                        value={hexInput}
-                                        onChange={(e) => setHexInput(e.target.value)}
-                                        onBlur={handleHexBlur}
-                                        onKeyDown={(e) => e.key === "Enter" && handleHexBlur()}
-                                        placeholder="#000000"
-                                        style={{
-                                            flex: 1,
-                                            padding: `${spacing[8]}px ${spacing[12]}px`,
-                                            fontFamily: typography.fontFamily.mono ?? typography.fontFamily.primary,
-                                            fontSize: typography.fontSize.sm,
-                                            color: semantic.text.default,
-                                            backgroundColor: semantic.surface.hover ?? semantic.surface.default,
-                                            border: `1px solid ${semantic.border.default}`,
-                                            borderRadius: radius.sm,
-                                        }}
-                                    />
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M18 2L22 6l-8 8-2-2 8-8z" />
+                                        <path d="M14 8l-2 2-4-4 2-2 4 4z" />
+                                        <path d="M4 12l8 8 2-2-8-8-2 2z" />
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
+                        {/* Collapsible Recientes */}
+                        <div style={{ marginTop: spacing[12], borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`, paddingTop: spacing[12] }}>
+                            <button
+                                type="button"
+                                onClick={() => setShowRecents(!showRecents)}
+                                aria-expanded={showRecents}
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    width: "100%",
+                                    padding: 0,
+                                    background: "none",
+                                    border: "none",
+                                    cursor: "pointer",
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.sm,
+                                    fontWeight: typography.fontWeight.medium,
+                                    color: semantic.text.muted,
+                                }}
+                            >
+                                Recientes
+                                <span style={{ transform: showRecents ? "rotate(180deg)" : "none", transition: "transform 0.2s ease", display: "flex" }}>
+                                    <Icon name="chevron-down" size={16} color="currentColor" />
+                                </span>
+                            </button>
+                            {showRecents && recentColors.length > 0 && (
+                                <div style={{ display: "flex", flexWrap: "wrap", gap: spacing[8], marginTop: spacing[8] }}>
+                                    {recentColors.slice(0, RECENT_COLORS_MAX).map((hex) => (
+                                        <button
+                                            key={hex}
+                                            type="button"
+                                            onClick={() => {
+                                                applyHex(hex);
+                                            }}
+                                            style={{
+                                                width: 28,
+                                                height: 28,
+                                                padding: 0,
+                                                borderRadius: radius.sm,
+                                                border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                                                backgroundColor: hex,
+                                                cursor: "pointer",
+                                            }}
+                                            title={hex}
+                                        />
+                                    ))}
                                 </div>
-                            </div>
-                        )}
+                            )}
+                            {showRecents && recentColors.length === 0 && (
+                                <p style={{ margin: `${spacing[8]}px 0 0`, fontSize: typography.fontSize.xs, color: semantic.text.muted }}>
+                                    Sin colores recientes
+                                </p>
+                            )}
+                        </div>
                     </div>
                 </FloatingSurface>
-            )}
+            </div>,
+            document.body
+        );
+
+    return (
+        <div ref={containerRef} style={{ position: "relative", minWidth: isIconVariant ? undefined : 120 }}>
+            {trigger}
+            {dropdownContent}
         </div>
     );
 }
@@ -763,9 +1031,16 @@ function BaseColorExpandableRow({
                 borderBottom: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
             }}
         >
-            <button
-                type="button"
+            <div
+                role="button"
+                tabIndex={0}
                 onClick={onToggle}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        onToggle();
+                    }
+                }}
                 style={{
                     display: "flex",
                     alignItems: "center",
@@ -784,7 +1059,7 @@ function BaseColorExpandableRow({
                         width: spacing[32],
                         height: spacing[32],
                         flexShrink: 0,
-                        borderRadius: radius.sm,
+                        borderRadius: "50%",
                         border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
                         backgroundColor: value || semantic.surface.default,
                     }}
@@ -804,7 +1079,7 @@ function BaseColorExpandableRow({
                     <span
                         style={{
                             display: "block",
-                            fontFamily: typography.fontFamily.mono ?? typography.fontFamily.primary,
+                            fontFamily: (typography.fontFamily as { mono?: string }).mono ?? typography.fontFamily.primary,
                             fontSize: typography.fontSize.xs,
                             color: semantic.text.muted,
                             marginTop: spacing[4],
@@ -813,25 +1088,23 @@ function BaseColorExpandableRow({
                         {hex}
                     </span>
                 </div>
-                <div style={{ minWidth: 120, maxWidth: 180 }} onClick={(e) => e.stopPropagation()}>
+                <BaseColorRowRightControl
+                    onExpandClick={(e) => {
+                        e.stopPropagation();
+                        onToggle();
+                    }}
+                    isExpanded={isExpanded}
+                    semantic={semantic}
+                >
                     <BaseColorSelector
+                        variant="icon"
                         options={options}
                         value={value}
                         onChange={(v) => onChange(v)}
                         semantic={semantic}
                     />
-                </div>
-                <span
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        transform: isExpanded ? "rotate(180deg)" : "none",
-                        transition: "transform 0.2s ease",
-                    }}
-                >
-                    <Icon name="chevron-down" size={16} color={semantic.text.muted} />
-                </span>
-            </button>
+                </BaseColorRowRightControl>
+            </div>
             {isExpanded && (
                 <div
                     style={{
@@ -901,10 +1174,10 @@ function BaseColorsCard({
 }: {
     mode: "dark" | "light";
     tokens: BaseTokens;
-    options: Record<keyof BaseTokens, ColorSelectOption[]>;
-    onChange: (field: keyof BaseTokens, value: string) => void;
-    expandedKey: keyof BaseTokens | null;
-    onExpandToggle: (key: keyof BaseTokens) => void;
+    options: Record<BaseTokenKey, ColorSelectOption[]>;
+    onChange: (field: BaseTokenKey, value: string) => void;
+    expandedKey: BaseTokenKey | null;
+    onExpandToggle: (key: BaseTokenKey) => void;
     titleAction?: React.ReactNode;
     semantic: (typeof colors.dark)["semantic"];
 }) {
@@ -1471,7 +1744,7 @@ export default function AparienciaPage() {
         };
     }, [localTokensByMode]);
 
-    const handleChange = (mode: ThemeEditMode, field: keyof BaseTokens, value: string) => {
+    const handleChange = (mode: ThemeEditMode, field: BaseTokenKey, value: string) => {
         setLocalTokensByMode((prev) => ({
             ...prev,
             [mode]: { ...prev[mode], [field]: value },
@@ -1845,7 +2118,7 @@ export default function AparienciaPage() {
                                             onChange={(k, v) => handleChange("dark", k, v)}
                                             expandedKey={
                                                 expandedColoresKey?.startsWith("dark-")
-                                                    ? (expandedColoresKey.replace("dark-", "") as keyof BaseTokens)
+                                                    ? (expandedColoresKey.replace("dark-", "") as BaseTokenKey)
                                                     : null
                                             }
                                             onExpandToggle={(k) =>
@@ -1863,7 +2136,7 @@ export default function AparienciaPage() {
                                         onChange={(k, v) => handleChange("light", k, v)}
                                         expandedKey={
                                             expandedColoresKey?.startsWith("light-")
-                                                ? (expandedColoresKey.replace("light-", "") as keyof BaseTokens)
+                                                ? (expandedColoresKey.replace("light-", "") as BaseTokenKey)
                                                 : null
                                         }
                                         onExpandToggle={(k) =>
