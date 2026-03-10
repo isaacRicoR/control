@@ -283,6 +283,97 @@ function ModeSegmentedControl({
     );
 }
 
+function BaseTabs({
+    value,
+    onChange,
+    semantic,
+}: {
+    value: "tema" | "colores";
+    onChange: (v: "tema" | "colores") => void;
+    semantic: (typeof colors.dark)["semantic"];
+}) {
+    const tabs: { value: "tema" | "colores"; label: string }[] = [
+        { value: "tema", label: "Tema" },
+        { value: "colores", label: "Colores base" },
+    ];
+    const tabsRef = React.useRef<(HTMLButtonElement | null)[]>([]);
+    const [underlineStyle, setUnderlineStyle] = React.useState({ left: 0, width: 0 });
+
+    React.useEffect(() => {
+        const id = requestAnimationFrame(() => {
+            const activeIndex = value === "tema" ? 0 : 1;
+            const currentTab = tabsRef.current[activeIndex];
+            if (currentTab) {
+                setUnderlineStyle({
+                    left: currentTab.offsetLeft,
+                    width: currentTab.offsetWidth,
+                });
+            }
+        });
+        return () => cancelAnimationFrame(id);
+    }, [value]);
+
+    return (
+        <div
+            role="tablist"
+            aria-label="Subsecciones de Base"
+            style={{
+                display: "flex",
+                flexWrap: "nowrap",
+                alignItems: "stretch",
+                gap: 0,
+                flex: 1,
+                minWidth: 0,
+                position: "relative",
+            }}
+        >
+            {tabs.map((tab, index) => {
+                const isActive = value === tab.value;
+                return (
+                    <button
+                        key={tab.value}
+                        ref={(el) => {
+                            tabsRef.current[index] = el;
+                        }}
+                        type="button"
+                        role="tab"
+                        aria-selected={isActive}
+                        onClick={() => onChange(tab.value)}
+                        style={{
+                            padding: `${spacing[16]}px ${spacing[16]}px`,
+                            fontFamily: typography.fontFamily.primary,
+                            fontSize: typography.fontSize.sm,
+                            fontWeight: typography.fontWeight.medium,
+                            color: isActive ? semantic.text.active : semantic.text.muted,
+                            backgroundColor: "transparent",
+                            border: "none",
+                            cursor: "pointer",
+                            transition: "color 0.2s ease",
+                            textAlign: "center",
+                        }}
+                    >
+                        {tab.label}
+                    </button>
+                );
+            })}
+            <div
+                style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: underlineStyle.left,
+                    width: underlineStyle.width,
+                    height: 2,
+                    borderRadius: 2,
+                    backgroundColor: semantic.text.active,
+                    transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    pointerEvents: "none",
+                }}
+                aria-hidden
+            />
+        </div>
+    );
+}
+
 function TokenRowWithSwatch({
     label,
     value,
@@ -801,6 +892,7 @@ function BaseColorsCard({
     onChange,
     expandedKey,
     onExpandToggle,
+    titleAction,
     semantic,
 }: {
     mode: "dark" | "light";
@@ -809,6 +901,7 @@ function BaseColorsCard({
     onChange: (field: keyof BaseTokens, value: string) => void;
     expandedKey: keyof BaseTokens | null;
     onExpandToggle: (key: keyof BaseTokens) => void;
+    titleAction?: React.ReactNode;
     semantic: (typeof colors.dark)["semantic"];
 }) {
     const title = mode === "dark" ? "Modo oscuro" : "Modo claro";
@@ -825,18 +918,27 @@ function BaseColorsCard({
                 boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
             }}
         >
-            <h3
+            <div
                 style={{
-                    margin: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: spacing[8],
                     marginBottom: spacing[16],
-                    fontFamily: typography.fontFamily.primary,
-                    fontSize: typography.fontSize.md,
-                    fontWeight: typography.fontWeight.semibold,
-                    color: semantic.text.default,
                 }}
             >
-                {title}
-            </h3>
+                {titleAction}
+                <h3
+                    style={{
+                        margin: 0,
+                        fontFamily: typography.fontFamily.primary,
+                        fontSize: typography.fontSize.md,
+                        fontWeight: typography.fontWeight.semibold,
+                        color: semantic.text.default,
+                    }}
+                >
+                    {title}
+                </h3>
+            </div>
             {BASE_TOKEN_KEYS.map(({ key, label }) => (
                 <BaseColorExpandableRow
                     key={key}
@@ -1467,20 +1569,38 @@ export default function AparienciaPage() {
                                 justifyContent: "space-between",
                                 gap: spacing[16],
                                 flexShrink: 0,
+                                position: "relative",
+                                ...(activeTab === "Base"
+                                    ? {
+                                          width: `calc(100% + ${spacing[16] * 2}px)`,
+                                          marginLeft: -spacing[16],
+                                          marginRight: -spacing[16],
+                                          marginTop: -spacing[16],
+                                          paddingLeft: spacing[16],
+                                          paddingRight: spacing[16],
+                                      }
+                                    : {}),
                             }}
                         >
-                            {activeTab === "Base" ? (
-                                <h2
+                            {activeTab === "Base" && (
+                                <div
                                     style={{
-                                        margin: 0,
-                                        fontFamily: typography.fontFamily.primary,
-                                        fontSize: typography.fontSize.lg,
-                                        fontWeight: typography.fontWeight.semibold,
-                                        color: semantic.text.active,
+                                        position: "absolute",
+                                        bottom: 0,
+                                        left: -spacing[16],
+                                        right: -spacing[16],
+                                        height: 1,
+                                        backgroundColor: semantic.border.subtle ?? semantic.border.default,
                                     }}
-                                >
-                                    Base
-                                </h2>
+                                    aria-hidden
+                                />
+                            )}
+                            {activeTab === "Base" ? (
+                                <BaseTabs
+                                    value={(selectedBaseSub ?? "tema") as "tema" | "colores"}
+                                    onChange={(v) => setSelectedBaseSub(v)}
+                                    semantic={semantic}
+                                />
                             ) : (
                                 <h2
                                     style={{
@@ -1494,7 +1614,6 @@ export default function AparienciaPage() {
                                     {activeTab}
                                 </h2>
                             )}
-                            <ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />
                         </div>
 
                 {/* Galería — grid de temas */}
@@ -1532,7 +1651,7 @@ export default function AparienciaPage() {
                     </section>
                 )}
 
-                {/* Base — línea horizontal y vertical que llegan a los bordes */}
+                {/* Base — tabs horizontales + contenido */}
                 {activeTab === "Base" && (
                     <>
                     <style>{`
@@ -1543,89 +1662,17 @@ export default function AparienciaPage() {
                         style={{
                             display: "flex",
                             flexDirection: "column",
-                            width: `calc(100% + ${spacing[16] * 2}px)`,
-                            marginLeft: -spacing[16],
-                            marginRight: -spacing[16],
-                            marginBottom: -spacing[16],
+                            width: "100%",
                             minHeight: 0,
                             flex: 1,
-                            alignSelf: "stretch",
                             overflow: "auto",
                         }}
                     >
                         <div
                             style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                minWidth: 804,
                                 flex: 1,
                                 minHeight: 0,
-                            }}
-                        >
-                        <div
-                            style={{
-                                height: 1,
-                                width: "100%",
-                                flexShrink: 0,
-                                backgroundColor: semantic.border.subtle ?? semantic.border.default,
-                            }}
-                            aria-hidden
-                        />
-                        <div
-                            style={{
-                                flex: 1,
-                                minHeight: 0,
-                                overflow: "visible",
-                            }}
-                        >
-                        <div
-                            style={{
-                                display: "flex",
-                                flexDirection: "row",
-                                minHeight: "100%",
-                                minWidth: 804,
-                            }}
-                        >
-                        <div
-                            style={{
-                                width: 280,
-                                minHeight: "100%",
-                                flexShrink: 0,
-                                borderRight: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                                display: "flex",
-                                flexDirection: "column",
-                                backgroundColor: semantic.surface.default,
-                            }}
-                        >
-                            <SettingRowItem
-                                label="Tema"
-                                textWhite
-                                rightContent={
-                                    <span style={{ color: "#ffffff", fontSize: typography.fontSize.sm, fontWeight: typography.fontWeight.medium }}>
-                                        {currentPreset === "control" ? "Cóntrol" : currentPreset}
-                                    </span>
-                                }
-                                isSelected={(selectedBaseSub ?? "tema") === "tema"}
-                                onClick={() => setSelectedBaseSub("tema")}
-                            />
-                            <SettingRowItem
-                                label="Colores base"
-                                textWhite
-                                rightContent={
-                                    <span style={{ color: "#ffffff", fontSize: typography.fontSize.sm }}>
-                                        {BASE_TOKEN_KEYS.length} colores
-                                    </span>
-                                }
-                                isSelected={selectedBaseSub === "colores"}
-                                onClick={() => setSelectedBaseSub("colores")}
-                            />
-                        </div>
-                        <div
-                            style={{
-                                flex: 1,
-                                minWidth: 460,
-                                padding: spacing[24],
-                                paddingRight: spacing[40],
+                                paddingTop: spacing[24],
                             }}
                         >
                             {(selectedBaseSub ?? "tema") === "tema" && (
@@ -1637,7 +1684,6 @@ export default function AparienciaPage() {
                                         minWidth: 460,
                                         maxWidth: 500,
                                         flexShrink: 0,
-                                        marginRight: spacing[16],
                                         backgroundColor: semantic.surface.card ?? semantic.surface.default,
                                         borderRadius: radius.card,
                                         border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
@@ -1740,17 +1786,6 @@ export default function AparienciaPage() {
                                         maxWidth: 560,
                                     }}
                                 >
-                                    <h3
-                                        style={{
-                                            margin: 0,
-                                            fontFamily: typography.fontFamily.primary,
-                                            fontSize: typography.fontSize.md,
-                                            fontWeight: typography.fontWeight.semibold,
-                                            color: semantic.text.default,
-                                        }}
-                                    >
-                                        Colores base
-                                    </h3>
                                     <BaseColorsCard
                                         mode="dark"
                                         tokens={localTokensByMode.dark}
@@ -1764,6 +1799,7 @@ export default function AparienciaPage() {
                                         onExpandToggle={(k) =>
                                             setExpandedColoresKey((prev) => (prev === `dark-${k}` ? null : `dark-${k}`))
                                         }
+                                        titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
                                         semantic={semantic}
                                     />
                                     <BaseColorsCard
@@ -1779,13 +1815,11 @@ export default function AparienciaPage() {
                                         onExpandToggle={(k) =>
                                             setExpandedColoresKey((prev) => (prev === `light-${k}` ? null : `light-${k}`))
                                         }
+                                        titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
                                         semantic={semantic}
                                     />
                                 </div>
                             )}
-                        </div>
-                        </div>
-                        </div>
                         </div>
                     </div>
                     </>
