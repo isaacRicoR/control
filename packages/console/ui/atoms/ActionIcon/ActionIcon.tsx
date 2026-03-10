@@ -13,6 +13,8 @@ type ActionIconProps = {
     color?: string;
     /** Optional: hover color when provided (e.g. for Users list Acciones) */
     hoverColor?: string;
+    /** When true, shows hover/active state (e.g. when related popover is open) */
+    isActive?: boolean;
 };
 
 export const ActionIcon = ({
@@ -22,6 +24,7 @@ export const ActionIcon = ({
     size = 16,
     color,
     hoverColor,
+    isActive = false,
 }: ActionIconProps) => {
     const [isHovered, setIsHovered] = useState(false);
     const { theme } = useTheme();
@@ -29,6 +32,7 @@ export const ActionIcon = ({
 
     const effectiveColor = color || semantic.icon?.muted || semantic.text.muted || semantic.text.default;
     const effectiveHoverColor = hoverColor ?? semantic.icon?.active ?? semantic.text.hover;
+    const showActive = isHovered || isActive;
 
     return (
         <div
@@ -41,14 +45,14 @@ export const ActionIcon = ({
                 cursor: "pointer",
                 padding: spacing[8], // 8px ensures 32-34px target
                 borderRadius: radius.md,
-                backgroundColor: isHovered
+                backgroundColor: showActive
                     ? semantic.surface.hoverElevated ?? semantic.surface.hover
                     : "transparent",
                 transition: "all 0.2s ease",
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: isHovered ? effectiveHoverColor : effectiveColor,
+                color: showActive ? effectiveHoverColor : effectiveColor,
                 // No border to keep it clean
             }}
         >
