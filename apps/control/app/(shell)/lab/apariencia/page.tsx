@@ -1155,6 +1155,7 @@ function BaseColorExpandableRow({
     isExpanded,
     onToggle,
     semantic,
+    onCopyHex,
 }: {
     label: string;
     value: string;
@@ -1221,37 +1222,33 @@ function BaseColorExpandableRow({
                     </span>
                     <span
                         style={{
-                            display: "inline-flex",
-                            alignItems: "center",
-                            gap: spacing[4],
+                            display: "block",
                             fontFamily: (typography.fontFamily as { mono?: string }).mono ?? typography.fontFamily.primary,
                             fontSize: typography.fontSize.xs,
                             color: semantic.text.muted,
-                            marginTop: spacing[4],
+                            marginTop: 2,
                         }}
                     >
-                        {hex}
-                        {onCopyHex && (
+                        {onCopyHex ? (
                             <button
                                 type="button"
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    navigator.clipboard.writeText(hex);
                                     onCopyHex(hex);
                                 }}
                                 aria-label="Copiar color"
                                 style={{
                                     display: "inline-flex",
                                     alignItems: "center",
-                                    justifyContent: "center",
-                                    padding: spacing[2],
-                                    margin: -spacing[2],
+                                    gap: 1,
+                                    padding: 0,
+                                    margin: 0,
                                     background: "none",
                                     border: "none",
                                     borderRadius: radius.sm,
                                     cursor: "pointer",
                                     color: semantic.text.muted,
-                                    opacity: 0.7,
+                                    opacity: 0.85,
                                     transition: "opacity 0.2s ease, color 0.2s ease",
                                 }}
                                 onMouseEnter={(e) => {
@@ -1259,12 +1256,15 @@ function BaseColorExpandableRow({
                                     e.currentTarget.style.color = semantic.text.default;
                                 }}
                                 onMouseLeave={(e) => {
-                                    e.currentTarget.style.opacity = "0.7";
+                                    e.currentTarget.style.opacity = "0.85";
                                     e.currentTarget.style.color = semantic.text.muted;
                                 }}
                             >
-                                <Icon name="copy" size={14} />
+                                <span style={{ display: "inline-block", transform: "scale(0.7)", transformOrigin: "left center" }}>{hex}</span>
+                                <Icon name="copy" size={10} />
                             </button>
+                        ) : (
+                            <span style={{ display: "inline-block", transform: "scale(0.7)", transformOrigin: "left center" }}>{hex}</span>
                         )}
                     </span>
                 </div>
@@ -1362,6 +1362,7 @@ function BaseColorsCard({
     semantic,
     isDirty,
     onSave,
+    onCopyHex,
 }: {
     mode: "dark" | "light";
     tokens: BaseTokens;
@@ -2095,6 +2096,11 @@ export default function AparienciaPage() {
         showToast({ title: "Cambios guardados", type: "success" });
     };
 
+    const handleCopyHex = (hex: string) => {
+        navigator.clipboard.writeText(hex);
+        showToast({ title: "Color copiado", type: "success", duration: 1500 });
+    };
+
     if (!DEV_UI_ENABLED || mockSession.role !== "OWNER") {
         return (
             <PageShell
@@ -2527,6 +2533,7 @@ export default function AparienciaPage() {
                                             semantic={semantic}
                                             isDirty={!baseTokensEqual(localTokensByMode.dark, lastSavedByMode.dark)}
                                             onSave={() => handleSaveBaseColors("dark")}
+                                            onCopyHex={handleCopyHex}
                                         />
                                     </div>
                                     <div key="light" style={{ minWidth: 320, maxWidth: 420, flex: "1 1 320", minHeight: 0, display: "flex" }}>
@@ -2547,6 +2554,7 @@ export default function AparienciaPage() {
                                         semantic={semantic}
                                         isDirty={!baseTokensEqual(localTokensByMode.light, lastSavedByMode.light)}
                                         onSave={() => handleSaveBaseColors("light")}
+                                        onCopyHex={handleCopyHex}
                                     />
                                     </div>
                                 </div>
