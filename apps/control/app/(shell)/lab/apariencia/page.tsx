@@ -2000,7 +2000,9 @@ export default function AparienciaPage() {
                 <>
                     <span>Desarrollador</span>
                     <span>›</span>
-                    <span style={{ color: semantic.text.active }}>Apariencia</span>
+                    <span>Apariencia</span>
+                    <span>›</span>
+                    <span style={{ color: semantic.text.active }}>{activeTab}</span>
                 </>
             }
             headerStyle={{ borderBottom: "none" }}
