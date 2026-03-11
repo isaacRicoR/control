@@ -2368,13 +2368,13 @@ export default function AparienciaPage() {
                     style={{
                         display: "flex",
                         flexDirection: "column",
-                        gap: activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados" ? 0 : spacing[16],
+                        gap: activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados" || activeTab === "Componentes" ? 0 : spacing[16],
                         minWidth: 0,
                         minHeight: 0,
                         flex: 1,
                         overflowY: "auto",
-                        overflowX: activeTab === "Base" || activeTab === "Estados" ? "auto" : "hidden",
-                        padding: activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados" ? 0 : spacing[16],
+                        overflowX: activeTab === "Base" || activeTab === "Estados" || activeTab === "Componentes" ? "auto" : "hidden",
+                        padding: activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados" || activeTab === "Componentes" ? 0 : spacing[16],
                         marginLeft: sidebarCollapsed ? -3 : 0,
                     }}
                 >
@@ -2682,18 +2682,8 @@ export default function AparienciaPage() {
                 )}
 
                 {activeTab === "Componentes" && (
-                    <>
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: spacing[16],
-                                flexShrink: 0,
-                                paddingLeft: 0,
-                                paddingRight: 0,
-                                width: "100%",
-                            }}
-                        >
+                    <AppearanceSectionLayout
+                        headerContent={
                             <h2
                                 style={{
                                     margin: 0,
@@ -2705,47 +2695,148 @@ export default function AparienciaPage() {
                             >
                                 Componentes
                             </h2>
-                        </div>
-                        <div style={{ display: "flex", flexDirection: "column", gap: spacing[24], width: "100%", maxWidth: CONTENT_MAX_WIDTH, paddingTop: spacing[16] }}>
-                        <SettingSection title="Tema" description="Preset activo para componentes.">
-                            <div style={{ maxWidth: 320 }}>
-                                <SelectSingle
-                                    label="Preset activo"
-                                    options={[...AVAILABLE_THEMES]}
-                                    value={currentPreset}
-                                    onChange={(v) => setPreset(v as "control" | "security")}
-                                />
-                            </div>
-                        </SettingSection>
-                        <SettingSection title="Componentes" description="Aspecto por tipo de componente.">
+                        }
+                        headerVariant="title"
+                        borderColor={semantic.border.subtle ?? semantic.border.default}
+                    >
+                        <div
+                            className="base-tema-scroll"
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "flex-start",
+                                flex: 1,
+                                minHeight: 0,
+                                minWidth: 0,
+                                overflowX: "auto",
+                                padding: spacing[16],
+                                boxSizing: "border-box",
+                                width: "100%",
+                            }}
+                        >
                             <div
                                 style={{
-                                    display: "grid",
-                                    gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
-                                    gap: spacing[12],
-                                    width: "100%",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: spacing[24],
+                                    minWidth: 460,
+                                    maxWidth: CONTENT_MAX_WIDTH,
+                                    flexShrink: 0,
+                                    backgroundColor: semantic.surface.card ?? semantic.surface.default,
+                                    borderRadius: radius.card,
+                                    border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                                    padding: spacing[24],
+                                    boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
                                 }}
                             >
-                                {["Buttons", "Cards", "Inputs", "Tables", "Badges"].map((name) => (
-                                    <div
-                                        key={name}
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "space-between",
+                                        gap: spacing[16],
+                                    }}
+                                >
+                                    <div>
+                                        <span
+                                            style={{
+                                                display: "block",
+                                                fontFamily: typography.fontFamily.primary,
+                                                fontSize: typography.fontSize.sm,
+                                                fontWeight: typography.fontWeight.medium,
+                                                color: semantic.text.default,
+                                            }}
+                                        >
+                                            Tema
+                                        </span>
+                                        <span
+                                            style={{
+                                                display: "block",
+                                                marginTop: spacing[4],
+                                                fontFamily: typography.fontFamily.primary,
+                                                fontSize: typography.fontSize.sm,
+                                                color: semantic.text.muted,
+                                            }}
+                                        >
+                                            Preset activo para componentes.
+                                        </span>
+                                    </div>
+                                    <PresetSelector />
+                                </div>
+                                <div
+                                    style={{
+                                        height: 1,
+                                        width: "100%",
+                                        backgroundColor: semantic.border.subtle ?? semantic.border.default,
+                                    }}
+                                    aria-hidden
+                                />
+                                <div>
+                                    <span
                                         style={{
-                                            padding: `${spacing[12]} ${spacing[16]}`,
-                                            backgroundColor: semantic.surface.default,
-                                            border: `1px solid ${semantic.border.subtle || semantic.border.default}`,
-                                            borderRadius: radius.sm,
-                                            color: semantic.text.muted,
+                                            display: "block",
+                                            fontFamily: typography.fontFamily.primary,
                                             fontSize: typography.fontSize.sm,
                                             fontWeight: typography.fontWeight.medium,
+                                            color: semantic.text.default,
                                         }}
                                     >
-                                        {name}
+                                        Componentes
+                                    </span>
+                                    <span
+                                        style={{
+                                            display: "block",
+                                            marginTop: spacing[4],
+                                            marginBottom: spacing[12],
+                                            fontFamily: typography.fontFamily.primary,
+                                            fontSize: typography.fontSize.sm,
+                                            color: semantic.text.muted,
+                                        }}
+                                    >
+                                        Aspecto por tipo de componente.
+                                    </span>
+                                    <div
+                                        style={{
+                                            display: "grid",
+                                            gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
+                                            gap: spacing[12],
+                                            width: "100%",
+                                        }}
+                                    >
+                                        {["Buttons", "Cards", "Inputs", "Tables", "Badges"].map((name) => (
+                                            <button
+                                                key={name}
+                                                type="button"
+                                                style={{
+                                                    padding: `${spacing[12]} ${spacing[16]}`,
+                                                    backgroundColor: semantic.surface.default,
+                                                    border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                                                    borderRadius: radius.sm,
+                                                    color: semantic.text.default,
+                                                    fontSize: typography.fontSize.sm,
+                                                    fontWeight: typography.fontWeight.medium,
+                                                    fontFamily: typography.fontFamily.primary,
+                                                    cursor: "pointer",
+                                                    textAlign: "left",
+                                                    transition: "background-color 0.2s ease, border-color 0.2s ease",
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.backgroundColor = semantic.surface.hover;
+                                                    e.currentTarget.style.borderColor = semantic.border.default ?? semantic.border.subtle;
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.backgroundColor = semantic.surface.default;
+                                                    e.currentTarget.style.borderColor = semantic.border.subtle ?? semantic.border.default;
+                                                }}
+                                            >
+                                                {name}
+                                            </button>
+                                        ))}
                                     </div>
-                                ))}
+                                </div>
                             </div>
-                        </SettingSection>
                         </div>
-                    </>
+                    </AppearanceSectionLayout>
                 )}
 
                 {activeTab === "Avanzado" && (

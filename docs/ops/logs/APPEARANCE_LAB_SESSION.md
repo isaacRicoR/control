@@ -16,84 +16,84 @@ Registro de la sesión de trabajo en el módulo **Appearance** dentro del labora
 - **Módulo**: Appearance (Theme Management System)
 - **Ruta**: `/lab/apariencia`
 - **Acceso**: Sidebar principal → Desarrollador → Apariencia
-- **Estado**: Fase LABORATORIO — no forma parte del producto final ni del Design System oficial
+- **Estado**: Fase LABORATORIO — no forma parte del producto final hasta formalización
 
 ---
 
-## Estructura de navegación implementada
+## Estructura actual (2026-03-06)
+
+### Sidebar interna
+
+- **SecondaryNavSidebar** — navegación vertical con grupos
+- Grupos: General (Galería, Base), Configuración (Estados, Componentes, Avanzado)
+- Modo colapsado con íconos
+- Línea vertical ajustada para alineación con header
+
+### Patrón de sección
 
 ```
-Sidebar principal
-  → Apariencia
-    → Card contenedora
-      → Tabs superiores
+AppearanceSectionLayout
+├ Header
+│   ├ headerVariant="tabs" → SectionTabs (Base)
+│   ├ headerVariant="title" → título h2 (Galería, Estados, Componentes)
+│   └ Línea horizontal
+└ Content area (scroll)
 ```
 
-### Tabs actuales
+---
 
-| Tab | Descripción |
-|-----|-------------|
-| **Tema** | Configuración general del tema |
-| **Colores base** | Tokens base para modo oscuro y claro |
+## Secciones implementadas
+
+| Sección | Estado | Descripción |
+|---------|--------|-------------|
+| **Base → Tema** | MADURO | Preset selector, modo Dark/Light, vista previa |
+| **Base → Colores base** | MADURO | Tokens base (accent, background, surface, text), color picker, persistencia |
+| **Galería** | CONSTRUIDO | Grid de temas (Control, Security), navegación a Base |
+| **Estados** | CONSTRUIDO | Tokens success, warning, error, info |
+| **Componentes** | EN LABORATORIO | Preset + categorías (Buttons, Cards, Inputs, Tables, Badges) |
+| **Avanzado** | PENDIENTE | Placeholder |
 
 ---
 
-## Estructura de "Colores base"
+## Componentes creados en el laboratorio
 
-Dos tarjetas principales:
+### SectionTabs
 
-| Tarjeta | Contenido |
-|---------|-----------|
-| **Modo oscuro** | Tokens base: accent, background, surface, text |
-| **Modo claro** | Tokens base: accent, background, surface, text |
+- **Ubicación**: `packages/console/ui/molecules/SectionTabs/`
+- **Uso**: Navegación de subsecciones (ej. Tema | Colores base)
+- **Estructura**: Altura 48px, padding 24px, underline animado
 
-### Estructura por token
+### AppearanceSectionLayout
 
-Cada token incluye:
-
-- **Izquierda**:
-  - Círculo con color
-  - Nombre del token
-  - Valor hexadecimal
-- **Derecha**:
-  - Botón editar (icono lápiz)
-  - Botón desplegar
+- **Ubicación**: `apps/control/app/(shell)/lab/apariencia/_components/AppearanceSectionLayout.tsx`
+- **Props**: `headerContent`, `headerVariant` ("tabs" | "title"), `borderColor`, `children`
+- **Uso**: Base, Galería, Estados, Componentes
 
 ---
 
-## Sistema de edición de color (implementado)
-
-Funcionalidades actuales:
+## Sistema de edición de color
 
 - Color picker (selector 2D + hue slider)
 - Formatos: HEX, RGB, HSL
 - Colores recientes
 - Herramienta eyedropper (EyeDropper API)
-- Apertura desde botón editar
+- Apertura desde botón editar (popover desktop, modal móvil)
 
-### Comportamiento objetivo del selector
-
-| Contexto | Comportamiento |
-|----------|----------------|
-| **Desktop** | Popover anclado al botón |
-| **Pantallas pequeñas** | Modal centrado |
-
-> **Nota**: El selector de color está en pruebas de UX. Aún no es un componente oficial del Design System.
+> **Nota**: El selector de color está en fase experimental. No es aún componente oficial del Design System.
 
 ---
 
-## Estado experimental
+## Hallazgos de diseño
 
-- Los componentes desarrollados en `/lab/apariencia` son experimentales.
-- Antes de promoverlos al Design System, deben registrarse en **UI SYSTEM MAP**.
-- La arquitectura base del proyecto no ha sido modificada.
-- Los componentes aún no forman parte del sistema oficial.
+- El sistema permite estructurar páginas con: sidebar, topbar, toolbar/header, contenido principal
+- El laboratorio de Apariencia sirve para **definir patrones visuales antes de formalizarlos**
+- La alineación visual entre secciones se consigue usando el mismo layout (AppearanceSectionLayout) con variantes de header
 
 ---
 
 ## Documentos actualizados
 
-- docs/system-maps/CONTROL_SYSTEM_MAP.md — Sección "Laboratory Modules"
-- docs/system-maps/UI_SYSTEM_MAP.md — Nota sobre color picker experimental
-- docs/system-maps/PRODUCT_SYSTEM_MAP.md — Sección "Módulos Experimentales"
-- docs/README.md — Nota sobre sección `/lab`
+- docs/PUNTO_DE_ARRANQUE.md — Punto de arranque para nuevos chats
+- docs/ops/logs/APPEARANCE_LAB_SESSION.md — Este archivo
+- docs/system-maps/CONTROL_SYSTEM_MAP.md — Sección Laboratory y lab/apariencia
+- docs/system-maps/UI_SYSTEM_MAP.md — SectionTabs y AppearanceSectionLayout

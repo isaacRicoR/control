@@ -4,6 +4,10 @@ Este archivo explica la estructura del sistema de documentación y la ubicación
 
 ---
 
+## Punto de arranque
+
+- **docs/PUNTO_DE_ARRANQUE.md** — Contexto para nuevos chats. Infraestructura, lab activo, componentes maduros, siguiente foco.
+
 ## Fuente oficial del sistema
 
 Los siguientes documentos actúan como la fuente oficial de verdad del sistema:
@@ -97,7 +101,9 @@ Ubicación: docs/ops/logs/
 
 Bitácoras operativas y cambios en la documentación a lo largo del tiempo.
 
-Ejemplo: APPEARANCE_LAB_SESSION.md — registro de la sesión de laboratorio del módulo Appearance.
+Ejemplos:
+- APPEARANCE_LAB_SESSION.md — registro de la sesión del lab Apariencia
+- HANDOFF_CONTEXT.md — bloque de contexto para handoff a nuevo chat
 
 **Nota sobre `/lab`**: Existe una sección `/lab` utilizada para experimentación de UX antes de formalizar componentes. Los módulos en `/lab` (por ejemplo `/lab/apariencia`) no forman parte del producto final hasta su formalización y registro en los mapas oficiales.
 

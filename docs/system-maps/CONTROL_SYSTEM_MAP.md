@@ -1,6 +1,6 @@
 # CONTROL — SYSTEM MAP
 
-> **Estado**: Actualizado al 2026-03-05
+> **Estado**: Actualizado al 2026-03-06
 > **Alcance**: Únicamente lo que existe en el codebase `c:\dev\controldev`.
 
 ---
@@ -284,13 +284,13 @@ El sistema implementa una jerarquía de persistencia de preferencias de usuario 
 
 ### Apariencia (`/lab/apariencia`)
 Herramienta de configuración de tokens visuales (Desarrollador → Apariencia).
-- **Tabs**: Base, Estados, Componentes, Avanzado.
-- **Permisos**: 
-  - Admin: Edición total de tokens.
-  - Usuario: Solo cambio Dark/Light.
+- **Sidebar interna**: SecondaryNavSidebar con grupos (General: Galería, Base; Configuración: Estados, Componentes, Avanzado)
+- **Secciones**: Galería, Base (Tema | Colores base), Estados, Componentes, Avanzado
+- **Layout**: AppearanceSectionLayout (header con variantes "tabs" / "title" + línea horizontal + content scroll)
+- **Permisos**: Admin: edición total; Usuario: solo cambio Dark/Light
 
 **Estado**:
-🟢 IMPLEMENTADO (Herramienta Real)
+🟢 IMPLEMENTADO — Base maduro; Galería, Estados, Componentes en laboratorio
 
 ---
 
@@ -300,7 +300,23 @@ Módulos que se encuentran en **fase de laboratorio** en la ruta `/lab`. No form
 
 | Módulo | Ruta | Descripción | Estado |
 |--------|------|-------------|--------|
-| **Appearance System** | `/lab/apariencia` | Sistema de gestión de temas (Theme Management System). Diseño y experimentación de UX/UI para configuración de tokens visuales antes de convertirse en componentes reutilizables. | 🧪 **LABORATORIO** |
+| **Appearance System** | `/lab/apariencia` | Sistema de gestión de temas. Sidebar interna + AppearanceSectionLayout. Secciones: Galería, Base (Tema, Colores base), Estados, Componentes, Avanzado. | 🧪 **LABORATORIO** |
+
+### Estado real de /lab/apariencia (2026-03-06)
+
+| Sección | Estado |
+|---------|--------|
+| Base → Tema | MADURO |
+| Base → Colores base | MADURO |
+| Galería | CONSTRUIDO (en revisión) |
+| Estados | CONSTRUIDO |
+| Componentes | EN LABORATORIO |
+| Avanzado | PENDIENTE |
+
+### Componentes del laboratorio
+
+- **SectionTabs** (`packages/console/ui/molecules/SectionTabs/`): Tabs de navegación de secciones. Diferencia con StatusTabs: StatusTabs para filtros en listados; SectionTabs para subsecciones (ej. Tema | Colores base).
+- **AppearanceSectionLayout** (`apps/control/app/(shell)/lab/apariencia/_components/`): Layout interno con header (`headerVariant="tabs"` o `"title"`), línea horizontal y content scroll.
 
 > **Regla**: Los componentes desarrollados en `/lab` son experimentales. Antes de promoverlos al Design System oficial, deben registrarse en **UI SYSTEM MAP** y cumplir el proceso de formalización.
 
@@ -389,13 +405,12 @@ Piezas de arquitectura UI reutilizables.
 
 ## 🚀 ÁREA DE DESARROLLO ACTUAL
 
-El foco se encuentra en la infraestructura de personalización y estética avanzada.
+El foco está en `/lab/apariencia`. Infraestructura (Console, Connector, RBAC, Shell) está **cerrada y estable**.
 
-- **Appearance System**: Refinamiento de la herramienta de edición de tokens.
-- **Theme Registry**: Gestión dinámica de presets (Control vs Security).
-- **Theme Switching**: Transiciones suaves y persistencia de modo (Dark/Light).
-- **Ubicación**: `apps/control/app/(shell)/lab/apariencia`
-- **Estado**: 🚧 IN DEVELOPMENT
+- **Lab activo**: `apps/control/app/(shell)/lab/apariencia`
+- **Maduro**: Base (Tema, Colores base), SectionTabs, AppearanceSectionLayout
+- **En progreso**: Galería, Estados; validación de alineación
+- **Pendiente**: Completar Componentes, Avanzado
 
 ---
 

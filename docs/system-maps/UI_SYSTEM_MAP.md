@@ -1,7 +1,7 @@
 # UI SYSTEM MAP
 
 > Inventario oficial del sistema de interfaz — CONTROL Design System  
-> Última actualización: 2026-03-05
+> Última actualización: 2026-03-06
 
 ---
 
@@ -166,6 +166,7 @@ Proceso obligatorio para nuevas piezas:
 | SelectSingle | ✅ | `molecules/SelectSingle/` | Select con dropdown flotante y scrollbar estilizado |
 | ConfirmDialog | ✅ | `molecules/ConfirmDialog/` | Modal de confirmación con tonos (default, error, warning, info, success). Layout compacto premium |
 | StatusTabs | ✅ | `molecules/StatusTabs/` | Tabs de filtro por estado con badges y underline animado (Users, Devices) |
+| SectionTabs | ✅ | `molecules/SectionTabs/` | Tabs de navegación de secciones (ej. Tema | Colores base en Apariencia). Diferencia: StatusTabs para filtros en listados; SectionTabs para subsecciones internas |
 | DeviceStatusCell | ✅ | `molecules/DeviceStatusCell.tsx` | Celda de estado de dispositivo para tablas (badge + estado) |
 | SelectMulti | ❌ | `molecules/SelectMulti/` | Select multi-valor con chips |
 | FilterChips | ❌ | `molecules/FilterChips/` | Chips activos de filtro con botón de eliminar |
@@ -499,6 +500,12 @@ Entornos internos para desarrollo y pruebas de componentes aislados.
 ### Nota sobre Color Picker (Experimental)
 
 El **selector de color** (color picker) actual está en **fase experimental** dentro de `/lab/apariencia`. Aún no es un componente oficial del Design System. Implementa: color picker 2D, hue slider, formatos HEX/RGB/HSL, colores recientes, herramienta eyedropper, y apertura desde botón editar. En desktop se abre como popover; en pantallas pequeñas como modal centrado. Hasta su formalización, no debe reutilizarse fuera de lab.
+
+### AppearanceSectionLayout (Lab interno)
+
+| Componente | Estado | Ruta | Nota |
+|------------|--------|------|------|
+| AppearanceSectionLayout | ✅ | `apps/control/app/(shell)/lab/apariencia/_components/AppearanceSectionLayout.tsx` | Layout interno del lab Apariencia. Estructura: header + línea horizontal + content scroll. Props: `headerVariant="tabs"` (SectionTabs) o `"title"` (título h2). Usado por Base, Galería, Estados, Componentes. No está en packages/console; es interno del lab hasta formalización. |
 
 ---
 
