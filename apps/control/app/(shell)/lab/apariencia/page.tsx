@@ -20,6 +20,7 @@ import { useVisualPreset } from "@core/visual/visualPresetStore";
 import { useToast } from "@core/toast/useToast";
 import { getThemeTokens } from "@core/visual/themeRegistry";
 import { AccessDeniedState } from "@ui/containers/AccessDeniedState/AccessDeniedState";
+import { AppearanceSectionLayout } from "./_components/AppearanceSectionLayout";
 import { PresetSelector } from "@ui/dev/PresetSelector";
 import { DEV_UI_ENABLED } from "@core/flags/devFlags";
 import { mockSession } from "@core/auth/mockSession";
@@ -2289,7 +2290,9 @@ export default function AparienciaPage() {
 .base-section-scroll::-webkit-scrollbar { display: none; }
 .base-section-scroll { scrollbar-width: none; -ms-overflow-style: none; }
 .appearance-cards-scroll::-webkit-scrollbar { display: none; }
-.appearance-cards-scroll { scrollbar-width: none; -ms-overflow-style: none; }`}</style>
+.appearance-cards-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+.base-tema-scroll::-webkit-scrollbar { display: none; }
+.base-tema-scroll { scrollbar-width: none; -ms-overflow-style: none; }`}</style>
         <PageShell
             variant="fluid"
             title="Apariencia"
@@ -2375,69 +2378,9 @@ export default function AparienciaPage() {
                         marginLeft: sidebarCollapsed ? -3 : 0,
                     }}
                 >
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                                gap: spacing[16],
-                                flexShrink: 0,
-                                position: "relative",
-                                ...(activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados"
-                                    ? {
-                                          paddingTop: activeTab === "Base" ? 0 : spacing[8],
-                                          paddingBottom: 0,
-                                          paddingLeft: 0,
-                                          paddingRight: 0,
-                                          width: "100%",
-                                      }
-                                    : {}),
-                            }}
-                        >
-                            {(activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados") && (
-                                <div
-                                    style={{
-                                        position: "absolute",
-                                        bottom: 0,
-                                        left: 0,
-                                        right: 0,
-                                        height: 1,
-                                        width: "100%",
-                                        backgroundColor: semantic.border.subtle ?? semantic.border.default,
-                                    }}
-                                    aria-hidden
-                                />
-                            )}
-                            {activeTab === "Base" ? (
-                                <div
-                                    style={{
-                                        flex: 1,
-                                        minWidth: 0,
-                                        display: "flex",
-                                        width: "100%",
-                                    }}
-                                >
-                                    <SectionTabs
-                                        items={BASE_SECTION_TABS}
-                                        activeValue={(selectedBaseSub ?? "tema") as string}
-                                        onChange={(v) => setSelectedBaseSub(v as "tema" | "colores")}
-                                        ariaLabel="Subsecciones de Base"
-                                    />
-                                </div>
-                            ) : activeTab === "Galería" || activeTab === "Estados" ? (
-                                <div
-                                    style={{
-                                        flex: 1,
-                                        minWidth: 0,
-                                        display: "flex",
-                                        alignItems: "center",
-                                        width: "100%",
-                                        paddingTop: 9.5,
-                                        paddingBottom: 9.5,
-                                        paddingLeft: spacing[16],
-                                        paddingRight: spacing[16],
-                                    }}
-                                >
+                        {activeTab === "Galería" && (
+                            <AppearanceSectionLayout
+                                headerContent={
                                     <h2
                                         style={{
                                             margin: 0,
@@ -2447,114 +2390,59 @@ export default function AparienciaPage() {
                                             color: semantic.text.active,
                                         }}
                                     >
-                                        {activeTab}
+                                        Galería
                                     </h2>
+                                }
+                                headerVariant="title"
+                                borderColor={semantic.border.subtle ?? semantic.border.default}
+                            >
+                                <div style={{ padding: spacing[16], boxSizing: "border-box", width: "100%" }}>
+                                    <div
+                                        style={{
+                                            display: "grid",
+                                            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 290px))",
+                                            gap: spacing.lg,
+                                            width: "100%",
+                                            justifyContent: "start",
+                                        }}
+                                        role="list"
+                                        aria-label="Galería de temas"
+                                    >
+                                        {GALLERY_THEMES.map((t) => (
+                                            <ThemeGalleryCard
+                                                key={t.id}
+                                                theme={t}
+                                                isActive={currentPreset === t.id}
+                                                onSelect={() => setPreset(t.id as "control" | "security")}
+                                                onEdit={() => {
+                                                    setActiveTab("Base");
+                                                    setSelectedBaseSub("tema");
+                                                    setPreset(t.id as "control" | "security");
+                                                }}
+                                                semantic={semantic}
+                                            />
+                                        ))}
+                                    </div>
                                 </div>
-                            ) : (
-                                <h2
-                                    style={{
-                                        margin: 0,
-                                        fontFamily: typography.fontFamily.primary,
-                                        fontSize: typography.fontSize.lg,
-                                        fontWeight: typography.fontWeight.semibold,
-                                        color: semantic.text.active,
-                                    }}
-                                >
-                                    {activeTab}
-                                </h2>
-                            )}
-                        </div>
+                            </AppearanceSectionLayout>
+                        )}
 
-                {/* Galería — grid de temas */}
-                {activeTab === "Galería" && (
-                    <div
-                        className="base-section-scroll"
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            width: "100%",
-                            minHeight: 0,
-                            flex: 1,
-                            overflow: "auto",
-                            paddingTop: spacing[12],
-                        }}
-                    >
-                        <div
-                            style={{
-                                flex: 1,
-                                minHeight: 0,
-                                paddingTop: spacing[16],
-                                paddingBottom: spacing[24],
-                            }}
-                        >
-                        <div
-                            style={{
-                                padding: spacing[16],
-                                boxSizing: "border-box",
-                                width: "100%",
-                            }}
-                        >
-                        <div
-                            style={{
-                                display: "grid",
-                                gridTemplateColumns: "repeat(auto-fill, minmax(260px, 290px))",
-                                gap: spacing.lg,
-                                width: "100%",
-                                justifyContent: "start",
-                            }}
-                            role="list"
-                            aria-label="Galería de temas"
-                        >
-                            {GALLERY_THEMES.map((t) => (
-                                <ThemeGalleryCard
-                                    key={t.id}
-                                    theme={t}
-                                    isActive={currentPreset === t.id}
-                                    onSelect={() => setPreset(t.id as "control" | "security")}
-                                    onEdit={() => {
-                                        setActiveTab("Base");
-                                        setSelectedBaseSub("tema");
-                                        setPreset(t.id as "control" | "security");
-                                    }}
-                                    semantic={semantic}
-                                />
-                            ))}
-                        </div>
-                        </div>
-                        </div>
-                    </div>
-                )}
-
-                {/* Base — tabs horizontales + contenido */}
-                {activeTab === "Base" && (
-                    <>
-                    <style>{`
-                        .base-section-scroll::-webkit-scrollbar { display: none; }
-                        .base-section-scroll { scrollbar-width: none; -ms-overflow-style: none; }
-                        .appearance-cards-scroll::-webkit-scrollbar { display: none; }
-                        .appearance-cards-scroll { scrollbar-width: none; -ms-overflow-style: none; }
-                        .base-tema-scroll::-webkit-scrollbar { display: none; }
-                        .base-tema-scroll { scrollbar-width: none; -ms-overflow-style: none; }
-                    `}</style>
-                    <div className="base-section-scroll"
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            width: "100%",
-                            minHeight: 0,
-                            flex: 1,
-                            overflow: "auto",
-                            paddingTop: spacing[12],
-                        }}
-                    >
-                        <div
-                            style={{
-                                flex: 1,
-                                minHeight: 0,
-                                paddingTop: spacing[16],
-                                paddingBottom: spacing[24],
-                            }}
-                        >
+                        {activeTab === "Base" && (
+                            <>
+                            <AppearanceSectionLayout
+                                headerContent={
+                                    <div style={{ flex: 1, minWidth: 0, display: "flex", width: "100%" }}>
+                                        <SectionTabs
+                                            items={BASE_SECTION_TABS}
+                                            activeValue={(selectedBaseSub ?? "tema") as string}
+                                            onChange={(v) => setSelectedBaseSub(v as "tema" | "colores")}
+                                            ariaLabel="Subsecciones de Base"
+                                        />
+                                    </div>
+                                }
+                                headerVariant="tabs"
+                                borderColor={semantic.border.subtle ?? semantic.border.default}
+                            >
                             {(selectedBaseSub ?? "tema") === "tema" && (
                                 <div
                                     className="base-tema-scroll"
@@ -2733,75 +2621,92 @@ export default function AparienciaPage() {
                                     </div>
                                 </div>
                             )}
-                        </div>
-                    </div>
+                            </AppearanceSectionLayout>
                     </>
                 )}
 
-                {/* Estados — patrón idéntico a Base → Colores base */}
                 {activeTab === "Estados" && (
-                    <div
-                        className="base-section-scroll"
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            width: "100%",
-                            minHeight: 0,
-                            flex: 1,
-                            overflow: "auto",
-                            paddingTop: spacing[12],
-                        }}
-                    >
-                        <div
-                            style={{
-                                flex: 1,
-                                minHeight: 0,
-                                paddingTop: spacing[16],
-                                paddingBottom: spacing[24],
-                            }}
-                        >
-                            <div
-                                className="appearance-cards-scroll"
+                    <AppearanceSectionLayout
+                        headerContent={
+                            <h2
                                 style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    flexWrap: "wrap",
-                                    gap: spacing[24],
-                                    width: "100%",
-                                    flex: 1,
-                                    minHeight: 0,
-                                    alignItems: "flex-start",
-                                    justifyContent: "flex-start",
-                                    overflowX: "auto",
-                                    minWidth: 0,
-                                    padding: spacing[16],
-                                    boxSizing: "border-box",
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.lg,
+                                    fontWeight: typography.fontWeight.semibold,
+                                    color: semantic.text.active,
                                 }}
                             >
-                                <div key="estados" style={{ minWidth: 320, maxWidth: 420, flex: "1 1 320", minHeight: 0, display: "flex" }}>
-                                    <EstadosCard
-                                        tokens={currentStates}
-                                        originalTokens={stateTokensFromTheme(getThemeTokens(currentPreset, theme as ThemeEditMode))}
-                                        options={stateColorOptions}
-                                        onChange={handleChangeState}
-                                        expandedByKey={expandedEstados}
-                                        onExpandToggle={(key) =>
-                                            setExpandedEstados((prev) => ({ ...prev, [key]: !prev[key] }))
-                                        }
-                                        semantic={semantic}
-                                        isDirty={!stateTokensEqual(currentStates, lastSavedStatesByMode[theme as ThemeEditMode])}
-                                        onSave={handleSaveEstados}
-                                        onCopyHex={handleCopyHex}
-                                    />
-                                </div>
+                                Estados
+                            </h2>
+                        }
+                        headerVariant="title"
+                        borderColor={semantic.border.subtle ?? semantic.border.default}
+                    >
+                        <div
+                            className="appearance-cards-scroll"
+                            style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                flexWrap: "wrap",
+                                gap: spacing[24],
+                                width: "100%",
+                                flex: 1,
+                                minHeight: 0,
+                                alignItems: "flex-start",
+                                justifyContent: "flex-start",
+                                overflowX: "auto",
+                                minWidth: 0,
+                                padding: spacing[16],
+                                boxSizing: "border-box",
+                            }}
+                        >
+                            <div key="estados" style={{ minWidth: 320, maxWidth: 420, flex: "1 1 320", minHeight: 0, display: "flex" }}>
+                                <EstadosCard
+                                    tokens={currentStates}
+                                    originalTokens={stateTokensFromTheme(getThemeTokens(currentPreset, theme as ThemeEditMode))}
+                                    options={stateColorOptions}
+                                    onChange={handleChangeState}
+                                    expandedByKey={expandedEstados}
+                                    onExpandToggle={(key) =>
+                                        setExpandedEstados((prev) => ({ ...prev, [key]: !prev[key] }))
+                                    }
+                                    semantic={semantic}
+                                    isDirty={!stateTokensEqual(currentStates, lastSavedStatesByMode[theme as ThemeEditMode])}
+                                    onSave={handleSaveEstados}
+                                    onCopyHex={handleCopyHex}
+                                />
                             </div>
                         </div>
-                    </div>
+                    </AppearanceSectionLayout>
                 )}
 
-                {/* Componentes — secciones apiladas, ancho proporcional */}
                 {activeTab === "Componentes" && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[24], width: "100%", maxWidth: CONTENT_MAX_WIDTH }}>
+                    <>
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: spacing[16],
+                                flexShrink: 0,
+                                paddingLeft: 0,
+                                paddingRight: 0,
+                                width: "100%",
+                            }}
+                        >
+                            <h2
+                                style={{
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.lg,
+                                    fontWeight: typography.fontWeight.semibold,
+                                    color: semantic.text.active,
+                                }}
+                            >
+                                Componentes
+                            </h2>
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: spacing[24], width: "100%", maxWidth: CONTENT_MAX_WIDTH, paddingTop: spacing[16] }}>
                         <SettingSection title="Tema" description="Preset activo para componentes.">
                             <div style={{ maxWidth: 320 }}>
                                 <SelectSingle
@@ -2839,12 +2744,36 @@ export default function AparienciaPage() {
                                 ))}
                             </div>
                         </SettingSection>
-                    </div>
+                        </div>
+                    </>
                 )}
 
-                {/* Avanzado — secciones apiladas, ancho proporcional */}
                 {activeTab === "Avanzado" && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[24], width: "100%", maxWidth: CONTENT_MAX_WIDTH }}>
+                    <>
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: spacing[16],
+                                flexShrink: 0,
+                                paddingLeft: 0,
+                                paddingRight: 0,
+                                width: "100%",
+                            }}
+                        >
+                            <h2
+                                style={{
+                                    margin: 0,
+                                    fontFamily: typography.fontFamily.primary,
+                                    fontSize: typography.fontSize.lg,
+                                    fontWeight: typography.fontWeight.semibold,
+                                    color: semantic.text.active,
+                                }}
+                            >
+                                Avanzado
+                            </h2>
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: spacing[24], width: "100%", maxWidth: CONTENT_MAX_WIDTH, paddingTop: spacing[16] }}>
                         <SettingSection title="Tema" description="Preset activo para ajustes avanzados.">
                             <div style={{ maxWidth: 320 }}>
                                 <SelectSingle
@@ -2870,7 +2799,8 @@ export default function AparienciaPage() {
                                 <Input label="Shadows" value="" placeholder="—" disabled />
                             </div>
                         </SettingSection>
-                    </div>
+                        </div>
+                    </>
                 )}
                 </div>
                 </div>
