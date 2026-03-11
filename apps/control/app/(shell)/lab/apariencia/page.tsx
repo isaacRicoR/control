@@ -2492,7 +2492,7 @@ export default function AparienciaPage() {
                                         width: "100%",
                                         paddingLeft: spacing[16],
                                         paddingRight: spacing[16],
-                                        marginTop: -4,
+                                        marginTop: -5,
                                     }}
                                 >
                                     <BaseTabs
