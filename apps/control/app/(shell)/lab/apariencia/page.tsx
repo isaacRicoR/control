@@ -7,6 +7,7 @@ import { PanelCard } from "@ui/containers/PanelCard";
 import { SelectSingle } from "@ui/molecules/SelectSingle/SelectSingle";
 import { FloatingSurface } from "@ui/atoms/FloatingSurface/FloatingSurface";
 import { SecondaryNavSidebar, SECONDARY_NAV_SIDEBAR_WIDTH } from "@ui/molecules/SecondaryNavSidebar";
+import { SectionTabs } from "@ui/molecules/SectionTabs";
 import { ActionIcon } from "@ui/atoms/ActionIcon/ActionIcon";
 import { Tooltip } from "@ui/atoms/Tooltip";
 import { Icon } from "@ui/atoms/Icon/Icon";
@@ -407,100 +408,10 @@ function ModeSegmentedControl({
     );
 }
 
-function BaseTabs({
-    value,
-    onChange,
-    semantic,
-}: {
-    value: "tema" | "colores";
-    onChange: (v: "tema" | "colores") => void;
-    semantic: (typeof colors.dark)["semantic"];
-}) {
-    const tabs: { value: "tema" | "colores"; label: string }[] = [
-        { value: "tema", label: "Tema" },
-        { value: "colores", label: "Colores base" },
-    ];
-    const tabsRef = React.useRef<(HTMLButtonElement | null)[]>([]);
-    const [underlineStyle, setUnderlineStyle] = React.useState({ left: 0, width: 0 });
-
-    React.useEffect(() => {
-        const id = requestAnimationFrame(() => {
-            const activeIndex = value === "tema" ? 0 : 1;
-            const currentTab = tabsRef.current[activeIndex];
-            if (currentTab) {
-                setUnderlineStyle({
-                    left: currentTab.offsetLeft,
-                    width: currentTab.offsetWidth,
-                });
-            }
-        });
-        return () => cancelAnimationFrame(id);
-    }, [value]);
-
-    return (
-        <div
-            role="tablist"
-            aria-label="Subsecciones de Base"
-            style={{
-                display: "flex",
-                flexWrap: "nowrap",
-                alignItems: "stretch",
-                gap: 0,
-                flex: "0 0 auto",
-                minWidth: "min-content",
-                position: "relative",
-            }}
-        >
-            {tabs.map((tab, index) => {
-                const isActive = value === tab.value;
-                return (
-                    <button
-                        key={tab.value}
-                        ref={(el) => {
-                            tabsRef.current[index] = el;
-                        }}
-                        type="button"
-                        role="tab"
-                        aria-selected={isActive}
-                        onClick={() => onChange(tab.value)}
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            padding: `${spacing[12]}px ${spacing[16]}px`,
-                            fontFamily: typography.fontFamily.primary,
-                            fontSize: typography.fontSize.sm,
-                            fontWeight: typography.fontWeight.medium,
-                            color: isActive ? semantic.text.active : semantic.text.muted,
-                            backgroundColor: "transparent",
-                            border: "none",
-                            cursor: "pointer",
-                            transition: "color 0.2s ease",
-                            textAlign: "center",
-                        }}
-                    >
-                        {tab.label}
-                    </button>
-                );
-            })}
-            <div
-                style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: underlineStyle.left,
-                    width: underlineStyle.width,
-                    height: 2,
-                    borderRadius: 2,
-                    backgroundColor: semantic.text.active,
-                    transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                    pointerEvents: "none",
-                    zIndex: 1,
-                }}
-                aria-hidden
-            />
-        </div>
-    );
-}
+const BASE_SECTION_TABS = [
+    { value: "tema", label: "Tema" },
+    { value: "colores", label: "Colores base" },
+] as const;
 
 function TokenRowWithSwatch({
     label,
@@ -2457,7 +2368,7 @@ export default function AparienciaPage() {
                                 position: "relative",
                                 ...(activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados"
                                     ? {
-                                          paddingTop: spacing[8],
+                                          paddingTop: activeTab === "Base" ? 0 : spacing[8],
                                           paddingBottom: 0,
                                           paddingLeft: 0,
                                           paddingRight: 0,
@@ -2482,23 +2393,18 @@ export default function AparienciaPage() {
                             )}
                             {activeTab === "Base" ? (
                                 <div
-                                    className="base-tabs-scroll"
                                     style={{
-                                        overflowX: "auto",
-                                        overflowY: "visible",
                                         flex: 1,
                                         minWidth: 0,
                                         display: "flex",
                                         width: "100%",
-                                        paddingLeft: spacing[16],
-                                        paddingRight: spacing[16],
-                                        marginTop: -5,
                                     }}
                                 >
-                                    <BaseTabs
-                                        value={(selectedBaseSub ?? "tema") as "tema" | "colores"}
-                                        onChange={(v) => setSelectedBaseSub(v)}
-                                        semantic={semantic}
+                                    <SectionTabs
+                                        items={BASE_SECTION_TABS}
+                                        activeValue={(selectedBaseSub ?? "tema") as string}
+                                        onChange={(v) => setSelectedBaseSub(v as "tema" | "colores")}
+                                        ariaLabel="Subsecciones de Base"
                                     />
                                 </div>
                             ) : activeTab === "Galería" || activeTab === "Estados" ? (
@@ -2610,8 +2516,6 @@ export default function AparienciaPage() {
                         .base-section-scroll { scrollbar-width: none; -ms-overflow-style: none; }
                         .appearance-cards-scroll::-webkit-scrollbar { display: none; }
                         .appearance-cards-scroll { scrollbar-width: none; -ms-overflow-style: none; }
-                        .base-tabs-scroll::-webkit-scrollbar { display: none; }
-                        .base-tabs-scroll { scrollbar-width: none; -ms-overflow-style: none; }
                         .base-tema-scroll::-webkit-scrollbar { display: none; }
                         .base-tema-scroll { scrollbar-width: none; -ms-overflow-style: none; }
                     `}</style>
