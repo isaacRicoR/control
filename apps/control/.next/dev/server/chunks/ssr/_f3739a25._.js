@@ -2470,13 +2470,13 @@ function ModeSegmentedControl({ value, onChange, semantic }) {
                 children: opt.label
             }, opt.value, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 382,
+                lineNumber: 383,
                 columnNumber: 21
             }, this);
         })
     }, void 0, false, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 364,
+        lineNumber: 365,
         columnNumber: 9
     }, this);
 }
@@ -2509,7 +2509,7 @@ function TokenRowWithSwatch({ label, value, options, onChange, semantic }) {
                 onChange: onChange
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 441,
+                lineNumber: 442,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2524,13 +2524,13 @@ function TokenRowWithSwatch({ label, value, options, onChange, semantic }) {
                 "aria-hidden": true
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 448,
+                lineNumber: 449,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 431,
+        lineNumber: 432,
         columnNumber: 9
     }, this);
 }
@@ -2550,7 +2550,7 @@ function BaseColorRowRightControl({ children, onExpandClick, isExpanded, semanti
                 children: children
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 485,
+                lineNumber: 486,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2586,23 +2586,23 @@ function BaseColorRowRightControl({ children, onExpandClick, isExpanded, semanti
                         color: "currentColor"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 515,
+                        lineNumber: 516,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 508,
+                    lineNumber: 509,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 486,
+                lineNumber: 487,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 478,
+        lineNumber: 479,
         columnNumber: 9
     }, this);
 }
@@ -2860,12 +2860,12 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
             onClick: ()=>setIsOpen(!isOpen)
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-            lineNumber: 788,
+            lineNumber: 789,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 787,
+        lineNumber: 788,
         columnNumber: 9
     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
         ref: triggerRef,
@@ -2910,7 +2910,7 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                     }
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 825,
+                    lineNumber: 826,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2923,7 +2923,7 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                     children: displayLabel
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 835,
+                    lineNumber: 836,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Icon$2f$Icon$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Icon"], {
@@ -2932,18 +2932,18 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                     color: semantic.text.muted
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 838,
+                    lineNumber: 839,
                     columnNumber: 13
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-            lineNumber: 799,
+            lineNumber: 800,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 798,
+        lineNumber: 799,
         columnNumber: 9
     }, this);
     const pickerContent = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2968,7 +2968,7 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                 }
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 846,
+                lineNumber: 847,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2988,7 +2988,7 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                 }
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 862,
+                lineNumber: 863,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3027,12 +3027,12 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                                 children: fmt
                             }, fmt, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 882,
+                                lineNumber: 883,
                                 columnNumber: 25
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 880,
+                        lineNumber: 881,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3053,7 +3053,7 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 904,
+                                lineNumber: 905,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3076,7 +3076,7 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 914,
+                                lineNumber: 915,
                                 columnNumber: 21
                             }, this),
                             eyedropperSupported && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Tooltip$2f$Tooltip$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Tooltip"], {
@@ -3112,34 +3112,34 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                                             d: "M12 2.69l5.66 5.66a8 8 0 1 1-11.32 0z"
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                            lineNumber: 955,
+                                            lineNumber: 956,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                        lineNumber: 954,
+                                        lineNumber: 955,
                                         columnNumber: 29
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 935,
+                                    lineNumber: 936,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 934,
+                                lineNumber: 935,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 903,
+                        lineNumber: 904,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 879,
+                lineNumber: 880,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3181,18 +3181,18 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                                     color: "currentColor"
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 985,
+                                    lineNumber: 986,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 984,
+                                lineNumber: 985,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 964,
+                        lineNumber: 965,
                         columnNumber: 17
                     }, this),
                     showRecents && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3220,12 +3220,12 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 992,
+                                    lineNumber: 993,
                                     columnNumber: 29
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 991,
+                                lineNumber: 992,
                                 columnNumber: 29
                             }, this),
                             recentColors.filter((hex)=>!originalValue || hex.toUpperCase() !== originalValue.toUpperCase()).slice(0, RECENT_COLORS_MAX).map((hex)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Tooltip$2f$Tooltip$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Tooltip"], {
@@ -3244,12 +3244,12 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                        lineNumber: 1013,
+                                        lineNumber: 1014,
                                         columnNumber: 33
                                     }, this)
                                 }, hex, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 1012,
+                                    lineNumber: 1013,
                                     columnNumber: 33
                                 }, this)),
                             !originalValue && recentColors.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3262,25 +3262,25 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                                 children: "Sin colores recientes"
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 1029,
+                                lineNumber: 1030,
                                 columnNumber: 29
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 989,
+                        lineNumber: 990,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 963,
+                lineNumber: 964,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 844,
+        lineNumber: 845,
         columnNumber: 9
     }, this);
     const dropdownContent = isOpen && dropdownRect && typeof document !== "undefined" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$dom$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createPortal"])(/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3311,12 +3311,12 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
                 children: pickerContent
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1063,
+                lineNumber: 1064,
                 columnNumber: 25
             }, this)
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-            lineNumber: 1046,
+            lineNumber: 1047,
             columnNumber: 21
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$FloatingSurface$2f$FloatingSurface$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FloatingSurface"], {
             style: {
@@ -3329,12 +3329,12 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
             children: pickerContent
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-            lineNumber: 1071,
+            lineNumber: 1072,
             columnNumber: 21
         }, this)
     }, void 0, false, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 1044,
+        lineNumber: 1045,
         columnNumber: 13
     }, this), document.body);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3349,7 +3349,7 @@ function BaseColorSelector({ value, options, onChange, semantic, variant = "full
         ]
     }, void 0, true, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 1088,
+        lineNumber: 1089,
         columnNumber: 9
     }, this);
 }
@@ -3394,7 +3394,7 @@ function BaseColorExpandableRow({ label, value, hex, originalValue, options, onC
                         "aria-hidden": true
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1149,
+                        lineNumber: 1150,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3413,7 +3413,7 @@ function BaseColorExpandableRow({ label, value, hex, originalValue, options, onC
                                 children: label
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 1161,
+                                lineNumber: 1162,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3463,7 +3463,7 @@ function BaseColorExpandableRow({ label, value, hex, originalValue, options, onC
                                             children: hex
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                            lineNumber: 1211,
+                                            lineNumber: 1212,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Icon$2f$Icon$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Icon"], {
@@ -3471,13 +3471,13 @@ function BaseColorExpandableRow({ label, value, hex, originalValue, options, onC
                                             size: 10
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                            lineNumber: 1212,
+                                            lineNumber: 1213,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 1181,
+                                    lineNumber: 1182,
                                     columnNumber: 29
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     style: {
@@ -3488,18 +3488,18 @@ function BaseColorExpandableRow({ label, value, hex, originalValue, options, onC
                                     children: hex
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 1215,
+                                    lineNumber: 1216,
                                     columnNumber: 29
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 1171,
+                                lineNumber: 1172,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1160,
+                        lineNumber: 1161,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(BaseColorRowRightControl, {
@@ -3518,18 +3518,18 @@ function BaseColorExpandableRow({ label, value, hex, originalValue, options, onC
                             semantic: semantic
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                            lineNumber: 1227,
+                            lineNumber: 1228,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1219,
+                        lineNumber: 1220,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1126,
+                lineNumber: 1127,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3564,7 +3564,7 @@ function BaseColorExpandableRow({ label, value, hex, originalValue, options, onC
                                 children: "Dónde se usa"
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 1259,
+                                lineNumber: 1260,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -3585,34 +3585,34 @@ function BaseColorExpandableRow({ label, value, hex, originalValue, options, onC
                                         children: item
                                     }, item, false, {
                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                        lineNumber: 1282,
+                                        lineNumber: 1283,
                                         columnNumber: 33
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 1271,
+                                lineNumber: 1272,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1252,
+                        lineNumber: 1253,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 1245,
+                    lineNumber: 1246,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1237,
+                lineNumber: 1238,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 1121,
+        lineNumber: 1122,
         columnNumber: 9
     }, this);
 }
@@ -3655,13 +3655,13 @@ function BaseColorsCard({ mode, tokens, originalTokens, options, onChange, expan
                         children: title
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1356,
+                        lineNumber: 1357,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1347,
+                lineNumber: 1348,
                 columnNumber: 13
             }, this),
             BASE_TOKEN_KEYS.map(({ key, label })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(BaseColorExpandableRow, {
@@ -3678,7 +3678,7 @@ function BaseColorsCard({ mode, tokens, originalTokens, options, onChange, expan
                     onCopyHex: onCopyHex
                 }, `${mode}-${key}`, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 1369,
+                    lineNumber: 1370,
                     columnNumber: 17
                 }, this)),
             onSave != null && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3706,18 +3706,18 @@ function BaseColorsCard({ mode, tokens, originalTokens, options, onChange, expan
                     children: "Guardar cambios"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 1402,
+                    lineNumber: 1403,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1385,
+                lineNumber: 1386,
                 columnNumber: 17
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 1330,
+        lineNumber: 1331,
         columnNumber: 9
     }, this);
 }
@@ -3757,12 +3757,12 @@ function EstadosCard({ tokens, originalTokens, options, onChange, expandedByKey,
                     children: "Estados"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 1466,
+                    lineNumber: 1467,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1458,
+                lineNumber: 1459,
                 columnNumber: 13
             }, this),
             STATE_TOKEN_KEYS.map(({ key })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(BaseColorExpandableRow, {
@@ -3779,7 +3779,7 @@ function EstadosCard({ tokens, originalTokens, options, onChange, expandedByKey,
                     onCopyHex: onCopyHex
                 }, key, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 1479,
+                    lineNumber: 1480,
                     columnNumber: 17
                 }, this)),
             onSave != null && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3807,18 +3807,18 @@ function EstadosCard({ tokens, originalTokens, options, onChange, expandedByKey,
                     children: "Guardar cambios"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 1512,
+                    lineNumber: 1513,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1495,
+                lineNumber: 1496,
                 columnNumber: 17
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 1441,
+        lineNumber: 1442,
         columnNumber: 9
     }, this);
 }
@@ -3855,7 +3855,7 @@ function ThemePreview({ tokens, semantic }) {
                         children: "Texto principal"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1557,
+                        lineNumber: 1558,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Text$2f$Text$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -3870,13 +3870,13 @@ function ThemePreview({ tokens, semantic }) {
                         children: "Texto secundario con menor énfasis."
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1567,
+                        lineNumber: 1568,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1550,
+                lineNumber: 1551,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3900,12 +3900,12 @@ function ThemePreview({ tokens, semantic }) {
                     children: "Campo de ejemplo"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 1592,
+                    lineNumber: 1593,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1580,
+                lineNumber: 1581,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -3925,13 +3925,13 @@ function ThemePreview({ tokens, semantic }) {
                 children: "Acento"
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1596,
+                lineNumber: 1597,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 1535,
+        lineNumber: 1536,
         columnNumber: 9
     }, this);
 }
@@ -3971,7 +3971,7 @@ function SettingRowItem({ label, rightContent, isSelected, onClick, textWhite })
                 children: label
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1659,
+                lineNumber: 1660,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3995,24 +3995,24 @@ function SettingRowItem({ label, rightContent, isSelected, onClick, textWhite })
                             size: 16
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                            lineNumber: 1663,
+                            lineNumber: 1664,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1662,
+                        lineNumber: 1663,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1660,
+                lineNumber: 1661,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 1636,
+        lineNumber: 1637,
         columnNumber: 9
     }, this);
 }
@@ -4041,7 +4041,7 @@ function SettingSection({ title, description, children }) {
                         children: title
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1690,
+                        lineNumber: 1691,
                         columnNumber: 17
                     }, this),
                     description != null && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4055,26 +4055,26 @@ function SettingSection({ title, description, children }) {
                         children: description
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1702,
+                        lineNumber: 1703,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1689,
+                lineNumber: 1690,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 children: children
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1715,
+                lineNumber: 1716,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 1683,
+        lineNumber: 1684,
         columnNumber: 9
     }, this);
 }
@@ -4089,7 +4089,7 @@ function ModoAyudaSwitch({ value, onChange }) {
         onClick: ()=>onChange(!value)
     }, void 0, false, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 1731,
+        lineNumber: 1732,
         columnNumber: 9
     }, this);
 }
@@ -4154,12 +4154,12 @@ function ThemeGalleryCard({ theme: galleryTheme, isActive, onSelect, onEdit, sem
                     children: "Activo"
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 1791,
+                    lineNumber: 1792,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1780,
+                lineNumber: 1781,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4191,7 +4191,7 @@ function ThemeGalleryCard({ theme: galleryTheme, isActive, onSelect, onEdit, sem
                                 children: galleryTheme.name
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 1835,
+                                lineNumber: 1836,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -4222,18 +4222,18 @@ function ThemeGalleryCard({ theme: galleryTheme, isActive, onSelect, onEdit, sem
                                     label: "Opciones"
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 1861,
+                                    lineNumber: 1862,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 1838,
+                                lineNumber: 1839,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1826,
+                        lineNumber: 1827,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Text$2f$Text$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -4250,7 +4250,7 @@ function ThemeGalleryCard({ theme: galleryTheme, isActive, onSelect, onEdit, sem
                         children: galleryTheme.description
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1864,
+                        lineNumber: 1865,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Text$2f$Text$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
@@ -4262,7 +4262,7 @@ function ThemeGalleryCard({ theme: galleryTheme, isActive, onSelect, onEdit, sem
                         children: galleryTheme.recommendedUse
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1880,
+                        lineNumber: 1881,
                         columnNumber: 17
                     }, this),
                     galleryTheme.tags.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4284,18 +4284,18 @@ function ThemeGalleryCard({ theme: galleryTheme, isActive, onSelect, onEdit, sem
                                 children: tag
                             }, tag, false, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 1888,
+                                lineNumber: 1889,
                                 columnNumber: 29
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 1886,
+                        lineNumber: 1887,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1815,
+                lineNumber: 1816,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4324,7 +4324,7 @@ function ThemeGalleryCard({ theme: galleryTheme, isActive, onSelect, onEdit, sem
                             children: "Usar tema"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                            lineNumber: 1927,
+                            lineNumber: 1928,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -4364,35 +4364,35 @@ function ThemeGalleryCard({ theme: galleryTheme, isActive, onSelect, onEdit, sem
                                         size: 14
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                        lineNumber: 1963,
+                                        lineNumber: 1964,
                                         columnNumber: 29
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                    lineNumber: 1962,
+                                    lineNumber: 1963,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                            lineNumber: 1935,
+                            lineNumber: 1936,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 1918,
+                    lineNumber: 1919,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 1908,
+                lineNumber: 1909,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-        lineNumber: 1762,
+        lineNumber: 1763,
         columnNumber: 9
     }, this);
 }
@@ -4821,14 +4821,14 @@ function AparienciaPage() {
                         children: "Desarrollador"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 2270,
+                        lineNumber: 2271,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: "›"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 2271,
+                        lineNumber: 2272,
                         columnNumber: 25
                     }, void 0),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -4838,7 +4838,7 @@ function AparienciaPage() {
                         children: "Apariencia"
                     }, void 0, false, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 2272,
+                        lineNumber: 2273,
                         columnNumber: 25
                     }, void 0)
                 ]
@@ -4849,12 +4849,12 @@ function AparienciaPage() {
                 description: "Esta pantalla solo está disponible para administradores en modo desarrollo."
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 2277,
+                lineNumber: 2278,
                 columnNumber: 17
             }, this)
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-            lineNumber: 2266,
+            lineNumber: 2267,
             columnNumber: 13
         }, this);
     }
@@ -4872,7 +4872,7 @@ function AparienciaPage() {
 .base-tema-scroll { scrollbar-width: none; -ms-overflow-style: none; }`
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 2288,
+                lineNumber: 2289,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$containers$2f$PageShell$2f$PageShell$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PageShell"], {
@@ -4884,28 +4884,28 @@ function AparienciaPage() {
                             children: "Desarrollador"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                            lineNumber: 2301,
-                            columnNumber: 21
-                        }, void 0),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            children: "›"
-                        }, void 0, false, {
-                            fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
                             lineNumber: 2302,
                             columnNumber: 21
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            children: "Apariencia"
+                            children: "›"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
                             lineNumber: 2303,
                             columnNumber: 21
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            children: "›"
+                            children: "Apariencia"
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
                             lineNumber: 2304,
+                            columnNumber: 21
+                        }, void 0),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            children: "›"
+                        }, void 0, false, {
+                            fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
+                            lineNumber: 2305,
                             columnNumber: 21
                         }, void 0),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -4915,7 +4915,7 @@ function AparienciaPage() {
                             children: activeTab
                         }, void 0, false, {
                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                            lineNumber: 2305,
+                            lineNumber: 2306,
                             columnNumber: 21
                         }, void 0)
                     ]
@@ -4975,7 +4975,7 @@ function AparienciaPage() {
                                         "aria-hidden": true
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                        lineNumber: 2344,
+                                        lineNumber: 2345,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$molecules$2f$SecondaryNavSidebar$2f$SecondaryNavSidebar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SecondaryNavSidebar"], {
@@ -4987,13 +4987,13 @@ function AparienciaPage() {
                                         ariaLabel: "Secciones de apariencia"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                        lineNumber: 2357,
+                                        lineNumber: 2358,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 2330,
+                                lineNumber: 2331,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5023,7 +5023,7 @@ function AparienciaPage() {
                                             children: "Galería"
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                            lineNumber: 2384,
+                                            lineNumber: 2385,
                                             columnNumber: 37
                                         }, void 0),
                                         headerVariant: "title",
@@ -5056,22 +5056,22 @@ function AparienciaPage() {
                                                         semantic: semantic
                                                     }, t.id, false, {
                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                        lineNumber: 2412,
+                                                        lineNumber: 2413,
                                                         columnNumber: 45
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                lineNumber: 2400,
+                                                lineNumber: 2401,
                                                 columnNumber: 37
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                            lineNumber: 2399,
+                                            lineNumber: 2400,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                        lineNumber: 2382,
+                                        lineNumber: 2383,
                                         columnNumber: 29
                                     }, this),
                                     activeTab === "Base" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -5090,12 +5090,12 @@ function AparienciaPage() {
                                                     ariaLabel: "Subsecciones de Base"
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                    lineNumber: 2435,
+                                                    lineNumber: 2436,
                                                     columnNumber: 41
                                                 }, void 0)
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                lineNumber: 2434,
+                                                lineNumber: 2435,
                                                 columnNumber: 37
                                             }, void 0),
                                             headerVariant: "tabs",
@@ -5148,18 +5148,18 @@ function AparienciaPage() {
                                                                         children: "Tema"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                        lineNumber: 2485,
+                                                                        lineNumber: 2486,
                                                                         columnNumber: 41
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$dev$2f$PresetSelector$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PresetSelector"], {}, void 0, false, {
                                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                        lineNumber: 2495,
+                                                                        lineNumber: 2496,
                                                                         columnNumber: 41
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2477,
+                                                                lineNumber: 2478,
                                                                 columnNumber: 37
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5171,7 +5171,7 @@ function AparienciaPage() {
                                                                 "aria-hidden": true
                                                             }, void 0, false, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2497,
+                                                                lineNumber: 2498,
                                                                 columnNumber: 37
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5192,7 +5192,7 @@ function AparienciaPage() {
                                                                         children: "Aspecto"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                        lineNumber: 2513,
+                                                                        lineNumber: 2514,
                                                                         columnNumber: 41
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ModeSegmentedControl, {
@@ -5201,13 +5201,13 @@ function AparienciaPage() {
                                                                         semantic: semantic
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                        lineNumber: 2523,
+                                                                        lineNumber: 2524,
                                                                         columnNumber: 41
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2505,
+                                                                lineNumber: 2506,
                                                                 columnNumber: 37
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5219,7 +5219,7 @@ function AparienciaPage() {
                                                                 "aria-hidden": true
                                                             }, void 0, false, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2529,
+                                                                lineNumber: 2530,
                                                                 columnNumber: 37
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5239,7 +5239,7 @@ function AparienciaPage() {
                                                                         children: "Vista previa"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                        lineNumber: 2544,
+                                                                        lineNumber: 2545,
                                                                         columnNumber: 41
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5253,29 +5253,29 @@ function AparienciaPage() {
                                                                             semantic: semantic
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                            lineNumber: 2555,
+                                                                            lineNumber: 2556,
                                                                             columnNumber: 45
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                        lineNumber: 2554,
+                                                                        lineNumber: 2555,
                                                                         columnNumber: 41
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2537,
+                                                                lineNumber: 2538,
                                                                 columnNumber: 37
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                        lineNumber: 2462,
+                                                        lineNumber: 2463,
                                                         columnNumber: 33
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                    lineNumber: 2447,
+                                                    lineNumber: 2448,
                                                     columnNumber: 33
                                                 }, this),
                                                 selectedBaseSub === "colores" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5323,7 +5323,7 @@ function AparienciaPage() {
                                                                     onChange: setModoAyuda
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                    lineNumber: 2594,
+                                                                    lineNumber: 2595,
                                                                     columnNumber: 58
                                                                 }, void 0),
                                                                 semantic: semantic,
@@ -5332,12 +5332,12 @@ function AparienciaPage() {
                                                                 onCopyHex: handleCopyHex
                                                             }, void 0, false, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2581,
+                                                                lineNumber: 2582,
                                                                 columnNumber: 41
                                                             }, this)
                                                         }, "dark", false, {
                                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                            lineNumber: 2580,
+                                                            lineNumber: 2581,
                                                             columnNumber: 37
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5367,7 +5367,7 @@ function AparienciaPage() {
                                                                     onChange: setModoAyuda
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                    lineNumber: 2615,
+                                                                    lineNumber: 2616,
                                                                     columnNumber: 54
                                                                 }, void 0),
                                                                 semantic: semantic,
@@ -5376,24 +5376,24 @@ function AparienciaPage() {
                                                                 onCopyHex: handleCopyHex
                                                             }, void 0, false, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2602,
+                                                                lineNumber: 2603,
                                                                 columnNumber: 41
                                                             }, this)
                                                         }, "light", false, {
                                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                            lineNumber: 2601,
+                                                            lineNumber: 2602,
                                                             columnNumber: 37
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                    lineNumber: 2562,
+                                                    lineNumber: 2563,
                                                     columnNumber: 33
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                            lineNumber: 2432,
+                                            lineNumber: 2433,
                                             columnNumber: 29
                                         }, this)
                                     }, void 0, false),
@@ -5409,7 +5409,7 @@ function AparienciaPage() {
                                             children: "Estados"
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                            lineNumber: 2631,
+                                            lineNumber: 2632,
                                             columnNumber: 29
                                         }, void 0),
                                         headerVariant: "title",
@@ -5455,22 +5455,22 @@ function AparienciaPage() {
                                                     onCopyHex: handleCopyHex
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                    lineNumber: 2665,
+                                                    lineNumber: 2666,
                                                     columnNumber: 33
                                                 }, this)
                                             }, "estados", false, {
                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                lineNumber: 2664,
+                                                lineNumber: 2665,
                                                 columnNumber: 29
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                            lineNumber: 2646,
+                                            lineNumber: 2647,
                                             columnNumber: 25
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                        lineNumber: 2629,
+                                        lineNumber: 2630,
                                         columnNumber: 21
                                     }, this),
                                     activeTab === "Componentes" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$control$2f$app$2f28$shell$292f$lab$2f$apariencia$2f$_components$2f$AppearanceSectionLayout$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AppearanceSectionLayout"], {
@@ -5485,7 +5485,7 @@ function AparienciaPage() {
                                             children: "Componentes"
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                            lineNumber: 2687,
+                                            lineNumber: 2688,
                                             columnNumber: 29
                                         }, void 0),
                                         headerVariant: "title",
@@ -5540,7 +5540,7 @@ function AparienciaPage() {
                                                                         children: "Tema"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                        lineNumber: 2741,
+                                                                        lineNumber: 2742,
                                                                         columnNumber: 41
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5554,24 +5554,24 @@ function AparienciaPage() {
                                                                         children: "Preset activo para componentes."
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                        lineNumber: 2752,
+                                                                        lineNumber: 2753,
                                                                         columnNumber: 41
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2740,
+                                                                lineNumber: 2741,
                                                                 columnNumber: 37
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$dev$2f$PresetSelector$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PresetSelector"], {}, void 0, false, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2764,
+                                                                lineNumber: 2765,
                                                                 columnNumber: 37
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                        lineNumber: 2732,
+                                                        lineNumber: 2733,
                                                         columnNumber: 33
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5583,7 +5583,7 @@ function AparienciaPage() {
                                                         "aria-hidden": true
                                                     }, void 0, false, {
                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                        lineNumber: 2766,
+                                                        lineNumber: 2767,
                                                         columnNumber: 33
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5599,7 +5599,7 @@ function AparienciaPage() {
                                                                 children: "Componentes"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2775,
+                                                                lineNumber: 2776,
                                                                 columnNumber: 37
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -5614,7 +5614,7 @@ function AparienciaPage() {
                                                                 children: "Aspecto por tipo de componente."
                                                             }, void 0, false, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2786,
+                                                                lineNumber: 2787,
                                                                 columnNumber: 37
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5656,34 +5656,34 @@ function AparienciaPage() {
                                                                         children: name
                                                                     }, name, false, {
                                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                        lineNumber: 2807,
+                                                                        lineNumber: 2808,
                                                                         columnNumber: 45
                                                                     }, this))
                                                             }, void 0, false, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2798,
+                                                                lineNumber: 2799,
                                                                 columnNumber: 37
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                        lineNumber: 2774,
+                                                        lineNumber: 2775,
                                                         columnNumber: 33
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                lineNumber: 2717,
+                                                lineNumber: 2718,
                                                 columnNumber: 29
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                            lineNumber: 2702,
+                                            lineNumber: 2703,
                                             columnNumber: 25
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                        lineNumber: 2685,
+                                        lineNumber: 2686,
                                         columnNumber: 21
                                     }, this),
                                     activeTab === "Avanzado" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -5709,12 +5709,12 @@ function AparienciaPage() {
                                                     children: "Avanzado"
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                    lineNumber: 2855,
+                                                    lineNumber: 2856,
                                                     columnNumber: 29
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                lineNumber: 2844,
+                                                lineNumber: 2845,
                                                 columnNumber: 25
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5743,17 +5743,17 @@ function AparienciaPage() {
                                                                 onChange: (v)=>setPreset(v)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                lineNumber: 2870,
+                                                                lineNumber: 2871,
                                                                 columnNumber: 33
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                            lineNumber: 2869,
+                                                            lineNumber: 2870,
                                                             columnNumber: 29
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                        lineNumber: 2868,
+                                                        lineNumber: 2869,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(SettingSection, {
@@ -5774,7 +5774,7 @@ function AparienciaPage() {
                                                                     disabled: true
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                    lineNumber: 2887,
+                                                                    lineNumber: 2888,
                                                                     columnNumber: 33
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -5784,7 +5784,7 @@ function AparienciaPage() {
                                                                     disabled: true
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                    lineNumber: 2888,
+                                                                    lineNumber: 2889,
                                                                     columnNumber: 33
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -5794,7 +5794,7 @@ function AparienciaPage() {
                                                                     disabled: true
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                    lineNumber: 2889,
+                                                                    lineNumber: 2890,
                                                                     columnNumber: 33
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Input$2f$Input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -5804,24 +5804,24 @@ function AparienciaPage() {
                                                                     disabled: true
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                                    lineNumber: 2890,
+                                                                    lineNumber: 2891,
                                                                     columnNumber: 33
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                            lineNumber: 2879,
+                                                            lineNumber: 2880,
                                                             columnNumber: 29
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                        lineNumber: 2878,
+                                                        lineNumber: 2879,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                                lineNumber: 2867,
+                                                lineNumber: 2868,
                                                 columnNumber: 25
                                             }, this)
                                         ]
@@ -5829,23 +5829,23 @@ function AparienciaPage() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                                lineNumber: 2366,
+                                lineNumber: 2367,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                        lineNumber: 2318,
+                        lineNumber: 2319,
                         columnNumber: 17
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                    lineNumber: 2317,
+                    lineNumber: 2318,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/control/app/(shell)/lab/apariencia/page.tsx",
-                lineNumber: 2296,
+                lineNumber: 2297,
                 columnNumber: 9
             }, this)
         ]
