@@ -484,7 +484,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$
     },
     surface: {
         default: "var(--semantic-surface-default)",
+        card: "var(--semantic-surface-card)",
         hover: "var(--semantic-surface-hover)",
+        hoverElevated: "var(--semantic-surface-hover-elevated)",
         active: "var(--semantic-surface-active)",
         disabled: "var(--semantic-surface-disabled)",
         focus: "var(--semantic-surface-focus)",
@@ -735,6 +737,7 @@ const layout = {
         expanded: 255
     },
     appBarHeight: 64,
+    pageHeaderToContentSpacing: 12,
     components: {
         avatar: {
             md: 40,

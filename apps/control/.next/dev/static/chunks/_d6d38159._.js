@@ -199,7 +199,7 @@ const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, 
                     ...showHeaderDivider ? {
                         borderBottom: `1px solid ${semantic.border.default}`
                     } : {},
-                    marginBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24],
+                    marginBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$layout$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["layout"].pageHeaderToContentSpacing,
                     paddingBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][16],
                     display: "grid",
                     gridTemplateColumns: "1fr auto",

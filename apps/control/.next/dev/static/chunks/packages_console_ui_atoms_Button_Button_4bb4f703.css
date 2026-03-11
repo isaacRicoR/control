@@ -32,7 +32,7 @@
 }
 
 .button-variant-secondary {
-  transition: background-color .15s, border-color .15s, opacity .2s, box-shadow .15s;
+  transition: background-color .15s, border-color .15s, opacity .2s;
 }
 
 .button-variant-secondary:hover {
@@ -44,8 +44,13 @@
   background-color: var(--button-secondary-active-bg) !important;
 }
 
+.button-variant-secondary:focus, .button-variant-secondary:focus-visible {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 .button-variant-secondary:focus-visible {
-  box-shadow: 0 0 0 2px var(--button-secondary-focus-ring);
+  border-color: var(--semantic-border-focus) !important;
 }
 
 /*# sourceMappingURL=packages_console_ui_atoms_Button_Button_4bb4f703.css.map*/

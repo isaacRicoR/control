@@ -403,7 +403,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$
     },
     surface: {
         default: "var(--semantic-surface-default)",
+        card: "var(--semantic-surface-card)",
         hover: "var(--semantic-surface-hover)",
+        hoverElevated: "var(--semantic-surface-hover-elevated)",
         active: "var(--semantic-surface-active)",
         disabled: "var(--semantic-surface-disabled)",
         focus: "var(--semantic-surface-focus)",
@@ -3383,7 +3385,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-const Button = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(_c = _s(({ children, disabled = false, onClick, variant = 'primary', size = 'md', style, className, ...props }, ref)=>{
+const Button = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])(_c = _s(({ children, disabled = false, onClick, variant = 'primary', size = 'md', shape = 'default', style, className, ...props }, ref)=>{
     _s();
     const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"])();
     const { currentPreset } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$visual$2f$visualPresetStore$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useVisualPreset"])();
@@ -3467,7 +3469,7 @@ const Button = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
             width: 'fit-content',
             height: `${btnHeight}px`,
             /* 🎨 Tokens */ padding: `0 ${paddingX}px`,
-            borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].md,
+            borderRadius: shape === 'panel' ? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].xl : __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].md,
             fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary,
             fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["typography"].fontSize.md,
             lineHeight: "1",
@@ -3484,7 +3486,7 @@ const Button = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
         children: children
     }, void 0, false, {
         fileName: "[project]/packages/console/ui/atoms/Button/Button.tsx",
-        lineNumber: 106,
+        lineNumber: 112,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 }, "bv5hN2c/khsGf9i385besdPr9+g=", false, function() {

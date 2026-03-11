@@ -2350,7 +2350,7 @@ const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, 
                     ...showHeaderDivider ? {
                         borderBottom: `1px solid ${semantic.border.default}`
                     } : {},
-                    marginBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24],
+                    marginBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$layout$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["layout"].pageHeaderToContentSpacing,
                     paddingBottom: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][16],
                     display: "grid",
                     gridTemplateColumns: "1fr auto",
@@ -2880,13 +2880,14 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-const ActionIcon = ({ name, onClick, label, size = 16, color, hoverColor })=>{
+const ActionIcon = ({ name, onClick, label, size = 16, color, hoverColor, isActive = false })=>{
     _s();
     const [isHovered, setIsHovered] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"])();
     const semantic = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["colors"][theme].semantic;
     const effectiveColor = color || semantic.icon?.muted || semantic.text.muted || semantic.text.default;
     const effectiveHoverColor = hoverColor ?? semantic.icon?.active ?? semantic.text.hover;
+    const showActive = isHovered || isActive;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         onClick: onClick,
         role: "button",
@@ -2897,12 +2898,12 @@ const ActionIcon = ({ name, onClick, label, size = 16, color, hoverColor })=>{
             cursor: "pointer",
             padding: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][8],
             borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["radius"].md,
-            backgroundColor: isHovered ? semantic.surface.hover : "transparent",
+            backgroundColor: showActive ? semantic.surface.hoverElevated ?? semantic.surface.hover : "transparent",
             transition: "all 0.2s ease",
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
-            color: isHovered ? effectiveHoverColor : effectiveColor
+            color: showActive ? effectiveHoverColor : effectiveColor
         },
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Icon$2f$Icon$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Icon"], {
             name: name,
@@ -2910,12 +2911,12 @@ const ActionIcon = ({ name, onClick, label, size = 16, color, hoverColor })=>{
             color: "currentColor"
         }, void 0, false, {
             fileName: "[project]/packages/console/ui/atoms/ActionIcon/ActionIcon.tsx",
-            lineNumber: 53,
+            lineNumber: 59,
             columnNumber: 13
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false, {
         fileName: "[project]/packages/console/ui/atoms/ActionIcon/ActionIcon.tsx",
-        lineNumber: 34,
+        lineNumber: 38,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };

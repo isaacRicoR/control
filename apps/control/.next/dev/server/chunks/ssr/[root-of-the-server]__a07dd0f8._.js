@@ -508,227 +508,19 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$
     info: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].info
 };
 /**
- * Semantic palette (paleta semántica) — Dark
- * Esto SÍ lo consumen los componentes.
- */ const semanticDark = {
-    background: {
-        default: baseDark.neutral[50],
-        hover: baseDark.neutral[100],
-        active: baseDark.neutral[200],
-        disabled: baseDark.neutral[100],
-        focus: baseDark.neutral[50],
-        selected: baseDark.neutral[100]
-    },
-    surface: {
-        default: baseDark.neutral[200],
-        hover: baseDark.neutral[300],
-        active: baseDark.neutral[300],
-        disabled: baseDark.neutral[200],
-        focus: baseDark.neutral[100],
-        selected: baseDark.brand[50]
-    },
-    elevated: {
-        default: baseDark.neutral[200],
-        hover: baseDark.neutral[300],
-        active: baseDark.neutral[400],
-        disabled: baseDark.neutral[300],
-        focus: baseDark.neutral[200],
-        selected: baseDark.neutral[300]
-    },
-    border: {
-        default: baseDark.neutral[300],
-        hover: baseDark.neutral[400],
-        active: baseDark.neutral[500],
-        disabled: baseDark.neutral[300],
-        focus: baseDark.brand[600],
-        selected: baseDark.brand[600]
-    },
-    text: {
-        default: baseDark.neutral[600],
-        hover: baseDark.neutral[1000],
-        active: baseDark.neutral[1000],
-        disabled: baseDark.neutral[500],
-        focus: baseDark.neutral[1000],
-        selected: baseDark.neutral[1000],
-        onSolid: baseDark.neutral[1000]
-    },
-    primary: {
-        default: baseDark.brand[600],
-        hover: baseDark.brand[700],
-        active: baseDark.brand[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.brand[600],
-        selected: baseDark.brand[700]
-    },
-    secondary: {
-        default: baseDark.neutral[300],
-        hover: baseDark.neutral[400],
-        active: baseDark.neutral[500],
-        disabled: baseDark.neutral[200],
-        focus: baseDark.neutral[300],
-        selected: baseDark.neutral[400]
-    },
-    success: {
-        default: baseDark.success[600],
-        hover: baseDark.success[700],
-        active: baseDark.success[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.success[600],
-        selected: baseDark.success[700],
-        100: baseDark.success[100],
-        200: baseDark.success[200],
-        300: baseDark.success[300]
-    },
-    warning: {
-        default: baseDark.warning[600],
-        hover: baseDark.warning[700],
-        active: baseDark.warning[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.warning[600],
-        selected: baseDark.warning[700],
-        100: baseDark.warning[100],
-        200: baseDark.warning[200],
-        300: baseDark.warning[300],
-        400: baseDark.warning[400],
-        emphasis: "#ff8c00"
-    },
-    danger: {
-        default: baseDark.danger[600],
-        hover: baseDark.danger[700],
-        active: baseDark.danger[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.danger[600],
-        selected: baseDark.danger[700],
-        100: baseDark.danger[100],
-        200: baseDark.danger[200],
-        300: baseDark.danger[300],
-        400: baseDark.danger[400],
-        surfaceHover: baseDark.danger[950]
-    },
-    info: {
-        default: baseDark.info[600],
-        hover: baseDark.info[700],
-        active: baseDark.info[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.info[600],
-        selected: baseDark.info[700]
-    },
-    error: {
-        default: baseDark.danger[600],
-        hover: baseDark.danger[700],
-        active: baseDark.danger[500],
-        disabled: baseDark.neutral[400],
-        focus: baseDark.danger[600],
-        selected: baseDark.danger[700]
-    },
-    button: {
-        white: {
-            bg: baseDark.neutral[1000],
-            text: baseDark.neutral[0],
-            border: baseDark.neutral[1000],
-            hoverBg: baseDark.neutral[950]
-        },
-        actionPrimary: {
-            bg: baseDark.neutral[0],
-            text: baseDark.neutral[950],
-            hoverBg: baseDark.neutral[100]
-        }
-    },
-    sidebar: {
-        groupLabel: baseDark.neutral[500]
-    },
-    icon: {
-        muted: baseDark.neutral[400],
-        active: baseDark.neutral[600]
-    }
+ * Base palette (paleta base) — Light placeholder
+ */ const baseLight = {
+    neutral: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].neutral,
+    brand: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].primary,
+    success: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].success,
+    warning: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].warning,
+    danger: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].danger,
+    info: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$brands$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["activeBrand"].info
 };
 /**
- * Light theme — SaaS moderno: fondo #F6F8F8, cards #FFFFFF, acento #00A76F
- */ const baseLight = {
-    neutral: baseDark.neutral,
-    brand: baseDark.brand,
-    success: baseDark.success,
-    warning: baseDark.warning,
-    danger: baseDark.danger,
-    info: baseDark.info
-};
-const semanticLight = {
-    background: {
-        default: "#F4F6F8",
-        hover: "#EEF2F7",
-        active: "#E4E4E7",
-        disabled: "#F4F4F5",
-        focus: "#F4F6F8",
-        selected: "#F4F4F5"
-    },
-    surface: {
-        default: "#FFFFFF",
-        hover: "#F4F4F5",
-        active: "#EEEEF0",
-        disabled: "#FFFFFF",
-        focus: "#FFFFFF",
-        selected: "#E1F0EE"
-    },
-    border: {
-        default: "#E4E4E7",
-        hover: "#D4D4D8",
-        active: "#A1A1AA",
-        disabled: "#E4E4E7",
-        focus: "#00A76F",
-        selected: "#00A76F"
-    },
-    text: {
-        default: "#18181B",
-        muted: "#71717A",
-        hover: "#000000",
-        active: "#18181B",
-        disabled: "#A1A1AA",
-        focus: "#18181B",
-        selected: "#18181B",
-        onSolid: "#FFFFFF"
-    },
-    primary: {
-        default: "#00A76F",
-        hover: "#007a58",
-        active: "#00c98f",
-        disabled: "#94a3b8",
-        focus: "#00A76F",
-        selected: "#007a58"
-    },
-    secondary: semanticDark.secondary,
-    elevated: semanticDark.elevated,
-    success: {
-        ...semanticDark.success,
-        default: "#00A76F",
-        hover: "#007a58",
-        active: "#00c98f"
-    },
-    warning: semanticDark.warning,
-    danger: {
-        ...semanticDark.danger,
-        surfaceHover: baseDark.danger[1000]
-    },
-    info: semanticDark.info,
-    error: semanticDark.error,
-    button: {
-        ...semanticDark.button,
-        actionPrimary: {
-            bg: baseDark.neutral[950],
-            text: baseDark.neutral[0],
-            hoverBg: baseDark.neutral[900]
-        }
-    },
-    sidebar: {
-        groupLabel: "#71717A",
-        itemDefault: "#71717A",
-        itemHover: "#52525B"
-    },
-    icon: {
-        muted: "#637381",
-        active: "#18181B"
-    }
-};
-const semanticActive = {
+ * Semantic Active — Uses CSS Variables for dynamic themes.
+ * This is the primary source for all semantic tokens.
+ */ const semanticActive = {
     background: {
         default: "var(--semantic-background-default)",
         hover: "var(--semantic-background-hover)",
@@ -739,7 +531,9 @@ const semanticActive = {
     },
     surface: {
         default: "var(--semantic-surface-default)",
+        card: "var(--semantic-surface-card)",
         hover: "var(--semantic-surface-hover)",
+        hoverElevated: "var(--semantic-surface-hover-elevated)",
         active: "var(--semantic-surface-active)",
         disabled: "var(--semantic-surface-disabled)",
         focus: "var(--semantic-surface-focus)",
@@ -747,6 +541,7 @@ const semanticActive = {
     },
     border: {
         default: "var(--semantic-border-default)",
+        subtle: "var(--semantic-border-subtle)",
         hover: "var(--semantic-border-hover)",
         active: "var(--semantic-border-active)",
         disabled: "var(--semantic-border-disabled)",
@@ -755,12 +550,12 @@ const semanticActive = {
     },
     text: {
         default: "var(--semantic-text-default)",
-        muted: "var(--semantic-text-muted)",
         hover: "var(--semantic-text-hover)",
         active: "var(--semantic-text-active)",
         disabled: "var(--semantic-text-disabled)",
         focus: "var(--semantic-text-focus)",
         selected: "var(--semantic-text-selected)",
+        muted: "var(--semantic-text-muted)",
         onSolid: "var(--semantic-text-on-solid)"
     },
     primary: {
@@ -781,8 +576,7 @@ const semanticActive = {
         100: "var(--status-danger-100)",
         200: "var(--status-danger-200)",
         300: "var(--status-danger-300)",
-        400: "var(--status-danger-400)",
-        surfaceHover: "var(--semantic-danger-surface-hover)"
+        400: "var(--status-danger-400)"
     },
     success: {
         default: "var(--semantic-success-default)",
@@ -824,34 +618,51 @@ const semanticActive = {
         focus: "var(--semantic-error-focus)",
         selected: "var(--semantic-error-selected)"
     },
-    secondary: semanticDark.secondary,
-    elevated: semanticDark.elevated,
+    secondary: {
+        default: "var(--semantic-secondary-default)",
+        hover: "var(--semantic-secondary-hover)",
+        active: "var(--semantic-secondary-active)",
+        disabled: "var(--semantic-secondary-active)",
+        focus: "var(--semantic-secondary-default)",
+        selected: "var(--semantic-secondary-hover)"
+    },
+    elevated: {
+        default: "var(--semantic-elevated-default)",
+        hover: "var(--semantic-elevated-hover)",
+        active: "var(--semantic-elevated-active)",
+        disabled: "var(--semantic-elevated-default)",
+        focus: "var(--semantic-elevated-hover)",
+        selected: "var(--semantic-elevated-active)"
+    },
     button: {
-        primary: {
-            bg: "var(--semantic-button-primary-bg, var(--semantic-primary-default))",
-            hover: "var(--semantic-button-primary-hover, var(--semantic-primary-hover))",
-            text: "var(--semantic-button-primary-text, var(--semantic-text-active))"
-        },
         white: {
             bg: "var(--semantic-button-white-bg)",
             text: "var(--semantic-button-white-text)",
             border: "var(--semantic-button-white-border)",
             hoverBg: "var(--semantic-button-white-hoverBg)"
         },
-        create: {
-            bg: "var(--semantic-button-create-bg)",
-            text: "var(--semantic-button-create-text)",
-            border: "var(--semantic-button-create-border)",
-            hover: "var(--semantic-button-create-hover)"
+        actionPrimary: {
+            bg: "var(--semantic-button-action-primary-bg)",
+            text: "var(--semantic-button-action-primary-text)",
+            hoverBg: "var(--semantic-button-action-primary-hover)"
         }
     },
     sidebar: {
         groupLabel: "var(--semantic-sidebar-group-label)"
     },
     icon: {
+        default: "var(--semantic-icon-default)",
         muted: "var(--semantic-icon-muted)",
         active: "var(--semantic-icon-active)"
     }
+};
+/**
+ * Semantic palette — Dark/Light wrappers around semanticActive
+ */ const semanticDark = {
+    ...semanticActive
+};
+const semanticLight = {
+    ...semanticActive
 };
 const colors = {
     dark: {
@@ -913,7 +724,8 @@ const radius = {
     lg: 14,
     xl: 18,
     "2xl": 24,
-    full: 9999
+    full: 9999,
+    card: 18
 };
 }),
 "[project]/packages/console/tokens/typography.ts [app-ssr] (ecmascript)", ((__turbopack_context__) => {
@@ -1128,7 +940,7 @@ const PageShell = ({ children, title, breadcrumbs, actions, style, headerStyle, 
                             }, ("TURBOPACK compile-time value", void 0)),
                             breadcrumbs && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
-                                    color: semantic.text.disabled,
+                                    color: semantic.text.muted,
                                     fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["typography"].fontSize.sm,
                                     fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary,
                                     display: "flex",
@@ -1208,7 +1020,9 @@ const themeRegistry = {
             info: "#29a3ff",
             pending: "#5A6672",
             buttonPrimaryBg: "#00FFA9",
-            buttonPrimaryText: "#FFFFFF"
+            buttonPrimaryText: "#FFFFFF",
+            buttonActionPrimaryBg: "#FFFFFF",
+            buttonActionPrimaryText: "#141A21"
         },
         light: {
             background: "#F4F6F8",
@@ -1222,7 +1036,9 @@ const themeRegistry = {
             info: "#29a3ff",
             pending: "#71717A",
             buttonPrimaryBg: "#00A76F",
-            buttonPrimaryText: "#18181B"
+            buttonPrimaryText: "#18181B",
+            buttonActionPrimaryBg: "#141A21",
+            buttonActionPrimaryText: "#FFFFFF"
         }
     },
     // TODO: customize security palette
@@ -1240,7 +1056,9 @@ const themeRegistry = {
             info: "#29a3ff",
             pending: "#94a3b8",
             buttonPrimaryBg: "#155eef",
-            buttonPrimaryText: "#FFFFFF"
+            buttonPrimaryText: "#FFFFFF",
+            buttonActionPrimaryBg: "#FFFFFF",
+            buttonActionPrimaryText: "#0f172a"
         },
         light: {
             background: "#F4F6F8",
@@ -1254,7 +1072,9 @@ const themeRegistry = {
             info: "#29a3ff",
             pending: "#71717A",
             buttonPrimaryBg: "#155eef",
-            buttonPrimaryText: "#FFFFFF"
+            buttonPrimaryText: "#FFFFFF",
+            buttonActionPrimaryBg: "#141A21",
+            buttonActionPrimaryText: "#FFFFFF"
         }
     }
 };
@@ -1284,7 +1104,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$
 ;
 ;
 ;
-const Button = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["forwardRef"])(({ children, disabled = false, onClick, variant = 'primary', size = 'md', style, className, ...props }, ref)=>{
+const Button = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["forwardRef"])(({ children, disabled = false, onClick, variant = 'primary', size = 'md', shape = 'default', style, className, ...props }, ref)=>{
     const { theme } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useTheme"])();
     const { currentPreset } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$visual$2f$visualPresetStore$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useVisualPreset"])();
     const themeTokens = (0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$core$2f$visual$2f$themeRegistry$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getThemeTokens"])(currentPreset, theme);
@@ -1301,33 +1121,25 @@ const Button = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f
         text = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.text.disabled;
         border = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.border.disabled;
     } else if (variant === 'primary') {
-        const pt = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.button?.primary;
-        const packBg = themeTokens?.buttonPrimaryBg;
-        const packText = themeTokens?.buttonPrimaryText;
-        bg = packBg ?? pt?.bg ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.primary.default;
-        text = packText ?? pt?.text ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.text.active;
+        bg = themeTokens?.buttonPrimaryBg ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.primary.default;
+        text = themeTokens?.buttonPrimaryText ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.text.onSolid;
         border = bg;
         variantClass = "button-variant-primary";
-        const hoverVal = pt?.hover ?? pt?.bg ?? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.primary.hover;
+        const hoverVal = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.primary.hover;
         cssVariables = {
             "--button-primary-hover": hoverVal
         };
     } else if (variant === 'actionPrimary') {
-        const actionTheme = theme === 'light' ? 'dark' : 'light';
-        const ap = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"][actionTheme].semantic.button?.actionPrimary;
-        if (ap) {
-            bg = ap.bg;
-            text = ap.text;
-            border = ap.bg;
-            variantClass = "button-variant-action-primary";
-            cssVariables = {
-                "--button-action-primary-hover": ap.hoverBg
-            };
-        } else {
-            bg = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.surface.default;
-            text = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.text.active;
-            border = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.border.default;
-        }
+        const ap = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"][theme].semantic.button?.actionPrimary;
+        const packBg = themeTokens?.buttonActionPrimaryBg;
+        const packText = themeTokens?.buttonActionPrimaryText;
+        bg = packBg ?? ap?.bg ?? "var(--semantic-button-action-primary-bg)";
+        text = packText ?? ap?.text ?? "var(--semantic-button-action-primary-text)";
+        border = bg;
+        variantClass = "button-variant-action-primary";
+        cssVariables = {
+            "--button-action-primary-hover": ap?.hoverBg ?? "var(--semantic-button-action-primary-hover)"
+        };
     } else if (variant === 'secondary') {
         // Acción funcional no primaria: fondo neutro de superficie, texto de máximo contraste, borde visible.
         bg = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.surface.default;
@@ -1337,8 +1149,7 @@ const Button = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f
         cssVariables = {
             "--button-secondary-hover-bg": __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.surface.hover,
             "--button-secondary-active-bg": __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.surface.active,
-            "--button-secondary-hover-border": __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.border.hover,
-            "--button-secondary-focus-ring": __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.border.focus
+            "--button-secondary-hover-border": __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.border.default
         };
     } else if (variant === 'white') {
         // 🔒 Refactored to use semantic tokens (No leaks)
@@ -1351,14 +1162,13 @@ const Button = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f
         cssVariables = {
             "--button-white-hover-bg": __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.button?.white.hoverBg ?? "#F4F4F5"
         };
-    } else if (variant === 'create' && __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.button?.create) {
-        const ct = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.button.create;
-        bg = ct.bg;
-        text = ct.text;
-        border = ct.border;
+    } else if (variant === 'create') {
+        bg = "var(--semantic-button-create-bg)";
+        text = "var(--semantic-button-create-text)";
+        border = "var(--semantic-button-create-border)";
         variantClass = "button-variant-create";
         cssVariables = {
-            "--button-create-hover": ct.hover
+            "--button-create-hover": "var(--semantic-button-create-hover)"
         };
     } else if (variant === 'error') {
         bg = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$colors$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["colors"].semantic.error.default;
@@ -1377,7 +1187,7 @@ const Button = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f
             width: 'fit-content',
             height: `${btnHeight}px`,
             /* 🎨 Tokens */ padding: `0 ${paddingX}px`,
-            borderRadius: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["radius"].md,
+            borderRadius: shape === 'panel' ? __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["radius"].xl : __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$radius$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["radius"].md,
             fontFamily: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["typography"].fontFamily.primary,
             fontSize: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["typography"].fontSize.md,
             lineHeight: "1",
@@ -1394,7 +1204,7 @@ const Button = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f
         children: children
     }, void 0, false, {
         fileName: "[project]/packages/console/ui/atoms/Button/Button.tsx",
-        lineNumber: 115,
+        lineNumber: 112,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 });
@@ -1414,6 +1224,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$token
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/spacing.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$typography$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/tokens/typography.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$context$2f$ThemeProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/console/ui/context/ThemeProvider.tsx [app-ssr] (ecmascript)");
+"use client";
 ;
 ;
 ;
@@ -1491,7 +1302,7 @@ const Badge = ({ label, variant = "neutral", appearance = "filled", interactive 
             `
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/atoms/Badge/Badge.tsx",
-                lineNumber: 101,
+                lineNumber: 103,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1500,7 +1311,7 @@ const Badge = ({ label, variant = "neutral", appearance = "filled", interactive 
                 children: label
             }, void 0, false, {
                 fileName: "[project]/packages/console/ui/atoms/Badge/Badge.tsx",
-                lineNumber: 106,
+                lineNumber: 108,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
@@ -1902,7 +1713,7 @@ function PermissionsCheckUI({ session, semantic }) {
                                             action: "create",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                                 size: "sm",
-                                                variant: "white",
+                                                variant: "actionPrimary",
                                                 children: "Create User"
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/control/app/lab/permissions-check/page.tsx",
@@ -1919,7 +1730,7 @@ function PermissionsCheckUI({ session, semantic }) {
                                             action: "edit",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                                 size: "sm",
-                                                variant: "primary",
+                                                variant: "actionPrimary",
                                                 children: "Edit User"
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/control/app/lab/permissions-check/page.tsx",
@@ -2004,7 +1815,7 @@ function PermissionsCheckUI({ session, semantic }) {
                                             action: "create",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                                 size: "sm",
-                                                variant: "white",
+                                                variant: "actionPrimary",
                                                 children: "Create Device"
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/control/app/lab/permissions-check/page.tsx",
@@ -2021,7 +1832,7 @@ function PermissionsCheckUI({ session, semantic }) {
                                             action: "edit",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$ui$2f$atoms$2f$Button$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                                 size: "sm",
-                                                variant: "primary",
+                                                variant: "actionPrimary",
                                                 children: "Edit Device"
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/control/app/lab/permissions-check/page.tsx",

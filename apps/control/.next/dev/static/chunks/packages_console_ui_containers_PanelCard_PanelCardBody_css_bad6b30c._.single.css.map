@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/packages/console/ui/containers/PanelCard/PanelCardBody.css"],"sourcesContent":["/* PanelCardBody.css — Custom scrollbar (same pattern as SelectSingle, Textarea, FloatingSurface) */\r\n\r\n.panel-card-body-scroll::-webkit-scrollbar {\r\n    width: 8px;\r\n}\r\n\r\n.panel-card-body-scroll::-webkit-scrollbar-track {\r\n    background: transparent;\r\n}\r\n\r\n.panel-card-body-scroll::-webkit-scrollbar-thumb {\r\n    background: var(--semantic-border-default);\r\n    border-radius: 4px;\r\n}\r\n\r\n.panel-card-body-scroll::-webkit-scrollbar-thumb:hover {\r\n    background: var(--semantic-border-active);\r\n}\r\n\r\n.panel-card-body-scroll {\r\n    scrollbar-width: thin;\r\n    scrollbar-color: var(--semantic-border-default) transparent;\r\n}\r\n"],"names":[],"mappings":"AAEA;;;;AAIA;;;;AAIA;;;;;AAKA;;;;AAIA"}}]
+}

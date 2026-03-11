@@ -109,7 +109,9 @@ a {
   --semantic-background-focus: var(--brand-neutral-50);
   --semantic-background-selected: var(--brand-neutral-100);
   --semantic-surface-default: var(--brand-neutral-200);
+  --semantic-surface-card: color-mix(in srgb, var(--brand-neutral-200) 90%, var(--brand-neutral-300));
   --semantic-surface-hover: var(--brand-neutral-300);
+  --semantic-surface-hover-elevated: var(--brand-neutral-400);
   --semantic-surface-active: var(--brand-neutral-300);
   --semantic-surface-disabled: var(--brand-neutral-200);
   --semantic-surface-focus: var(--brand-neutral-100);
@@ -223,7 +225,9 @@ a {
   --semantic-background-focus: #f4f6f8;
   --semantic-background-selected: #f4f4f5;
   --semantic-surface-default: #fff;
+  --semantic-surface-card: #fbfbfc;
   --semantic-surface-hover: #f4f4f5;
+  --semantic-surface-hover-elevated: #eeeef0;
   --semantic-surface-active: #eeeef0;
   --semantic-surface-disabled: #fff;
   --semantic-surface-focus: #fff;
@@ -323,7 +327,9 @@ a {
   --semantic-background-focus: #141a21;
   --semantic-background-selected: #111114;
   --semantic-surface-default: #1c252e;
+  --semantic-surface-card: #222c36;
   --semantic-surface-hover: #2a3744;
+  --semantic-surface-hover-elevated: #374854;
   --semantic-surface-active: #2a3744;
   --semantic-surface-disabled: #1c252e;
   --semantic-surface-focus: #111114;
