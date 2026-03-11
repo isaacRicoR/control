@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///C:/dev/controldev/apps/control/proxy.ts"],"sourcesContent":["import { NextResponse, type NextRequest } from \"next/server\";\r\n\r\nexport function proxy(request: NextRequest) {\r\n  const requestHeaders = new Headers(request.headers);\r\n  requestHeaders.set(\"x-pathname\", request.nextUrl.pathname);\r\n\r\n  return NextResponse.next({\r\n    request: { headers: requestHeaders },\r\n  });\r\n}\r\n\r\nexport default proxy;\r\n"],"names":[],"mappings":";;;;;;AAAA;;AAEO,SAAS,MAAM,OAAoB;IACxC,MAAM,iBAAiB,IAAI,QAAQ,QAAQ,OAAO;IAClD,eAAe,GAAG,CAAC,cAAc,QAAQ,OAAO,CAAC,QAAQ;IAEzD,OAAO,8IAAY,CAAC,IAAI,CAAC;QACvB,SAAS;YAAE,SAAS;QAAe;IACrC;AACF;uCAEe"}}]
-}

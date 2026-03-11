@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/packages/console/ui/molecules/CardTabsHeader/CardTabsHeader.css"],"sourcesContent":["/* Oculta el scrollbar horizontal manteniendo scroll funcional (mouse, trackpad, touch). */\r\n\r\n.card-tabs-header-scroll {\r\n    -ms-overflow-style: none;  /* IE / Edge legacy */\r\n    scrollbar-width: none;     /* Firefox */\r\n}\r\n\r\n.card-tabs-header-scroll::-webkit-scrollbar {\r\n    display: none;             /* Chrome, Safari, Edge Chromium */\r\n}\r\n"],"names":[],"mappings":"AAEA;;;;;AAKA"}}]
-}

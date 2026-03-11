@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/dev/controldev/apps/control/app/page.tsx"],"sourcesContent":["import { redirect } from \"next/navigation\";\nimport { hasModules } from \"@core/navigation/hasModules\";\nimport { sidebarConfigFull } from \"@core/navigation/sidebar.config\";\n\nexport default function Home() {\n    const modulesActive = hasModules(sidebarConfigFull);\n\n    if (modulesActive) {\n        redirect(\"/dashboard\");\n    }\n\n    // Si no hay módulos instalados, el punto de entrada es /panel\n    redirect(\"/panel\");\n}\n"],"names":[],"mappings":";;;;AAAA;AAAA;;;;;;;;;;;;;;AAIe,SAAS;IACpB,MAAM,gBAAgB,WAAW;IAEjC,IAAI,eAAe;QACf,IAAA,iMAAQ,EAAC;IACb;IAEA,8DAA8D;IAC9D,IAAA,iMAAQ,EAAC;AACb"}}]
-}

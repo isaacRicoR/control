@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/packages/console/ui/patterns/form/FormLayout.module.css"],"sourcesContent":["/* FormLayout pattern — reusable 2-column grid (visual + form) */\r\n/* Breakpoint 768px matches design/tokens/breakpoints.md */\r\n\r\n.layoutGrid {\r\n    display: grid;\r\n    grid-template-columns: 250px 1fr;\r\n    /* Fixed width for avatar column, rest for form */\r\n    width: 100%;\r\n}\r\n\r\n.visualCol {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n}\r\n\r\n.formCol {\r\n    display: flex;\r\n    flex-direction: column;\r\n    width: 100%;\r\n}\r\n\r\n.formColumnGrid {\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n    /* 2 equal columns */\r\n}\r\n\r\n/* Mobile Responsive Overrides */\r\n@media (max-width: 768px) {\r\n    .layoutGrid {\r\n        grid-template-columns: 1fr;\r\n    }\r\n\r\n    .visualCol {\r\n        order: -1;\r\n        /* Move visual to top */\r\n        width: 100%;\r\n    }\r\n\r\n    .formColumnGrid {\r\n        grid-template-columns: 1fr;\r\n        /* Single column on mobile */\r\n    }\r\n}"],"names":[],"mappings":"AAGA;;;;;;AAOA;;;;;;AAMA;;;;;;AAMA;;;;;AAOA;EACI;;;;EAIA;;;;;EAMA"}}]
-}
