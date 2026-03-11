@@ -162,7 +162,7 @@ export const SecondaryNavSidebar: React.FC<SecondaryNavSidebarProps> = ({
                                     <div
                                         style={{
                                             position: "absolute",
-                                            top: 2,
+                                            top: 3,
                                             left: 0,
                                             right: 0,
                                             height: 1,

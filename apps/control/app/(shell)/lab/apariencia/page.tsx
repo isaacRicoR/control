@@ -2332,9 +2332,25 @@ export default function AparienciaPage() {
                             minWidth: 0,
                             overflowX: "hidden",
                             gridRow: "1 / -1",
-                            borderRight: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                            position: "relative",
+                            borderRight: sidebarCollapsed ? "none" : `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                            paddingRight: sidebarCollapsed ? 3 : 0,
                         }}
                     >
+                        {sidebarCollapsed && (
+                            <div
+                                style={{
+                                    position: "absolute",
+                                    top: 0,
+                                    right: 2,
+                                    bottom: 0,
+                                    width: 1,
+                                    backgroundColor: semantic.border.subtle ?? semantic.border.default,
+                                    pointerEvents: "none",
+                                }}
+                                aria-hidden
+                            />
+                        )}
                         <SecondaryNavSidebar
                             groups={TABS_GROUPS}
                             value={activeTab}
@@ -2356,6 +2372,7 @@ export default function AparienciaPage() {
                         overflowY: "auto",
                         overflowX: activeTab === "Base" || activeTab === "Estados" ? "auto" : "hidden",
                         padding: activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados" ? 0 : spacing[16],
+                        marginLeft: sidebarCollapsed ? -3 : 0,
                     }}
                 >
                         <div
