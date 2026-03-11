@@ -1,0 +1,54 @@
+/* [project]/packages/console/ui/containers/ToastStack/ToastStack.css [app-client] (css) */
+.toast-stack {
+  z-index: 10000;
+  pointer-events: none;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  position: fixed;
+  top: 24px;
+  right: 24px;
+}
+
+.toast-stack > * {
+  pointer-events: auto;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .toast-stack {
+    gap: 8px;
+    max-width: none;
+    padding: 16px;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/*# sourceMappingURL=packages_console_ui_containers_ToastStack_ToastStack_css_bad6b30c._.single.css.map*/

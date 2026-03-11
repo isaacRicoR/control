@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/dev/controldev/apps/control/app/%28shell%29/users/layout.tsx"],"sourcesContent":["import { requireAuth } from \"@core/auth/routeGuard\";\r\n\r\nexport const dynamic = 'force-dynamic';\r\n\r\nexport default async function UsersLayout({\r\n    children,\r\n}: {\r\n    children: React.ReactNode;\r\n}) {\r\n    await requireAuth({ action: 'view', entity: 'users' });\r\n\r\n    return <>{children}</>;\r\n}\r\n"],"names":[],"mappings":";;;;;;;;;;;;;;AAEO,MAAM,UAAU;AAER,eAAe,YAAY,EACtC,QAAQ,EAGX;IACG,MAAM,YAAY;QAAE,QAAQ;QAAQ,QAAQ;IAAQ;IAEpD,qBAAO;kBAAG;;AACd"}}]
+}

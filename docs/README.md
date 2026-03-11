@@ -21,6 +21,23 @@ En caso de conflicto entre documentos, estos archivos tienen prioridad.
 
 ---
 
+## Documentación de alto nivel (docs/)
+
+Documentos que describen el estado actual del sistema de forma resumida:
+
+| Documento | Contenido |
+|-----------|-----------|
+| **ARCHITECTURE.md** | Monorepo, apps, packages, cartuchos, aliases |
+| **PROJECT_STRUCTURE.md** | Estructura de directorios |
+| **DESIGN_SYSTEM.md** | Tokens semánticos, superficies, componentes base |
+| **TOKENS_SYSTEM.md** | Sistema de tokens (colores, spacing, typography) |
+| **APPEARANCE_SYSTEM.md** | Modo claro/oscuro, lab apariencia |
+| **COMPONENT_LIBRARY.md** | Inventario de componentes |
+| **POPOVER_SYSTEM.md** | Popovers: portal, posicionamiento, scroll |
+| **GIT_WORKFLOW.md** | .gitignore, scripts de verificación |
+
+---
+
 ## Gobierno de documentación
 
 Reglas para mantener la calidad de la documentación:
