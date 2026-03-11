@@ -60,6 +60,7 @@ const GALLERY_THEMES: GalleryTheme[] = [
 
 const CONTENT_MAX_WIDTH = 560;
 const LAB_APARIENCIA_OVERIDES_KEY = "control.lab.apariencia.overrides";
+const LAB_APARIENCIA_STATES_KEY = "control.lab.apariencia.states";
 
 const TABS_GROUPS = [
     {
@@ -124,6 +125,41 @@ const BASE_TOKEN_KEYS: { key: BaseTokenKey; label: string }[] = [
     { key: "surface", label: "Superficie" },
     { key: "text", label: "Texto" },
 ];
+
+type StateTokenKey = "success" | "warning" | "error" | "info";
+
+const STATE_TOKEN_KEYS: { key: StateTokenKey; themeKey: "success" | "warning" | "danger" | "info" }[] = [
+    { key: "success", themeKey: "success" },
+    { key: "warning", themeKey: "warning" },
+    { key: "error", themeKey: "danger" },
+    { key: "info", themeKey: "info" },
+];
+
+type StateTokens = Record<StateTokenKey, string>;
+
+const STATE_LABELS: Record<StateTokenKey, string> = {
+    success: "Success",
+    warning: "Warning",
+    error: "Error",
+    info: "Info",
+};
+
+/** Dónde se usa cada token de estado en el sistema */
+const STATE_USAGE: Record<StateTokenKey, string[]> = {
+    success: ["Toasts", "Badges", "Validaciones", "Estados positivos"],
+    warning: ["Toasts", "Badges", "Alertas", "Estados de advertencia"],
+    error: ["Toasts", "Badges", "Errores", "Validaciones fallidas"],
+    info: ["Toasts", "Badges", "Información", "Estados neutros"],
+};
+
+function stateTokensEqual(a: StateTokens, b: StateTokens): boolean {
+    return (
+        a.success === b.success &&
+        a.warning === b.warning &&
+        a.error === b.error &&
+        a.info === b.info
+    );
+}
 
 /** Dónde se usa cada token de color base en el sistema */
 const COLOR_USAGE: Record<BaseTokenKey, string[]> = {
@@ -1466,6 +1502,116 @@ function BaseColorsCard({
     );
 }
 
+function EstadosCard({
+    tokens,
+    originalTokens,
+    options,
+    onChange,
+    expandedByKey,
+    onExpandToggle,
+    semantic,
+    isDirty,
+    onSave,
+    onCopyHex,
+}: {
+    tokens: StateTokens;
+    originalTokens: StateTokens;
+    options: Record<StateTokenKey, ColorSelectOption[]>;
+    onChange: (field: StateTokenKey, value: string) => void;
+    expandedByKey: Record<StateTokenKey, boolean>;
+    onExpandToggle: (key: StateTokenKey) => void;
+    semantic: (typeof colors.dark)["semantic"];
+    isDirty?: boolean;
+    onSave?: () => void;
+    onCopyHex?: (hex: string) => void;
+}) {
+    return (
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 0,
+                flex: 1,
+                minHeight: 0,
+                backgroundColor: semantic.surface.card ?? semantic.surface.default,
+                borderRadius: radius.card,
+                border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                paddingTop: spacing[24],
+                paddingLeft: spacing[24],
+                paddingRight: spacing[24],
+                paddingBottom: 0,
+                boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
+            }}
+        >
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: spacing[8],
+                    marginBottom: spacing[16],
+                }}
+            >
+                <h3
+                    style={{
+                        margin: 0,
+                        fontFamily: typography.fontFamily.primary,
+                        fontSize: typography.fontSize.md,
+                        fontWeight: typography.fontWeight.semibold,
+                        color: semantic.text.default,
+                    }}
+                >
+                    Estados
+                </h3>
+            </div>
+            {STATE_TOKEN_KEYS.map(({ key }) => (
+                <BaseColorExpandableRow
+                    key={key}
+                    label={STATE_LABELS[key]}
+                    value={tokens[key]}
+                    hex={tokens[key].toUpperCase()}
+                    originalValue={originalTokens[key]}
+                    options={options[key]}
+                    onChange={(v) => onChange(key, v)}
+                    usage={STATE_USAGE[key]}
+                    isExpanded={expandedByKey[key]}
+                    onToggle={() => onExpandToggle(key)}
+                    semantic={semantic}
+                    onCopyHex={onCopyHex}
+                />
+            ))}
+            {onSave != null && (
+                <div
+                    style={{
+                        flexShrink: 0,
+                        marginTop: spacing[16],
+                        marginLeft: -spacing[24],
+                        marginRight: -spacing[24],
+                        borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                        padding: spacing[16],
+                        paddingLeft: spacing[24],
+                        paddingRight: spacing[24],
+                        display: "flex",
+                        alignItems: "center",
+                        gap: spacing[12],
+                        justifyContent: "flex-end",
+                        flexWrap: "wrap",
+                    }}
+                >
+                    <Button
+                        variant="actionPrimary"
+                        size="sm"
+                        shape="panel"
+                        onClick={onSave}
+                        disabled={!isDirty}
+                    >
+                        Guardar cambios
+                    </Button>
+                </div>
+            )}
+        </div>
+    );
+}
+
 function ThemePreview({
     tokens,
     semantic,
@@ -1934,6 +2080,33 @@ function saveLabOverrides(preset: string, mode: ThemeEditMode, tokens: BaseToken
     }
 }
 
+function loadLabStateOverrides(preset: string): { dark: StateTokens | null; light: StateTokens | null } {
+    try {
+        if (typeof window === "undefined" || !window.localStorage) return { dark: null, light: null };
+        const raw = window.localStorage.getItem(`${LAB_APARIENCIA_STATES_KEY}.${preset}`);
+        if (!raw) return { dark: null, light: null };
+        const parsed = JSON.parse(raw) as { dark?: StateTokens; light?: StateTokens };
+        return { dark: parsed.dark ?? null, light: parsed.light ?? null };
+    } catch {
+        return { dark: null, light: null };
+    }
+}
+
+function saveLabStateOverrides(preset: string, mode: ThemeEditMode, tokens: StateTokens): void {
+    try {
+        if (typeof window === "undefined" || !window.localStorage) return;
+        const existing = loadLabStateOverrides(preset);
+        const next = { ...existing, [mode]: tokens };
+        window.localStorage.setItem(`${LAB_APARIENCIA_STATES_KEY}.${preset}`, JSON.stringify(next));
+    } catch {
+        // no-op
+    }
+}
+
+function stateTokensFromTheme(t: { success: string; warning: string; danger: string; info: string }): StateTokens {
+    return { success: t.success, warning: t.warning, error: t.danger, info: t.info };
+}
+
 export default function AparienciaPage() {
     const { theme } = useTheme();
     const { currentPreset, setPreset } = useVisualPreset();
@@ -1950,6 +2123,9 @@ export default function AparienciaPage() {
         dark: Record<BaseTokenKey, boolean>;
         light: Record<BaseTokenKey, boolean>;
     }>({ dark: initialExpandedByKey(), light: initialExpandedByKey() });
+    const initialExpandedEstados = (): Record<StateTokenKey, boolean> =>
+        Object.fromEntries(STATE_TOKEN_KEYS.map(({ key }) => [key, false])) as Record<StateTokenKey, boolean>;
+    const [expandedEstados, setExpandedEstados] = useState<Record<StateTokenKey, boolean>>(initialExpandedEstados);
     const handleTabChange = (value: string) => setActiveTab(value);
     const [editMode, setEditMode] = useState<ThemeEditMode>("dark");
 
@@ -1978,7 +2154,28 @@ export default function AparienciaPage() {
         setLocalTokensByMode(next);
         setLastSavedByMode(next);
     }, [currentPreset, getInitialTokens]);
+
+    const getInitialStateTokens = useCallback(() => {
+        const ov = loadLabStateOverrides(currentPreset);
+        const dark = getThemeTokens(currentPreset, "dark");
+        const light = getThemeTokens(currentPreset, "light");
+        return {
+            dark: ov.dark ?? stateTokensFromTheme(dark),
+            light: ov.light ?? stateTokensFromTheme(light),
+        };
+    }, [currentPreset]);
+
+    const [localStatesByMode, setLocalStatesByMode] = useState(() => getInitialStateTokens());
+    const [lastSavedStatesByMode, setLastSavedStatesByMode] = useState(() => getInitialStateTokens());
+
+    useEffect(() => {
+        const next = getInitialStateTokens();
+        setLocalStatesByMode(next);
+        setLastSavedStatesByMode(next);
+    }, [currentPreset, getInitialStateTokens]);
+
     const currentTokens = localTokensByMode[editMode];
+    const currentStates = localStatesByMode[theme as ThemeEditMode];
     const baseColorOptions = useMemo<Record<(typeof BASE_TOKEN_KEYS)[number]["key"], ColorSelectOption[]>>(() => {
         const controlPack = getThemeTokens("control", editMode);
         const securityPack = getThemeTokens("security", editMode);
@@ -2082,6 +2279,41 @@ export default function AparienciaPage() {
         };
     }, [localTokensByMode]);
 
+    const stateColorOptions = useMemo<Record<StateTokenKey, ColorSelectOption[]>>(() => {
+        const controlPack = getThemeTokens("control", theme as ThemeEditMode);
+        const securityPack = getThemeTokens("security", theme as ThemeEditMode);
+        return {
+            success: ensureCurrentColorOption(
+                currentStates.success,
+                uniqueColorOptions([
+                    { value: controlPack.success, label: "● Control" },
+                    { value: securityPack.success, label: "● Security" },
+                ])
+            ),
+            warning: ensureCurrentColorOption(
+                currentStates.warning,
+                uniqueColorOptions([
+                    { value: controlPack.warning, label: "● Control" },
+                    { value: securityPack.warning, label: "● Security" },
+                ])
+            ),
+            error: ensureCurrentColorOption(
+                currentStates.error,
+                uniqueColorOptions([
+                    { value: controlPack.danger, label: "● Control" },
+                    { value: securityPack.danger, label: "● Security" },
+                ])
+            ),
+            info: ensureCurrentColorOption(
+                currentStates.info,
+                uniqueColorOptions([
+                    { value: controlPack.info, label: "● Control" },
+                    { value: securityPack.info, label: "● Security" },
+                ])
+            ),
+        };
+    }, [currentStates, theme]);
+
     const handleChange = (mode: ThemeEditMode, field: BaseTokenKey, value: string) => {
         setLocalTokensByMode((prev) => ({
             ...prev,
@@ -2093,6 +2325,22 @@ export default function AparienciaPage() {
         const tokens = localTokensByMode[mode];
         setLastSavedByMode((prev) => ({ ...prev, [mode]: tokens }));
         saveLabOverrides(currentPreset, mode, tokens);
+        showToast({ title: "Cambios guardados", type: "success" });
+    };
+
+    const handleChangeState = (field: StateTokenKey, value: string) => {
+        const mode = theme as ThemeEditMode;
+        setLocalStatesByMode((prev) => ({
+            ...prev,
+            [mode]: { ...prev[mode], [field]: value },
+        }));
+    };
+
+    const handleSaveEstados = () => {
+        const mode = theme as ThemeEditMode;
+        const tokens = localStatesByMode[mode];
+        setLastSavedStatesByMode((prev) => ({ ...prev, [mode]: tokens }));
+        saveLabStateOverrides(currentPreset, mode, tokens);
         showToast({ title: "Cambios guardados", type: "success" });
     };
 
@@ -2126,7 +2374,11 @@ export default function AparienciaPage() {
     return (
         <>
         <style>{`.apariencia-content-scroll::-webkit-scrollbar { display: none; }
-.apariencia-content-scroll { scrollbar-width: none; -ms-overflow-style: none; }`}</style>
+.apariencia-content-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+.base-section-scroll::-webkit-scrollbar { display: none; }
+.base-section-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+.appearance-cards-scroll::-webkit-scrollbar { display: none; }
+.appearance-cards-scroll { scrollbar-width: none; -ms-overflow-style: none; }`}</style>
         <PageShell
             variant="fluid"
             title="Apariencia"
@@ -2186,13 +2438,13 @@ export default function AparienciaPage() {
                     style={{
                         display: "flex",
                         flexDirection: "column",
-                        gap: activeTab === "Base" || activeTab === "Galería" ? 0 : spacing[16],
+                        gap: activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados" ? 0 : spacing[16],
                         minWidth: 0,
                         minHeight: 0,
                         flex: 1,
                         overflowY: "auto",
-                        overflowX: activeTab === "Base" ? "auto" : "hidden",
-                        padding: activeTab === "Base" || activeTab === "Galería" ? 0 : spacing[16],
+                        overflowX: activeTab === "Base" || activeTab === "Estados" ? "auto" : "hidden",
+                        padding: activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados" ? 0 : spacing[16],
                     }}
                 >
                         <div
@@ -2203,7 +2455,7 @@ export default function AparienciaPage() {
                                 gap: spacing[16],
                                 flexShrink: 0,
                                 position: "relative",
-                                ...(activeTab === "Base" || activeTab === "Galería"
+                                ...(activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados"
                                     ? {
                                           paddingTop: spacing[8],
                                           paddingBottom: 0,
@@ -2214,7 +2466,7 @@ export default function AparienciaPage() {
                                     : {}),
                             }}
                         >
-                            {(activeTab === "Base" || activeTab === "Galería") && (
+                            {(activeTab === "Base" || activeTab === "Galería" || activeTab === "Estados") && (
                                 <div
                                     style={{
                                         position: "absolute",
@@ -2248,7 +2500,7 @@ export default function AparienciaPage() {
                                         semantic={semantic}
                                     />
                                 </div>
-                            ) : activeTab === "Galería" ? (
+                            ) : activeTab === "Galería" || activeTab === "Estados" ? (
                                 <div
                                     style={{
                                         flex: 1,
@@ -2271,7 +2523,7 @@ export default function AparienciaPage() {
                                             color: semantic.text.active,
                                         }}
                                     >
-                                        Galería
+                                        {activeTab}
                                     </h2>
                                 </div>
                             ) : (
@@ -2355,8 +2607,8 @@ export default function AparienciaPage() {
                     <style>{`
                         .base-section-scroll::-webkit-scrollbar { display: none; }
                         .base-section-scroll { scrollbar-width: none; -ms-overflow-style: none; }
-                        .base-colores-cards-scroll::-webkit-scrollbar { display: none; }
-                        .base-colores-cards-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+                        .appearance-cards-scroll::-webkit-scrollbar { display: none; }
+                        .appearance-cards-scroll { scrollbar-width: none; -ms-overflow-style: none; }
                         .base-tabs-scroll::-webkit-scrollbar { display: none; }
                         .base-tabs-scroll { scrollbar-width: none; -ms-overflow-style: none; }
                         .base-tema-scroll::-webkit-scrollbar { display: none; }
@@ -2498,7 +2750,7 @@ export default function AparienciaPage() {
                             )}
                             {selectedBaseSub === "colores" && (
                                 <div
-                                    className="base-colores-cards-scroll"
+                                    className="appearance-cards-scroll"
                                     style={{
                                         display: "flex",
                                         flexDirection: "row",
@@ -2564,34 +2816,64 @@ export default function AparienciaPage() {
                     </>
                 )}
 
-                {/* Estados — secciones apiladas, ancho proporcional */}
+                {/* Estados — patrón idéntico a Base → Colores base */}
                 {activeTab === "Estados" && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: spacing[24], width: "100%", maxWidth: CONTENT_MAX_WIDTH }}>
-                        <SettingSection title="Tema" description="Preset activo para estados.">
-                            <div style={{ maxWidth: 320 }}>
-                                <SelectSingle
-                                    label="Preset activo"
-                                    options={[...AVAILABLE_THEMES]}
-                                    value={currentPreset}
-                                    onChange={(v) => setPreset(v as "control" | "security")}
-                                />
-                            </div>
-                        </SettingSection>
-                        <SettingSection title="Colores de feedback" description="Success, warning, danger, info.">
+                    <div
+                        className="base-section-scroll"
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "100%",
+                            minHeight: 0,
+                            flex: 1,
+                            overflow: "auto",
+                            paddingTop: spacing[12],
+                        }}
+                    >
+                        <div
+                            style={{
+                                flex: 1,
+                                minHeight: 0,
+                                paddingTop: spacing[16],
+                                paddingBottom: spacing[24],
+                            }}
+                        >
                             <div
+                                className="appearance-cards-scroll"
                                 style={{
-                                    display: "grid",
-                                    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-                                    gap: spacing[16],
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    flexWrap: "wrap",
+                                    gap: spacing[24],
                                     width: "100%",
+                                    flex: 1,
+                                    minHeight: 0,
+                                    alignItems: "flex-start",
+                                    justifyContent: "flex-start",
+                                    overflowX: "auto",
+                                    minWidth: 0,
+                                    padding: spacing[16],
+                                    boxSizing: "border-box",
                                 }}
                             >
-                                <Input label="Success" value="" placeholder="—" disabled />
-                                <Input label="Warning" value="" placeholder="—" disabled />
-                                <Input label="Danger" value="" placeholder="—" disabled />
-                                <Input label="Info" value="" placeholder="—" disabled />
+                                <div key="estados" style={{ minWidth: 320, maxWidth: 420, flex: "1 1 320", minHeight: 0, display: "flex" }}>
+                                    <EstadosCard
+                                        tokens={currentStates}
+                                        originalTokens={stateTokensFromTheme(getThemeTokens(currentPreset, theme as ThemeEditMode))}
+                                        options={stateColorOptions}
+                                        onChange={handleChangeState}
+                                        expandedByKey={expandedEstados}
+                                        onExpandToggle={(key) =>
+                                            setExpandedEstados((prev) => ({ ...prev, [key]: !prev[key] }))
+                                        }
+                                        semantic={semantic}
+                                        isDirty={!stateTokensEqual(currentStates, lastSavedStatesByMode[theme as ThemeEditMode])}
+                                        onSave={handleSaveEstados}
+                                        onCopyHex={handleCopyHex}
+                                    />
+                                </div>
                             </div>
-                        </SettingSection>
+                        </div>
                     </div>
                 )}
 
