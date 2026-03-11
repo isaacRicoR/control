@@ -3855,34 +3855,15 @@ const ComponentsSection = ()=>{
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "appearance-cards-scroll",
             style: {
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                gap: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][24],
                 width: "100%",
                 flex: 1,
                 minHeight: 0,
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                overflowX: "auto",
                 minWidth: 0,
                 padding: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$console$2f$tokens$2f$spacing$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["spacing"][16],
-                boxSizing: "border-box"
+                boxSizing: "border-box",
+                overflowX: "auto"
             },
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                style: {
-                    minWidth: 320,
-                    maxWidth: 460,
-                    flex: "1 1 320",
-                    minHeight: 0,
-                    display: "flex"
-                },
-                children: renderEditor()
-            }, void 0, false, {
-                fileName: "[project]/apps/control/app/(shell)/lab/apariencia/_sections/components/ComponentsSection.tsx",
-                lineNumber: 78,
-                columnNumber: 17
-            }, ("TURBOPACK compile-time value", void 0))
+            children: renderEditor()
         }, void 0, false, {
             fileName: "[project]/apps/control/app/(shell)/lab/apariencia/_sections/components/ComponentsSection.tsx",
             lineNumber: 60,

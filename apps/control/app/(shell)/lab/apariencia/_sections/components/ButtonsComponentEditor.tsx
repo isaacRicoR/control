@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { ComponentsSectionCard } from "./ComponentsSectionCard";
-import { VariantBlock } from "./VariantBlock";
+import { AppearanceConfigCard, AppearanceConfigGrid } from "../../_components";
 import { ComponentTokenExpandableRow } from "./ComponentTokenExpandableRow";
+import { useComponentsEditMode } from "./ComponentsEditModeContext";
+import type { ComponentsEditMode } from "./ComponentsEditModeContext";
 
 const BUTTON_VARIANTS = [
     { id: "primary", label: "Primary" },
@@ -14,13 +15,15 @@ const BUTTON_VARIANTS = [
 ] as const;
 
 const BUTTON_PROPERTIES = [
-    { key: "background", label: "Background", usage: ["Buttons", "Superficie principal"] },
-    { key: "textColor", label: "Color de texto", usage: ["Buttons", "Texto sobre fondo"] },
-    { key: "borderColor", label: "Color de borde", usage: ["Buttons", "Outline · Ghost"] },
-    { key: "hoverBackground", label: "Hover background", usage: ["Buttons", "Estado hover"] },
+    { key: "background", label: "Background", usage: ["Estado base de la variante", "Superficie principal de acción"] },
+    { key: "textColor", label: "Color de texto", usage: ["Texto visible sobre el fondo", "Contraste de legibilidad"] },
+    { key: "borderColor", label: "Color de borde", usage: ["Borde visual del estado base", "Separación visual del contenedor, si aplica"] },
+    { key: "hoverBackground", label: "Hover background", usage: ["Estado hover de la variante", "Respuesta visual al puntero"] },
 ] as const;
 
 type ButtonOverrides = Record<string, Record<string, string>>;
+
+type ModeKeyedButtonOverrides = Record<ComponentsEditMode, ButtonOverrides>;
 
 const DEFAULT_BUTTON_OVERRIDES: ButtonOverrides = {
     primary: { background: "primary.default", textColor: "text.onSolid", borderColor: "border.default", hoverBackground: "primary.hover" },
@@ -30,14 +33,24 @@ const DEFAULT_BUTTON_OVERRIDES: ButtonOverrides = {
     danger: { background: "danger.default", textColor: "text.onSolid", borderColor: "danger.default", hoverBackground: "danger.hover" },
 };
 
+const DEFAULT_MODE_OVERRIDES: ModeKeyedButtonOverrides = {
+    dark: { ...DEFAULT_BUTTON_OVERRIDES },
+    light: { ...DEFAULT_BUTTON_OVERRIDES },
+};
+
 export const ButtonsComponentEditor: React.FC = () => {
-    const [overrides, setOverrides] = useState<ButtonOverrides>(() => ({ ...DEFAULT_BUTTON_OVERRIDES }));
+    const editModeCtx = useComponentsEditMode();
+    const editMode = editModeCtx?.editMode ?? "dark";
+    const [overrides, setOverrides] = useState<ModeKeyedButtonOverrides>(() => DEFAULT_MODE_OVERRIDES);
     const [expandedByKey, setExpandedByKey] = useState<Record<string, boolean>>({});
 
     const handleChange = (variantId: string, key: string, value: string) => {
         setOverrides((prev) => ({
             ...prev,
-            [variantId]: { ...(prev[variantId] ?? {}), [key]: value },
+            [editMode]: {
+                ...prev[editMode],
+                [variantId]: { ...(prev[editMode][variantId] ?? {}), [key]: value },
+            },
         }));
     };
 
@@ -45,26 +58,31 @@ export const ButtonsComponentEditor: React.FC = () => {
         setExpandedByKey((prev) => ({ ...prev, [rowKey]: !prev[rowKey] }));
     };
 
+    const modeOverrides = overrides[editMode];
+    const getValue = (variantId: string, key: string) =>
+        modeOverrides[variantId]?.[key] ?? DEFAULT_BUTTON_OVERRIDES[variantId]?.[key] ?? "";
+
     return (
-        <ComponentsSectionCard title="Buttons">
+        <AppearanceConfigGrid>
             {BUTTON_VARIANTS.map(({ id, label }) => (
-                <VariantBlock key={id} variantLabel={label}>
+                <AppearanceConfigCard key={id} title={label}>
                     {BUTTON_PROPERTIES.map(({ key, label: propLabel, usage }) => {
                         const rowKey = `${id}-${key}`;
                         return (
                             <ComponentTokenExpandableRow
                                 key={rowKey}
                                 label={propLabel}
-                                value={overrides[id]?.[key] ?? DEFAULT_BUTTON_OVERRIDES[id]?.[key] ?? ""}
+                                value={getValue(id, key)}
                                 onChange={(v) => handleChange(id, key, v)}
                                 usage={usage}
                                 isExpanded={!!expandedByKey[rowKey]}
                                 onToggle={() => toggleExpanded(rowKey)}
+                                propertyKey={key}
                             />
                         );
                     })}
-                </VariantBlock>
+                </AppearanceConfigCard>
             ))}
-        </ComponentsSectionCard>
+        </AppearanceConfigGrid>
     );
 };

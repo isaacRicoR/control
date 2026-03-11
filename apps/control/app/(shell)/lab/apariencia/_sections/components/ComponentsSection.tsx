@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { AppearanceSectionLayout } from "../../_components/AppearanceSectionLayout";
+import { AppearanceSectionLayout, ModeSegmentedControl } from "../../_components";
 import { SectionTabs } from "@ui/molecules/SectionTabs";
-import { spacing, colors, typography } from "@tokens";
+import { spacing, colors } from "@tokens";
 import { useTheme } from "@ui/context/ThemeProvider";
+import { ComponentsEditModeProvider, useComponentsEditMode } from "./ComponentsEditModeContext";
 import { ButtonsComponentEditor } from "./ButtonsComponentEditor";
 import { InputsComponentEditor } from "./InputsComponentEditor";
 import { TabsComponentEditor } from "./TabsComponentEditor";
@@ -19,9 +20,10 @@ const COMPONENT_TABS = [
     { value: "tables", label: "Tables" },
 ] as const;
 
-export const ComponentsSection: React.FC = () => {
+const ComponentsSectionInner: React.FC = () => {
     const { theme } = useTheme();
-    const semantic = colors[theme].semantic as { border?: { subtle?: string; default?: string }; text?: { active?: string } };
+    const editModeCtx = useComponentsEditMode();
+    const semantic = colors[theme].semantic as { border?: { subtle?: string; default?: string }; text?: { active?: string }; surface?: { selected?: string; hover?: string } };
     const [activeSubTab, setActiveSubTab] = useState<string>("buttons");
     const borderColor = semantic?.border?.subtle ?? semantic?.border?.default;
 
@@ -45,7 +47,7 @@ export const ComponentsSection: React.FC = () => {
     return (
         <AppearanceSectionLayout
             headerContent={
-                <div style={{ flex: 1, minWidth: 0, display: "flex", width: "100%" }}>
+                <div style={{ flex: 1, minWidth: 0, display: "flex", alignItems: "center", width: "100%" }}>
                     <SectionTabs
                         items={[...COMPONENT_TABS]}
                         activeValue={activeSubTab}
@@ -58,27 +60,50 @@ export const ComponentsSection: React.FC = () => {
             borderColor={borderColor ?? ""}
         >
             <div
-                className="appearance-cards-scroll"
                 style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                    gap: spacing[24],
                     width: "100%",
                     flex: 1,
                     minHeight: 0,
-                    alignItems: "flex-start",
-                    justifyContent: "flex-start",
-                    overflowX: "auto",
                     minWidth: 0,
-                    padding: spacing[16],
-                    boxSizing: "border-box",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: spacing[16],
                 }}
             >
-                <div style={{ minWidth: 320, maxWidth: 460, flex: "1 1 320", minHeight: 0, display: "flex" }}>
+                {editModeCtx && (
+                    <div style={{ display: "flex", alignItems: "center", gap: spacing[8], flexShrink: 0, paddingLeft: spacing[16] }}>
+                        <span style={{ fontSize: 12, color: semantic?.text?.muted, whiteSpace: "nowrap" }}>Editando:</span>
+                        <ModeSegmentedControl
+                            value={editModeCtx.editMode}
+                            onChange={editModeCtx.setEditMode}
+                            semantic={semantic}
+                            ariaLabel="Editando (Oscuro/Claro)"
+                        />
+                    </div>
+                )}
+                <div
+                    className="appearance-cards-scroll"
+                    style={{
+                        width: "100%",
+                        flex: 1,
+                        minHeight: 0,
+                        minWidth: 0,
+                        padding: spacing[16],
+                        boxSizing: "border-box",
+                        overflowX: "auto",
+                    }}
+                >
                     {renderEditor()}
                 </div>
             </div>
         </AppearanceSectionLayout>
+    );
+};
+
+export const ComponentsSection: React.FC = () => {
+    return (
+        <ComponentsEditModeProvider>
+            <ComponentsSectionInner />
+        </ComponentsEditModeProvider>
     );
 };

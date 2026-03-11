@@ -6,6 +6,104 @@
 
 export type TokenOption = { value: string; label: string };
 
+/**
+ * Allowlist de tokens por tipo de propiedad.
+ * Cada propiedad solo muestra tokens de su categoría real.
+ * No mezclar: superficie, acento, estado, estructurales.
+ */
+export const TOKEN_ALLOWLIST_BY_PROPERTY: Record<string, string[]> = {
+    // Buttons - solo tokens compatibles por categoría
+    background: [
+        "primary.default",
+        "primary.hover",
+        "primary.disabled",
+        "surface.default",
+        "surface.hover",
+        "surface.selected",
+        "surface.disabled",
+        "background.default",
+    ],
+    textColor: [
+        "text.default",
+        "text.muted",
+        "text.onSolid",
+        "text.disabled",
+    ],
+    borderColor: [
+        "border.default",
+        "border.subtle",
+        "border.focus",
+        "border.disabled",
+    ],
+    hoverBackground: [
+        "primary.hover",
+        "surface.hover",
+        "surface.selected",
+    ],
+    // Inputs
+    focusRing: [
+        "border.focus",
+        "primary.default",
+        "danger.default",
+        "border.subtle",
+    ],
+    placeholderColor: [
+        "text.muted",
+        "text.disabled",
+    ],
+    // Tabs
+    activeColor: [
+        "text.active",
+        "primary.default",
+        "surface.selected",
+    ],
+    inactiveColor: [
+        "text.muted",
+        "text.default",
+    ],
+    hoverColor: [
+        "text.hover",
+        "surface.hover",
+        "surface.default",
+    ],
+    // Cards / Tables
+    headerBackground: [
+        "surface.default",
+        "surface.hover",
+        "surface.card",
+        "elevated.default",
+    ],
+    rowHoverColor: [
+        "surface.hover",
+        "surface.selected",
+    ],
+    rowDensity: [
+        "surface.default",
+        "surface.hover",
+    ],
+    paddingDensity: [
+        "surface.default",
+        "surface.hover",
+    ],
+};
+
+/** Obtiene las opciones de token filtradas por tipo de propiedad */
+export function getTokenOptionsForProperty(
+    propertyKey: string,
+    allOptions: TokenOption[],
+    currentValue?: string
+): TokenOption[] {
+    const allowed = TOKEN_ALLOWLIST_BY_PROPERTY[propertyKey];
+    if (!allowed || allowed.length === 0) return allOptions;
+    const allowedSet = new Set(allowed);
+    const filtered = allOptions.filter((opt) => allowedSet.has(opt.value));
+    if (currentValue && !allowedSet.has(currentValue)) {
+        const currentOpt = allOptions.find((o) => o.value === currentValue);
+        if (currentOpt) return [currentOpt, ...filtered];
+    }
+    return filtered;
+}
+
 /** Rutas de tokens semánticos disponibles para mapeo de componentes */
 const SEMANTIC_TOKEN_PATHS: { path: string; label: string }[] = [
     { path: "primary.default", label: "Acento (primary)" },

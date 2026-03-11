@@ -20,7 +20,12 @@ import { useVisualPreset } from "@core/visual/visualPresetStore";
 import { useToast } from "@core/toast/useToast";
 import { getThemeTokens } from "@core/visual/themeRegistry";
 import { AccessDeniedState } from "@ui/containers/AccessDeniedState/AccessDeniedState";
-import { AppearanceSectionLayout } from "./_components/AppearanceSectionLayout";
+import {
+    AppearanceSectionLayout,
+    AppearanceConfigCard,
+    AppearanceConfigRow,
+    AppearanceConfigUsage,
+} from "./_components";
 import { ComponentsSection } from "./_sections/components/ComponentsSection";
 import { PresetSelector } from "@ui/dev/PresetSelector";
 import { DEV_UI_ENABLED } from "@core/flags/devFlags";
@@ -457,65 +462,6 @@ function TokenRowWithSwatch({
                 }}
                 aria-hidden
             />
-        </div>
-    );
-}
-
-function BaseColorRowRightControl({
-    children,
-    onExpandClick,
-    isExpanded,
-    semantic,
-}: {
-    children: React.ReactNode;
-    onExpandClick: (e: React.MouseEvent) => void;
-    isExpanded: boolean;
-    semantic: (typeof colors.dark)["semantic"];
-}) {
-    const [chevronHovered, setChevronHovered] = useState(false);
-    const iconDefault = semantic.icon?.muted ?? semantic.text.muted;
-    const iconHover = semantic.icon?.active ?? semantic.text.hover;
-    return (
-        <div
-            style={{
-                display: "flex",
-                alignItems: "center",
-                gap: spacing[4],
-            }}
-        >
-            <div onClick={(e) => e.stopPropagation()}>{children}</div>
-            <button
-                type="button"
-                onClick={onExpandClick}
-                onMouseEnter={() => setChevronHovered(true)}
-                onMouseLeave={() => setChevronHovered(false)}
-                aria-expanded={isExpanded}
-                aria-label={isExpanded ? "Contraer" : "Expandir"}
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: spacing[8],
-                    minWidth: spacing[32],
-                    minHeight: spacing[32],
-                    background: chevronHovered ? semantic.surface.hoverElevated ?? semantic.surface.hover : "transparent",
-                    border: "none",
-                    borderRadius: radius.md,
-                    cursor: "pointer",
-                    color: chevronHovered ? iconHover : iconDefault,
-                    transition: "background-color 0.2s ease, color 0.2s ease",
-                }}
-            >
-                <span
-                    style={{
-                        display: "flex",
-                        transform: isExpanded ? "rotate(180deg)" : "none",
-                        transition: "transform 0.2s ease",
-                    }}
-                >
-                    <Icon name="chevron-down" size={16} color="currentColor" />
-                </span>
-            </button>
         </div>
     );
 }
@@ -1118,184 +1064,80 @@ function BaseColorExpandableRow({
     semantic: (typeof colors.dark)["semantic"];
     onCopyHex?: (hex: string) => void;
 }) {
-    return (
-        <div
+    const valueDisplay = onCopyHex ? (
+        <button
+            type="button"
+            onClick={(e) => {
+                e.stopPropagation();
+                onCopyHex(hex);
+            }}
+            aria-label="Copiar color"
             style={{
-                borderBottom: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 1,
+                padding: 0,
+                margin: 0,
+                background: "none",
+                border: "none",
+                borderRadius: radius.sm,
+                cursor: "pointer",
+                color: semantic.text.muted,
+                opacity: 0.85,
+                transition: "opacity 0.2s ease, color 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = "1";
+                e.currentTarget.style.color = semantic.text.default;
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = "0.85";
+                e.currentTarget.style.color = semantic.text.muted;
             }}
         >
-            <div
-                role="button"
-                tabIndex={0}
-                onClick={onToggle}
-                onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        onToggle();
-                    }
-                }}
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: spacing[12],
-                    width: "100%",
-                    padding: `${spacing[12]}px 0`,
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    textAlign: "left",
-                }}
-                aria-expanded={isExpanded}
-            >
-                <div
-                    style={{
-                        width: spacing[32],
-                        height: spacing[32],
-                        flexShrink: 0,
-                        borderRadius: "50%",
-                        border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                        backgroundColor: value || semantic.surface.default,
-                    }}
-                    aria-hidden
-                />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                    <span
-                        style={{
-                            fontFamily: typography.fontFamily.primary,
-                            fontSize: typography.fontSize.sm,
-                            fontWeight: typography.fontWeight.medium,
-                            color: semantic.text.default,
-                        }}
-                    >
-                        {label}
-                    </span>
-                    <span
-                        style={{
-                            display: "block",
-                            fontFamily: (typography.fontFamily as { mono?: string }).mono ?? typography.fontFamily.primary,
-                            fontSize: typography.fontSize.xs,
-                            color: semantic.text.muted,
-                            marginTop: 2,
-                        }}
-                    >
-                        {onCopyHex ? (
-                            <button
-                                type="button"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    onCopyHex(hex);
-                                }}
-                                aria-label="Copiar color"
-                                style={{
-                                    display: "inline-flex",
-                                    alignItems: "center",
-                                    gap: 1,
-                                    padding: 0,
-                                    margin: 0,
-                                    background: "none",
-                                    border: "none",
-                                    borderRadius: radius.sm,
-                                    cursor: "pointer",
-                                    color: semantic.text.muted,
-                                    opacity: 0.85,
-                                    transition: "opacity 0.2s ease, color 0.2s ease",
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.opacity = "1";
-                                    e.currentTarget.style.color = semantic.text.default;
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.opacity = "0.85";
-                                    e.currentTarget.style.color = semantic.text.muted;
-                                }}
-                            >
-                                <span style={{ display: "inline-block", transform: "scale(0.7)", transformOrigin: "left center" }}>{hex}</span>
-                                <Icon name="copy" size={10} />
-                            </button>
-                        ) : (
-                            <span style={{ display: "inline-block", transform: "scale(0.7)", transformOrigin: "left center" }}>{hex}</span>
-                        )}
-                    </span>
-                </div>
-                <BaseColorRowRightControl
-                    onExpandClick={(e) => {
-                        e.stopPropagation();
-                        onToggle();
-                    }}
-                    isExpanded={isExpanded}
+            <span style={{ display: "inline-block", transform: "scale(0.7)", transformOrigin: "left center" }}>{hex}</span>
+            <Icon name="copy" size={10} />
+        </button>
+    ) : (
+        <span style={{ display: "inline-block", transform: "scale(0.7)", transformOrigin: "left center" }}>{hex}</span>
+    );
+    return (
+        <AppearanceConfigRow
+            label={label}
+            swatchColor={value || semantic.surface.default}
+            valueDisplay={valueDisplay}
+            editControl={
+                <BaseColorSelector
+                    variant="icon"
+                    options={options}
+                    value={value}
+                    originalValue={originalValue}
+                    onChange={(v) => onChange(v)}
                     semantic={semantic}
-                >
-                    <BaseColorSelector
-                        variant="icon"
-                        options={options}
-                        value={value}
-                        originalValue={originalValue}
-                        onChange={(v) => onChange(v)}
-                        semantic={semantic}
-                    />
-                </BaseColorRowRightControl>
-            </div>
-            <div
-                style={{
-                    overflow: "hidden",
-                    maxHeight: isExpanded ? 400 : 0,
-                    opacity: isExpanded ? 1 : 0,
-                    transition: "max-height 220ms ease-out, opacity 200ms ease-out",
-                }}
-            >
-                <div
-                    style={{
-                        padding: spacing[12],
-                        paddingTop: 0,
-                        paddingBottom: spacing[16],
-                    }}
-                >
-                    <div
-                        style={{
-                            padding: spacing[12],
-                            backgroundColor: semantic.surface.hover ?? semantic.surface.default,
-                            borderRadius: radius.sm,
-                        }}
-                    >
-                        <span
-                            style={{
-                                fontFamily: typography.fontFamily.primary,
-                                fontSize: typography.fontSize.xs,
-                                fontWeight: typography.fontWeight.medium,
-                                color: semantic.text.muted,
-                                textTransform: "uppercase",
-                                letterSpacing: "0.05em",
-                            }}
-                        >
-                            Dónde se usa
-                        </span>
-                        <ul
-                            style={{
-                                margin: `${spacing[8]}px 0 0`,
-                                paddingLeft: spacing[16],
-                                listStyle: "disc",
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: spacing[4],
-                            }}
-                        >
-                            {usage.map((item) => (
-                                <li
-                                    key={item}
-                                    style={{
-                                        fontFamily: typography.fontFamily.primary,
-                                        fontSize: typography.fontSize.sm,
-                                        color: semantic.text.default,
-                                    }}
-                                >
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                />
+            }
+            isExpanded={isExpanded}
+            onToggle={onToggle}
+            expandedContent={<AppearanceConfigUsage usage={usage} />}
+        />
+    );
+}
+
+function BaseColorsCardWithLocalExpansion(
+    props: Omit<
+        Parameters<typeof BaseColorsCard>[0],
+        "expandedByKey" | "onExpandToggle"
+    >
+) {
+    const initialExpanded = (): Record<BaseTokenKey, boolean> =>
+        Object.fromEntries(BASE_TOKEN_KEYS.map(({ key }) => [key, false])) as Record<BaseTokenKey, boolean>;
+    const [expandedByKey, setExpandedByKey] = useState(initialExpanded);
+    return (
+        <BaseColorsCard
+            {...props}
+            expandedByKey={expandedByKey}
+            onExpandToggle={(k) => setExpandedByKey((prev) => ({ ...prev, [k]: !prev[k] }))}
+        />
     );
 }
 
@@ -1328,44 +1170,23 @@ function BaseColorsCard({
 }) {
     const title = mode === "dark" ? "Modo oscuro" : "Modo claro";
     return (
-        <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 0,
-                flex: 1,
-                minHeight: 0,
-                backgroundColor: semantic.surface.card ?? semantic.surface.default,
-                borderRadius: radius.card,
-                border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                paddingTop: spacing[24],
-                paddingLeft: spacing[24],
-                paddingRight: spacing[24],
-                paddingBottom: 0,
-                boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
-            }}
+        <AppearanceConfigCard
+            title={title}
+            titleAction={titleAction}
+            footer={
+                onSave != null ? (
+                    <Button
+                        variant="actionPrimary"
+                        size="sm"
+                        shape="panel"
+                        onClick={onSave}
+                        disabled={!isDirty}
+                    >
+                        Guardar cambios
+                    </Button>
+                ) : undefined
+            }
         >
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: spacing[8],
-                    marginBottom: spacing[16],
-                }}
-            >
-                {titleAction}
-                <h3
-                    style={{
-                        margin: 0,
-                        fontFamily: typography.fontFamily.primary,
-                        fontSize: typography.fontSize.md,
-                        fontWeight: typography.fontWeight.semibold,
-                        color: semantic.text.default,
-                    }}
-                >
-                    {title}
-                </h3>
-            </div>
             {BASE_TOKEN_KEYS.map(({ key, label }) => (
                 <BaseColorExpandableRow
                     key={`${mode}-${key}`}
@@ -1382,36 +1203,7 @@ function BaseColorsCard({
                     onCopyHex={onCopyHex}
                 />
             ))}
-            {onSave != null && (
-                <div
-                    style={{
-                        flexShrink: 0,
-                        marginTop: spacing[16],
-                        marginLeft: -spacing[24],
-                        marginRight: -spacing[24],
-                        borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                        padding: spacing[16],
-                        paddingLeft: spacing[24],
-                        paddingRight: spacing[24],
-                        display: "flex",
-                        alignItems: "center",
-                        gap: spacing[12],
-                        justifyContent: "flex-end",
-                        flexWrap: "wrap",
-                    }}
-                >
-                    <Button
-                        variant="actionPrimary"
-                        size="sm"
-                        shape="panel"
-                        onClick={onSave}
-                        disabled={!isDirty}
-                    >
-                        Guardar cambios
-                    </Button>
-                </div>
-            )}
-        </div>
+        </AppearanceConfigCard>
     );
 }
 
@@ -1439,43 +1231,22 @@ function EstadosCard({
     onCopyHex?: (hex: string) => void;
 }) {
     return (
-        <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 0,
-                flex: 1,
-                minHeight: 0,
-                backgroundColor: semantic.surface.card ?? semantic.surface.default,
-                borderRadius: radius.card,
-                border: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                paddingTop: spacing[24],
-                paddingLeft: spacing[24],
-                paddingRight: spacing[24],
-                paddingBottom: 0,
-                boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
-            }}
+        <AppearanceConfigCard
+            title="Estados"
+            footer={
+                onSave != null ? (
+                    <Button
+                        variant="actionPrimary"
+                        size="sm"
+                        shape="panel"
+                        onClick={onSave}
+                        disabled={!isDirty}
+                    >
+                        Guardar cambios
+                    </Button>
+                ) : undefined
+            }
         >
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: spacing[8],
-                    marginBottom: spacing[16],
-                }}
-            >
-                <h3
-                    style={{
-                        margin: 0,
-                        fontFamily: typography.fontFamily.primary,
-                        fontSize: typography.fontSize.md,
-                        fontWeight: typography.fontWeight.semibold,
-                        color: semantic.text.default,
-                    }}
-                >
-                    Estados
-                </h3>
-            </div>
             {STATE_TOKEN_KEYS.map(({ key }) => (
                 <BaseColorExpandableRow
                     key={key}
@@ -1492,36 +1263,7 @@ function EstadosCard({
                     onCopyHex={onCopyHex}
                 />
             ))}
-            {onSave != null && (
-                <div
-                    style={{
-                        flexShrink: 0,
-                        marginTop: spacing[16],
-                        marginLeft: -spacing[24],
-                        marginRight: -spacing[24],
-                        borderTop: `1px solid ${semantic.border.subtle ?? semantic.border.default}`,
-                        padding: spacing[16],
-                        paddingLeft: spacing[24],
-                        paddingRight: spacing[24],
-                        display: "flex",
-                        alignItems: "center",
-                        gap: spacing[12],
-                        justifyContent: "flex-end",
-                        flexWrap: "wrap",
-                    }}
-                >
-                    <Button
-                        variant="actionPrimary"
-                        size="sm"
-                        shape="panel"
-                        onClick={onSave}
-                        disabled={!isDirty}
-                    >
-                        Guardar cambios
-                    </Button>
-                </div>
-            )}
-        </div>
+        </AppearanceConfigCard>
     );
 }
 
@@ -1817,8 +1559,10 @@ function ThemeGalleryCard({
                 style={{
                     flex: 1,
                     minHeight: 0,
-                    padding: spacing.lg,
                     paddingTop: spacing.md,
+                    paddingRight: spacing.lg,
+                    paddingBottom: spacing.lg,
+                    paddingLeft: spacing.lg,
                     display: "flex",
                     flexDirection: "column",
                     gap: spacing[8],
@@ -2030,12 +1774,6 @@ export default function AparienciaPage() {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [modoAyuda, setModoAyuda] = useState(false);
     const [selectedBaseSub, setSelectedBaseSub] = useState<"tema" | "colores" | null>("tema");
-    const initialExpandedByKey = (): Record<BaseTokenKey, boolean> =>
-        Object.fromEntries(BASE_TOKEN_KEYS.map(({ key }) => [key, false])) as Record<BaseTokenKey, boolean>;
-    const [expandedColores, setExpandedColores] = useState<{
-        dark: Record<BaseTokenKey, boolean>;
-        light: Record<BaseTokenKey, boolean>;
-    }>({ dark: initialExpandedByKey(), light: initialExpandedByKey() });
     const initialExpandedEstados = (): Record<StateTokenKey, boolean> =>
         Object.fromEntries(STATE_TOKEN_KEYS.map(({ key }) => [key, false])) as Record<StateTokenKey, boolean>;
     const [expandedEstados, setExpandedEstados] = useState<Record<StateTokenKey, boolean>>(initialExpandedEstados);
@@ -2579,19 +2317,12 @@ export default function AparienciaPage() {
                                     }}
                                 >
                                     <div key="dark" style={{ minWidth: 320, maxWidth: 420, flex: "1 1 320", minHeight: 0, display: "flex" }}>
-                                        <BaseColorsCard
+                                        <BaseColorsCardWithLocalExpansion
                                             mode="dark"
                                             tokens={localTokensByMode.dark}
                                             originalTokens={canonicalDark}
                                             options={baseColorOptionsByMode.dark}
                                             onChange={(k, v) => handleChange("dark", k, v)}
-                                            expandedByKey={expandedColores.dark}
-                                            onExpandToggle={(k) =>
-                                                setExpandedColores((prev) => ({
-                                                    ...prev,
-                                                    dark: { ...prev.dark, [k]: !prev.dark[k] },
-                                                }))
-                                            }
                                             titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
                                             semantic={semantic}
                                             isDirty={!baseTokensEqual(localTokensByMode.dark, lastSavedByMode.dark)}
@@ -2600,25 +2331,18 @@ export default function AparienciaPage() {
                                         />
                                     </div>
                                     <div key="light" style={{ minWidth: 320, maxWidth: 420, flex: "1 1 320", minHeight: 0, display: "flex" }}>
-                                        <BaseColorsCard
+                                        <BaseColorsCardWithLocalExpansion
                                             mode="light"
                                             tokens={localTokensByMode.light}
                                             originalTokens={canonicalLight}
                                             options={baseColorOptionsByMode.light}
                                             onChange={(k, v) => handleChange("light", k, v)}
-                                            expandedByKey={expandedColores.light}
-                                            onExpandToggle={(k) =>
-                                                setExpandedColores((prev) => ({
-                                                    ...prev,
-                                                    light: { ...prev.light, [k]: !prev.light[k] },
-                                                }))
-                                            }
-                                        titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
-                                        semantic={semantic}
-                                        isDirty={!baseTokensEqual(localTokensByMode.light, lastSavedByMode.light)}
-                                        onSave={() => handleSaveBaseColors("light")}
-                                        onCopyHex={handleCopyHex}
-                                    />
+                                            titleAction={<ModoAyudaSwitch value={modoAyuda} onChange={setModoAyuda} />}
+                                            semantic={semantic}
+                                            isDirty={!baseTokensEqual(localTokensByMode.light, lastSavedByMode.light)}
+                                            onSave={() => handleSaveBaseColors("light")}
+                                            onCopyHex={handleCopyHex}
+                                        />
                                     </div>
                                 </div>
                             )}
